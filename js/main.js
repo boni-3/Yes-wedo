@@ -102,11 +102,11 @@
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 if (this.colorType === 'orange') {
-                    ctx.fillStyle = `rgba(232, 93, 38, ${this.opacity})`;
+                    ctx.fillStyle = `rgba(240, 67, 32, ${this.opacity})`;
                 } else if (this.colorType === 'blue') {
-                    ctx.fillStyle = `rgba(74, 144, 217, ${this.opacity})`;
+                    ctx.fillStyle = `rgba(82, 155, 202, ${this.opacity})`;
                 } else {
-                    ctx.fillStyle = `rgba(199, 48, 102, ${this.opacity * 0.7})`;
+                    ctx.fillStyle = `rgba(186, 4, 106, ${this.opacity * 0.7})`;
                 }
                 ctx.fill();
             }
@@ -130,11 +130,11 @@
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         if (particles[i].colorType === 'orange' || particles[j].colorType === 'orange') {
-                            ctx.strokeStyle = `rgba(232, 93, 38, ${opacity})`;
+                            ctx.strokeStyle = `rgba(240, 67, 32, ${opacity})`;
                         } else if (particles[i].colorType === 'blue' || particles[j].colorType === 'blue') {
-                            ctx.strokeStyle = `rgba(74, 144, 217, ${opacity})`;
+                            ctx.strokeStyle = `rgba(82, 155, 202, ${opacity})`;
                         } else {
-                            ctx.strokeStyle = `rgba(199, 48, 102, ${opacity * 0.6})`;
+                            ctx.strokeStyle = `rgba(186, 4, 106, ${opacity * 0.6})`;
                         }
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
@@ -191,32 +191,23 @@
                 }, 1.5);
             }
 
-            // Reveal "Yes,"
-            tl.to('#heroYes', {
+            // Reveal logo image
+            tl.to('#heroLogo', {
                 opacity: 1,
                 y: 0,
-                duration: 0.8,
+                duration: 1,
                 ease: 'power3.out'
             }, 1)
-            // Reveal "We"
-            .to('#heroWe', {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: 'power3.out'
-            }, 1.3)
-            // Reveal "Do"
-            .to('#heroDo', {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: 'power3.out'
-            }, 1.5);
+            .to('#heroLogo', {
+                scale: 1,
+                duration: 0.6,
+                ease: 'elastic.out(1, 0.5)'
+            }, 1.2);
 
-            // Particle burst on "Do" reveal
+            // Particle burst on logo reveal
             tl.call(() => {
                 createParticleBurst();
-            }, null, 1.8);
+            }, null, 1.6);
 
             // Tagline "Marketing & Publicidade"
             tl.to('#heroTagline', {

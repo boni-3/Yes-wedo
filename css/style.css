@@ -12,15 +12,15 @@
 }
 
 :root {
-    /* Brand Colors from Logo */
-    --orange: #E85D26;
-    --orange-light: #F47B4A;
-    --orange-dark: #C94D1E;
-    --blue: #4A90D9;
-    --blue-light: #6BAAE8;
-    --blue-dark: #2D6BB5;
-    --magenta: #C73066;
-    --magenta-light: #E0447E;
+    /* Brand Colors — Exact from Logo PDF */
+    --orange: #F04320;
+    --orange-light: #F4664A;
+    --orange-dark: #D03A1A;
+    --blue: #529BCA;
+    --blue-light: #74B1D8;
+    --blue-dark: #3A7BAA;
+    --magenta: #BA046A;
+    --magenta-light: #D41A80;
     --white: #FFFFFF;
     --off-white: #F8F9FA;
     --black: #0A0A0A;
@@ -226,33 +226,20 @@ body.cursor-hover .cursor-outline {
 }
 
 .nav-logo {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
     display: flex;
-    gap: 0.1em;
-    align-items: baseline;
+    align-items: center;
 }
 
-.logo-yes {
-    color: var(--orange);
-    font-size: 0.7em;
-    text-transform: lowercase;
+.nav-logo-img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
 }
 
-.logo-comma { display: none; }
-
-.logo-we {
-    color: var(--orange);
-    font-size: 1.1em;
-    font-weight: 800;
-    font-style: italic;
-}
-
-.logo-do {
-    color: var(--blue);
-    font-weight: 800;
+.footer-logo-img {
+    height: 35px;
+    width: auto;
+    object-fit: contain;
 }
 
 .nav-tagline {
@@ -487,38 +474,16 @@ body.cursor-hover .cursor-outline {
     margin-bottom: 1.5rem;
 }
 
-.hero-line {
+.hero-logo-container {
     overflow: hidden;
-}
-
-.hero-word {
-    display: inline-block;
-    font-family: var(--font-heading);
-    font-size: clamp(4rem, 14vw, 12rem);
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.04em;
     opacity: 0;
-    transform: translateY(100%);
+    transform: translateY(40px);
 }
 
-/* Logo colors in hero: "Yes," in orange, "We" in orange, "Do" in blue */
-#heroYes {
-    color: var(--orange);
-}
-
-.hero-comma {
-    color: var(--orange);
-}
-
-#heroWe {
-    color: var(--orange);
-    font-style: italic;
-}
-
-.hero-word-do {
-    color: var(--blue);
-    margin-left: 0.15em;
+.hero-logo-img {
+    max-width: min(400px, 70vw);
+    height: auto;
+    filter: drop-shadow(0 4px 30px rgba(240, 67, 32, 0.3));
 }
 
 .hero-tagline {
@@ -1700,8 +1665,8 @@ body.cursor-hover .cursor-outline {
 }
 
 @media (max-width: 480px) {
-    .hero-word {
-        font-size: clamp(3rem, 16vw, 5rem);
+    .hero-logo-img {
+        max-width: min(280px, 65vw);
     }
 }
 
