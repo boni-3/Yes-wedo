@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yes, We Do — Agência de Publicidade, Comunicação e Design | Rio Tinto</title>
+    <meta name="description" content="A Yes, We Do é uma agência criativa de publicidade, comunicação e design em Rio Tinto, Porto. Mais de 10 anos de experiência ao serviço da sua marca.">
+    <meta name="keywords" content="agência publicidade, design gráfico, marketing digital, branding, comunicação, Rio Tinto, Porto, Portugal">
+    <meta name="author" content="Yes, We Do">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Yes, We Do — Agência Criativa">
+    <meta property="og:description" content="Criatividade sem limites. Resultados que falam. Agência de publicidade, comunicação e design em Rio Tinto.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yes-wedo.pt">
+    <meta property="og:locale" content="pt_PT">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>Y</text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js" defer></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-text">
+                <span class="preloader-letter" data-letter="Y">Y</span>
+                <span class="preloader-letter" data-letter="e">e</span>
+                <span class="preloader-letter" data-letter="s">s</span>
+                <span class="preloader-comma">,</span>
+                <span class="preloader-space">&nbsp;</span>
+                <span class="preloader-letter" data-letter="W">W</span>
+                <span class="preloader-letter" data-letter="e">e</span>
+                <span class="preloader-space">&nbsp;</span>
+                <span class="preloader-letter" data-letter="D">D</span>
+                <span class="preloader-letter" data-letter="o">o</span>
+            </div>
+            <div class="preloader-bar">
+                <div class="preloader-bar-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <span class="logo-yes">Yes</span><span class="logo-comma">,</span>
+                <span class="logo-we">We</span>
+                <span class="logo-do">Do</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#sobre" class="nav-link" data-text="Sobre">Sobre</a>
+                <a href="#servicos" class="nav-link" data-text="Serviços">Serviços</a>
+                <a href="#portfolio" class="nav-link" data-text="Portfolio">Portfolio</a>
+                <a href="#processo" class="nav-link" data-text="Processo">Processo</a>
+                <a href="#contacto" class="nav-link cta-link" data-text="Contacto">Contacto</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span class="nav-toggle-line"></span>
+                <span class="nav-toggle-line"></span>
+                <span class="nav-toggle-line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-inner">
+            <a href="#sobre" class="mobile-menu-link">Sobre</a>
+            <a href="#servicos" class="mobile-menu-link">Serviços</a>
+            <a href="#portfolio" class="mobile-menu-link">Portfolio</a>
+            <a href="#processo" class="mobile-menu-link">Processo</a>
+            <a href="#contacto" class="mobile-menu-link">Contacto</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <canvas id="heroCanvas"></canvas>
+        <div class="hero-overlay"></div>
+
+        <!-- Service image flashes -->
+        <div class="hero-images">
+            <div class="hero-image-item" data-service="design">
+                <div class="hero-img-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="20" width="80" height="80" rx="8" stroke="#F5C518" stroke-width="2"/>
+                        <circle cx="45" cy="50" r="12" stroke="#F5C518" stroke-width="2"/>
+                        <rect x="65" y="38" width="24" height="24" stroke="#F5C518" stroke-width="2"/>
+                        <path d="M30 85L50 65L70 80L90 55" stroke="#F5C518" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>Design Gráfico</span>
+                </div>
+            </div>
+            <div class="hero-image-item" data-service="marketing">
+                <div class="hero-img-placeholder" style="background: linear-gradient(135deg, #0f3460, #1a1a2e);">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="25" y="70" width="14" height="30" rx="2" stroke="#F5C518" stroke-width="2"/>
+                        <rect x="43" y="50" width="14" height="50" rx="2" stroke="#F5C518" stroke-width="2"/>
+                        <rect x="61" y="35" width="14" height="65" rx="2" stroke="#F5C518" stroke-width="2"/>
+                        <rect x="79" y="20" width="14" height="80" rx="2" stroke="#F5C518" stroke-width="2"/>
+                        <path d="M25 55L50 35L70 45L95 20" stroke="#F5C518" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="95" cy="20" r="4" fill="#F5C518"/>
+                    </svg>
+                    <span>Marketing Digital</span>
+                </div>
+            </div>
+            <div class="hero-image-item" data-service="branding">
+                <div class="hero-img-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #2d1b69);">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="55" r="30" stroke="#F5C518" stroke-width="2"/>
+                        <path d="M45 55L55 65L75 45" stroke="#F5C518" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M35 90H85" stroke="#F5C518" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M40 97H80" stroke="#F5C518" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>Branding</span>
+                </div>
+            </div>
+            <div class="hero-image-item" data-service="web">
+                <div class="hero-img-placeholder" style="background: linear-gradient(135deg, #16213e, #0f3460);">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="15" y="25" width="90" height="60" rx="6" stroke="#F5C518" stroke-width="2"/>
+                        <line x1="15" y1="40" x2="105" y2="40" stroke="#F5C518" stroke-width="2"/>
+                        <circle cx="25" cy="33" r="3" fill="#F5C518"/>
+                        <circle cx="35" cy="33" r="3" fill="#F5C518" opacity="0.5"/>
+                        <circle cx="45" cy="33" r="3" fill="#F5C518" opacity="0.3"/>
+                        <path d="M50 55L40 65L50 75" stroke="#F5C518" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M70 55L80 65L70 75" stroke="#F5C518" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="55" y1="78" x2="65" y2="52" stroke="#F5C518" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M45 95L60 87L75 95" stroke="#F5C518" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>Web Design</span>
+                </div>
+            </div>
+            <div class="hero-image-item" data-service="events">
+                <div class="hero-img-placeholder" style="background: linear-gradient(135deg, #2d1b69, #1a1a2e);">
+                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M60 20L63 50L90 35L70 58L100 60L70 62L90 85L63 70L60 100L57 70L30 85L50 62L20 60L50 58L30 35L57 50Z" stroke="#F5C518" stroke-width="2" fill="none"/>
+                        <circle cx="60" cy="60" r="10" stroke="#F5C518" stroke-width="2"/>
+                    </svg>
+                    <span>Eventos</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-title">
+                <div class="hero-line hero-line-1">
+                    <span class="hero-word" id="heroYes">Yes<span class="hero-comma">,</span></span>
+                </div>
+                <div class="hero-line hero-line-2">
+                    <span class="hero-word" id="heroWe">We</span>
+                    <span class="hero-word hero-word-do" id="heroDo">Do</span>
+                </div>
+            </div>
+            <p class="hero-subtitle" id="heroSubtitle">Criatividade sem limites. Resultados que falam.</p>
+            <div class="hero-cta" id="heroCta">
+                <a href="#contacto" class="btn btn-primary magnetic">
+                    <span>Vamos conversar</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-scroll" id="heroScroll">
+            <div class="hero-scroll-line"></div>
+            <span>scroll</span>
+        </div>
+
+        <!-- Floating particles burst -->
+        <div class="hero-particles" id="heroParticles"></div>
+    </section>
+
+    <!-- Marquee Ticker -->
+    <section class="marquee">
+        <div class="marquee-track">
+            <div class="marquee-content">
+                <span>DESIGN</span><span class="marquee-dot"></span>
+                <span>PUBLICIDADE</span><span class="marquee-dot"></span>
+                <span>BRANDING</span><span class="marquee-dot"></span>
+                <span>MARKETING DIGITAL</span><span class="marquee-dot"></span>
+                <span>WEB DESIGN</span><span class="marquee-dot"></span>
+                <span>IMPRESSÃO</span><span class="marquee-dot"></span>
+                <span>EVENTOS</span><span class="marquee-dot"></span>
+                <span>CONSULTORIA</span><span class="marquee-dot"></span>
+                <span>DESIGN</span><span class="marquee-dot"></span>
+                <span>PUBLICIDADE</span><span class="marquee-dot"></span>
+                <span>BRANDING</span><span class="marquee-dot"></span>
+                <span>MARKETING DIGITAL</span><span class="marquee-dot"></span>
+                <span>WEB DESIGN</span><span class="marquee-dot"></span>
+                <span>IMPRESSÃO</span><span class="marquee-dot"></span>
+                <span>EVENTOS</span><span class="marquee-dot"></span>
+                <span>CONSULTORIA</span><span class="marquee-dot"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Nós -->
+    <section class="section section-about" id="sobre">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <span class="section-label">Sobre Nós</span>
+                    <h2 class="section-title reveal-text">Somos a <em>Yes, We Do</em></h2>
+                    <p class="about-text reveal-up">
+                        Fundada por profissionais com mais de 10 anos de experiência no mercado da comunicação,
+                        a Yes, We Do nasceu da vontade de colocar todo o conhecimento e competências
+                        ao serviço dos nossos clientes.
+                    </p>
+                    <p class="about-text reveal-up">
+                        De Rio Tinto para o mundo, dizemos <strong>sim</strong> aos desafios.
+                        Acreditamos que cada marca tem uma história única para contar — e nós
+                        sabemos como a contar da forma mais impactante.
+                    </p>
+                    <p class="about-text reveal-up">
+                        Combinamos criatividade, estratégia e execução impecável para
+                        transformar as ideias dos nossos clientes em resultados concretos.
+                    </p>
+                </div>
+                <div class="about-visual">
+                    <div class="about-shape-container reveal-up">
+                        <div class="about-shape">
+                            <span class="about-shape-text">Y<br>W<br>D</span>
+                        </div>
+                        <div class="about-shape-orbit"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-item reveal-up">
+                    <span class="stat-number" data-count="10">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Anos de experiência</span>
+                </div>
+                <div class="stat-item reveal-up">
+                    <span class="stat-number" data-count="150">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Projetos realizados</span>
+                </div>
+                <div class="stat-item reveal-up">
+                    <span class="stat-number" data-count="80">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Clientes satisfeitos</span>
+                </div>
+                <div class="stat-item reveal-up">
+                    <span class="stat-number" data-count="100">0</span><span class="stat-percent">%</span>
+                    <span class="stat-label">Dedicação</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section class="section section-services" id="servicos">
+        <div class="container">
+            <span class="section-label">O Que Fazemos</span>
+            <h2 class="section-title reveal-text">Os nossos <em>serviços</em></h2>
+            <p class="section-subtitle reveal-up">Soluções completas de comunicação para a sua marca crescer.</p>
+
+            <div class="services-grid">
+                <div class="service-card reveal-up" data-service="01">
+                    <div class="service-card-inner">
+                        <span class="service-number">01</span>
+                        <div class="service-icon">
+                            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 8h48v48H8z" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="24" cy="28" r="8" stroke="currentColor" stroke-width="2"/>
+                                <rect x="36" y="20" width="14" height="14" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 48l14-14 10 8 16-20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Design Gráfico</h3>
+                        <p class="service-desc">Identidade visual, logótipos, packaging e materiais gráficos que comunicam a essência da sua marca.</p>
+                        <div class="service-tags">
+                            <span>Logótipos</span>
+                            <span>Packaging</span>
+                            <span>Editorial</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card reveal-up" data-service="02">
+                    <div class="service-card-inner">
+                        <span class="service-number">02</span>
+                        <div class="service-icon">
+                            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M32 8L36 24h16L38 34l6 18-12-10-12 10 6-18L12 24h16z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Publicidade</h3>
+                        <p class="service-desc">Campanhas publicitárias criativas e estratégicas que captam a atenção e geram resultados mensuráveis.</p>
+                        <div class="service-tags">
+                            <span>Campanhas</span>
+                            <span>Estratégia</span>
+                            <span>Media</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card reveal-up" data-service="03">
+                    <div class="service-card-inner">
+                        <span class="service-number">03</span>
+                        <div class="service-icon">
+                            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="12" width="48" height="32" rx="4" stroke="currentColor" stroke-width="2"/>
+                                <line x1="8" y1="22" x2="56" y2="22" stroke="currentColor" stroke-width="2"/>
+                                <path d="M24 56l8-12 8 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="32" cy="34" r="4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M20 34h6M38 34h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Marketing Digital</h3>
+                        <p class="service-desc">Gestão de redes sociais, SEO, SEM e content marketing para uma presença digital forte e eficaz.</p>
+                        <div class="service-tags">
+                            <span>Redes Sociais</span>
+                            <span>SEO</span>
+                            <span>Conteúdo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card reveal-up" data-service="04">
+                    <div class="service-card-inner">
+                        <span class="service-number">04</span>
+                        <div class="service-icon">
+                            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="14" width="48" height="30" rx="4" stroke="currentColor" stroke-width="2"/>
+                                <line x1="8" y1="24" x2="56" y2="24" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="16" cy="19" r="2" fill="currentColor"/>
+                                <circle cx="22" cy="19" r="2" fill="currentColor" opacity="0.5"/>
+                                <path d="M24 34l-8 8M40 34l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M28 50h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Web Design</h3>
+                        <p class="service-desc">Websites modernos, landing pages e e-commerce que convertem visitantes em clientes.</p>
+                        <div class="service-tags">
+                            <span>Websites</span>
+                            <span>E-commerce</span>
+                            <span>UI/UX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card reveal-up" data-service="05">
+                    <div class="service-card-inner">
+                        <span class="service-number">05</span>
+                        <div class="service-icon">
+                            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="32" cy="28" r="18" stroke="currentColor" stroke-width="2"/>
+                                <path d="M24 28l6 6 12-12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <line x1="20" y1="52" x2="44" y2="52" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="24" y1="57" x2="40" y2="57" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Branding</h3>
+                        <p class="service-desc">Criação e revitalização de marcas com identidade forte, coerente e memorável.</p>
+                        <div class="service-tags">
+                            <span>Identidade</span>
+                            <span>Naming</span>
+                            <span>Brand Strategy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card reveal-up" data-service="06">
+                    <div class="service-card-inner">
+                        <span class="service-number">06</span>
+                        <div class="service-icon">
+                            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="12" y="8" width="40" height="48" rx="4" stroke="currentColor" stroke-width="2"/>
+                                <line x1="20" y1="20" x2="44" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="20" y1="28" x2="36" y2="28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="20" y1="36" x2="40" y2="36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <rect x="20" y="42" width="12" height="8" rx="1" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Impressão & Produção</h3>
+                        <p class="service-desc">Materiais impressos de alta qualidade, merchandising e sinalética que fazem a diferença.</p>
+                        <div class="service-tags">
+                            <span>Impressão</span>
+                            <span>Merchandising</span>
+                            <span>Sinalética</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card reveal-up" data-service="07">
+                    <div class="service-card-inner">
+                        <span class="service-number">07</span>
+                        <div class="service-icon">
+                            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M32 10l4 20h20L40 40l6 14-14-10-14 10 6-14L8 30h20z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Eventos</h3>
+                        <p class="service-desc">Organização e comunicação de eventos corporativos que criam experiências memoráveis.</p>
+                        <div class="service-tags">
+                            <span>Corporativos</span>
+                            <span>Lançamentos</span>
+                            <span>Feiras</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card reveal-up" data-service="08">
+                    <div class="service-card-inner">
+                        <span class="service-number">08</span>
+                        <div class="service-icon">
+                            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="32" cy="20" r="10" stroke="currentColor" stroke-width="2"/>
+                                <path d="M16 54c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M40 44l8-4M24 44l-8-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Consultoria</h3>
+                        <p class="service-desc">Estratégia de comunicação e marketing personalizada para alavancar o seu negócio.</p>
+                        <div class="service-tags">
+                            <span>Estratégia</span>
+                            <span>Planeamento</span>
+                            <span>Análise</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="section section-portfolio" id="portfolio">
+        <div class="container">
+            <span class="section-label">Portfolio</span>
+            <h2 class="section-title reveal-text">Trabalhos que <em>inspiram</em></h2>
+            <p class="section-subtitle reveal-up">Uma seleção dos nossos projetos mais recentes.</p>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item portfolio-item-large reveal-up">
+                    <div class="portfolio-item-inner">
+                        <div class="portfolio-img" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
+                            <div class="portfolio-placeholder">
+                                <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="40" y="40" width="120" height="120" rx="12" stroke="#F5C518" stroke-width="2"/>
+                                    <circle cx="80" cy="90" r="20" stroke="#F5C518" stroke-width="2"/>
+                                    <rect x="110" y="70" width="35" height="35" stroke="#F5C518" stroke-width="2"/>
+                                    <path d="M50 140l30-30 25 20 35-45" stroke="#F5C518" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <span class="portfolio-category">Branding</span>
+                            <h3 class="portfolio-title">Identidade Visual Corporativa</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item reveal-up">
+                    <div class="portfolio-item-inner">
+                        <div class="portfolio-img" style="background: linear-gradient(135deg, #0f3460, #1a1a2e);">
+                            <div class="portfolio-placeholder">
+                                <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="30" y="50" width="140" height="90" rx="8" stroke="#F5C518" stroke-width="2"/>
+                                    <line x1="30" y1="70" x2="170" y2="70" stroke="#F5C518" stroke-width="2"/>
+                                    <rect x="45" y="85" width="50" height="35" rx="4" stroke="#F5C518" stroke-width="1.5"/>
+                                    <line x1="110" y1="85" x2="155" y2="85" stroke="#F5C518" stroke-width="1.5"/>
+                                    <line x1="110" y1="95" x2="145" y2="95" stroke="#F5C518" stroke-width="1.5"/>
+                                    <line x1="110" y1="105" x2="150" y2="105" stroke="#F5C518" stroke-width="1.5"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <span class="portfolio-category">Web Design</span>
+                            <h3 class="portfolio-title">Plataforma Digital</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item reveal-up">
+                    <div class="portfolio-item-inner">
+                        <div class="portfolio-img" style="background: linear-gradient(135deg, #2d1b69, #1a1a2e);">
+                            <div class="portfolio-placeholder">
+                                <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="100" cy="100" r="50" stroke="#F5C518" stroke-width="2"/>
+                                    <path d="M80 100l15 15 25-30" stroke="#F5C518" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="100" cy="100" r="65" stroke="#F5C518" stroke-width="1" opacity="0.3"/>
+                                    <circle cx="100" cy="100" r="80" stroke="#F5C518" stroke-width="0.5" opacity="0.15"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <span class="portfolio-category">Marketing</span>
+                            <h3 class="portfolio-title">Campanha Digital 360°</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item reveal-up">
+                    <div class="portfolio-item-inner">
+                        <div class="portfolio-img" style="background: linear-gradient(135deg, #1a1a2e, #0f3460);">
+                            <div class="portfolio-placeholder">
+                                <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="50" y="30" width="100" height="140" rx="8" stroke="#F5C518" stroke-width="2"/>
+                                    <line x1="65" y1="55" x2="135" y2="55" stroke="#F5C518" stroke-width="1.5"/>
+                                    <line x1="65" y1="70" x2="120" y2="70" stroke="#F5C518" stroke-width="1.5"/>
+                                    <rect x="65" y="85" width="70" height="50" rx="4" stroke="#F5C518" stroke-width="1.5"/>
+                                    <line x1="65" y1="150" x2="110" y2="150" stroke="#F5C518" stroke-width="1.5"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <span class="portfolio-category">Editorial</span>
+                            <h3 class="portfolio-title">Design Editorial</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item portfolio-item-large reveal-up">
+                    <div class="portfolio-item-inner">
+                        <div class="portfolio-img" style="background: linear-gradient(135deg, #16213e, #2d1b69);">
+                            <div class="portfolio-placeholder">
+                                <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M100 30l5 35h35L110 85l10 30-20-18-20 18 10-30-30-20h35z" stroke="#F5C518" stroke-width="2"/>
+                                    <rect x="30" y="130" width="140" height="40" rx="6" stroke="#F5C518" stroke-width="2"/>
+                                    <line x1="55" y1="150" x2="145" y2="150" stroke="#F5C518" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <span class="portfolio-category">Eventos</span>
+                            <h3 class="portfolio-title">Evento Corporativo Anual</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Processo -->
+    <section class="section section-process" id="processo">
+        <div class="container">
+            <span class="section-label">Como Trabalhamos</span>
+            <h2 class="section-title reveal-text">O nosso <em>processo</em></h2>
+            <p class="section-subtitle reveal-up">Do briefing à entrega, cada passo é pensado para superar as suas expectativas.</p>
+
+            <div class="process-grid">
+                <div class="process-step reveal-up">
+                    <div class="process-step-number">01</div>
+                    <div class="process-step-line"></div>
+                    <div class="process-step-content">
+                        <div class="process-icon">
+                            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2"/>
+                                <path d="M24 14v10l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Ouvir</h3>
+                        <p>Compreendemos as suas necessidades, objetivos e desafios. O primeiro passo é sempre ouvir com atenção.</p>
+                    </div>
+                </div>
+
+                <div class="process-step reveal-up">
+                    <div class="process-step-number">02</div>
+                    <div class="process-step-line"></div>
+                    <div class="process-step-content">
+                        <div class="process-icon">
+                            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="24" cy="18" r="8" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 40c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="currentColor" stroke-width="2"/>
+                                <path d="M28 14l6-4M20 14l-6-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Pensar</h3>
+                        <p>Desenvolvemos a estratégia perfeita, combinando criatividade com dados e experiência de mercado.</p>
+                    </div>
+                </div>
+
+                <div class="process-step reveal-up">
+                    <div class="process-step-number">03</div>
+                    <div class="process-step-line"></div>
+                    <div class="process-step-content">
+                        <div class="process-icon">
+                            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24 8L28 20h12L30 28l4 12-10-8-10 8 4-12-10-8h12z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Criar</h3>
+                        <p>Damos vida às ideias com design de excelência e execução impecável em cada detalhe.</p>
+                    </div>
+                </div>
+
+                <div class="process-step reveal-up">
+                    <div class="process-step-number">04</div>
+                    <div class="process-step-line"></div>
+                    <div class="process-step-content">
+                        <div class="process-icon">
+                            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 24l8 8 16-16" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Entregar</h3>
+                        <p>Resultados que superam expectativas. Acompanhamos cada projeto até ao sucesso final.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testemunhos -->
+    <section class="section section-testimonials">
+        <div class="container">
+            <span class="section-label">Testemunhos</span>
+            <h2 class="section-title reveal-text">O que dizem os <em>clientes</em></h2>
+
+            <div class="testimonials-slider" id="testimonialsSlider">
+                <div class="testimonial-item active">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">A Yes, We Do transformou completamente a imagem da nossa empresa. Profissionalismo, criatividade e resultados excecionais.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-author-info">
+                            <strong>Ana Silva</strong>
+                            <span>Diretora de Marketing, TechVida</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">Desde o primeiro dia que sentimos uma dedicação total ao nosso projeto. A equipa da Yes, We Do entende verdadeiramente as necessidades dos clientes.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-author-info">
+                            <strong>Pedro Santos</strong>
+                            <span>CEO, Grupo Horizonte</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">A campanha digital que criaram para nós superou todas as expectativas. Os resultados foram impressionantes e imediatos.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-author-info">
+                            <strong>Maria Costa</strong>
+                            <span>Fundadora, NaturalBio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-dots" id="testimonialDots">
+                <button class="testimonial-dot active" data-index="0" aria-label="Testemunho 1"></button>
+                <button class="testimonial-dot" data-index="1" aria-label="Testemunho 2"></button>
+                <button class="testimonial-dot" data-index="2" aria-label="Testemunho 3"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section section-cta">
+        <div class="container">
+            <div class="cta-content reveal-up">
+                <h2 class="cta-title">Tem um projeto<br>em mente<span class="cta-question">?</span></h2>
+                <p class="cta-text">Diga-nos o que precisa. A nossa resposta será sempre:</p>
+                <div class="cta-answer">
+                    <span class="cta-yes">Yes,</span>
+                    <span class="cta-we">We</span>
+                    <span class="cta-do">Do.</span>
+                </div>
+                <a href="#contacto" class="btn btn-primary btn-large magnetic">
+                    <span>Iniciar Projeto</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="section section-contact" id="contacto">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <span class="section-label">Contacto</span>
+                    <h2 class="section-title reveal-text">Vamos <em>conversar</em></h2>
+                    <p class="contact-text reveal-up">Estamos prontos para transformar a sua ideia em realidade. Contacte-nos e descubra o que podemos fazer pela sua marca.</p>
+
+                    <div class="contact-details reveal-up">
+                        <div class="contact-detail-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <div>
+                                <strong>Morada</strong>
+                                <p>Av. D. João I 81<br>4435-208 Rio Tinto</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            <div>
+                                <strong>Email</strong>
+                                <p>geral@yes-wedo.pt</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <div>
+                                <strong>Telefone</strong>
+                                <p>+351 XXX XXX XXX</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-social reveal-up">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper reveal-up">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="formName" name="name" required placeholder=" ">
+                            <label for="formName">Nome</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="formEmail" name="email" required placeholder=" ">
+                            <label for="formEmail">Email</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="formPhone" name="phone" placeholder=" ">
+                            <label for="formPhone">Telefone</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="formMessage" name="message" required rows="4" placeholder=" "></textarea>
+                            <label for="formMessage">Mensagem</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-submit magnetic">
+                            <span>Enviar Mensagem</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo footer-logo">
+                        <span class="logo-yes">Yes</span><span class="logo-comma">,</span>
+                        <span class="logo-we">We</span>
+                        <span class="logo-do">Do</span>
+                    </a>
+                    <p>Agência de publicidade, comunicação e design. Mais de 10 anos de experiência ao serviço da sua marca.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navegação</h4>
+                    <a href="#sobre">Sobre</a>
+                    <a href="#servicos">Serviços</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#processo">Processo</a>
+                    <a href="#contacto">Contacto</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Serviços</h4>
+                    <a href="#servicos">Design Gráfico</a>
+                    <a href="#servicos">Marketing Digital</a>
+                    <a href="#servicos">Branding</a>
+                    <a href="#servicos">Web Design</a>
+                    <a href="#servicos">Publicidade</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Contacto</h4>
+                    <p>Av. D. João I 81<br>4435-208 Rio Tinto</p>
+                    <a href="mailto:geral@yes-wedo.pt">geral@yes-wedo.pt</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Yes, We Do. Todos os direitos reservados.</p>
+                <p>Yes Wedo, Lda. — Agência de Publicidade</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js" defer></script>
+</body>
+</html>
