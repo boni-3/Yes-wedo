@@ -18,7 +18,6 @@
         // ===== PRELOADER =====
         const preloader = document.getElementById('preloader');
         const preloaderLetters = document.querySelectorAll('.preloader-letter');
-        const preloaderComma = document.querySelector('.preloader-comma');
         const preloaderBarFill = document.querySelector('.preloader-bar-fill');
 
         const preloaderTl = gsap.timeline({
@@ -44,10 +43,9 @@
                 opacity: 1,
                 y: 0,
                 duration: 0.5,
-                stagger: 0.06,
+                stagger: 0.12,
                 ease: 'back.out(1.7)'
-            }, 0.3)
-            .to(preloaderComma, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 0.7);
+            }, 0.3);
 
         // ===== HERO CANVAS PARTICLES =====
         const canvas = document.getElementById('heroCanvas');
@@ -76,7 +74,11 @@
                 this.speedX = (Math.random() - 0.5) * 0.5;
                 this.speedY = (Math.random() - 0.5) * 0.5;
                 this.opacity = Math.random() * 0.5 + 0.1;
-                this.golden = Math.random() > 0.7;
+                // Brand colors: orange, blue, magenta
+                const colorRoll = Math.random();
+                if (colorRoll > 0.6) this.colorType = 'orange';
+                else if (colorRoll > 0.3) this.colorType = 'blue';
+                else this.colorType = 'magenta';
             }
 
             update() {
@@ -99,10 +101,12 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                if (this.golden) {
-                    ctx.fillStyle = `rgba(245, 197, 24, ${this.opacity})`;
+                if (this.colorType === 'orange') {
+                    ctx.fillStyle = `rgba(232, 93, 38, ${this.opacity})`;
+                } else if (this.colorType === 'blue') {
+                    ctx.fillStyle = `rgba(74, 144, 217, ${this.opacity})`;
                 } else {
-                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity * 0.5})`;
+                    ctx.fillStyle = `rgba(199, 48, 102, ${this.opacity * 0.7})`;
                 }
                 ctx.fill();
             }
@@ -125,10 +129,12 @@
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        if (particles[i].golden || particles[j].golden) {
-                            ctx.strokeStyle = `rgba(245, 197, 24, ${opacity})`;
+                        if (particles[i].colorType === 'orange' || particles[j].colorType === 'orange') {
+                            ctx.strokeStyle = `rgba(232, 93, 38, ${opacity})`;
+                        } else if (particles[i].colorType === 'blue' || particles[j].colorType === 'blue') {
+                            ctx.strokeStyle = `rgba(74, 144, 217, ${opacity})`;
                         } else {
-                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.5})`;
+                            ctx.strokeStyle = `rgba(199, 48, 102, ${opacity * 0.6})`;
                         }
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
@@ -211,6 +217,14 @@
             tl.call(() => {
                 createParticleBurst();
             }, null, 1.8);
+
+            // Tagline "Marketing & Publicidade"
+            tl.to('#heroTagline', {
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                ease: 'power2.out'
+            }, 2);
 
             // Subtitle
             tl.to('#heroSubtitle', {
