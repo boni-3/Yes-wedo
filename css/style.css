@@ -231,14 +231,15 @@ body.cursor-hover .cursor-outline {
 }
 
 .nav-logo-img {
-    height: 45px;
+    height: 50px;
     width: auto;
+    max-width: 180px;
     object-fit: contain;
 }
 
 .footer-logo-img {
-    height: 35px;
-    width: auto;
+    height: auto;
+    width: min(200px, 50vw);
     object-fit: contain;
 }
 
@@ -1196,16 +1197,15 @@ body.cursor-hover .cursor-outline {
 }
 
 .cta-answer {
-    font-family: var(--font-heading);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 700;
     margin-bottom: 3rem;
-    letter-spacing: -0.02em;
 }
 
-.cta-yes { color: var(--orange); }
-.cta-we { color: var(--orange); margin-left: 0.2em; font-style: italic; }
-.cta-do { color: var(--blue); margin-left: 0.1em; }
+.cta-logo-img {
+    width: min(400px, 70vw);
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
 
 /* --- Contact Section --- */
 .section-contact {
@@ -1572,8 +1572,8 @@ body.cursor-hover .cursor-outline {
         padding: clamp(60px, 10vw, 100px) 0;
     }
 
-    .cta-answer {
-        font-size: clamp(1.5rem, 6vw, 2.5rem);
+    .cta-logo-img {
+        width: min(280px, 65vw);
     }
 
     /* Ensure contact & footer are visible on mobile */
