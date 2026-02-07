@@ -51,25 +51,20 @@
         function startHeroAnimation() {
             const tl = gsap.timeline();
 
-            // Fade in logo
-            tl.to('#heroLogo', {
-                opacity: 1, y: 0, duration: 1, ease: 'power2.out'
+            // CTA button
+            tl.to('#heroCta', {
+                opacity: 1, y: 0, duration: 0.8, ease: 'power2.out'
             }, 0.3);
 
             // Subtitle
             tl.to('#heroSubtitle', {
                 opacity: 1, y: 0, duration: 0.6, ease: 'power2.out'
-            }, 1);
-
-            // CTA
-            tl.to('#heroCta', {
-                opacity: 1, y: 0, duration: 0.6, ease: 'power2.out'
-            }, 1.3);
+            }, 0.8);
 
             // Scroll indicator
             tl.to('#heroScroll', {
                 opacity: 1, duration: 0.5, ease: 'power2.out'
-            }, 1.8);
+            }, 1.3);
         }
 
         // ===== CUSTOM CURSOR =====
