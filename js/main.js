@@ -653,34 +653,34 @@
         const portfolioTrack = document.getElementById('portfolioScrollTrack');
         const portfolioProgressBar = document.getElementById('portfolioProgressBar');
         if (portfolioTrack && portfolioWrapper) {
-            // Wait a tick for layout to settle before measuring
-            requestAnimationFrame(() => {
-                function getScrollDistance() {
-                    return portfolioTrack.scrollWidth - portfolioWrapper.offsetWidth;
-                }
+            function getScrollDistance() {
+                return portfolioTrack.scrollWidth - portfolioWrapper.offsetWidth;
+            }
 
-                const dist = getScrollDistance();
-                if (dist > 0) {
-                    gsap.to(portfolioTrack, {
-                        x: () => -getScrollDistance(),
-                        ease: 'none',
-                        scrollTrigger: {
-                            trigger: '#portfolio',
-                            start: 'top top',
-                            end: () => '+=' + Math.max(getScrollDistance(), 600),
-                            pin: true,
-                            scrub: 1,
-                            anticipatePin: 1,
-                            invalidateOnRefresh: true,
-                            onUpdate: (self) => {
-                                if (portfolioProgressBar) {
-                                    gsap.set(portfolioProgressBar, { scaleX: self.progress });
-                                }
+            const dist = getScrollDistance();
+            if (dist > 0) {
+                gsap.to(portfolioTrack, {
+                    x: () => -getScrollDistance(),
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '#portfolio',
+                        start: 'top top',
+                        end: () => '+=' + Math.max(getScrollDistance(), 600),
+                        pin: true,
+                        scrub: 1,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
+                        onUpdate: (self) => {
+                            if (portfolioProgressBar) {
+                                gsap.set(portfolioProgressBar, { scaleX: self.progress });
                             }
                         }
-                    });
-                }
-            });
+                    }
+                });
+            }
+
+            // Recalculate all ScrollTrigger positions after pin is created
+            ScrollTrigger.refresh();
         }
 
         // ===== MARQUEE: Infinite auto-scroll CSS animation =====
