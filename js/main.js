@@ -236,27 +236,28 @@
         });
 
         // ===== ANIMATED COUNTERS =====
-        const statNumbers = document.querySelectorAll('.stat-number');
-        statNumbers.forEach(stat => {
-            const target = parseInt(stat.getAttribute('data-count'));
-
+        const statsGrid = document.querySelector('.stats-grid');
+        if (statsGrid) {
             ScrollTrigger.create({
-                trigger: stat,
-                start: 'top 85%',
+                trigger: statsGrid,
+                start: 'top 80%',
                 onEnter: () => {
-                    gsap.to(stat, {
-                        innerText: target,
-                        duration: 2,
-                        ease: 'power2.out',
-                        snap: { innerText: 1 },
-                        onUpdate: function () {
-                            stat.textContent = Math.round(parseFloat(stat.textContent));
-                        }
+                    document.querySelectorAll('.stat-number').forEach(stat => {
+                        const target = parseInt(stat.getAttribute('data-count'));
+                        gsap.fromTo(stat, { innerText: 0 }, {
+                            innerText: target,
+                            duration: 2,
+                            ease: 'power2.out',
+                            snap: { innerText: 1 },
+                            onUpdate: function () {
+                                stat.textContent = Math.round(parseFloat(stat.textContent));
+                            }
+                        });
                     });
                 },
                 once: true
             });
-        });
+        }
 
         // ===== CTA SECTION ANIMATION =====
         ScrollTrigger.create({
