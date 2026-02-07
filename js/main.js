@@ -48,6 +48,12 @@
             }, 0.3);
 
         // ===== HERO VIDEO ANIMATION =====
+        // Set initial hidden state via GSAP (more reliable than CSS)
+        gsap.set('#heroHeadline', { opacity: 0, y: 30 });
+        gsap.set('#heroTagline', { opacity: 0, y: 20 });
+        gsap.set('#heroCta', { opacity: 0, y: 20 });
+        gsap.set('#heroScroll', { opacity: 0 });
+
         function startHeroAnimation() {
             const tl = gsap.timeline();
 
