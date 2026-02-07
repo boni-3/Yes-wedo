@@ -967,24 +967,30 @@ body.cursor-hover .cursor-outline {
 }
 
 /* --- Portfolio Section — Horizontal Scroll Gallery --- */
+/* Outer section: tall container (height set by JS based on scroll distance) */
 .section-portfolio {
     background: #0F1B2D;
-    padding-top: clamp(80px, 12vw, 160px);
-    padding-bottom: 3rem;
-    height: 100vh;
-    height: 100dvh;
-    box-sizing: border-box;
 }
 
-/* GSAP creates a .pin-spacer wrapper when pinning — inherit section bg */
-.pin-spacer {
-    background-color: inherit !important;
+/* Inner sticky panel: stays fixed while parent scrolls */
+.portfolio-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding-top: clamp(80px, 12vw, 160px);
+    padding-bottom: 3rem;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .portfolio-scroll-wrapper {
     margin-top: 3rem;
     overflow: hidden;
     width: 100%;
+    flex: 1;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }

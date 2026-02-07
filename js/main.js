@@ -402,7 +402,7 @@
         }
 
         // ===== PORTFOLIO: Horizontal scroll gallery =====
-        // Must wait for portfolio images to load so scrollWidth is correct
+        // Uses CSS position:sticky (no GSAP pin) for bulletproof scroll
         function initPortfolioScroll() {
             const portfolioWrapper = document.getElementById('portfolioScrollWrapper');
             const portfolioTrack = document.getElementById('portfolioScrollTrack');
@@ -418,18 +418,23 @@
             const dist = getScrollDistance();
             if (dist <= 0) return;
 
+            // Make section tall enough to provide scroll room for the horizontal movement
+            portfolioSection.style.height = (window.innerHeight + dist) + 'px';
+
             gsap.to(portfolioTrack, {
                 x: () => -getScrollDistance(),
                 ease: 'none',
                 scrollTrigger: {
-                    trigger: '#portfolio',
+                    trigger: portfolioSection,
                     start: 'top top',
-                    end: () => '+=' + getScrollDistance(),
-                    pin: true,
-                    pinSpacing: true,
+                    end: 'bottom bottom',
                     scrub: true,
-                    anticipatePin: 1,
                     invalidateOnRefresh: true,
+                    onRefresh: () => {
+                        // Recalculate section height on resize
+                        const d = getScrollDistance();
+                        portfolioSection.style.height = (window.innerHeight + d) + 'px';
+                    },
                     onUpdate: (self) => {
                         if (portfolioProgressBar) {
                             gsap.set(portfolioProgressBar, { scaleX: self.progress });
