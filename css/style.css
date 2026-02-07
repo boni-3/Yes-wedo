@@ -1528,12 +1528,7 @@ body.cursor-hover .cursor-outline {
 
     /* Marquee slower on mobile */
     .marquee-track {
-        animation-duration: 20s;
-    }
-
-    /* Portfolio section doesn't need full vh on mobile */
-    .section-portfolio {
-        min-height: auto;
+        animation-duration: 60s;
     }
 
     .services-grid {
