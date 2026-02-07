@@ -51,14 +51,19 @@
         function startHeroAnimation() {
             const tl = gsap.timeline();
 
-            // CTA button
+            // Headline
+            tl.to('#heroHeadline', {
+                opacity: 1, y: 0, duration: 1, ease: 'power3.out'
+            }, 0.1);
+
+            // Tagline
+            tl.to('#heroTagline', {
+                opacity: 1, y: 0, duration: 0.8, ease: 'power2.out'
+            }, 0.5);
+
+            // CTA buttons
             tl.to('#heroCta', {
                 opacity: 1, y: 0, duration: 0.8, ease: 'power2.out'
-            }, 0.3);
-
-            // Subtitle
-            tl.to('#heroSubtitle', {
-                opacity: 1, y: 0, duration: 0.6, ease: 'power2.out'
             }, 0.8);
 
             // Scroll indicator
@@ -297,14 +302,14 @@
         });
 
         // ===== PARALLAX HERO =====
-        gsap.to('.hero-content', {
+        gsap.to('#heroContent', {
             scrollTrigger: {
                 trigger: '.hero',
                 start: 'top top',
                 end: 'bottom top',
                 scrub: true
             },
-            y: -100,
+            y: -80,
             opacity: 0.3,
             ease: 'none'
         });
