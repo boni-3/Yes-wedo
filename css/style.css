@@ -498,91 +498,141 @@ body.cursor-hover .cursor-outline {
 .vinyl-wrapper {
     position: relative;
     display: inline-block;
-    perspective: 1000px;
 }
 
-/* The "wall surface" texture behind */
+/* The logo underneath (will be muted until transfer peels) */
 .vinyl-wall {
     position: relative;
     display: inline-block;
 }
 
-/* Transfer paper overlay */
-.vinyl-transfer {
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    right: -8px;
-    bottom: -8px;
-    background: linear-gradient(135deg, rgba(230, 225, 215, 0.95) 0%, rgba(215, 210, 200, 0.93) 40%, rgba(225, 220, 210, 0.95) 100%);
-    z-index: 10;
-    transform-origin: right top;
-    border-radius: 4px;
-    pointer-events: none;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-    perspective: 800px;
-    will-change: clip-path, transform;
+/* Muted/faded version of logo visible through transfer */
+.vinyl-wall .hero-logo-img {
+    opacity: 0.35;
+    transition: opacity 0.6s ease;
 }
 
-/* Grid/texture on transfer paper */
+.vinyl-wall.revealed .hero-logo-img {
+    opacity: 1;
+}
+
+/* Transfer paper overlay - semi-transparent like real transfer */
+.vinyl-transfer {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(
+        135deg,
+        rgba(235, 232, 225, 0.72) 0%,
+        rgba(225, 220, 212, 0.68) 30%,
+        rgba(230, 226, 218, 0.70) 60%,
+        rgba(235, 232, 225, 0.72) 100%
+    );
+    z-index: 10;
+    border-radius: 3px;
+    pointer-events: none;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
+    will-change: clip-path;
+    backdrop-filter: blur(0.5px);
+    -webkit-backdrop-filter: blur(0.5px);
+}
+
+/* Subtle grid texture on transfer paper */
 .vinyl-transfer::before {
     content: '';
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(0deg, rgba(0,0,0,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
-    background-size: 20px 20px;
-    border-radius: 4px;
+        linear-gradient(0deg, rgba(0,0,0,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+    background-size: 15px 15px;
+    border-radius: 3px;
 }
 
-/* Shadow under peeling edge */
-.vinyl-transfer::after {
-    content: '';
+/* Diagonal peel edge - the shadow/curl at the tear line */
+.vinyl-peel-edge {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: -5px 5px 15px rgba(0,0,0,0.3);
-    border-radius: 4px;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    z-index: 11;
+    pointer-events: none;
     opacity: 0;
-    transition: opacity 0.3s;
+    background: linear-gradient(
+        135deg,
+        transparent 0%,
+        transparent calc(var(--peel, 0%) - 3%),
+        rgba(0,0,0,0.15) calc(var(--peel, 0%) - 1%),
+        rgba(255,255,255,0.4) var(--peel, 0%),
+        rgba(0,0,0,0.08) calc(var(--peel, 0%) + 1%),
+        transparent calc(var(--peel, 0%) + 3%),
+        transparent 100%
+    );
 }
 
-.vinyl-transfer.peeling::after {
-    opacity: 1;
+/* Diagonal peel keyframes: top-left to bottom-right */
+@keyframes vinylPeel {
+    0% {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
+    }
+    25% {
+        clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%);
+    }
+    50% {
+        clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%);
+    }
+    75% {
+        clip-path: polygon(100% 50%, 100% 50%, 100% 100%, 50% 100%, 50% 100%);
+    }
+    100% {
+        clip-path: polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%);
+    }
 }
 
-/* The sticky residue / application effect */
-.vinyl-reveal {
+.vinyl-transfer.peeling {
+    animation: vinylPeel 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Shine flash when logo is fully revealed */
+@keyframes vinylShine {
+    0% {
+        opacity: 0;
+        background-position: -200% center;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        background-position: 200% center;
+    }
+}
+
+.vinyl-shine {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: transparent;
     z-index: 5;
+    pointer-events: none;
+    background: linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255,255,255,0.3) 48%,
+        rgba(255,255,255,0.5) 50%,
+        rgba(255,255,255,0.3) 52%,
+        transparent 70%
+    );
+    background-size: 200% 100%;
     opacity: 0;
 }
 
-.vinyl-reveal::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(240, 67, 32, 0.08), rgba(82, 155, 202, 0.05));
-    opacity: 0;
-}
-
-.hero-tagline {
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--magenta);
-    margin-bottom: 0.5rem;
-    opacity: 0;
-    transform: translateY(20px);
+.vinyl-shine.active {
+    animation: vinylShine 0.8s ease-out forwards;
 }
 
 .hero-subtitle {

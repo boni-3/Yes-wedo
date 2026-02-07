@@ -192,10 +192,14 @@
             }
 
             // === VINYL TRANSFER PEEL ANIMATION ===
+            // Replicates a real vinyl transfer being peeled from top-left to bottom-right
             const vinylTransfer = document.getElementById('vinylTransfer');
-            const vinylWrapper = document.getElementById('vinylWrapper');
+            const vinylWall = document.getElementById('vinylWall');
+            const vinylPeelEdge = document.getElementById('vinylPeelEdge');
+            const vinylShine = document.getElementById('vinylShine');
 
-            // Step 1: Show the logo container (with transfer paper covering it)
+            // Step 1: Show the logo with transfer paper on top
+            // Logo is muted/faded under the semi-transparent transfer
             tl.to('#heroLogo', {
                 opacity: 1,
                 y: 0,
@@ -203,73 +207,81 @@
                 ease: 'power2.out'
             }, 1);
 
-            // Step 2: Slight press-down effect (applying the vinyl)
+            // Step 2: Brief pause - vinyl is "pressed onto the wall"
+            // Small squeeze effect like pressing the squeegee
             tl.to('#vinylWrapper', {
-                scale: 1.02,
-                duration: 0.4,
+                scale: 1.01,
+                duration: 0.3,
                 ease: 'power2.in'
-            }, 1.8)
+            }, 2)
             .to('#vinylWrapper', {
                 scale: 1,
-                duration: 0.3,
+                duration: 0.2,
                 ease: 'power2.out'
-            }, 2.2);
+            }, 2.3);
 
-            // Step 3: Start peeling the transfer paper
-            // The paper peels from bottom-left corner to top-right
-            tl.call(() => {
-                if (vinylTransfer) vinylTransfer.classList.add('peeling');
-            }, null, 2.5);
-
-            // Peel using clip-path - paper lifts from bottom-left
-            tl.to('#vinylTransfer', {
-                clipPath: 'polygon(100% 0%, 100% 0%, 100% 0%, 100% 0%)',
-                duration: 2,
-                ease: 'power2.inOut',
-                onStart: function() {
-                    // Add 3D perspective during peel
-                    if (vinylTransfer) {
-                        vinylTransfer.style.transformOrigin = 'right top';
-                    }
-                }
-            }, 2.6);
-
-            // Subtle 3D rotation of the paper as it peels
-            tl.to('#vinylTransfer', {
-                rotateY: -15,
-                rotateX: 5,
-                duration: 2,
-                ease: 'power2.inOut'
-            }, 2.6);
-
-            // The reveal glow effect under transfer
-            tl.to('#vinylReveal', {
+            // Step 3: Start the diagonal peel from top-left to bottom-right
+            // Show the peel edge shadow
+            tl.to('#vinylPeelEdge', {
                 opacity: 1,
-                duration: 0.3,
-                ease: 'power2.out'
-            }, 3)
-            .to('#vinylReveal', {
-                opacity: 0,
-                duration: 0.8,
-                ease: 'power2.out'
-            }, 3.6);
+                duration: 0.2
+            }, 2.8);
 
-            // Particle burst when logo is fully revealed
+            // Trigger CSS animation for the clip-path peel
             tl.call(() => {
-                createParticleBurst();
-            }, null, 4.2);
+                if (vinylTransfer) {
+                    vinylTransfer.classList.add('peeling');
+                }
+            }, null, 2.8);
 
-            // Add a subtle glow/shadow pulse on the revealed logo
+            // Animate the peel edge shadow position to follow the diagonal
+            tl.fromTo('#vinylPeelEdge', {
+                '--peel': '0%'
+            }, {
+                '--peel': '150%',
+                duration: 2.5,
+                ease: 'power2.inOut'
+            }, 2.8);
+
+            // As the transfer peels, gradually reveal the full-color logo
+            tl.to('.hero-logo-img', {
+                opacity: 1,
+                duration: 1.5,
+                ease: 'power2.in'
+            }, 3);
+
+            // Mark wall as revealed (full opacity logo)
+            tl.call(() => {
+                if (vinylWall) vinylWall.classList.add('revealed');
+            }, null, 4.5);
+
+            // Hide peel edge
+            tl.to('#vinylPeelEdge', {
+                opacity: 0,
+                duration: 0.3
+            }, 5);
+
+            // Step 4: Shine flash across the revealed logo
+            tl.call(() => {
+                if (vinylShine) vinylShine.classList.add('active');
+            }, null, 5.1);
+
+            // Glow pulse on the logo
             tl.to('.hero-logo-img', {
                 filter: 'drop-shadow(0 4px 60px rgba(240, 67, 32, 0.5))',
                 duration: 0.5,
                 ease: 'power2.out'
-            }, 4.2)
+            }, 5.1)
             .to('.hero-logo-img', {
                 filter: 'drop-shadow(0 4px 40px rgba(240, 67, 32, 0.3))',
                 duration: 1,
                 ease: 'power2.out'
-            }, 4.7);
+            }, 5.6);
+
+            // Particle burst when logo is fully revealed
+            tl.call(() => {
+                createParticleBurst();
+            }, null, 5.2);
 
             // Subtitle
             tl.to('#heroSubtitle', {
@@ -277,7 +289,7 @@
                 y: 0,
                 duration: 0.6,
                 ease: 'power2.out'
-            }, 4.5);
+            }, 5.5);
 
             // CTA
             tl.to('#heroCta', {
@@ -285,14 +297,14 @@
                 y: 0,
                 duration: 0.6,
                 ease: 'power2.out'
-            }, 4.8);
+            }, 5.8);
 
             // Scroll indicator
             tl.to('#heroScroll', {
                 opacity: 1,
                 duration: 0.5,
                 ease: 'power2.out'
-            }, 5.2);
+            }, 6.2);
         }
 
         // Particle burst effect
