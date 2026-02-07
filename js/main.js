@@ -418,7 +418,7 @@
             const dist = getScrollDistance();
             if (dist <= 0) return;
 
-            gsap.to(portfolioTrack, {
+            const portfolioTween = gsap.to(portfolioTrack, {
                 x: () => -getScrollDistance(),
                 ease: 'none',
                 scrollTrigger: {
@@ -426,9 +426,17 @@
                     start: 'top top',
                     end: () => '+=' + Math.max(getScrollDistance(), 600),
                     pin: true,
-                    scrub: 1,
+                    pinSpacing: true,
+                    scrub: 0.5,
                     anticipatePin: 1,
                     invalidateOnRefresh: true,
+                    onRefresh: (self) => {
+                        // Re-apply pin-spacer background on every refresh
+                        const spacer = portfolioSection.parentElement;
+                        if (spacer && spacer.classList.contains('pin-spacer')) {
+                            spacer.style.backgroundColor = '#0F1B2D';
+                        }
+                    },
                     onUpdate: (self) => {
                         if (portfolioProgressBar) {
                             gsap.set(portfolioProgressBar, { scaleX: self.progress });
@@ -437,12 +445,20 @@
                 }
             });
 
-            // Style pin-spacer background immediately
-            requestAnimationFrame(() => {
-                const spacer = portfolioSection.parentElement;
-                if (spacer && spacer.classList.contains('pin-spacer')) {
-                    spacer.style.background = 'var(--dark-blue)';
-                }
+            // Style pin-spacer background immediately and on resize
+            function stylePinSpacer() {
+                requestAnimationFrame(() => {
+                    const spacer = portfolioSection.parentElement;
+                    if (spacer && spacer.classList.contains('pin-spacer')) {
+                        spacer.style.backgroundColor = '#0F1B2D';
+                        spacer.style.overflow = 'hidden';
+                    }
+                });
+            }
+
+            stylePinSpacer();
+            window.addEventListener('resize', () => {
+                setTimeout(stylePinSpacer, 100);
             });
 
             ScrollTrigger.refresh();
