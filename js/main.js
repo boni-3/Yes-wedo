@@ -649,34 +649,38 @@
         }
 
         // ===== PORTFOLIO: Horizontal scroll gallery =====
+        const portfolioWrapper = document.getElementById('portfolioScrollWrapper');
         const portfolioTrack = document.getElementById('portfolioScrollTrack');
         const portfolioProgressBar = document.getElementById('portfolioProgressBar');
-        if (portfolioTrack) {
-            function getScrollDistance() {
-                return portfolioTrack.scrollWidth - window.innerWidth;
-            }
+        if (portfolioTrack && portfolioWrapper) {
+            // Wait a tick for layout to settle before measuring
+            requestAnimationFrame(() => {
+                function getScrollDistance() {
+                    return portfolioTrack.scrollWidth - portfolioWrapper.offsetWidth;
+                }
 
-            // Only apply horizontal scroll if track is wider than viewport
-            if (getScrollDistance() > 0) {
-                gsap.to(portfolioTrack, {
-                    x: () => -getScrollDistance(),
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: '#portfolio',
-                        start: 'top top',
-                        end: () => '+=' + Math.max(getScrollDistance() * 1.5, 600),
-                        pin: true,
-                        scrub: 1,
-                        anticipatePin: 1,
-                        invalidateOnRefresh: true,
-                        onUpdate: (self) => {
-                            if (portfolioProgressBar) {
-                                gsap.set(portfolioProgressBar, { scaleX: self.progress });
+                const dist = getScrollDistance();
+                if (dist > 0) {
+                    gsap.to(portfolioTrack, {
+                        x: () => -getScrollDistance(),
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: '#portfolio',
+                            start: 'top top',
+                            end: () => '+=' + Math.max(getScrollDistance(), 600),
+                            pin: true,
+                            scrub: 1,
+                            anticipatePin: 1,
+                            invalidateOnRefresh: true,
+                            onUpdate: (self) => {
+                                if (portfolioProgressBar) {
+                                    gsap.set(portfolioProgressBar, { scaleX: self.progress });
+                                }
                             }
                         }
-                    }
-                });
-            }
+                    });
+                }
+            });
         }
 
         // ===== MARQUEE: Scroll-driven horizontal movement =====

@@ -1070,8 +1070,8 @@ body.cursor-hover .cursor-outline {
 }
 
 .portfolio-scroll-wrapper {
-    overflow: hidden;
     margin-top: 3rem;
+    overflow: hidden;
     width: 100%;
 }
 
@@ -1086,9 +1086,7 @@ body.cursor-hover .cursor-outline {
 
 .portfolio-slide {
     flex: 0 0 auto;
-    width: 80vw;
-    max-width: 800px;
-    position: relative;
+    width: min(80vw, 800px);
     border-radius: 16px;
     overflow: hidden;
 }
@@ -1691,10 +1689,6 @@ body.cursor-hover .cursor-outline {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .portfolio-slide {
-        width: 90vw;
-    }
-
     .process-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -1724,14 +1718,6 @@ body.cursor-hover .cursor-outline {
 @media (max-width: 768px) {
     .services-grid {
         grid-template-columns: 1fr;
-    }
-
-    .portfolio-slide {
-        width: 92vw;
-    }
-
-    .portfolio-slide-img {
-        aspect-ratio: 4/3;
     }
 
     .process-grid {
