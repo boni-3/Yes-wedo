@@ -391,8 +391,9 @@ body.cursor-hover .cursor-outline {
     position: relative;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     overflow: hidden;
     background: var(--dark);
 }
@@ -431,13 +432,14 @@ body.cursor-hover .cursor-outline {
     mix-blend-mode: overlay;
 }
 
-/* Hero content — centered with headline */
+/* Hero content — positioned in lower third */
 .hero-content {
     position: relative;
     z-index: 5;
     text-align: center;
     max-width: 900px;
     padding: 0 clamp(20px, 4vw, 80px);
+    margin-bottom: clamp(90px, 12vh, 150px);
 }
 
 .hero-headline {
