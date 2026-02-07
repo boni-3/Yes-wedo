@@ -755,6 +755,16 @@ body.cursor-hover .cursor-outline {
 .marquee-track {
     display: flex;
     width: max-content;
+    animation: marqueeScroll 35s linear infinite;
+}
+
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
 }
 
 .marquee-content {
@@ -782,7 +792,7 @@ body.cursor-hover .cursor-outline {
     flex-shrink: 0;
 }
 
-/* marqueeScroll now handled by GSAP ScrollTrigger */
+/* marqueeScroll: infinite CSS loop (content duplicated in HTML) */
 
 /* --- Sections Common --- */
 .section {

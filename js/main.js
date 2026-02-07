@@ -683,28 +683,9 @@
             });
         }
 
-        // ===== MARQUEE: Pin & scroll through all services =====
-        const marqueeTrack = document.querySelector('.marquee-track');
-        const marqueeSection = document.querySelector('.marquee');
-        if (marqueeTrack && marqueeSection) {
-            requestAnimationFrame(() => {
-                const moveAmount = () => -(marqueeTrack.scrollWidth - window.innerWidth);
-
-                gsap.to(marqueeTrack, {
-                    x: moveAmount,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: '.marquee',
-                        start: 'top top',
-                        end: () => '+=' + marqueeTrack.scrollWidth,
-                        pin: true,
-                        scrub: 1,
-                        anticipatePin: 1,
-                        invalidateOnRefresh: true
-                    }
-                });
-            });
-        }
+        // ===== MARQUEE: Infinite auto-scroll CSS animation =====
+        // No GSAP pin — uses CSS animation for smooth infinite loop
+        // (The duplicated content in HTML makes the loop seamless)
 
         // ===== TEXT SCRAMBLE ON NAV LINKS =====
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
