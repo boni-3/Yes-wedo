@@ -508,7 +508,7 @@ body.cursor-hover .cursor-outline {
 
 /* Muted/faded version of logo visible through transfer */
 .vinyl-wall .hero-logo-img {
-    opacity: 0.35;
+    opacity: 0.5;
     transition: opacity 0.6s ease;
 }
 
@@ -551,49 +551,38 @@ body.cursor-hover .cursor-outline {
     border-radius: 3px;
 }
 
-/* Diagonal peel edge - the shadow/curl at the tear line */
-.vinyl-peel-edge {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    z-index: 11;
-    pointer-events: none;
-    opacity: 0;
-    background: linear-gradient(
-        135deg,
-        transparent 0%,
-        transparent calc(var(--peel, 0%) - 3%),
-        rgba(0,0,0,0.15) calc(var(--peel, 0%) - 1%),
-        rgba(255,255,255,0.4) var(--peel, 0%),
-        rgba(0,0,0,0.08) calc(var(--peel, 0%) + 1%),
-        transparent calc(var(--peel, 0%) + 3%),
-        transparent 100%
-    );
-}
+/* Peel edge is handled by the clip-path animation edge */
 
 /* Diagonal peel keyframes: top-left to bottom-right */
 @keyframes vinylPeel {
     0% {
+        -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
         clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
     }
     25% {
+        -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%);
         clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%);
     }
     50% {
+        -webkit-clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%);
         clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%);
     }
     75% {
+        -webkit-clip-path: polygon(100% 50%, 100% 50%, 100% 100%, 50% 100%, 50% 100%);
         clip-path: polygon(100% 50%, 100% 50%, 100% 100%, 50% 100%, 50% 100%);
     }
     100% {
+        -webkit-clip-path: polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%);
         clip-path: polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%);
     }
 }
 
 .vinyl-transfer.peeling {
     animation: vinylPeel 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.vinyl-transfer {
+    -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
 }
 
 /* Shine flash when logo is fully revealed */
@@ -772,7 +761,6 @@ body.cursor-hover .cursor-outline {
     display: flex;
     align-items: center;
     gap: 2rem;
-    animation: marqueeScroll 25s linear infinite;
     padding-right: 2rem;
 }
 
@@ -794,10 +782,7 @@ body.cursor-hover .cursor-outline {
     flex-shrink: 0;
 }
 
-@keyframes marqueeScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
+/* marqueeScroll now handled by GSAP ScrollTrigger */
 
 /* --- Sections Common --- */
 .section {
@@ -894,82 +879,42 @@ body.cursor-hover .cursor-outline {
     justify-content: center;
 }
 
-.about-shape-container {
+.about-logo-showcase {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 280px;
+    height: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.about-shape {
-    width: 200px;
-    height: 200px;
-    border: 2px solid var(--orange);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.about-logo-img {
+    width: 160px;
+    height: auto;
+    filter: drop-shadow(0 2px 20px rgba(240, 67, 32, 0.2));
     position: relative;
-    animation: shapeRotate 20s linear infinite;
+    z-index: 2;
 }
 
-.about-shape::before {
-    content: '';
+.about-logo-ring {
     position: absolute;
     width: 220px;
     height: 220px;
-    border: 1px solid rgba(74, 144, 217, 0.3);
+    border: 1px solid rgba(240, 67, 32, 0.2);
     border-radius: 50%;
-    animation: shapeRotate 15s linear infinite reverse;
+    animation: ringPulse 6s ease-in-out infinite;
 }
 
-.about-shape::after {
-    content: '';
-    position: absolute;
+.about-logo-ring--outer {
     width: 260px;
     height: 260px;
-    border: 1px dashed rgba(199, 48, 102, 0.2);
-    border-radius: 50%;
-    animation: shapeRotate 25s linear infinite;
+    border-color: rgba(82, 155, 202, 0.15);
+    animation-delay: -3s;
 }
 
-.about-shape-text {
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    font-weight: 700;
-    text-align: center;
-    line-height: 1.3;
-    animation: shapeRotate 20s linear infinite reverse;
-}
-
-.about-shape-text .shape-y { color: var(--orange); }
-.about-shape-text .shape-w { color: var(--orange); }
-.about-shape-text .shape-d { color: var(--blue); }
-
-@keyframes shapeRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.about-shape-orbit {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    background: var(--blue);
-    border-radius: 50%;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: orbit 8s linear infinite;
-    transform-origin: 50% 150px;
-    box-shadow: 0 0 20px rgba(74, 144, 217, 0.5);
-}
-
-@keyframes orbit {
-    from { transform: translateX(-50%) rotate(0deg); }
-    to { transform: translateX(-50%) rotate(360deg); }
+@keyframes ringPulse {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.05); opacity: 0.8; }
 }
 
 /* Stats */
@@ -1707,14 +1652,23 @@ body.cursor-hover .cursor-outline {
         order: -1;
     }
 
-    .about-shape-container {
+    .about-logo-showcase {
         width: 220px;
         height: 220px;
     }
 
-    .about-shape {
-        width: 150px;
-        height: 150px;
+    .about-logo-img {
+        width: 120px;
+    }
+
+    .about-logo-ring {
+        width: 170px;
+        height: 170px;
+    }
+
+    .about-logo-ring--outer {
+        width: 200px;
+        height: 200px;
     }
 
     .stats-grid {

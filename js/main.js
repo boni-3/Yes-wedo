@@ -192,14 +192,11 @@
             }
 
             // === VINYL TRANSFER PEEL ANIMATION ===
-            // Replicates a real vinyl transfer being peeled from top-left to bottom-right
             const vinylTransfer = document.getElementById('vinylTransfer');
             const vinylWall = document.getElementById('vinylWall');
-            const vinylPeelEdge = document.getElementById('vinylPeelEdge');
             const vinylShine = document.getElementById('vinylShine');
 
-            // Step 1: Show the logo with transfer paper on top
-            // Logo is muted/faded under the semi-transparent transfer
+            // Step 1: Show the logo with transfer paper on top (logo dimmed)
             tl.to('#heroLogo', {
                 opacity: 1,
                 y: 0,
@@ -207,8 +204,7 @@
                 ease: 'power2.out'
             }, 1);
 
-            // Step 2: Brief pause - vinyl is "pressed onto the wall"
-            // Small squeeze effect like pressing the squeegee
+            // Step 2: Squeegee press
             tl.to('#vinylWrapper', {
                 scale: 1.01,
                 duration: 0.3,
@@ -220,90 +216,58 @@
                 ease: 'power2.out'
             }, 2.3);
 
-            // Step 3: Start the diagonal peel from top-left to bottom-right
-            // Show the peel edge shadow
-            tl.to('#vinylPeelEdge', {
-                opacity: 1,
-                duration: 0.2
-            }, 2.8);
-
-            // Trigger CSS animation for the clip-path peel
+            // Step 3: Peel the transfer from top-left to bottom-right
             tl.call(() => {
-                if (vinylTransfer) {
-                    vinylTransfer.classList.add('peeling');
-                }
-            }, null, 2.8);
+                if (vinylTransfer) vinylTransfer.classList.add('peeling');
+            }, null, 2.7);
 
-            // Animate the peel edge shadow position to follow the diagonal
-            tl.fromTo('#vinylPeelEdge', {
-                '--peel': '0%'
-            }, {
-                '--peel': '150%',
-                duration: 2.5,
-                ease: 'power2.inOut'
-            }, 2.8);
-
-            // As the transfer peels, gradually reveal the full-color logo
+            // Reveal the full-color logo as transfer peels
             tl.to('.hero-logo-img', {
                 opacity: 1,
-                duration: 1.5,
+                duration: 2,
                 ease: 'power2.in'
             }, 3);
 
-            // Mark wall as revealed (full opacity logo)
+            // Mark as fully revealed
             tl.call(() => {
                 if (vinylWall) vinylWall.classList.add('revealed');
-            }, null, 4.5);
+            }, null, 5);
 
-            // Hide peel edge
-            tl.to('#vinylPeelEdge', {
-                opacity: 0,
-                duration: 0.3
-            }, 5);
-
-            // Step 4: Shine flash across the revealed logo
+            // Step 4: Shine flash
             tl.call(() => {
                 if (vinylShine) vinylShine.classList.add('active');
-            }, null, 5.1);
+            }, null, 5.2);
 
-            // Glow pulse on the logo
+            // Glow pulse
             tl.to('.hero-logo-img', {
                 filter: 'drop-shadow(0 4px 60px rgba(240, 67, 32, 0.5))',
-                duration: 0.5,
+                duration: 0.4,
                 ease: 'power2.out'
-            }, 5.1)
+            }, 5.2)
             .to('.hero-logo-img', {
                 filter: 'drop-shadow(0 4px 40px rgba(240, 67, 32, 0.3))',
-                duration: 1,
+                duration: 0.8,
                 ease: 'power2.out'
             }, 5.6);
 
-            // Particle burst when logo is fully revealed
+            // Particle burst
             tl.call(() => {
                 createParticleBurst();
-            }, null, 5.2);
+            }, null, 5.3);
 
             // Subtitle
             tl.to('#heroSubtitle', {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: 'power2.out'
-            }, 5.5);
+                opacity: 1, y: 0, duration: 0.6, ease: 'power2.out'
+            }, 5.6);
 
             // CTA
             tl.to('#heroCta', {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: 'power2.out'
-            }, 5.8);
+                opacity: 1, y: 0, duration: 0.6, ease: 'power2.out'
+            }, 5.9);
 
             // Scroll indicator
             tl.to('#heroScroll', {
-                opacity: 1,
-                duration: 0.5,
-                ease: 'power2.out'
+                opacity: 1, duration: 0.5, ease: 'power2.out'
             }, 6.2);
         }
 
@@ -684,15 +648,18 @@
             });
         }
 
-        // ===== MARQUEE HOVER PAUSE =====
-        const marquee = document.querySelector('.marquee');
-        const marqueeContent = document.querySelector('.marquee-content');
-        if (marquee && marqueeContent) {
-            marquee.addEventListener('mouseenter', () => {
-                marqueeContent.style.animationPlayState = 'paused';
-            });
-            marquee.addEventListener('mouseleave', () => {
-                marqueeContent.style.animationPlayState = 'running';
+        // ===== MARQUEE: Scroll-driven horizontal movement =====
+        const marqueeTrack = document.querySelector('.marquee-track');
+        if (marqueeTrack) {
+            gsap.to(marqueeTrack, {
+                x: () => -(marqueeTrack.scrollWidth - window.innerWidth),
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.marquee',
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1
+                }
             });
         }
 
