@@ -650,28 +650,33 @@
 
         // ===== PORTFOLIO: Horizontal scroll gallery =====
         const portfolioTrack = document.getElementById('portfolioScrollTrack');
-        const portfolioWrapper = document.getElementById('portfolioScrollWrapper');
         const portfolioProgressBar = document.getElementById('portfolioProgressBar');
-        if (portfolioTrack && portfolioWrapper) {
-            const getScrollAmount = () => -(portfolioTrack.scrollWidth - window.innerWidth + 40);
+        if (portfolioTrack) {
+            function getScrollDistance() {
+                return portfolioTrack.scrollWidth - window.innerWidth;
+            }
 
-            gsap.to(portfolioTrack, {
-                x: getScrollAmount,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: '.section-portfolio',
-                    start: 'top 15%',
-                    end: () => '+=' + (portfolioTrack.scrollWidth - window.innerWidth + 200),
-                    pin: true,
-                    scrub: 1.5,
-                    invalidateOnRefresh: true,
-                    onUpdate: (self) => {
-                        if (portfolioProgressBar) {
-                            gsap.set(portfolioProgressBar, { scaleX: self.progress });
+            // Only apply horizontal scroll if track is wider than viewport
+            if (getScrollDistance() > 0) {
+                gsap.to(portfolioTrack, {
+                    x: () => -getScrollDistance(),
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '#portfolio',
+                        start: 'top top',
+                        end: () => '+=' + Math.max(getScrollDistance() * 1.5, 600),
+                        pin: true,
+                        scrub: 1,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
+                        onUpdate: (self) => {
+                            if (portfolioProgressBar) {
+                                gsap.set(portfolioProgressBar, { scaleX: self.progress });
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
         }
 
         // ===== MARQUEE: Scroll-driven horizontal movement =====

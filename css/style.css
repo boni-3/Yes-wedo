@@ -1066,26 +1066,28 @@ body.cursor-hover .cursor-outline {
 /* --- Portfolio Section — Horizontal Scroll Gallery --- */
 .section-portfolio {
     background: var(--dark-blue);
-    overflow: hidden;
     padding-bottom: 3rem;
 }
 
 .portfolio-scroll-wrapper {
     overflow: hidden;
     margin-top: 3rem;
+    width: 100%;
 }
 
 .portfolio-scroll-track {
     display: flex;
+    flex-wrap: nowrap;
     gap: 2rem;
     padding: 0 5vw;
+    width: max-content;
     will-change: transform;
 }
 
 .portfolio-slide {
-    flex-shrink: 0;
-    width: 85vw;
-    max-width: 900px;
+    flex: 0 0 auto;
+    width: 80vw;
+    max-width: 800px;
     position: relative;
     border-radius: 16px;
     overflow: hidden;
