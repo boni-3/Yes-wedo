@@ -865,8 +865,16 @@ body.cursor-hover .cursor-outline {
 .section-portfolio {
     background: var(--dark-blue);
     padding-bottom: 3rem;
-    min-height: 100vh;
+    height: 100vh;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* GSAP pin-spacer background — prevents blue gap and duplicate appearance */
+.pin-spacer {
+    background: var(--dark-blue) !important;
 }
 
 .portfolio-scroll-wrapper {

@@ -419,12 +419,14 @@
                                 gsap.set(portfolioProgressBar, { scaleX: self.progress });
                             }
                         },
-                        onRefresh: () => {
-                            const spacer = portfolioSection.parentElement;
-                            if (spacer && spacer.classList.contains('pin-spacer')) {
-                                spacer.style.background = 'var(--dark-blue)';
-                            }
-                        }
+                    }
+                });
+
+                // Style pin-spacer immediately after creation
+                requestAnimationFrame(() => {
+                    const spacer = portfolioSection.parentElement;
+                    if (spacer && spacer.classList.contains('pin-spacer')) {
+                        spacer.style.background = 'var(--dark-blue)';
                     }
                 });
             }
