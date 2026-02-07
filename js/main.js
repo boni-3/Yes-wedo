@@ -400,6 +400,7 @@
 
             const dist = getScrollDistance();
             if (dist > 0) {
+                const portfolioSection = document.getElementById('portfolio');
                 gsap.to(portfolioTrack, {
                     x: () => -getScrollDistance(),
                     ease: 'none',
@@ -414,6 +415,13 @@
                         onUpdate: (self) => {
                             if (portfolioProgressBar) {
                                 gsap.set(portfolioProgressBar, { scaleX: self.progress });
+                            }
+                        },
+                        onRefresh: () => {
+                            // Style the pin-spacer so no transparent gap shows
+                            const spacer = portfolioSection.parentElement;
+                            if (spacer && spacer.classList.contains('pin-spacer')) {
+                                spacer.style.background = 'var(--dark-blue)';
                             }
                         }
                     }
