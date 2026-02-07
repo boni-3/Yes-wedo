@@ -60,9 +60,9 @@
                 <img src="img/logo-nav.png" alt="Yes We Do" class="nav-logo-img">
             </a>
             <div class="nav-links" id="navLinks">
+                <a href="#portfolio" class="nav-link" data-text="Portfolio">Portfolio</a>
                 <a href="#sobre" class="nav-link" data-text="Sobre">Sobre</a>
                 <a href="#servicos" class="nav-link" data-text="Serviços">Serviços</a>
-                <a href="#portfolio" class="nav-link" data-text="Portfolio">Portfolio</a>
                 <a href="#processo" class="nav-link" data-text="Processo">Processo</a>
                 <a href="#contacto" class="nav-link cta-link" data-text="Contacto">Contacto</a>
             </div>
@@ -77,94 +77,24 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-inner">
+            <a href="#portfolio" class="mobile-menu-link">Portfolio</a>
             <a href="#sobre" class="mobile-menu-link">Sobre</a>
             <a href="#servicos" class="mobile-menu-link">Serviços</a>
-            <a href="#portfolio" class="mobile-menu-link">Portfolio</a>
             <a href="#processo" class="mobile-menu-link">Processo</a>
             <a href="#contacto" class="mobile-menu-link">Contacto</a>
         </div>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero Section — Fullscreen Video Loop -->
     <section class="hero" id="hero">
-        <canvas id="heroCanvas"></canvas>
-        <div class="hero-overlay"></div>
-
-        <!-- Service image flashes -->
-        <div class="hero-images">
-            <div class="hero-image-item" data-service="flyers">
-                <div class="hero-img-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
-                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="25" y="15" width="70" height="90" rx="6" stroke="#F04320" stroke-width="2"/>
-                        <line x1="35" y1="35" x2="85" y2="35" stroke="#F04320" stroke-width="2" stroke-linecap="round"/>
-                        <line x1="35" y1="50" x2="75" y2="50" stroke="#F04320" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
-                        <line x1="35" y1="60" x2="70" y2="60" stroke="#F04320" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
-                        <rect x="35" y="72" width="30" height="20" rx="3" stroke="#F04320" stroke-width="1.5"/>
-                    </svg>
-                    <span>Flyers</span>
-                </div>
-            </div>
-            <div class="hero-image-item" data-service="sinaletica">
-                <div class="hero-img-placeholder" style="background: linear-gradient(135deg, #0f3460, #1a1a2e);">
-                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="15" y="25" width="90" height="50" rx="6" stroke="#529BCA" stroke-width="2"/>
-                        <line x1="60" y1="75" x2="60" y2="100" stroke="#529BCA" stroke-width="3"/>
-                        <line x1="40" y1="100" x2="80" y2="100" stroke="#529BCA" stroke-width="3" stroke-linecap="round"/>
-                        <circle cx="40" cy="50" r="6" stroke="#529BCA" stroke-width="1.5"/>
-                        <line x1="52" y1="45" x2="90" y2="45" stroke="#529BCA" stroke-width="1.5" stroke-linecap="round"/>
-                        <line x1="52" y1="55" x2="80" y2="55" stroke="#529BCA" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                    <span>Sinaléticas</span>
-                </div>
-            </div>
-            <div class="hero-image-item" data-service="merchandising">
-                <div class="hero-img-placeholder" style="background: linear-gradient(135deg, #1a1a2e, #2d1b69);">
-                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M30 40L60 20L90 40V90H30Z" stroke="#BA046A" stroke-width="2"/>
-                        <rect x="45" y="60" width="30" height="30" stroke="#BA046A" stroke-width="2"/>
-                        <circle cx="60" cy="48" r="8" stroke="#BA046A" stroke-width="2"/>
-                    </svg>
-                    <span>Merchandising</span>
-                </div>
-            </div>
-            <div class="hero-image-item" data-service="reclames">
-                <div class="hero-img-placeholder" style="background: linear-gradient(135deg, #16213e, #0f3460);">
-                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="15" y="30" width="90" height="45" rx="6" stroke="#F04320" stroke-width="2"/>
-                        <circle cx="60" cy="52" r="15" stroke="#F04320" stroke-width="2"/>
-                        <path d="M52 52l6 6 10-12" stroke="#F04320" stroke-width="2" stroke-linecap="round"/>
-                        <line x1="45" y1="85" x2="75" y2="85" stroke="#F04320" stroke-width="2" stroke-linecap="round"/>
-                        <line x1="30" y1="95" x2="90" y2="95" stroke="#F04320" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                    <span>Reclames Luminosos</span>
-                </div>
-            </div>
-            <div class="hero-image-item" data-service="stands">
-                <div class="hero-img-placeholder" style="background: linear-gradient(135deg, #2d1b69, #1a1a2e);">
-                    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="20" y="20" width="80" height="60" rx="4" stroke="#529BCA" stroke-width="2"/>
-                        <line x1="20" y1="80" x2="20" y2="100" stroke="#529BCA" stroke-width="2"/>
-                        <line x1="100" y1="80" x2="100" y2="100" stroke="#529BCA" stroke-width="2"/>
-                        <line x1="60" y1="80" x2="60" y2="100" stroke="#529BCA" stroke-width="2"/>
-                        <rect x="35" y="35" width="50" height="30" rx="3" stroke="#529BCA" stroke-width="1.5" stroke-dasharray="4 2"/>
-                    </svg>
-                    <span>Stands</span>
-                </div>
-            </div>
-        </div>
+        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline>
+            <source src="img/hero-video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-video-overlay"></div>
 
         <div class="hero-content">
             <div class="hero-title">
-                <div class="hero-logo-container" id="heroLogo">
-                    <div class="vinyl-wrapper" id="vinylWrapper">
-                        <div class="vinyl-wall" id="vinylWall">
-                            <img src="img/logo-hero.png" alt="Yes We Do" class="hero-logo-img">
-                        </div>
-                        <div class="vinyl-transfer" id="vinylTransfer"></div>
-                        <div class="vinyl-peel-edge" id="vinylPeelEdge"></div>
-                        <div class="vinyl-shine" id="vinylShine"></div>
-                    </div>
-                </div>
+                <img src="img/logo-hero.png" alt="Yes We Do" class="hero-logo-img" id="heroLogo">
             </div>
             <p class="hero-subtitle" id="heroSubtitle">Idealize que nós fazemos... Peça a nossa opinião.</p>
             <div class="hero-cta" id="heroCta">
@@ -179,8 +109,6 @@
             <div class="hero-scroll-line"></div>
             <span>scroll</span>
         </div>
-
-        <div class="hero-particles" id="heroParticles"></div>
     </section>
 
     <!-- Marquee Ticker -->
@@ -208,6 +136,109 @@
                 <span>DECORAÇÃO DE MONTRAS</span><span class="marquee-dot"></span>
                 <span>DECORAÇÃO DE VIATURAS</span><span class="marquee-dot"></span>
             </div>
+        </div>
+    </section>
+
+    <!-- Portfolio / Galeria — Horizontal Scroll -->
+    <section class="section section-portfolio" id="portfolio">
+        <div class="container">
+            <span class="section-label">Galeria</span>
+            <h2 class="section-title reveal-text">Trabalhos <em>realizados</em></h2>
+            <p class="section-subtitle reveal-up">Aqui pode visualizar alguns dos nossos trabalhos realizados.</p>
+        </div>
+
+        <div class="portfolio-scroll-wrapper" id="portfolioScrollWrapper">
+            <div class="portfolio-scroll-track" id="portfolioScrollTrack">
+
+                <div class="portfolio-slide">
+                    <div class="portfolio-slide-img">
+                        <img src="img/portfolio/reclame-lusiadas.jpg" alt="Lusíadas Hospital Paços de Ferreira">
+                    </div>
+                    <div class="portfolio-slide-info">
+                        <span class="portfolio-slide-num">01</span>
+                        <span class="portfolio-slide-category">Reclames Luminosos</span>
+                        <h3 class="portfolio-slide-title">Lusíadas Hospital</h3>
+                        <p class="portfolio-slide-desc">Letras recortadas iluminadas — Paços de Ferreira</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-slide">
+                    <div class="portfolio-slide-img">
+                        <img src="img/portfolio/amani-spa.png" alt="Amani Spa Reclame Luminoso">
+                    </div>
+                    <div class="portfolio-slide-info">
+                        <span class="portfolio-slide-num">02</span>
+                        <span class="portfolio-slide-category">Reclames Luminosos</span>
+                        <h3 class="portfolio-slide-title">Amani Spa</h3>
+                        <p class="portfolio-slide-desc">Letras e moldura em néon iluminado — Fachada exterior</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-slide">
+                    <div class="portfolio-slide-img">
+                        <img src="img/portfolio/cleva.png" alt="Cleva Letras 3D">
+                    </div>
+                    <div class="portfolio-slide-info">
+                        <span class="portfolio-slide-num">03</span>
+                        <span class="portfolio-slide-category">Letras Recortadas</span>
+                        <h3 class="portfolio-slide-title">Cleva</h3>
+                        <p class="portfolio-slide-desc">Letras 3D volumétricas com iluminação LED — Evento corporativo</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-slide">
+                    <div class="portfolio-slide-img">
+                        <img src="img/portfolio/vogue-stand.png" alt="Vogue Stand Evento">
+                    </div>
+                    <div class="portfolio-slide-info">
+                        <span class="portfolio-slide-num">04</span>
+                        <span class="portfolio-slide-category">Stands &amp; Eventos</span>
+                        <h3 class="portfolio-slide-title">Vogue</h3>
+                        <p class="portfolio-slide-desc">Stand promocional para evento — Centro comercial</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-slide">
+                    <div class="portfolio-slide-img">
+                        <img src="img/portfolio/steve-madden.png" alt="Steve Madden Exposição">
+                    </div>
+                    <div class="portfolio-slide-info">
+                        <span class="portfolio-slide-num">05</span>
+                        <span class="portfolio-slide-category">Stands &amp; Eventos</span>
+                        <h3 class="portfolio-slide-title">Steve Madden</h3>
+                        <p class="portfolio-slide-desc">Exposição promocional com passadeira vermelha — Centro comercial</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-slide">
+                    <div class="portfolio-slide-img">
+                        <img src="img/portfolio/norboxe-motor.png" alt="Norboxe Stand Motos">
+                    </div>
+                    <div class="portfolio-slide-info">
+                        <span class="portfolio-slide-num">06</span>
+                        <span class="portfolio-slide-category">Stands &amp; Exposição</span>
+                        <h3 class="portfolio-slide-title">Norboxe</h3>
+                        <p class="portfolio-slide-desc">Stand de exposição com lona impressa — Feira de motos</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-slide">
+                    <div class="portfolio-slide-img">
+                        <img src="img/portfolio/sinaletica-homycasa.jpg" alt="Homy Casa Armazém">
+                    </div>
+                    <div class="portfolio-slide-info">
+                        <span class="portfolio-slide-num">07</span>
+                        <span class="portfolio-slide-category">Sinaléticas</span>
+                        <h3 class="portfolio-slide-title">Homy Casa</h3>
+                        <p class="portfolio-slide-desc">Sinalética exterior de armazém — Receção clientes</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="portfolio-scroll-progress">
+            <div class="portfolio-scroll-progress-bar" id="portfolioProgressBar"></div>
         </div>
     </section>
 
@@ -453,109 +484,6 @@
         </div>
     </section>
 
-    <!-- Portfolio / Galeria — Horizontal Scroll -->
-    <section class="section section-portfolio" id="portfolio">
-        <div class="container">
-            <span class="section-label">Galeria</span>
-            <h2 class="section-title reveal-text">Trabalhos <em>realizados</em></h2>
-            <p class="section-subtitle reveal-up">Aqui pode visualizar alguns dos nossos trabalhos realizados.</p>
-        </div>
-
-        <div class="portfolio-scroll-wrapper" id="portfolioScrollWrapper">
-            <div class="portfolio-scroll-track" id="portfolioScrollTrack">
-
-                <div class="portfolio-slide">
-                    <div class="portfolio-slide-img">
-                        <img src="img/portfolio/reclame-lusiadas.jpg" alt="Lusíadas Hospital Paços de Ferreira">
-                    </div>
-                    <div class="portfolio-slide-info">
-                        <span class="portfolio-slide-num">01</span>
-                        <span class="portfolio-slide-category">Reclames Luminosos</span>
-                        <h3 class="portfolio-slide-title">Lusíadas Hospital</h3>
-                        <p class="portfolio-slide-desc">Letras recortadas iluminadas — Paços de Ferreira</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-slide">
-                    <div class="portfolio-slide-img">
-                        <img src="img/portfolio/amani-spa.png" alt="Amani Spa Reclame Luminoso">
-                    </div>
-                    <div class="portfolio-slide-info">
-                        <span class="portfolio-slide-num">02</span>
-                        <span class="portfolio-slide-category">Reclames Luminosos</span>
-                        <h3 class="portfolio-slide-title">Amani Spa</h3>
-                        <p class="portfolio-slide-desc">Letras e moldura em néon iluminado — Fachada exterior</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-slide">
-                    <div class="portfolio-slide-img">
-                        <img src="img/portfolio/cleva.png" alt="Cleva Letras 3D">
-                    </div>
-                    <div class="portfolio-slide-info">
-                        <span class="portfolio-slide-num">03</span>
-                        <span class="portfolio-slide-category">Letras Recortadas</span>
-                        <h3 class="portfolio-slide-title">Cleva</h3>
-                        <p class="portfolio-slide-desc">Letras 3D volumétricas com iluminação LED — Evento corporativo</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-slide">
-                    <div class="portfolio-slide-img">
-                        <img src="img/portfolio/vogue-stand.png" alt="Vogue Stand Evento">
-                    </div>
-                    <div class="portfolio-slide-info">
-                        <span class="portfolio-slide-num">04</span>
-                        <span class="portfolio-slide-category">Stands &amp; Eventos</span>
-                        <h3 class="portfolio-slide-title">Vogue</h3>
-                        <p class="portfolio-slide-desc">Stand promocional para evento — Centro comercial</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-slide">
-                    <div class="portfolio-slide-img">
-                        <img src="img/portfolio/steve-madden.png" alt="Steve Madden Exposição">
-                    </div>
-                    <div class="portfolio-slide-info">
-                        <span class="portfolio-slide-num">05</span>
-                        <span class="portfolio-slide-category">Stands &amp; Eventos</span>
-                        <h3 class="portfolio-slide-title">Steve Madden</h3>
-                        <p class="portfolio-slide-desc">Exposição promocional com passadeira vermelha — Centro comercial</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-slide">
-                    <div class="portfolio-slide-img">
-                        <img src="img/portfolio/norboxe-motor.png" alt="Norboxe Stand Motos">
-                    </div>
-                    <div class="portfolio-slide-info">
-                        <span class="portfolio-slide-num">06</span>
-                        <span class="portfolio-slide-category">Stands &amp; Exposição</span>
-                        <h3 class="portfolio-slide-title">Norboxe</h3>
-                        <p class="portfolio-slide-desc">Stand de exposição com lona impressa — Feira de motos</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-slide">
-                    <div class="portfolio-slide-img">
-                        <img src="img/portfolio/sinaletica-homycasa.jpg" alt="Homy Casa Armazém">
-                    </div>
-                    <div class="portfolio-slide-info">
-                        <span class="portfolio-slide-num">07</span>
-                        <span class="portfolio-slide-category">Sinaléticas</span>
-                        <h3 class="portfolio-slide-title">Homy Casa</h3>
-                        <p class="portfolio-slide-desc">Sinalética exterior de armazém — Receção clientes</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="portfolio-scroll-progress">
-            <div class="portfolio-scroll-progress-bar" id="portfolioProgressBar"></div>
-        </div>
-    </section>
-
     <!-- Processo -->
     <section class="section section-process" id="processo">
         <div class="container">
@@ -784,9 +712,9 @@
                 </div>
                 <div class="footer-links">
                     <h4>Navegação</h4>
+                    <a href="#portfolio">Galeria</a>
                     <a href="#sobre">Sobre</a>
                     <a href="#servicos">Serviços</a>
-                    <a href="#portfolio">Galeria</a>
                     <a href="#processo">Processo</a>
                     <a href="#contacto">Contacto</a>
                 </div>

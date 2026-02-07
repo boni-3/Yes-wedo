@@ -47,268 +47,29 @@
                 ease: 'back.out(1.7)'
             }, 0.3);
 
-        // ===== HERO CANVAS PARTICLES =====
-        const canvas = document.getElementById('heroCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let animFrameId;
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
-                this.opacity = Math.random() * 0.5 + 0.1;
-                // Brand colors: orange, blue, magenta
-                const colorRoll = Math.random();
-                if (colorRoll > 0.6) this.colorType = 'orange';
-                else if (colorRoll > 0.3) this.colorType = 'blue';
-                else this.colorType = 'magenta';
-            }
-
-            update() {
-                // Mouse attraction
-                const dx = mouseX - this.x;
-                const dy = mouseY - this.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 200) {
-                    this.x += dx * 0.002;
-                    this.y += dy * 0.002;
-                }
-
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                if (this.colorType === 'orange') {
-                    ctx.fillStyle = `rgba(240, 67, 32, ${this.opacity})`;
-                } else if (this.colorType === 'blue') {
-                    ctx.fillStyle = `rgba(82, 155, 202, ${this.opacity})`;
-                } else {
-                    ctx.fillStyle = `rgba(186, 4, 106, ${this.opacity * 0.7})`;
-                }
-                ctx.fill();
-            }
-        }
-
-        // Create particles
-        const particleCount = Math.min(120, Math.floor(window.innerWidth / 15));
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-
-        function drawConnections() {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 150) {
-                        const opacity = (1 - dist / 150) * 0.15;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        if (particles[i].colorType === 'orange' || particles[j].colorType === 'orange') {
-                            ctx.strokeStyle = `rgba(240, 67, 32, ${opacity})`;
-                        } else if (particles[i].colorType === 'blue' || particles[j].colorType === 'blue') {
-                            ctx.strokeStyle = `rgba(82, 155, 202, ${opacity})`;
-                        } else {
-                            ctx.strokeStyle = `rgba(186, 4, 106, ${opacity * 0.6})`;
-                        }
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animateCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-
-            drawConnections();
-            animFrameId = requestAnimationFrame(animateCanvas);
-        }
-
-        animateCanvas();
-
-        // Track mouse for canvas
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        // ===== HERO ANIMATION =====
+        // ===== HERO VIDEO ANIMATION =====
         function startHeroAnimation() {
             const tl = gsap.timeline();
 
-            // Flash service images
-            const heroImages = document.querySelectorAll('.hero-image-item');
-            if (window.innerWidth > 1024) {
-                heroImages.forEach((img, i) => {
-                    tl.to(img, {
-                        opacity: 0.25,
-                        duration: 0.15,
-                        ease: 'power2.in'
-                    }, 0.3 + i * 0.15)
-                    .to(img, {
-                        opacity: 0,
-                        duration: 0.3,
-                        ease: 'power2.out'
-                    }, 0.55 + i * 0.15);
-                });
-
-                // Keep some images visible subtly
-                tl.to([heroImages[0], heroImages[3]], {
-                    opacity: 0.12,
-                    duration: 0.6,
-                    ease: 'power2.out'
-                }, 1.5);
-            }
-
-            // === VINYL TRANSFER PEEL ANIMATION ===
-            const vinylTransfer = document.getElementById('vinylTransfer');
-            const vinylWall = document.getElementById('vinylWall');
-            const vinylShine = document.getElementById('vinylShine');
-
-            // Step 1: Show the logo with transfer paper on top (logo dimmed)
+            // Fade in logo
             tl.to('#heroLogo', {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: 'power2.out'
-            }, 1);
-
-            // Step 2: Squeegee press
-            tl.to('#vinylWrapper', {
-                scale: 1.01,
-                duration: 0.3,
-                ease: 'power2.in'
-            }, 2)
-            .to('#vinylWrapper', {
-                scale: 1,
-                duration: 0.2,
-                ease: 'power2.out'
-            }, 2.3);
-
-            // Step 3: Peel the transfer from top-left to bottom-right
-            tl.call(() => {
-                if (vinylTransfer) vinylTransfer.classList.add('peeling');
-            }, null, 2.7);
-
-            // Reveal the full-color logo as transfer peels
-            tl.to('.hero-logo-img', {
-                opacity: 1,
-                duration: 2,
-                ease: 'power2.in'
-            }, 3);
-
-            // Mark as fully revealed
-            tl.call(() => {
-                if (vinylWall) vinylWall.classList.add('revealed');
-            }, null, 5);
-
-            // Step 4: Shine flash
-            tl.call(() => {
-                if (vinylShine) vinylShine.classList.add('active');
-            }, null, 5.2);
-
-            // Glow pulse
-            tl.to('.hero-logo-img', {
-                filter: 'drop-shadow(0 4px 60px rgba(240, 67, 32, 0.5))',
-                duration: 0.4,
-                ease: 'power2.out'
-            }, 5.2)
-            .to('.hero-logo-img', {
-                filter: 'drop-shadow(0 4px 40px rgba(240, 67, 32, 0.3))',
-                duration: 0.8,
-                ease: 'power2.out'
-            }, 5.6);
-
-            // Particle burst
-            tl.call(() => {
-                createParticleBurst();
-            }, null, 5.3);
+                opacity: 1, y: 0, duration: 1, ease: 'power2.out'
+            }, 0.3);
 
             // Subtitle
             tl.to('#heroSubtitle', {
                 opacity: 1, y: 0, duration: 0.6, ease: 'power2.out'
-            }, 5.6);
+            }, 1);
 
             // CTA
             tl.to('#heroCta', {
                 opacity: 1, y: 0, duration: 0.6, ease: 'power2.out'
-            }, 5.9);
+            }, 1.3);
 
             // Scroll indicator
             tl.to('#heroScroll', {
                 opacity: 1, duration: 0.5, ease: 'power2.out'
-            }, 6.2);
-        }
-
-        // Particle burst effect
-        function createParticleBurst() {
-            const container = document.getElementById('heroParticles');
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
-            const burstCount = 30;
-
-            for (let i = 0; i < burstCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                particle.style.left = centerX + 'px';
-                particle.style.top = centerY + 'px';
-                particle.style.width = (Math.random() * 6 + 2) + 'px';
-                particle.style.height = particle.style.width;
-                container.appendChild(particle);
-
-                const angle = (Math.PI * 2 * i) / burstCount;
-                const distance = Math.random() * 300 + 100;
-                const endX = Math.cos(angle) * distance;
-                const endY = Math.sin(angle) * distance;
-
-                gsap.to(particle, {
-                    x: endX,
-                    y: endY,
-                    opacity: 1,
-                    duration: 0.1,
-                    ease: 'power2.out',
-                    onComplete: () => {
-                        gsap.to(particle, {
-                            opacity: 0,
-                            scale: 0,
-                            duration: 0.8 + Math.random() * 0.5,
-                            ease: 'power2.out',
-                            onComplete: () => particle.remove()
-                        });
-                    }
-                });
-            }
+            }, 1.8);
         }
 
         // ===== CUSTOM CURSOR =====
@@ -610,21 +371,6 @@
 
         testimonialInterval = setInterval(nextTestimonial, 5000);
 
-        // ===== HERO IMAGE FLOATING (on desktop) =====
-        if (window.innerWidth > 1024) {
-            const heroImages = document.querySelectorAll('.hero-image-item');
-            heroImages.forEach((img, i) => {
-                gsap.to(img, {
-                    y: `${(i % 2 === 0 ? -1 : 1) * (15 + Math.random() * 10)}px`,
-                    duration: 3 + Math.random() * 2,
-                    ease: 'sine.inOut',
-                    repeat: -1,
-                    yoyo: true,
-                    delay: i * 0.5
-                });
-            });
-        }
-
         // ===== FORM HANDLING =====
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
@@ -711,19 +457,6 @@
             });
         });
 
-        // ===== PERFORMANCE: Stop canvas animation when not visible =====
-        const heroSection = document.getElementById('hero');
-        const heroObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    cancelAnimationFrame(animFrameId);
-                } else {
-                    animateCanvas();
-                }
-            });
-        }, { threshold: 0 });
-
-        heroObserver.observe(heroSection);
     }
 
     // Start when DOM is ready
