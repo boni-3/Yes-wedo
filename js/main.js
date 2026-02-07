@@ -191,31 +191,85 @@
                 }, 1.5);
             }
 
-            // Reveal logo image
+            // === VINYL TRANSFER PEEL ANIMATION ===
+            const vinylTransfer = document.getElementById('vinylTransfer');
+            const vinylWrapper = document.getElementById('vinylWrapper');
+
+            // Step 1: Show the logo container (with transfer paper covering it)
             tl.to('#heroLogo', {
                 opacity: 1,
                 y: 0,
-                duration: 1,
-                ease: 'power3.out'
-            }, 1)
-            .to('#heroLogo', {
-                scale: 1,
-                duration: 0.6,
-                ease: 'elastic.out(1, 0.5)'
-            }, 1.2);
+                duration: 0.8,
+                ease: 'power2.out'
+            }, 1);
 
-            // Particle burst on logo reveal
+            // Step 2: Slight press-down effect (applying the vinyl)
+            tl.to('#vinylWrapper', {
+                scale: 1.02,
+                duration: 0.4,
+                ease: 'power2.in'
+            }, 1.8)
+            .to('#vinylWrapper', {
+                scale: 1,
+                duration: 0.3,
+                ease: 'power2.out'
+            }, 2.2);
+
+            // Step 3: Start peeling the transfer paper
+            // The paper peels from bottom-left corner to top-right
+            tl.call(() => {
+                if (vinylTransfer) vinylTransfer.classList.add('peeling');
+            }, null, 2.5);
+
+            // Peel using clip-path - paper lifts from bottom-left
+            tl.to('#vinylTransfer', {
+                clipPath: 'polygon(100% 0%, 100% 0%, 100% 0%, 100% 0%)',
+                duration: 2,
+                ease: 'power2.inOut',
+                onStart: function() {
+                    // Add 3D perspective during peel
+                    if (vinylTransfer) {
+                        vinylTransfer.style.transformOrigin = 'right top';
+                    }
+                }
+            }, 2.6);
+
+            // Subtle 3D rotation of the paper as it peels
+            tl.to('#vinylTransfer', {
+                rotateY: -15,
+                rotateX: 5,
+                duration: 2,
+                ease: 'power2.inOut'
+            }, 2.6);
+
+            // The reveal glow effect under transfer
+            tl.to('#vinylReveal', {
+                opacity: 1,
+                duration: 0.3,
+                ease: 'power2.out'
+            }, 3)
+            .to('#vinylReveal', {
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power2.out'
+            }, 3.6);
+
+            // Particle burst when logo is fully revealed
             tl.call(() => {
                 createParticleBurst();
-            }, null, 1.6);
+            }, null, 4.2);
 
-            // Tagline "Marketing & Publicidade"
-            tl.to('#heroTagline', {
-                opacity: 1,
-                y: 0,
+            // Add a subtle glow/shadow pulse on the revealed logo
+            tl.to('.hero-logo-img', {
+                filter: 'drop-shadow(0 4px 60px rgba(240, 67, 32, 0.5))',
                 duration: 0.5,
                 ease: 'power2.out'
-            }, 2);
+            }, 4.2)
+            .to('.hero-logo-img', {
+                filter: 'drop-shadow(0 4px 40px rgba(240, 67, 32, 0.3))',
+                duration: 1,
+                ease: 'power2.out'
+            }, 4.7);
 
             // Subtitle
             tl.to('#heroSubtitle', {
@@ -223,7 +277,7 @@
                 y: 0,
                 duration: 0.6,
                 ease: 'power2.out'
-            }, 2.2);
+            }, 4.5);
 
             // CTA
             tl.to('#heroCta', {
@@ -231,14 +285,14 @@
                 y: 0,
                 duration: 0.6,
                 ease: 'power2.out'
-            }, 2.5);
+            }, 4.8);
 
             // Scroll indicator
             tl.to('#heroScroll', {
                 opacity: 1,
                 duration: 0.5,
                 ease: 'power2.out'
-            }, 3);
+            }, 5.2);
         }
 
         // Particle burst effect

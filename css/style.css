@@ -445,7 +445,7 @@ body.cursor-hover .cursor-outline {
     align-items: center;
     justify-content: center;
     gap: 15px;
-    border: 1px solid rgba(74, 144, 217, 0.2);
+    border: 1px solid rgba(82, 155, 202, 0.2);
     aspect-ratio: 4/3;
 }
 
@@ -468,22 +468,110 @@ body.cursor-hover .cursor-outline {
     z-index: 5;
     text-align: center;
     padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-title {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
 }
 
 .hero-logo-container {
-    overflow: hidden;
+    position: relative;
     opacity: 0;
     transform: translateY(40px);
 }
 
 .hero-logo-img {
-    max-width: min(400px, 70vw);
+    max-width: min(550px, 80vw);
     height: auto;
-    filter: drop-shadow(0 4px 30px rgba(240, 67, 32, 0.3));
+    filter: drop-shadow(0 4px 40px rgba(240, 67, 32, 0.3));
+    display: block;
+    margin: 0 auto;
+}
+
+/* === Vinyl Transfer Peel Animation === */
+.vinyl-wrapper {
+    position: relative;
+    display: inline-block;
+    perspective: 1000px;
+}
+
+/* The "wall surface" texture behind */
+.vinyl-wall {
+    position: relative;
+    display: inline-block;
+}
+
+/* Transfer paper overlay */
+.vinyl-transfer {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    background: linear-gradient(135deg, rgba(230, 225, 215, 0.95) 0%, rgba(215, 210, 200, 0.93) 40%, rgba(225, 220, 210, 0.95) 100%);
+    z-index: 10;
+    transform-origin: right top;
+    border-radius: 4px;
+    pointer-events: none;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    perspective: 800px;
+    will-change: clip-path, transform;
+}
+
+/* Grid/texture on transfer paper */
+.vinyl-transfer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(0deg, rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    border-radius: 4px;
+}
+
+/* Shadow under peeling edge */
+.vinyl-transfer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: -5px 5px 15px rgba(0,0,0,0.3);
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.vinyl-transfer.peeling::after {
+    opacity: 1;
+}
+
+/* The sticky residue / application effect */
+.vinyl-reveal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: 5;
+    opacity: 0;
+}
+
+.vinyl-reveal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(240, 67, 32, 0.08), rgba(82, 155, 202, 0.05));
+    opacity: 0;
 }
 
 .hero-tagline {
