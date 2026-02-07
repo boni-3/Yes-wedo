@@ -651,14 +651,16 @@
         // ===== MARQUEE: Scroll-driven horizontal movement =====
         const marqueeTrack = document.querySelector('.marquee-track');
         if (marqueeTrack) {
+            // Move only 40% of total width so it scrolls gently
+            const moveAmount = () => -(marqueeTrack.scrollWidth * 0.4);
             gsap.to(marqueeTrack, {
-                x: () => -(marqueeTrack.scrollWidth - window.innerWidth),
+                x: moveAmount,
                 ease: 'none',
                 scrollTrigger: {
                     trigger: '.marquee',
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: 1
+                    start: 'top 95%',
+                    end: 'top -200%',
+                    scrub: 3
                 }
             });
         }
