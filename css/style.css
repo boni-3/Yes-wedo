@@ -956,14 +956,14 @@ body.cursor-hover .cursor-outline {
     height: 100dvh;
     display: flex;
     flex-direction: column;
-    padding-top: clamp(80px, 12vw, 160px);
-    padding-bottom: 3rem;
+    padding-top: clamp(60px, 8vw, 100px);
+    padding-bottom: 2rem;
     box-sizing: border-box;
     overflow: hidden;
 }
 
 .portfolio-scroll-wrapper {
-    margin-top: 3rem;
+    margin-top: 1.5rem;
     overflow: hidden;
     width: 100%;
     flex: 1;
