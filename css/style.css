@@ -777,42 +777,18 @@ body.cursor-hover .cursor-outline {
     justify-content: center;
 }
 
-.about-logo-showcase {
-    position: relative;
-    width: 280px;
-    height: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.about-photo {
+    border-radius: 16px;
+    overflow: hidden;
+    max-width: 400px;
 }
 
-.about-logo-img {
-    width: 160px;
+.about-photo-img {
+    width: 100%;
     height: auto;
-    filter: drop-shadow(0 2px 20px rgba(240, 67, 32, 0.2));
-    position: relative;
-    z-index: 2;
-}
-
-.about-logo-ring {
-    position: absolute;
-    width: 220px;
-    height: 220px;
-    border: 1px solid rgba(240, 67, 32, 0.2);
-    border-radius: 50%;
-    animation: ringPulse 6s ease-in-out infinite;
-}
-
-.about-logo-ring--outer {
-    width: 260px;
-    height: 260px;
-    border-color: rgba(82, 155, 202, 0.15);
-    animation-delay: -3s;
-}
-
-@keyframes ringPulse {
-    0%, 100% { transform: scale(1); opacity: 0.4; }
-    50% { transform: scale(1.05); opacity: 0.8; }
+    display: block;
+    border-radius: 16px;
+    object-fit: cover;
 }
 
 /* Stats */
@@ -1611,23 +1587,8 @@ body.cursor-hover .cursor-outline {
         order: -1;
     }
 
-    .about-logo-showcase {
-        width: 220px;
-        height: 220px;
-    }
-
-    .about-logo-img {
-        width: 120px;
-    }
-
-    .about-logo-ring {
-        width: 170px;
-        height: 170px;
-    }
-
-    .about-logo-ring--outer {
-        width: 200px;
-        height: 200px;
+    .about-photo {
+        max-width: 320px;
     }
 
     .stats-grid {
