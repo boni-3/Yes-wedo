@@ -394,43 +394,61 @@
         const portfolioWrapper = document.getElementById('portfolioScrollWrapper');
         const portfolioTrack = document.getElementById('portfolioScrollTrack');
         const portfolioProgressBar = document.getElementById('portfolioProgressBar');
-        if (portfolioTrack && portfolioWrapper) {
-            function getScrollDistance() {
-                return portfolioTrack.scrollWidth - portfolioWrapper.offsetWidth;
-            }
+        const isMobile = window.innerWidth < 768;
 
-            const dist = getScrollDistance();
-            if (dist > 0) {
-                const portfolioSection = document.getElementById('portfolio');
-                gsap.to(portfolioTrack, {
-                    x: () => -getScrollDistance(),
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: '#portfolio',
-                        start: 'top top',
-                        end: () => '+=' + Math.max(getScrollDistance(), 600),
-                        pin: true,
-                        scrub: 1,
-                        anticipatePin: 1,
-                        invalidateOnRefresh: true,
-                        onUpdate: (self) => {
-                            if (portfolioProgressBar) {
-                                gsap.set(portfolioProgressBar, { scaleX: self.progress });
-                            }
-                        },
-                        onRefresh: () => {
-                            // Style the pin-spacer so no transparent gap shows
-                            const spacer = portfolioSection.parentElement;
-                            if (spacer && spacer.classList.contains('pin-spacer')) {
-                                spacer.style.background = 'var(--dark-blue)';
+        if (portfolioTrack && portfolioWrapper) {
+            if (isMobile) {
+                // On mobile: native horizontal scroll (touch-friendly)
+                portfolioWrapper.style.overflowX = 'auto';
+                portfolioWrapper.style.webkitOverflowScrolling = 'touch';
+
+                // Update progress bar on native scroll
+                if (portfolioProgressBar) {
+                    portfolioWrapper.addEventListener('scroll', () => {
+                        const maxScroll = portfolioWrapper.scrollWidth - portfolioWrapper.offsetWidth;
+                        const progress = maxScroll > 0 ? portfolioWrapper.scrollLeft / maxScroll : 0;
+                        gsap.set(portfolioProgressBar, { scaleX: progress });
+                    });
+                }
+            } else {
+                // On desktop: GSAP pin + scrub horizontal scroll
+                function getScrollDistance() {
+                    return portfolioTrack.scrollWidth - portfolioWrapper.offsetWidth;
+                }
+
+                const dist = getScrollDistance();
+                if (dist > 0) {
+                    const portfolioSection = document.getElementById('portfolio');
+                    gsap.to(portfolioTrack, {
+                        x: () => -getScrollDistance(),
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: '#portfolio',
+                            start: 'top top',
+                            end: () => '+=' + Math.max(getScrollDistance(), 600),
+                            pin: true,
+                            scrub: 1,
+                            anticipatePin: 1,
+                            invalidateOnRefresh: true,
+                            onUpdate: (self) => {
+                                if (portfolioProgressBar) {
+                                    gsap.set(portfolioProgressBar, { scaleX: self.progress });
+                                }
+                            },
+                            onRefresh: () => {
+                                // Style the pin-spacer so no transparent gap shows
+                                const spacer = portfolioSection.parentElement;
+                                if (spacer && spacer.classList.contains('pin-spacer')) {
+                                    spacer.style.background = 'var(--dark-blue)';
+                                }
                             }
                         }
-                    }
-                });
-            }
+                    });
+                }
 
-            // Recalculate all ScrollTrigger positions after pin is created
-            ScrollTrigger.refresh();
+                // Recalculate all ScrollTrigger positions after pin is created
+                ScrollTrigger.refresh();
+            }
         }
 
         // ===== MARQUEE: Infinite auto-scroll CSS animation =====
