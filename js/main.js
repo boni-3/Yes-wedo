@@ -418,25 +418,18 @@
             const dist = getScrollDistance();
             if (dist <= 0) return;
 
-            const portfolioTween = gsap.to(portfolioTrack, {
+            gsap.to(portfolioTrack, {
                 x: () => -getScrollDistance(),
                 ease: 'none',
                 scrollTrigger: {
                     trigger: '#portfolio',
                     start: 'top top',
-                    end: () => '+=' + Math.max(getScrollDistance(), 600),
+                    end: () => '+=' + getScrollDistance(),
                     pin: true,
                     pinSpacing: true,
-                    scrub: 0.5,
+                    scrub: true,
                     anticipatePin: 1,
                     invalidateOnRefresh: true,
-                    onRefresh: (self) => {
-                        // Re-apply pin-spacer background on every refresh
-                        const spacer = portfolioSection.parentElement;
-                        if (spacer && spacer.classList.contains('pin-spacer')) {
-                            spacer.style.backgroundColor = '#0F1B2D';
-                        }
-                    },
                     onUpdate: (self) => {
                         if (portfolioProgressBar) {
                             gsap.set(portfolioProgressBar, { scaleX: self.progress });
@@ -444,24 +437,6 @@
                     }
                 }
             });
-
-            // Style pin-spacer background immediately and on resize
-            function stylePinSpacer() {
-                requestAnimationFrame(() => {
-                    const spacer = portfolioSection.parentElement;
-                    if (spacer && spacer.classList.contains('pin-spacer')) {
-                        spacer.style.backgroundColor = '#0F1B2D';
-                        spacer.style.overflow = 'hidden';
-                    }
-                });
-            }
-
-            stylePinSpacer();
-            window.addEventListener('resize', () => {
-                setTimeout(stylePinSpacer, 100);
-            });
-
-            ScrollTrigger.refresh();
         }
 
         // Wait for ALL portfolio images to load before initializing scroll

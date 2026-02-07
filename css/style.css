@@ -971,16 +971,14 @@ body.cursor-hover .cursor-outline {
     background: #0F1B2D;
     padding-top: clamp(80px, 12vw, 160px);
     padding-bottom: 3rem;
-    min-height: 100vh;
-    min-height: 100dvh;
+    height: 100vh;
+    height: 100dvh;
     box-sizing: border-box;
-    overflow: hidden;
 }
 
-/* GSAP creates a .pin-spacer wrapper when pinning — match its background */
+/* GSAP creates a .pin-spacer wrapper when pinning — inherit section bg */
 .pin-spacer {
-    background-color: #0F1B2D !important;
-    overflow: hidden !important;
+    background-color: inherit !important;
 }
 
 .portfolio-scroll-wrapper {
