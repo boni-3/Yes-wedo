@@ -648,6 +648,32 @@
             });
         }
 
+        // ===== PORTFOLIO: Horizontal scroll gallery =====
+        const portfolioTrack = document.getElementById('portfolioScrollTrack');
+        const portfolioWrapper = document.getElementById('portfolioScrollWrapper');
+        const portfolioProgressBar = document.getElementById('portfolioProgressBar');
+        if (portfolioTrack && portfolioWrapper) {
+            const getScrollAmount = () => -(portfolioTrack.scrollWidth - window.innerWidth + 40);
+
+            gsap.to(portfolioTrack, {
+                x: getScrollAmount,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.section-portfolio',
+                    start: 'top 15%',
+                    end: () => '+=' + (portfolioTrack.scrollWidth - window.innerWidth + 200),
+                    pin: true,
+                    scrub: 1.5,
+                    invalidateOnRefresh: true,
+                    onUpdate: (self) => {
+                        if (portfolioProgressBar) {
+                            gsap.set(portfolioProgressBar, { scaleX: self.progress });
+                        }
+                    }
+                }
+            });
+        }
+
         // ===== MARQUEE: Scroll-driven horizontal movement =====
         const marqueeTrack = document.querySelector('.marquee-track');
         if (marqueeTrack) {
