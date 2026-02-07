@@ -683,20 +683,26 @@
             });
         }
 
-        // ===== MARQUEE: Scroll-driven horizontal movement =====
+        // ===== MARQUEE: Pin & scroll through all services =====
         const marqueeTrack = document.querySelector('.marquee-track');
-        if (marqueeTrack) {
-            // Move only 40% of total width so it scrolls gently
-            const moveAmount = () => -(marqueeTrack.scrollWidth * 0.4);
-            gsap.to(marqueeTrack, {
-                x: moveAmount,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: '.marquee',
-                    start: 'top 95%',
-                    end: 'top -200%',
-                    scrub: 3
-                }
+        const marqueeSection = document.querySelector('.marquee');
+        if (marqueeTrack && marqueeSection) {
+            requestAnimationFrame(() => {
+                const moveAmount = () => -(marqueeTrack.scrollWidth - window.innerWidth);
+
+                gsap.to(marqueeTrack, {
+                    x: moveAmount,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.marquee',
+                        start: 'top top',
+                        end: () => '+=' + marqueeTrack.scrollWidth,
+                        pin: true,
+                        scrub: 1,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true
+                    }
+                });
             });
         }
 
