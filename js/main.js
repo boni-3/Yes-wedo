@@ -403,7 +403,11 @@
 
         // ===== PORTFOLIO: Horizontal scroll gallery =====
         // Uses CSS position:sticky (no GSAP pin) for bulletproof scroll
+        let portfolioInitialized = false;
         function initPortfolioScroll() {
+            if (portfolioInitialized) return;
+            portfolioInitialized = true;
+
             const portfolioWrapper = document.getElementById('portfolioScrollWrapper');
             const portfolioTrack = document.getElementById('portfolioScrollTrack');
             const portfolioProgressBar = document.getElementById('portfolioProgressBar');
