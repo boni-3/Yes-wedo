@@ -391,47 +391,78 @@
         }
 
         // ===== PORTFOLIO: Horizontal scroll gallery =====
-        const portfolioWrapper = document.getElementById('portfolioScrollWrapper');
-        const portfolioTrack = document.getElementById('portfolioScrollTrack');
-        const portfolioProgressBar = document.getElementById('portfolioProgressBar');
+        // Must wait for portfolio images to load so scrollWidth is correct
+        function initPortfolioScroll() {
+            const portfolioWrapper = document.getElementById('portfolioScrollWrapper');
+            const portfolioTrack = document.getElementById('portfolioScrollTrack');
+            const portfolioProgressBar = document.getElementById('portfolioProgressBar');
+            const portfolioSection = document.getElementById('portfolio');
 
-        if (portfolioTrack && portfolioWrapper) {
+            if (!portfolioTrack || !portfolioWrapper || !portfolioSection) return;
+
             function getScrollDistance() {
                 return portfolioTrack.scrollWidth - portfolioWrapper.offsetWidth;
             }
 
             const dist = getScrollDistance();
-            if (dist > 0) {
-                const portfolioSection = document.getElementById('portfolio');
-                gsap.to(portfolioTrack, {
-                    x: () => -getScrollDistance(),
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: '#portfolio',
-                        start: 'top top',
-                        end: () => '+=' + Math.max(getScrollDistance(), 600),
-                        pin: true,
-                        scrub: 1,
-                        anticipatePin: 1,
-                        invalidateOnRefresh: true,
-                        onUpdate: (self) => {
-                            if (portfolioProgressBar) {
-                                gsap.set(portfolioProgressBar, { scaleX: self.progress });
-                            }
-                        },
-                    }
-                });
+            if (dist <= 0) return;
 
-                // Style pin-spacer immediately after creation
-                requestAnimationFrame(() => {
-                    const spacer = portfolioSection.parentElement;
-                    if (spacer && spacer.classList.contains('pin-spacer')) {
-                        spacer.style.background = 'var(--dark-blue)';
+            gsap.to(portfolioTrack, {
+                x: () => -getScrollDistance(),
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '#portfolio',
+                    start: 'top top',
+                    end: () => '+=' + Math.max(getScrollDistance(), 600),
+                    pin: true,
+                    scrub: 1,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                    onUpdate: (self) => {
+                        if (portfolioProgressBar) {
+                            gsap.set(portfolioProgressBar, { scaleX: self.progress });
+                        }
                     }
-                });
-            }
+                }
+            });
+
+            // Style pin-spacer background immediately
+            requestAnimationFrame(() => {
+                const spacer = portfolioSection.parentElement;
+                if (spacer && spacer.classList.contains('pin-spacer')) {
+                    spacer.style.background = 'var(--dark-blue)';
+                }
+            });
 
             ScrollTrigger.refresh();
+        }
+
+        // Wait for ALL portfolio images to load before initializing scroll
+        const portfolioImages = document.querySelectorAll('#portfolioScrollTrack img');
+        if (portfolioImages.length > 0) {
+            let loaded = 0;
+            const total = portfolioImages.length;
+            portfolioImages.forEach(img => {
+                if (img.complete) {
+                    loaded++;
+                    if (loaded === total) initPortfolioScroll();
+                } else {
+                    img.addEventListener('load', () => {
+                        loaded++;
+                        if (loaded === total) initPortfolioScroll();
+                    });
+                    img.addEventListener('error', () => {
+                        loaded++;
+                        if (loaded === total) initPortfolioScroll();
+                    });
+                }
+            });
+            // Fallback: if images take too long, init after 3s anyway
+            setTimeout(() => {
+                if (loaded < total) initPortfolioScroll();
+            }, 3000);
+        } else {
+            initPortfolioScroll();
         }
 
         // ===== MARQUEE: Infinite auto-scroll CSS animation =====

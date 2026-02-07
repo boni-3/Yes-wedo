@@ -865,17 +865,23 @@ body.cursor-hover .cursor-outline {
 /* --- Portfolio Section — Horizontal Scroll Gallery --- */
 .section-portfolio {
     background: var(--dark-blue);
+    padding-top: clamp(80px, 12vw, 160px);
     padding-bottom: 3rem;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100dvh;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
-/* GSAP pin-spacer background — prevents blue gap and duplicate appearance */
+/* GSAP creates a .pin-spacer wrapper when pinning — match its background */
 .pin-spacer {
     background: var(--dark-blue) !important;
+}
+
+/* When GSAP pins the section, ensure it covers the full viewport */
+.section-portfolio[style*="position: fixed"],
+.section-portfolio[style*="position:fixed"] {
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
 }
 
 .portfolio-scroll-wrapper {
