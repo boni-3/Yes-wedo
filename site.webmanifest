@@ -1,0 +1,19 @@
+{
+    "name": "Yes, We Do — Marketing & Publicidade",
+    "short_name": "Yes, We Do",
+    "icons": [
+        {
+            "src": "img/favicons/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "img/favicons/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#0a0a0a",
+    "background_color": "#0a0a0a",
+    "display": "standalone"
+}

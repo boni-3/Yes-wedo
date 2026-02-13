@@ -15,68 +15,25 @@
 
         gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-        // ===== PRELOADER =====
-        const preloader = document.getElementById('preloader');
-        const preloaderLetters = document.querySelectorAll('.preloader-letter');
-        const preloaderBarFill = document.querySelector('.preloader-bar-fill');
-
-        const preloaderTl = gsap.timeline({
-            onComplete: () => {
-                gsap.to(preloader, {
-                    yPercent: -100,
-                    duration: 0.8,
-                    ease: 'power3.inOut',
-                    onComplete: () => {
-                        preloader.style.display = 'none';
-                        document.body.style.overflow = '';
-                        startHeroAnimation();
-                    }
-                });
-            }
-        });
-
-        document.body.style.overflow = 'hidden';
-
-        preloaderTl
-            .to(preloaderBarFill, { width: '100%', duration: 1.5, ease: 'power2.inOut' })
-            .to(preloaderLetters, {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                stagger: 0.12,
-                ease: 'back.out(1.7)'
-            }, 0.3);
-
-        // ===== HERO VIDEO ANIMATION =====
-        // Set initial hidden state via GSAP (more reliable than CSS)
+        // ===== HERO ENTRANCE ANIMATION =====
         gsap.set('#heroHeadline', { opacity: 0, y: 30 });
         gsap.set('#heroTagline', { opacity: 0, y: 20 });
         gsap.set('#heroCta', { opacity: 0, y: 20 });
         gsap.set('#heroScroll', { opacity: 0 });
 
-        function startHeroAnimation() {
-            const tl = gsap.timeline();
-
-            // Headline
-            tl.to('#heroHeadline', {
-                opacity: 1, y: 0, duration: 1, ease: 'power3.out'
-            }, 0.1);
-
-            // Tagline
-            tl.to('#heroTagline', {
-                opacity: 1, y: 0, duration: 0.8, ease: 'power2.out'
-            }, 0.5);
-
-            // CTA buttons
-            tl.to('#heroCta', {
-                opacity: 1, y: 0, duration: 0.8, ease: 'power2.out'
-            }, 0.8);
-
-            // Scroll indicator
-            tl.to('#heroScroll', {
-                opacity: 1, duration: 0.5, ease: 'power2.out'
-            }, 1.3);
-        }
+        const heroTl = gsap.timeline({ delay: 0.2 });
+        heroTl.to('#heroHeadline', {
+            opacity: 1, y: 0, duration: 1, ease: 'power3.out'
+        }, 0);
+        heroTl.to('#heroTagline', {
+            opacity: 1, y: 0, duration: 0.8, ease: 'power2.out'
+        }, 0.4);
+        heroTl.to('#heroCta', {
+            opacity: 1, y: 0, duration: 0.8, ease: 'power2.out'
+        }, 0.7);
+        heroTl.to('#heroScroll', {
+            opacity: 1, duration: 0.5, ease: 'power2.out'
+        }, 1.2);
 
         // ===== CUSTOM CURSOR =====
         const cursorDot = document.getElementById('cursorDot');
@@ -214,22 +171,6 @@
             once: true
         });
 
-        // Stagger portfolio items
-        ScrollTrigger.create({
-            trigger: '.portfolio-grid',
-            start: 'top 80%',
-            onEnter: () => {
-                gsap.to('.portfolio-item', {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.6,
-                    stagger: 0.12,
-                    ease: 'power2.out'
-                });
-            },
-            once: true
-        });
-
         // Process steps stagger
         ScrollTrigger.create({
             trigger: '.process-grid',
@@ -249,15 +190,20 @@
         // ===== ANIMATED COUNTERS =====
         const statsGrid = document.querySelector('.stats-grid');
         if (statsGrid) {
+            // Keep numbers at 0 until visible
+            document.querySelectorAll('.stat-number').forEach(stat => {
+                stat.textContent = '0';
+            });
+
             ScrollTrigger.create({
                 trigger: statsGrid,
-                start: 'top 80%',
+                start: 'top bottom',
                 onEnter: () => {
                     document.querySelectorAll('.stat-number').forEach(stat => {
                         const target = parseInt(stat.getAttribute('data-count'));
                         gsap.fromTo(stat, { innerText: 0 }, {
                             innerText: target,
-                            duration: 2,
+                            duration: 2.5,
                             ease: 'power2.out',
                             snap: { innerText: 1 },
                             onUpdate: function () {
@@ -378,6 +324,28 @@
 
         testimonialInterval = setInterval(nextTestimonial, 5000);
 
+        // Dynamic testimonial height — measure tallest item
+        const testimonialsSlider = document.getElementById('testimonialsSlider');
+        function setTestimonialHeight() {
+            if (!testimonialsSlider || testimonialItems.length === 0) return;
+            var maxH = 0;
+            testimonialItems.forEach(function (item) {
+                item.style.position = 'relative';
+                item.style.opacity = '1';
+                item.style.visibility = 'hidden';
+                var h = item.offsetHeight;
+                if (h > maxH) maxH = h;
+                item.style.position = '';
+                item.style.opacity = '';
+                item.style.visibility = '';
+            });
+            if (maxH > 0) {
+                testimonialsSlider.style.minHeight = maxH + 'px';
+            }
+        }
+        setTestimonialHeight();
+        window.addEventListener('resize', setTestimonialHeight);
+
         // ===== FORM HANDLING =====
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
@@ -402,8 +370,11 @@
         }
 
         // ===== PORTFOLIO: Horizontal scroll gallery =====
-        // Uses CSS position:sticky (no GSAP pin) for bulletproof scroll
+        // Desktop: CSS position:sticky + GSAP scrub
+        // Mobile: native overflow-x scroll with CSS snap
         let portfolioInitialized = false;
+        const isMobilePortfolio = window.matchMedia('(max-width: 768px)');
+
         function initPortfolioScroll() {
             if (portfolioInitialized) return;
             portfolioInitialized = true;
@@ -415,6 +386,23 @@
 
             if (!portfolioTrack || !portfolioWrapper || !portfolioSection) return;
 
+            // Mobile: skip GSAP, use native scroll with progress bar
+            if (isMobilePortfolio.matches) {
+                portfolioSection.style.height = 'auto';
+                if (portfolioProgressBar) {
+                    gsap.set(portfolioProgressBar, { scaleX: 0 });
+                }
+                portfolioWrapper.addEventListener('scroll', function () {
+                    var maxScroll = portfolioWrapper.scrollWidth - portfolioWrapper.offsetWidth;
+                    if (maxScroll > 0 && portfolioProgressBar) {
+                        var progress = portfolioWrapper.scrollLeft / maxScroll;
+                        gsap.set(portfolioProgressBar, { scaleX: progress });
+                    }
+                }, { passive: true });
+                return;
+            }
+
+            // Desktop: GSAP horizontal scroll
             function getScrollDistance() {
                 return portfolioTrack.scrollWidth - portfolioWrapper.offsetWidth;
             }
