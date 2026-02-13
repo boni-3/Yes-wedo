@@ -354,18 +354,28 @@
 
                 const btn = contactForm.querySelector('.btn-submit span');
                 const originalText = btn.textContent;
-
                 btn.textContent = 'A enviar...';
 
-                // Simulate form submission
-                setTimeout(() => {
-                    btn.textContent = 'Mensagem enviada!';
-                    contactForm.reset();
-
+                fetch('https://formspree.io/f/mzdaewqk', {
+                    method: 'POST',
+                    body: new FormData(contactForm),
+                    headers: { 'Accept': 'application/json' }
+                }).then((response) => {
+                    if (response.ok) {
+                        btn.textContent = 'Mensagem enviada!';
+                        contactForm.reset();
+                    } else {
+                        btn.textContent = 'Erro ao enviar';
+                    }
                     setTimeout(() => {
                         btn.textContent = originalText;
                     }, 3000);
-                }, 1500);
+                }).catch(() => {
+                    btn.textContent = 'Erro ao enviar';
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                    }, 3000);
+                });
             });
         }
 
