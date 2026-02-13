@@ -518,4 +518,36 @@
     } else {
         init();
     }
+
+    // ===== COOKIE CONSENT (outside GSAP init) =====
+    function initCookieBanner() {
+        var banner = document.getElementById('cookieBanner');
+        var acceptBtn = document.getElementById('cookieAccept');
+        var rejectBtn = document.getElementById('cookieReject');
+        if (!banner) return;
+
+        var consent = localStorage.getItem('cookie_consent');
+        if (!consent) {
+            banner.classList.add('active');
+        }
+
+        if (acceptBtn) {
+            acceptBtn.addEventListener('click', function () {
+                localStorage.setItem('cookie_consent', 'accepted');
+                banner.classList.remove('active');
+            });
+        }
+        if (rejectBtn) {
+            rejectBtn.addEventListener('click', function () {
+                localStorage.setItem('cookie_consent', 'rejected');
+                banner.classList.remove('active');
+            });
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCookieBanner);
+    } else {
+        initCookieBanner();
+    }
 })();
