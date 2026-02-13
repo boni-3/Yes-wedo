@@ -1476,7 +1476,7 @@ body.cursor-hover .cursor-outline {
 .form-success-title {
     font-family: var(--font-heading);
     font-size: 1.5rem;
-    color: #fff;
+    color: var(--dark);
     margin-bottom: 0.5rem;
 }
 
