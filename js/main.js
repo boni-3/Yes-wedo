@@ -348,7 +348,10 @@
 
         // ===== FORM HANDLING =====
         const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
+        const formSuccess = document.getElementById('formSuccess');
+        const formSuccessBtn = document.getElementById('formSuccessBtn');
+
+        if (contactForm && formSuccess) {
             contactForm.addEventListener('submit', (e) => {
                 e.preventDefault();
 
@@ -362,21 +365,26 @@
                     headers: { 'Accept': 'application/json' }
                 }).then((response) => {
                     if (response.ok) {
-                        btn.textContent = 'Mensagem enviada!';
                         contactForm.reset();
+                        contactForm.style.display = 'none';
+                        formSuccess.classList.add('active');
                     } else {
                         btn.textContent = 'Erro ao enviar';
+                        setTimeout(() => { btn.textContent = originalText; }, 3000);
                     }
-                    setTimeout(() => {
-                        btn.textContent = originalText;
-                    }, 3000);
                 }).catch(() => {
                     btn.textContent = 'Erro ao enviar';
-                    setTimeout(() => {
-                        btn.textContent = originalText;
-                    }, 3000);
+                    setTimeout(() => { btn.textContent = originalText; }, 3000);
                 });
             });
+
+            if (formSuccessBtn) {
+                formSuccessBtn.addEventListener('click', () => {
+                    formSuccess.classList.remove('active');
+                    contactForm.style.display = '';
+                    contactForm.querySelector('.btn-submit span').textContent = 'Enviar Mensagem';
+                });
+            }
         }
 
         // ===== PORTFOLIO: Horizontal scroll gallery =====
