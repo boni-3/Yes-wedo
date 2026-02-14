@@ -14,13 +14,16 @@ Language: **Portuguese (Portugal) (pt-PT)**.
 ```
 Yes-wedo/
 ├── index.html                  # Single-page HTML (all sections)
+├── portfolio.html              # Portfolio gallery page (filterable grid + lightbox)
+├── data/
+│   └── portfolio-data.json     # All portfolio projects (JSON, read by JS)
 ├── css/
-│   ├── style.css               # Source CSS (~1862 lines)
-│   ├── style.min.css           # Minified CSS (~26KB) — referenced by HTML
+│   ├── style.css               # Source CSS (includes pg-* gallery classes)
+│   ├── style.min.css           # Minified CSS — referenced by HTML
 │   └── fonts.css               # Local @font-face declarations
 ├── js/
-│   ├── main.js                 # Source JS (~503 lines)
-│   ├── main.min.js             # Minified JS (~7KB) — referenced by HTML
+│   ├── main.js                 # Source JS (includes gallery/lightbox logic)
+│   ├── main.min.js             # Minified JS — referenced by HTML
 │   └── vendor/
 │       ├── gsap.min.js         # GSAP core (self-hosted)
 │       ├── ScrollTrigger.min.js
@@ -31,7 +34,8 @@ Yes-wedo/
 │   ├── space-grotesk-latin.woff2
 │   └── space-grotesk-latin-ext.woff2
 ├── img/
-│   ├── portfolio/              # 7 WebP images (1536x1024, ~100-200KB each)
+│   ├── portfolio/              # WebP images (1536x1024, ~100-200KB each)
+│   │   └── new/                # Drop new images here for add-portfolio.sh
 │   ├── favicons/               # 5 sizes (16, 32, 180, 192, 512)
 │   ├── logo-horizontal-new.webp
 │   ├── Socios .webp            # NOTE: space before the dot in filename
@@ -39,6 +43,7 @@ Yes-wedo/
 │   ├── hero-poster.jpg         # Fallback poster for hero video
 │   ├── og-image.jpg            # 1200x630 Open Graph image
 │   └── FavIcon.png             # Original favicon source
+├── add-portfolio.sh            # Automation: add new projects (WebP + JSON + minify + deploy)
 ├── robots.txt                  # Allows GPTBot, ClaudeBot, PerplexityBot, Google-Extended
 ├── sitemap.xml
 ├── site.webmanifest
@@ -80,17 +85,25 @@ The contact form at the bottom of the page is front-end only. Form submission is
 
 ## HTML (index.html)
 
-### Page sections (in order)
+### index.html — Page sections (in order)
 1. **Hero** — fullscreen video background with logo, headline, tagline, CTA button, scroll indicator
 2. **Marquee** — infinite horizontal scrolling text strip
 3. **Services** — 12 service cards in a grid
-4. **Portfolio** — horizontal-scrolling project showcase (GSAP on desktop, native scroll-snap on mobile)
+4. **Portfolio** — horizontal-scrolling project showcase (GSAP on desktop, native scroll-snap on mobile) + "Ver todos os trabalhos" link to portfolio.html
 5. **About** — agency description with animated counters (stats section)
 6. **Process** — step-by-step workflow cards
 7. **Testimonials** — auto-rotating slider with dot navigation
 8. **CTA** — call-to-action section
 9. **Contact** — form with name, email, phone, message fields
 10. **Footer** — logo, navigation links, social links, legal text
+
+### portfolio.html — Dedicated gallery page
+- **Compact hero** — title only, no video
+- **Sticky filter bar** — category pill buttons (rendered from JSON)
+- **Responsive grid** — 3 cols desktop, 2 cols tablet, 1 col mobile
+- **Lightbox** — fullscreen viewer with arrow/keyboard/swipe navigation
+- **CTA section** — "Gostou do que viu?" with link to contact
+- All project data loaded from `data/portfolio-data.json` via fetch
 
 ### Structural notes
 - Semantic HTML: `<header>`, `<main id="main-content">`, `<footer>`
@@ -226,6 +239,27 @@ The contact form at the bottom of the page is front-end only. Form submission is
 
 ---
 
+## Adding New Portfolio Projects
+
+Use the automation script to add new projects:
+
+1. Create `img/portfolio/new/` directory (if not exists)
+2. Drop image files (PNG/JPG) into `img/portfolio/new/`
+3. Create `img/portfolio/new/metadata.txt` with one line per image:
+   ```
+   filename.png | Category | Title | Description
+   ```
+4. Run:
+   ```bash
+   ./add-portfolio.sh
+   ```
+
+The script will: convert to WebP 1536x1024, update `portfolio-data.json`, minify CSS/JS, git commit & push.
+
+Requires: `brew install webp jq`
+
+---
+
 ## Quick Commands
 
 ```bash
@@ -234,6 +268,9 @@ npx clean-css-cli css/style.css -o css/style.min.css
 
 # Minify JS after editing main.js
 npx terser js/main.js -c -m -o js/main.min.js
+
+# Add new portfolio projects
+./add-portfolio.sh
 
 # Local preview (any static server works)
 npx serve .

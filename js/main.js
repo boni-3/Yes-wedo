@@ -482,6 +482,175 @@
             initPortfolioScroll();
         }
 
+        // ===== PORTFOLIO GALLERY PAGE =====
+        var portfolioGrid = document.getElementById('portfolioGrid');
+        if (portfolioGrid) {
+            var pgState = {
+                projects: [],
+                filtered: [],
+                activeCategory: 'Todos',
+                lightboxIndex: -1,
+                touchStartX: 0,
+                touchEndX: 0
+            };
+
+            // Fetch portfolio data
+            fetch('data/portfolio-data.json')
+                .then(function (res) { return res.json(); })
+                .then(function (data) {
+                    pgState.projects = data.projects;
+                    pgState.filtered = data.projects;
+                    renderFilters(data.categories);
+                    renderGrid(data.projects);
+                })
+                .catch(function () {
+                    portfolioGrid.innerHTML = '<div class="pg-empty">Erro ao carregar os projetos. Tente novamente mais tarde.</div>';
+                });
+
+            function renderFilters(categories) {
+                var bar = document.getElementById('pgFilterBar');
+                if (!bar) return;
+                bar.innerHTML = '';
+                categories.forEach(function (cat) {
+                    var btn = document.createElement('button');
+                    btn.className = 'pg-filter-btn' + (cat === 'Todos' ? ' active' : '');
+                    btn.textContent = cat;
+                    btn.setAttribute('type', 'button');
+                    btn.addEventListener('click', function () {
+                        pgState.activeCategory = cat;
+                        bar.querySelectorAll('.pg-filter-btn').forEach(function (b) { b.classList.remove('active'); });
+                        btn.classList.add('active');
+                        var filtered = cat === 'Todos' ? pgState.projects : pgState.projects.filter(function (p) { return p.category === cat; });
+                        pgState.filtered = filtered;
+                        renderGrid(filtered);
+                    });
+                    bar.appendChild(btn);
+                });
+            }
+
+            function renderGrid(projects) {
+                var countEl = document.getElementById('pgResultsCount');
+                if (countEl) {
+                    countEl.textContent = projects.length + (projects.length === 1 ? ' projeto' : ' projetos');
+                }
+
+                portfolioGrid.innerHTML = '';
+                if (projects.length === 0) {
+                    portfolioGrid.innerHTML = '<div class="pg-empty">Nenhum projeto encontrado nesta categoria.</div>';
+                    return;
+                }
+
+                projects.forEach(function (project, index) {
+                    var card = document.createElement('article');
+                    card.className = 'pg-card';
+                    card.setAttribute('role', 'button');
+                    card.setAttribute('tabindex', '0');
+                    card.setAttribute('aria-label', 'Ver ' + project.title);
+                    card.innerHTML =
+                        '<div class="pg-card-img">' +
+                            '<img src="' + project.image + '" alt="' + project.alt + '" loading="lazy" width="1536" height="1024">' +
+                        '</div>' +
+                        '<div class="pg-card-info">' +
+                            '<span class="pg-card-category">' + project.category + '</span>' +
+                            '<h3 class="pg-card-title">' + project.title + '</h3>' +
+                            '<p class="pg-card-desc">' + project.description + '</p>' +
+                        '</div>';
+
+                    card.addEventListener('click', function () { openLightbox(index); });
+                    card.addEventListener('keydown', function (e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            openLightbox(index);
+                        }
+                    });
+
+                    portfolioGrid.appendChild(card);
+                });
+
+                // GSAP stagger animation
+                gsap.fromTo('.pg-card', {
+                    opacity: 0,
+                    y: 20
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.5,
+                    stagger: 0.06,
+                    ease: 'power2.out'
+                });
+            }
+
+            // Lightbox
+            var lightbox = document.getElementById('pgLightbox');
+            var lbImg = document.getElementById('pgLightboxImg');
+            var lbTitle = document.getElementById('pgLightboxTitle');
+            var lbDesc = document.getElementById('pgLightboxDesc');
+            var lbCounter = document.getElementById('pgLightboxCounter');
+
+            function openLightbox(index) {
+                pgState.lightboxIndex = index;
+                updateLightbox();
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+                pgState.lightboxIndex = -1;
+            }
+
+            function updateLightbox() {
+                var p = pgState.filtered[pgState.lightboxIndex];
+                if (!p) return;
+                lbImg.src = p.image;
+                lbImg.alt = p.alt;
+                lbTitle.textContent = p.title;
+                lbDesc.textContent = p.description;
+                lbCounter.textContent = (pgState.lightboxIndex + 1) + ' / ' + pgState.filtered.length;
+            }
+
+            function lightboxNav(dir) {
+                var len = pgState.filtered.length;
+                if (len === 0) return;
+                pgState.lightboxIndex = (pgState.lightboxIndex + dir + len) % len;
+                updateLightbox();
+            }
+
+            // Lightbox event listeners
+            if (lightbox) {
+                document.getElementById('pgLightboxClose').addEventListener('click', closeLightbox);
+                document.getElementById('pgLightboxPrev').addEventListener('click', function () { lightboxNav(-1); });
+                document.getElementById('pgLightboxNext').addEventListener('click', function () { lightboxNav(1); });
+
+                // Close on backdrop click
+                lightbox.addEventListener('click', function (e) {
+                    if (e.target === lightbox) closeLightbox();
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', function (e) {
+                    if (!lightbox.classList.contains('active')) return;
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowLeft') lightboxNav(-1);
+                    if (e.key === 'ArrowRight') lightboxNav(1);
+                });
+
+                // Touch swipe
+                lightbox.addEventListener('touchstart', function (e) {
+                    pgState.touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
+
+                lightbox.addEventListener('touchend', function (e) {
+                    pgState.touchEndX = e.changedTouches[0].screenX;
+                    var diff = pgState.touchStartX - pgState.touchEndX;
+                    if (Math.abs(diff) > 50) {
+                        lightboxNav(diff > 0 ? 1 : -1);
+                    }
+                }, { passive: true });
+            }
+        }
+
         // ===== MARQUEE: Infinite auto-scroll CSS animation =====
         // No GSAP pin — uses CSS animation for smooth infinite loop
         // (The duplicated content in HTML makes the loop seamless)

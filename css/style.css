@@ -2050,6 +2050,408 @@ body.cursor-hover .cursor-outline {
     }
 }
 
+/* =====================================================
+   PORTFOLIO GALLERY PAGE (pg- prefix)
+   ===================================================== */
+
+/* --- Page Hero (compact, no video) --- */
+.pg-hero {
+    background: var(--gradient-hero);
+    padding: clamp(120px, 15vw, 180px) 0 clamp(40px, 6vw, 60px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.pg-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    opacity: 0.03;
+    pointer-events: none;
+    background: repeating-conic-gradient(rgba(255, 255, 255, .08) 0% 25%, transparent 0% 50%) 0 0 / 2px 2px;
+}
+
+.pg-hero .section-label {
+    margin-bottom: 1rem;
+}
+
+.pg-hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--white);
+}
+
+.pg-hero-title em {
+    font-style: normal;
+    background: var(--gradient-orange-magenta);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* --- Filter Bar --- */
+.pg-filter-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15, 27, 45, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 1rem 0;
+}
+
+.pg-filter-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding: 0.25rem 0;
+}
+
+.pg-filter-inner::-webkit-scrollbar {
+    display: none;
+}
+
+.pg-filter-btn {
+    flex-shrink: 0;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.5rem 1.25rem;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s var(--ease-out);
+    white-space: nowrap;
+}
+
+.pg-filter-btn:hover {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.pg-filter-btn.active {
+    color: var(--white);
+    background: var(--orange);
+    border-color: var(--orange);
+    font-weight: 600;
+}
+
+.pg-results-count {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.45);
+    margin-top: 1rem;
+    font-weight: 300;
+}
+
+/* --- Portfolio Grid --- */
+.pg-grid-section {
+    background: var(--dark-blue);
+    padding: clamp(2rem, 4vw, 3rem) 0 clamp(4rem, 8vw, 6rem);
+    min-height: 50vh;
+}
+
+.pg-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.pg-card {
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.pg-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+.pg-card-img {
+    width: 100%;
+    aspect-ratio: 3/2;
+    overflow: hidden;
+}
+
+.pg-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease-out);
+}
+
+.pg-card:hover .pg-card-img img {
+    transform: scale(1.05);
+}
+
+.pg-card-info {
+    padding: 1.25rem 1.25rem 1.5rem;
+}
+
+.pg-card-category {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--magenta);
+    margin-bottom: 0.5rem;
+}
+
+.pg-card-title {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.35rem;
+}
+
+.pg-card-desc {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+/* --- Empty State --- */
+.pg-empty {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1rem;
+    grid-column: 1 / -1;
+}
+
+/* --- Lightbox --- */
+.pg-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.pg-lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.pg-lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pg-lightbox-img {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 8px;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.pg-lightbox-info {
+    text-align: center;
+    padding: 1.25rem 1rem 0;
+    max-width: 600px;
+}
+
+.pg-lightbox-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+}
+
+.pg-lightbox-desc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 300;
+}
+
+.pg-lightbox-counter {
+    position: absolute;
+    top: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-variant-numeric: tabular-nums;
+}
+
+.pg-lightbox-close {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    z-index: 10;
+}
+
+.pg-lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.pg-lightbox-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    border-radius: 50%;
+    color: var(--white);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    z-index: 10;
+}
+
+.pg-lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.pg-lightbox-prev {
+    left: 1.5rem;
+}
+
+.pg-lightbox-next {
+    right: 1.5rem;
+}
+
+/* --- CTA Section (portfolio page) --- */
+.pg-cta {
+    background: var(--dark);
+    padding: clamp(60px, 10vw, 100px) 0;
+    text-align: center;
+}
+
+.pg-cta-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.pg-cta-title em {
+    font-style: normal;
+    background: var(--gradient-orange-magenta);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.pg-cta-text {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.65);
+    font-weight: 300;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+}
+
+/* --- Portfolio Gallery Responsive --- */
+@media (max-width: 1024px) {
+    .pg-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .pg-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .pg-filter-inner {
+        padding: 0 0 0.25rem;
+    }
+
+    .pg-lightbox-nav {
+        width: 40px;
+        height: 40px;
+    }
+
+    .pg-lightbox-prev {
+        left: 0.75rem;
+    }
+
+    .pg-lightbox-next {
+        right: 0.75rem;
+    }
+
+    .pg-lightbox-close {
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .pg-lightbox-img {
+        max-height: 60vh;
+    }
+
+    .pg-lightbox-counter {
+        top: -2rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* --- "Ver todos" button on homepage --- */
+.portfolio-see-all {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.portfolio-see-all .btn {
+    font-size: 0.85rem;
+    padding: 12px 28px;
+}
+
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {

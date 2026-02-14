@@ -1,0 +1,74 @@
+{
+    "categories": [
+        "Todos",
+        "Reclames Luminosos",
+        "Letras Recortadas",
+        "Stands & Eventos",
+        "Sinaléticas"
+    ],
+    "projects": [
+        {
+            "id": 1,
+            "image": "img/portfolio/reclame-lusiadas.webp",
+            "alt": "Lusíadas Hospital Paços de Ferreira",
+            "category": "Reclames Luminosos",
+            "title": "Lusíadas Hospital",
+            "description": "Letras recortadas iluminadas — Paços de Ferreira",
+            "date": "2025-01-15"
+        },
+        {
+            "id": 2,
+            "image": "img/portfolio/amani-spa.webp",
+            "alt": "Amani Spa Reclame Luminoso",
+            "category": "Reclames Luminosos",
+            "title": "Amani Spa",
+            "description": "Letras e moldura em néon iluminado — Fachada exterior",
+            "date": "2025-02-10"
+        },
+        {
+            "id": 3,
+            "image": "img/portfolio/cleva.webp",
+            "alt": "Cleva Letras 3D",
+            "category": "Letras Recortadas",
+            "title": "Cleva",
+            "description": "Letras 3D volumétricas com iluminação LED — Evento corporativo",
+            "date": "2025-03-05"
+        },
+        {
+            "id": 4,
+            "image": "img/portfolio/vogue-stand.webp",
+            "alt": "Vogue Stand Evento",
+            "category": "Stands & Eventos",
+            "title": "Vogue",
+            "description": "Stand promocional para evento — Centro comercial",
+            "date": "2025-04-20"
+        },
+        {
+            "id": 5,
+            "image": "img/portfolio/steve-madden.webp",
+            "alt": "Steve Madden Exposição",
+            "category": "Stands & Eventos",
+            "title": "Steve Madden",
+            "description": "Exposição promocional com passadeira vermelha — Centro comercial",
+            "date": "2025-05-12"
+        },
+        {
+            "id": 6,
+            "image": "img/portfolio/norboxe-motor.webp",
+            "alt": "Norboxe Stand Motos",
+            "category": "Stands & Eventos",
+            "title": "Norboxe",
+            "description": "Stand de exposição com lona impressa — Feira de motos",
+            "date": "2025-06-08"
+        },
+        {
+            "id": 7,
+            "image": "img/portfolio/sinaletica-homycasa.webp",
+            "alt": "Homy Casa Armazém",
+            "category": "Sinaléticas",
+            "title": "Homy Casa",
+            "description": "Sinalética exterior de armazém — Receção clientes",
+            "date": "2025-07-01"
+        }
+    ]
+}
