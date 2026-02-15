@@ -4,7 +4,7 @@
 
 **Yes, We Do** is a marketing and advertising agency based in Rio Tinto, Porto, Portugal.
 This repository contains a single-page landing website served at **https://yes-wedo.pt**.
-The site is a static HTML page with no build system, no frameworks, and no backend.
+The site is a static HTML page with no build system and no frameworks. The contact form integrates with **Formspree** for email delivery.
 Language: **Portuguese (Portugal) (pt-PT)**.
 
 ---
@@ -77,9 +77,9 @@ npx terser js/main.js -c -m -o js/main.min.js
 
 `index.html` contains a `<style>` block in the `<head>` with critical CSS for the nav and hero section. If you change nav or hero styles in `style.css`, you must also update the inline `<style>` block in `index.html` to match.
 
-### No backend
+### Contact form (Formspree)
 
-The contact form at the bottom of the page is front-end only. Form submission is simulated in JavaScript with no actual HTTP request.
+The contact form submits via `fetch` POST to **Formspree** (`https://formspree.io/f/mzdaewqk`). It sends `FormData` with JSON accept header, shows "A enviar..." while processing, resets on success, and displays an error message with auto-recovery on failure. Emails are delivered to the agency inbox.
 
 ---
 
@@ -181,7 +181,7 @@ The contact form at the bottom of the page is front-end only. Form submission is
 | **Testimonials** | Auto-rotate every 5 seconds, dot navigation, dynamic height measurement |
 | **Magnetic buttons** | Buttons subtly follow cursor on hover (desktop, `pointer: fine` only) |
 | **Text scramble** | Randomized character effect on nav link hover |
-| **Contact form** | Client-side validation and simulated submission (no HTTP request) |
+| **Contact form** | Client-side validation + Formspree submission (`POST https://formspree.io/f/mzdaewqk`), success/error UI states |
 
 ---
 
