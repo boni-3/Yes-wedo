@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrega de Projeto — Yes, We Do | yes-wedo.pt</title>
+<style>
+  @page {
+    size: A4;
+    margin: 20mm 18mm 20mm 18mm;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.6;
+    color: #1a1a1a;
+    background: #fff;
+    padding: 40px 50px;
+    max-width: 210mm;
+    margin: 0 auto;
+  }
+
+  /* Cover */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    text-align: center;
+    page-break-after: always;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: #F04320;
+    color: #fff;
+    font-size: 9pt;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+  }
+  .cover h1 {
+    font-size: 28pt;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .cover h1 span { color: #F04320; }
+  .cover .cover-subtitle {
+    font-size: 14pt;
+    color: #555;
+    margin-bottom: 40px;
+  }
+  .cover-meta {
+    font-size: 9.5pt;
+    color: #777;
+    line-height: 2;
+  }
+  .cover-meta strong { color: #333; }
+  .cover-line {
+    width: 60px;
+    height: 3px;
+    background: #F04320;
+    margin: 30px auto;
+    border-radius: 2px;
+  }
+
+  /* Headings */
+  h2 {
+    font-size: 16pt;
+    font-weight: 700;
+    color: #111827;
+    margin-top: 35px;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #F04320;
+    page-break-after: avoid;
+  }
+  h2 .section-num {
+    color: #F04320;
+    margin-right: 6px;
+  }
+  h3 {
+    font-size: 11.5pt;
+    font-weight: 600;
+    color: #333;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    page-break-after: avoid;
+  }
+
+  /* Body */
+  p { margin-bottom: 8px; }
+  ul, ol { margin: 6px 0 12px 20px; }
+  li { margin-bottom: 4px; }
+  strong { color: #111; }
+  a { color: #F04320; text-decoration: none; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 16px 0;
+    font-size: 10pt;
+    page-break-inside: avoid;
+  }
+  th {
+    background: #111827;
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    padding: 8px 10px;
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  td {
+    padding: 7px 10px;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #f9fafb; }
+  .status-ok {
+    color: #16a34a;
+    font-weight: 600;
+  }
+  .status-pending {
+    color: #d97706;
+    font-weight: 600;
+  }
+
+  /* Info boxes */
+  .info-box {
+    background: #f0f7ff;
+    border-left: 4px solid #529BCA;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 10pt;
+  }
+  .warning-box {
+    background: #fff7ed;
+    border-left: 4px solid #F04320;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 10pt;
+  }
+
+  /* Cards grid */
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin: 10px 0 16px 0;
+  }
+  .service-item {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 9.5pt;
+    text-align: center;
+  }
+
+  /* Sections list */
+  .section-list {
+    counter-reset: section;
+    list-style: none;
+    margin-left: 0;
+  }
+  .section-list li {
+    counter-increment: section;
+    padding: 6px 0 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .section-list li::before {
+    content: counter(section, decimal-leading-zero);
+    display: inline-block;
+    width: 28px;
+    font-weight: 700;
+    color: #F04320;
+    font-size: 10pt;
+  }
+
+  /* Footer */
+  .doc-footer {
+    margin-top: 40px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+    font-size: 8.5pt;
+    color: #999;
+    text-align: center;
+  }
+
+  /* TOC */
+  .toc {
+    page-break-after: always;
+  }
+  .toc h2 { border-bottom: none; margin-bottom: 20px; }
+  .toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .toc-list li {
+    padding: 8px 0;
+    border-bottom: 1px dotted #ccc;
+    display: flex;
+    justify-content: space-between;
+  }
+  .toc-list li span:first-child { font-weight: 600; color: #333; }
+  .toc-list li span:last-child { color: #999; font-size: 9.5pt; }
+
+  /* Print */
+  @media print {
+    body { padding: 0; }
+    .cover { min-height: 100vh; }
+    h2, h3 { page-break-after: avoid; }
+    table, .info-box, .warning-box { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<div class="cover">
+  <div class="cover-badge">Documento de Entrega</div>
+  <h1>Website <span>Yes, We Do</span></h1>
+  <p class="cover-subtitle">Relatório completo do projeto</p>
+  <div class="cover-line"></div>
+  <div class="cover-meta">
+    <strong>Cliente:</strong> Yes Wedo, Lda.<br>
+    <strong>Website:</strong> https://yes-wedo.pt<br>
+    <strong>Data de entrega:</strong> 13 de fevereiro de 2026<br>
+    <strong>Preparado por:</strong> Ryan Alves
+  </div>
+</div>
+
+<!-- ==================== TOC ==================== -->
+<div class="toc">
+  <h2>Índice</h2>
+  <ol class="toc-list">
+    <li><span>01 — Visão Geral do Projeto</span></li>
+    <li><span>02 — Estrutura e Secções do Website</span></li>
+    <li><span>03 — Serviços Apresentados</span></li>
+    <li><span>04 — Formulário de Contacto</span></li>
+    <li><span>05 — Design e Experiência Visual</span></li>
+    <li><span>06 — Conformidade Legal (RGPD / UE)</span></li>
+    <li><span>07 — Acessibilidade</span></li>
+    <li><span>08 — SEO e Presença Digital</span></li>
+    <li><span>09 — Performance e Infraestrutura</span></li>
+    <li><span>10 — Dados de Contacto Configurados</span></li>
+    <li><span>11 — Mapa do Website</span></li>
+    <li><span>12 — Ações Necessárias do Cliente</span></li>
+    <li><span>13 — Resumo de Conformidade</span></li>
+  </ol>
+</div>
+
+<!-- ==================== 1. VISÃO GERAL ==================== -->
+<h2><span class="section-num">01</span> Visão Geral do Projeto</h2>
+
+<p>O website da <strong>Yes, We Do</strong> é uma landing page profissional de página única, desenvolvida para apresentar a agência de marketing e publicidade sediada em Rio Tinto, Porto, Portugal.</p>
+
+<table>
+  <tr><th style="width:35%">Detalhe</th><th>Informação</th></tr>
+  <tr><td><strong>URL</strong></td><td>https://yes-wedo.pt</td></tr>
+  <tr><td><strong>Tipo</strong></td><td>Single-page landing website</td></tr>
+  <tr><td><strong>Idioma</strong></td><td>Português (Portugal) — pt-PT</td></tr>
+  <tr><td><strong>Alojamento</strong></td><td>GitHub Pages com SSL/HTTPS</td></tr>
+  <tr><td><strong>Domínio</strong></td><td>yes-wedo.pt (domínio personalizado)</td></tr>
+  <tr><td><strong>Tecnologias</strong></td><td>HTML5, CSS3, JavaScript (ES6), GSAP</td></tr>
+  <tr><td><strong>Frameworks/CMS</strong></td><td>Nenhum — código nativo sem dependências</td></tr>
+  <tr><td><strong>Responsivo</strong></td><td>Sim — desktop, tablet e telemóvel</td></tr>
+</table>
+
+<!-- ==================== 2. ESTRUTURA ==================== -->
+<h2><span class="section-num">02</span> Estrutura e Secções do Website</h2>
+
+<p>O website é composto por 11 secções distintas, apresentadas sequencialmente numa única página com navegação fluida:</p>
+
+<ol class="section-list">
+  <li><strong>Hero</strong> — Ecrã inicial com vídeo de fundo em full-screen, logótipo, título animado <em>"A sua marca merece ser vista"</em>, dois botões de ação (Iniciar Projeto e Ver Serviços) e indicador de scroll animado.</li>
+  <li><strong>Prova Social</strong> — Barra horizontal com logos e nomes dos clientes de referência: Lusíadas, Vogue, Steve Madden, Amani Spa, Homy Casa e NaturalBio.</li>
+  <li><strong>Marquee</strong> — Banner animado em scroll contínuo infinito com todos os serviços da agência.</li>
+  <li><strong>Serviços</strong> — Grelha de 12 cartões interativos, cada um representando um serviço (ver secção 3).</li>
+  <li><strong>Portfólio</strong> — Galeria com 7 projetos em scroll horizontal (animado com GSAP no desktop, scroll nativo com snap no telemóvel). Projetos: Lusíadas, Amani Spa, Cleva, Vogue, Steve Madden, Norboxe e Homy Casa.</li>
+  <li><strong>Sobre Nós</strong> — Texto de apresentação da agência, fotografia dos sócios e contadores animados: 10+ anos de experiência, 150+ projetos, 80+ clientes, 100% dedicação.</li>
+  <li><strong>Processo de Trabalho</strong> — 4 etapas ilustradas: Ouvir → Pensar → Criar → Entregar.</li>
+  <li><strong>Testemunhos</strong> — Carrossel automático com 3 avaliações de clientes (5 estrelas), rotação a cada 5 segundos e navegação por pontos.</li>
+  <li><strong>Call-to-Action</strong> — Secção de destaque com convite a iniciar projeto e link direto para WhatsApp.</li>
+  <li><strong>Contacto</strong> — Informações completas de contacto (morada, email, telefones, WhatsApp, redes sociais) e formulário funcional com envio de email real.</li>
+  <li><strong>Footer</strong> — Logótipo, navegação, serviços, links legais obrigatórios, dados legais da empresa e aviso de copyright.</li>
+</ol>
+
+<!-- ==================== 3. SERVIÇOS ==================== -->
+<h2><span class="section-num">03</span> Serviços Apresentados</h2>
+
+<p>O website apresenta o catálogo completo de 12 serviços da agência, cada um com ícone dedicado e descrição:</p>
+
+<div class="services-grid">
+  <div class="service-item">Flyers &amp; Brochuras</div>
+  <div class="service-item">Lonas &amp; Stands</div>
+  <div class="service-item">Sinaléticas</div>
+  <div class="service-item">Merchandising</div>
+  <div class="service-item">Reclames Luminosos</div>
+  <div class="service-item">Impressão Grandes Formatos</div>
+  <div class="service-item">Decoração de Montras</div>
+  <div class="service-item">Decoração de Viaturas</div>
+  <div class="service-item">Páginas Web</div>
+  <div class="service-item">Eventos</div>
+  <div class="service-item">Decoração de Espaços</div>
+  <div class="service-item">Néons</div>
+</div>
+
+<p>Estes serviços estão também indexados nos dados estruturados Schema.org (ver secção 8), garantindo visibilidade nos motores de pesquisa.</p>
+
+<!-- ==================== 4. FORMULÁRIO ==================== -->
+<h2><span class="section-num">04</span> Formulário de Contacto</h2>
+
+<p>O formulário de contacto está <strong>totalmente funcional</strong> e envia os dados diretamente para o email <strong>geral@yes-wedo.pt</strong> através do serviço Formspree.</p>
+
+<h3>Campos do formulário</h3>
+<table>
+  <tr><th>Campo</th><th>Obrigatório</th><th>Descrição</th></tr>
+  <tr><td>Nome</td><td>Sim</td><td>Nome do visitante</td></tr>
+  <tr><td>Email</td><td>Sim</td><td>Endereço de email para resposta</td></tr>
+  <tr><td>Telefone</td><td>Não</td><td>Número de telefone (opcional)</td></tr>
+  <tr><td>Mensagem</td><td>Sim</td><td>Conteúdo da mensagem</td></tr>
+</table>
+
+<h3>Comportamento ao submeter</h3>
+<ol>
+  <li>O botão de envio muda para <em>"A enviar..."</em> durante o processamento</li>
+  <li>Em caso de <strong>sucesso</strong>: o formulário desaparece com uma transição suave e é substituído por uma animação de confirmação — ícone verde animado (checkmark) com a mensagem <em>"Mensagem enviada com sucesso!"</em> e subtítulo <em>"Entraremos em contacto consigo brevemente."</em></li>
+  <li>O visitante pode clicar em <em>"Enviar outra mensagem"</em> para voltar ao formulário</li>
+  <li>Em caso de <strong>erro</strong>: o botão mostra <em>"Erro ao enviar"</em> durante 3 segundos e volta ao estado original</li>
+</ol>
+
+<h3>Privacidade</h3>
+<p>Abaixo do botão de envio existe uma nota informativa: <em>"Ao submeter este formulário, concorda com a nossa Política de Privacidade"</em>, com link direto para a página de Política de Privacidade, garantindo consentimento informado conforme o RGPD.</p>
+
+<h3>Processamento dos dados</h3>
+<p>Os dados são processados pela <strong>Formspree, Inc.</strong> (EUA), que atua como subcontratante nos termos do Artigo 28.º do RGPD, com salvaguardas adequadas para transferências internacionais de dados.</p>
+
+<!-- ==================== 5. DESIGN ==================== -->
+<h2><span class="section-num">05</span> Design e Experiência Visual</h2>
+
+<h3>Identidade visual</h3>
+<table>
+  <tr><th>Elemento</th><th>Detalhe</th></tr>
+  <tr><td><strong>Cor primária</strong></td><td>Laranja #F04320</td></tr>
+  <tr><td><strong>Cor secundária</strong></td><td>Azul #529BCA</td></tr>
+  <tr><td><strong>Cor de destaque</strong></td><td>Magenta #BA046A</td></tr>
+  <tr><td><strong>Fundo escuro</strong></td><td>#0F1B2D / #111827</td></tr>
+  <tr><td><strong>Tipografia títulos</strong></td><td>Space Grotesk (auto-hospedada)</td></tr>
+  <tr><td><strong>Tipografia corpo</strong></td><td>Inter (auto-hospedada)</td></tr>
+</table>
+
+<h3>Animações e efeitos interativos</h3>
+<ul>
+  <li><strong>Animações de scroll</strong> — Elementos aparecem com fade-in suave ao entrar na área visível (GSAP ScrollTrigger)</li>
+  <li><strong>Cursor personalizado</strong> — Ponto central + anel exterior que segue o cursor com efeito elástico (apenas desktop)</li>
+  <li><strong>Botões magnéticos</strong> — Os botões seguem subtilmente o cursor ao fazer hover</li>
+  <li><strong>Text scramble</strong> — Efeito de caracteres aleatórios nos links de navegação ao passar o cursor</li>
+  <li><strong>Contadores animados</strong> — Números contam de 0 até ao valor final quando a secção "Sobre Nós" entra na área visível</li>
+  <li><strong>Portfólio horizontal</strong> — Scroll horizontal controlado por GSAP no desktop, scroll nativo no telemóvel</li>
+  <li><strong>Parallax no hero</strong> — O conteúdo do hero move-se suavemente ao fazer scroll</li>
+</ul>
+
+<h3>Responsividade</h3>
+<p>O website é 100% responsivo, adaptando-se automaticamente a qualquer dispositivo:</p>
+<ul>
+  <li><strong>Desktop</strong> (acima de 1024px) — Layout completo com cursor personalizado e animações avançadas</li>
+  <li><strong>Tablet</strong> (768px–1024px) — Layout adaptado, menus reformatados</li>
+  <li><strong>Telemóvel</strong> (abaixo de 768px) — Menu hamburger, portfólio com scroll nativo, áreas de toque otimizadas (mín. 44px)</li>
+</ul>
+
+<!-- ==================== 6. LEGAL ==================== -->
+<h2><span class="section-num">06</span> Conformidade Legal (RGPD / UE)</h2>
+
+<p>O website cumpre integralmente a legislação portuguesa e europeia aplicável a websites comerciais. Foram criadas 3 páginas legais dedicadas e implementados todos os mecanismos obrigatórios.</p>
+
+<h3>6.1 — Política de Privacidade</h3>
+<p><strong>URL:</strong> https://yes-wedo.pt/politica-privacidade.html<br>
+<strong>Legislação:</strong> Regulamento (UE) 2016/679 (RGPD) · Lei n.º 58/2019</p>
+
+<table>
+  <tr><th>Requisito RGPD (Art. 13.º)</th><th>Estado</th></tr>
+  <tr><td>Identidade e contactos do responsável pelo tratamento</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Finalidades e base legal do tratamento</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Destinatários dos dados (Formspree, Inc.)</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Transferências internacionais e salvaguardas (cláusulas contratuais-tipo)</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Prazo de conservação dos dados (máx. 12 meses)</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Direitos do titular (acesso, retificação, apagamento, limitação, portabilidade, oposição)</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Direito de retirar o consentimento</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Direito de reclamação junto da CNPD</td><td class="status-ok">&#10003; Implementado</td></tr>
+</table>
+
+<h3>6.2 — Política de Cookies</h3>
+<p><strong>URL:</strong> https://yes-wedo.pt/politica-cookies.html<br>
+<strong>Legislação:</strong> Lei n.º 41/2004 · Lei n.º 46/2012 · RGPD</p>
+
+<table>
+  <tr><th>Elemento</th><th>Estado</th></tr>
+  <tr><td>Definição e explicação de cookies</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Tabela detalhada dos cookies utilizados</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Informação sobre cookies de terceiros (Formspree)</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Instruções para gestão nos principais navegadores</td><td class="status-ok">&#10003; Implementado</td></tr>
+</table>
+
+<div class="info-box">
+  <strong>Nota:</strong> O website NÃO utiliza cookies de analytics, publicidade, remarketing ou rastreamento de terceiros. O único armazenamento local é a preferência de consentimento de cookies.
+</div>
+
+<h3>6.3 — Banner de Consentimento de Cookies</h3>
+<table>
+  <tr><th>Requisito</th><th>Estado</th></tr>
+  <tr><td>Informação clara antes da colocação de cookies</td><td class="status-ok">&#10003; Conforme</td></tr>
+  <tr><td>Botão "Aceitar todos"</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Botão "Rejeitar" com igual destaque visual</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Link para Política de Cookies ("Saiba mais")</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Sem pre-checked boxes</td><td class="status-ok">&#10003; Conforme</td></tr>
+  <tr><td>Sem cookie walls (acesso não condicionado)</td><td class="status-ok">&#10003; Conforme</td></tr>
+  <tr><td>Preferência armazenada localmente</td><td class="status-ok">&#10003; Implementado</td></tr>
+</table>
+
+<h3>6.4 — Termos e Condições</h3>
+<p><strong>URL:</strong> https://yes-wedo.pt/termos-condicoes.html<br>
+<strong>Legislação:</strong> Decreto-Lei n.º 7/2004 · Lei n.º 24/96 · Decreto-Lei n.º 24/2014 · Lei n.º 144/2015</p>
+
+<p>A página inclui: identificação completa do prestador, objeto e descrição dos serviços, regras de utilização, propriedade intelectual, limitação de responsabilidade, resolução alternativa de litígios (RAL), lei aplicável e foro competente.</p>
+
+<h3>6.5 — Identificação Legal no Rodapé</h3>
+<p>Conforme o Decreto-Lei n.º 7/2004 (Art. 10.º) e o Código das Sociedades Comerciais (Art. 171.º), o rodapé apresenta permanentemente:</p>
+
+<table>
+  <tr><th>Informação</th><th>Valor</th></tr>
+  <tr><td>Denominação social</td><td>Yes Wedo, Lda.</td></tr>
+  <tr><td>NIF / NIPC</td><td>PT517927977</td></tr>
+  <tr><td>Registo Comercial</td><td>Conservatória de Lisboa, n.º 517927977</td></tr>
+  <tr><td>Capital Social</td><td>1.000,00 EUR</td></tr>
+  <tr><td>Morada</td><td>Apresentada na secção de contacto</td></tr>
+  <tr><td>Email</td><td>geral@yes-wedo.pt</td></tr>
+  <tr><td>Telefones</td><td>912 320 366 / 919 755 990</td></tr>
+</table>
+
+<h3>6.6 — Livro de Reclamações Eletrónico</h3>
+<p><strong>Legislação:</strong> Decreto-Lei n.º 156/2005 · Decreto-Lei n.º 74/2017</p>
+<p>O rodapé contém um link visível e direto para a plataforma oficial: <strong>www.livroreclamacoes.pt</strong></p>
+
+<h3>6.7 — Resolução Alternativa de Litígios (RAL)</h3>
+<p><strong>Legislação:</strong> Lei n.º 144/2015, Artigo 18.º</p>
+
+<table>
+  <tr><th>Informação</th><th>Dados</th></tr>
+  <tr><td>Entidade</td><td>CICAP — Centro de Informação de Consumo e Arbitragem do Porto</td></tr>
+  <tr><td>Morada</td><td>Rua Damião de Góis, 31 — 4050-225 Porto</td></tr>
+  <tr><td>Telefone</td><td>22 550 83 49</td></tr>
+  <tr><td>Email</td><td>cicap@cicap.pt</td></tr>
+  <tr><td>Website</td><td>www.cicap.pt</td></tr>
+  <tr><td>Portal do Consumidor</td><td>www.consumidor.gov.pt</td></tr>
+</table>
+
+<h3>6.8 — Direitos de Autor</h3>
+<p><strong>Legislação:</strong> Código do Direito de Autor e dos Direitos Conexos (Decreto-Lei n.º 63/85)</p>
+<p>O rodapé inclui o aviso: <em>© 2026 Yes, We Do. Todos os direitos reservados.</em></p>
+<p>A página de Termos e Condições contém uma secção dedicada à propriedade intelectual.</p>
+
+<!-- ==================== 7. ACESSIBILIDADE ==================== -->
+<h2><span class="section-num">07</span> Acessibilidade</h2>
+
+<p><strong>Legislação:</strong> Decreto-Lei n.º 82/2022 (European Accessibility Act)</p>
+
+<div class="info-box">
+  A Yes Wedo, Lda. qualifica-se como <strong>microempresa</strong> (menos de 10 trabalhadores e volume de negócios inferior a 2 milhões de euros), beneficiando da isenção prevista no Decreto-Lei n.º 82/2022. No entanto, o website implementa voluntariamente diversas boas práticas de acessibilidade.
+</div>
+
+<table>
+  <tr><th>Medida de Acessibilidade</th><th>Estado</th></tr>
+  <tr><td>Link "Saltar para o conteúdo" (skip-to-content) para leitores de ecrã</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Contornos :focus-visible em todos os elementos interativos</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>aria-hidden="true" em ícones SVG decorativos (~42 instâncias)</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>aria-live="polite" no slider de testemunhos</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>aria-label no vídeo de fundo do hero</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Texto alternativo (alt) em todas as imagens</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Labels associados a todos os campos de formulário</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Áreas de toque mínimas de 44px em dispositivos móveis</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>@media (prefers-reduced-motion: reduce) para desativar animações</td><td class="status-ok">&#10003; Implementado</td></tr>
+  <tr><td>Contraste de cores adequado em todo o website</td><td class="status-ok">&#10003; Implementado</td></tr>
+</table>
+
+<!-- ==================== 8. SEO ==================== -->
+<h2><span class="section-num">08</span> SEO e Presença Digital</h2>
+
+<h3>Meta tags</h3>
+<table>
+  <tr><th>Meta Tag</th><th>Estado</th></tr>
+  <tr><td>Open Graph (Facebook / LinkedIn)</td><td class="status-ok">&#10003; Configurado</td></tr>
+  <tr><td>Twitter Cards</td><td class="status-ok">&#10003; Configurado</td></tr>
+  <tr><td>Imagem de partilha social (1200×630px)</td><td class="status-ok">&#10003; Configurado</td></tr>
+  <tr><td>URL canónico</td><td class="status-ok">&#10003; Configurado</td></tr>
+  <tr><td>Idioma pt-PT</td><td class="status-ok">&#10003; Configurado</td></tr>
+</table>
+
+<h3>Dados estruturados (Schema.org — JSON-LD)</h3>
+<ul>
+  <li><strong>LocalBusiness</strong> — Nome, morada completa (Rio Tinto, Porto), coordenadas geográficas, telefones, email, área de serviço (50km), catálogo de 12 serviços</li>
+  <li><strong>FAQPage</strong> — 7 perguntas e respostas em português, direcionadas a pesquisas locais na zona do Porto</li>
+</ul>
+
+<h3>Ficheiros de indexação</h3>
+<table>
+  <tr><th>Ficheiro</th><th>Função</th><th>Estado</th></tr>
+  <tr><td>sitemap.xml</td><td>Mapa do site para motores de pesquisa</td><td class="status-ok">&#10003; Presente</td></tr>
+  <tr><td>robots.txt</td><td>Permissões de indexação (Google, Bing, GPTBot, ClaudeBot, PerplexityBot)</td><td class="status-ok">&#10003; Configurado</td></tr>
+  <tr><td>llms.txt</td><td>Resumo para motores de IA (ChatGPT, Claude, Perplexity)</td><td class="status-ok">&#10003; Presente</td></tr>
+</table>
+
+<!-- ==================== 9. PERFORMANCE ==================== -->
+<h2><span class="section-num">09</span> Performance e Infraestrutura</h2>
+
+<table>
+  <tr><th>Medida</th><th>Detalhe</th><th>Estado</th></tr>
+  <tr><td>Alojamento</td><td>GitHub Pages com SSL/HTTPS</td><td class="status-ok">&#10003; Ativo</td></tr>
+  <tr><td>Domínio personalizado</td><td>yes-wedo.pt</td><td class="status-ok">&#10003; Ativo</td></tr>
+  <tr><td>Imagens otimizadas</td><td>Formato WebP com compressão avançada</td><td class="status-ok">&#10003;</td></tr>
+  <tr><td>Vídeo hero</td><td>Comprimido de 23MB para 3.5MB</td><td class="status-ok">&#10003;</td></tr>
+  <tr><td>CSS minificado</td><td>37KB → 26KB (redução de ~30%)</td><td class="status-ok">&#10003;</td></tr>
+  <tr><td>JavaScript minificado</td><td>18KB → 7KB (redução de ~61%)</td><td class="status-ok">&#10003;</td></tr>
+  <tr><td>Fontes auto-hospedadas</td><td>Zero dependências de servidores externos</td><td class="status-ok">&#10003;</td></tr>
+  <tr><td>CSS crítico inline</td><td>Primeira pintura visual quase instantânea</td><td class="status-ok">&#10003;</td></tr>
+  <tr><td>Carregamento assíncrono</td><td>CSS carregado de forma não bloqueante</td><td class="status-ok">&#10003;</td></tr>
+</table>
+
+<div class="info-box">
+  <strong>Zero dependências externas:</strong> Todas as fontes, bibliotecas JavaScript e recursos visuais são servidos diretamente do servidor, sem depender de CDNs ou serviços de terceiros (como Google Fonts). Isto garante máxima velocidade e privacidade dos visitantes.
+</div>
+
+<!-- ==================== 10. CONTACTOS ==================== -->
+<h2><span class="section-num">10</span> Dados de Contacto Configurados</h2>
+
+<table>
+  <tr><th>Canal</th><th>Detalhe</th></tr>
+  <tr><td><strong>Morada</strong></td><td>Av. D. João I 81, 4435-208 Rio Tinto, Porto</td></tr>
+  <tr><td><strong>Email</strong></td><td>geral@yes-wedo.pt</td></tr>
+  <tr><td><strong>Telefone 1</strong></td><td>912 320 366</td></tr>
+  <tr><td><strong>Telefone 2</strong></td><td>919 755 990</td></tr>
+  <tr><td><strong>WhatsApp</strong></td><td>919 755 990 (link direto no website)</td></tr>
+  <tr><td><strong>Instagram</strong></td><td>@wedo_yes / @y.wedo_</td></tr>
+  <tr><td><strong>Facebook</strong></td><td>Página da empresa (link no website)</td></tr>
+</table>
+
+<!-- ==================== 11. MAPA DO WEBSITE ==================== -->
+<h2><span class="section-num">11</span> Mapa do Website</h2>
+
+<table>
+  <tr><th>Página</th><th>URL</th><th>Descrição</th></tr>
+  <tr><td>Página principal</td><td>yes-wedo.pt</td><td>Landing page com todas as secções</td></tr>
+  <tr><td>Política de Privacidade</td><td>yes-wedo.pt/politica-privacidade.html</td><td>Conforme RGPD Art. 13.º</td></tr>
+  <tr><td>Política de Cookies</td><td>yes-wedo.pt/politica-cookies.html</td><td>Conforme Lei 41/2004</td></tr>
+  <tr><td>Termos e Condições</td><td>yes-wedo.pt/termos-condicoes.html</td><td>Conforme DL 7/2004, Lei 144/2015</td></tr>
+</table>
+
+<!-- ==================== 12. AÇÕES ==================== -->
+<h2><span class="section-num">12</span> Ações Necessárias do Cliente</h2>
+
+<p>Para completar a conformidade legal e o funcionamento pleno do website, são necessárias as seguintes ações por parte da Yes Wedo, Lda.:</p>
+
+<table>
+  <tr><th>#</th><th>Ação</th><th>Prioridade</th></tr>
+  <tr>
+    <td><strong>1</strong></td>
+    <td><strong>Registar a empresa em www.livroreclamacoes.pt</strong> com o NIF PT517927977. O registo é obrigatório para prestadores de serviços com contacto com o público.</td>
+    <td class="status-pending">Alta</td>
+  </tr>
+  <tr>
+    <td><strong>2</strong></td>
+    <td><strong>Verificar periodicamente</strong> se a legislação sofreu alterações e informar para atualização das páginas legais.</td>
+    <td>Periódica</td>
+  </tr>
+</table>
+
+<div class="warning-box">
+  <strong>Importante:</strong> O registo na plataforma do Livro de Reclamações Eletrónico (www.livroreclamacoes.pt) é obrigatório por lei e deve ser efetuado o mais brevemente possível. O link para a plataforma já se encontra no rodapé do website.
+</div>
+
+<!-- ==================== 13. RESUMO ==================== -->
+<h2><span class="section-num">13</span> Resumo de Conformidade</h2>
+
+<table>
+  <tr><th>Área Legal</th><th>Legislação</th><th>Estado</th></tr>
+  <tr><td>Proteção de dados (RGPD)</td><td>Reg. (UE) 2016/679, Lei 58/2019</td><td class="status-ok">&#10003; Conforme</td></tr>
+  <tr><td>Cookies (ePrivacy)</td><td>Lei 41/2004, Lei 46/2012</td><td class="status-ok">&#10003; Conforme</td></tr>
+  <tr><td>Identificação do prestador</td><td>DL 7/2004, CSC Art. 171.º</td><td class="status-ok">&#10003; Conforme</td></tr>
+  <tr><td>Livro de Reclamações</td><td>DL 156/2005, DL 74/2017</td><td class="status-ok">&#10003; Link implementado</td></tr>
+  <tr><td>Resolução alternativa de litígios</td><td>Lei 144/2015</td><td class="status-ok">&#10003; Conforme</td></tr>
+  <tr><td>Termos e condições</td><td>Lei 24/96, DL 24/2014</td><td class="status-ok">&#10003; Conforme</td></tr>
+  <tr><td>Direitos de autor</td><td>DL 63/85</td><td class="status-ok">&#10003; Conforme</td></tr>
+  <tr><td>Acessibilidade</td><td>DL 82/2022</td><td class="status-ok">&#10003; Isento + boas práticas</td></tr>
+</table>
+
+<br>
+<div class="doc-footer">
+  <p>Documento preparado a 13 de fevereiro de 2026 por Ryan Alves.</p>
+  <p>Este documento tem caráter informativo e não constitui aconselhamento jurídico.<br>Para questões legais específicas, recomenda-se a consulta de um advogado especializado.</p>
+</div>
+
+</body>
+</html>

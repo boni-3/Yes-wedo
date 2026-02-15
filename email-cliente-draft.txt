@@ -1,0 +1,198 @@
+Asunto: Entrega Final — Website Yes, We Do | yes-wedo.pt
+
+Estimado/a cliente,
+
+Temos o prazer de confirmar que o website da Yes, We Do está oficialmente online e acessível em https://yes-wedo.pt.
+
+Este documento descreve, de forma detalhada, tudo o que o website inclui — funcionalidades, design, conformidade legal, SEO e infraestrutura técnica.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. ESTRUTURA E SECÇÕES DO WEBSITE
+
+O website é uma single-page profissional com as seguintes secções:
+
+ 1. Hero (Ecrã inicial) — Vídeo de fundo em full-screen, título animado "A sua marca merece ser vista", dois botões de ação (Iniciar Projeto e Ver Serviços) e indicador de scroll animado
+ 2. Prova Social — Barra com logos/nomes dos clientes de referência (Lusíadas, Vogue, Steve Madden, Amani Spa, Homy Casa, NaturalBio)
+ 3. Marquee (Ticker infinito) — Banner animado com todos os serviços em scroll contínuo
+ 4. Serviços (12 cartões) — Apresentação completa dos serviços:
+    • Flyers & Brochuras
+    • Lonas & Stands
+    • Sinaléticas
+    • Merchandising
+    • Reclames Luminosos
+    • Impressão Grandes Formatos
+    • Decoração de Montras
+    • Decoração de Viaturas
+    • Páginas Web
+    • Eventos
+    • Decoração de Espaços
+    • Néons
+ 5. Portfólio (Galeria horizontal) — 7 projetos com imagem e descrição (Lusíadas, Amani Spa, Cleva, Vogue, Steve Madden, Norboxe, Homy Casa), com scroll horizontal animado no desktop e scroll nativo com snap no telemóvel
+ 6. Sobre Nós — Texto de apresentação da agência, foto dos sócios e contadores animados (10+ anos, 150+ projetos, 80+ clientes, 100% dedicação)
+ 7. Processo de Trabalho — 4 etapas ilustradas: Ouvir → Pensar → Criar → Entregar
+ 8. Testemunhos — Carrossel automático com 3 avaliações de clientes (5 estrelas cada), com navegação por pontos e rotação a cada 5 segundos
+ 9. Call-to-Action — Secção de destaque com convite a iniciar projeto e link direto para WhatsApp
+10. Contacto — Informações completas + formulário funcional (ver secção 2)
+11. Footer — Navegação, serviços, links legais, dados da empresa e copyright
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+2. FORMULÁRIO DE CONTACTO
+
+O formulário de contacto está totalmente funcional e envia os dados diretamente para o vosso email geral@yes-wedo.pt através do serviço Formspree.
+
+Campos disponíveis:
+ • Nome (obrigatório)
+ • Email (obrigatório)
+ • Telefone (opcional)
+ • Mensagem (obrigatório)
+
+Quando um visitante submete o formulário:
+ → O botão muda para "A enviar..." durante o processamento
+ → Em caso de sucesso, o formulário desaparece e é substituído por uma animação de confirmação (ícone verde animado + mensagem "Mensagem enviada com sucesso!")
+ → O visitante pode enviar outra mensagem clicando em "Enviar outra mensagem"
+ → Em caso de erro, o utilizador é informado com a mensagem "Erro ao enviar"
+
+Nota de privacidade: Abaixo do botão de envio, existe um aviso informando que "Ao submeter este formulário, concorda com a nossa Política de Privacidade", com link direto para a mesma.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+3. DESIGN E EXPERIÊNCIA
+
+• Paleta de cores da marca: Laranja (#F04320), Azul (#529BCA), Magenta (#BA046A) sobre fundos escuros e claros
+• Tipografia profissional: Space Grotesk (títulos) + Inter (corpo), todas auto-hospedadas para máxima velocidade
+• Animações premium: GSAP com efeitos de scroll, contadores animados, efeito text-scramble na navegação, cursor personalizado e botões magnéticos
+• 100% responsivo: Totalmente adaptado para desktop, tablet e telemóvel com breakpoints otimizados
+• Cursor personalizado: Ponto + anel que segue o cursor com efeito elástico (apenas em desktop)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+4. CONFORMIDADE LEGAL (RGPD / LEI PORTUGUESA / UE)
+
+O website cumpre integralmente a legislação portuguesa e europeia. Foram criadas 3 páginas legais dedicadas e implementados todos os mecanismos obrigatórios:
+
+PÁGINAS LEGAIS:
+
+ a) Política de Privacidade — yes-wedo.pt/politica-privacidade.html
+    Conforme o Regulamento (UE) 2016/679 (RGPD) e Lei n.º 58/2019:
+    • Identidade e contactos do responsável pelo tratamento
+    • Finalidades e base legal do tratamento (consentimento, Art. 6.º, n.º 1, alínea a)
+    • Dados recolhidos (nome, email, telefone, mensagem)
+    • Destinatários dos dados (Formspree, Inc., EUA, com cláusulas contratuais-tipo)
+    • Prazo de conservação (máximo 12 meses)
+    • Direitos do titular (acesso, retificação, apagamento, limitação, portabilidade, oposição)
+    • Direito de reclamação junto da CNPD (Comissão Nacional de Proteção de Dados)
+
+ b) Política de Cookies — yes-wedo.pt/politica-cookies.html
+    Conforme a Lei n.º 41/2004, Lei n.º 46/2012 e RGPD:
+    • Tabela detalhada dos cookies utilizados
+    • Informação sobre cookies de terceiros
+    • Instruções para gestão de cookies nos principais navegadores
+    • O website NÃO utiliza cookies de analytics, publicidade ou rastreamento
+
+ c) Termos e Condições — yes-wedo.pt/termos-condicoes.html
+    Conforme o Decreto-Lei n.º 7/2004, Lei n.º 24/96 e Lei n.º 144/2015:
+    • Identificação completa do prestador de serviços
+    • Regras de utilização e propriedade intelectual
+    • Resolução alternativa de litígios (RAL) — CICAP Porto
+    • Lei aplicável (portuguesa) e foro competente (Porto)
+
+BANNER DE COOKIES:
+ • Apresentado na primeira visita do utilizador
+ • Botão "Aceitar todos" e botão "Rejeitar" com igual destaque
+ • Link para a Política de Cookies ("Saiba mais")
+ • Preferência armazenada localmente (sem cookies adicionais)
+ • Sem pre-checked boxes nem cookie walls
+
+IDENTIFICAÇÃO LEGAL NO RODAPÉ:
+ • Yes Wedo, Lda.
+ • NIF: PT517927977
+ • Conservatória do Registo Comercial de Lisboa, n.º 517927977
+ • Capital Social: 1.000,00 EUR
+ • Links para todas as páginas legais
+ • Link para o Livro de Reclamações Eletrónico (www.livroreclamacoes.pt)
+ • Aviso de copyright: © 2026 Yes, We Do. Todos os direitos reservados.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+5. ACESSIBILIDADE
+
+O website implementa boas práticas de acessibilidade (WCAG AA), mesmo beneficiando da isenção para microempresas prevista no Decreto-Lei n.º 82/2022:
+
+ • Link "Saltar para o conteúdo" para leitores de ecrã
+ • Contornos :focus-visible em todos os elementos interativos
+ • aria-hidden="true" em ~42 ícones SVG decorativos
+ • aria-live="polite" no slider de testemunhos
+ • Texto alternativo (alt) em todas as imagens
+ • Labels associados a todos os campos de formulário
+ • Áreas de toque mínimas de 44px em dispositivos móveis
+ • Desativação automática de animações em dispositivos com "prefers-reduced-motion"
+ • Contraste de cores adequado em todo o website
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+6. SEO E PRESENÇA DIGITAL
+
+ • Meta tags Open Graph (Facebook/LinkedIn) e Twitter Cards com imagem de partilha 1200×630px
+ • Dados estruturados Schema.org (JSON-LD):
+   — LocalBusiness: nome, morada completa (Rio Tinto, Porto), coordenadas geográficas, telefones, email, área de serviço (50km), catálogo de 12 serviços
+   — FAQPage: 7 perguntas e respostas em português, direcionadas a pesquisas locais
+ • Sitemap.xml e robots.txt configurados
+ • llms.txt para compatibilidade com motores de IA (ChatGPT, Claude, Perplexity)
+ • URL canónico configurado
+ • Idioma: pt-PT nativo com localização portuguesa completa
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+7. PERFORMANCE E INFRAESTRUTURA
+
+ • Alojamento: GitHub Pages com SSL/HTTPS
+ • Domínio personalizado: yes-wedo.pt (ativo)
+ • Imagens otimizadas: Formato WebP com compressão avançada
+ • Vídeo hero comprimido: 3.5MB (original 23MB)
+ • CSS e JavaScript minificados: Redução de ~30-60% no tamanho dos ficheiros
+ • Fontes auto-hospedadas: Zero dependências de servidores externos (Google Fonts, etc.)
+ • CSS crítico inline: Primeira pintura visual quase instantânea, sem flash de conteúdo sem estilo
+ • Zero dependências externas de carregamento: Todo o conteúdo é servido localmente
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+8. DADOS DE CONTACTO CONFIGURADOS
+
+ • Morada: Av. D. João I 81, 4435-208 Rio Tinto, Porto
+ • Email: geral@yes-wedo.pt
+ • Telefones: 912 320 366 / 919 755 990
+ • WhatsApp: 919 755 990 (link direto)
+ • Instagram: @wedo_yes / @y.wedo_
+ • Facebook: Página ligada
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+9. ESTRUTURA COMPLETA DO WEBSITE
+
+ Página                    URL
+ ─────────────────────────────────────────────────────
+ Página principal          yes-wedo.pt
+ Política de Privacidade   yes-wedo.pt/politica-privacidade.html
+ Política de Cookies       yes-wedo.pt/politica-cookies.html
+ Termos e Condições        yes-wedo.pt/termos-condicoes.html
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+10. AÇÕES NECESSÁRIAS DA VOSSA PARTE
+
+Para completar a conformidade legal, é necessário que a Yes Wedo, Lda. realize as seguintes ações:
+
+ 1. [PRIORIDADE ALTA] Registar a empresa na plataforma www.livroreclamacoes.pt com o NIF PT517927977. Este registo é obrigatório para prestadores de serviços com contacto com o público.
+
+ 2. [PERIÓDICA] Verificar periodicamente se a legislação sofreu alterações e informar-nos caso seja necessário atualizar as páginas legais.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+O website está completo, funcional, otimizado e em conformidade com a legislação portuguesa e europeia. Caso pretendam alguma alteração ou tenham questões, não hesitem em contactar-nos.
+
+Em anexo: Relatório de Conformidade Legal (documento detalhado).
+
+Com os melhores cumprimentos,
+Ryan Alves
