@@ -4,7 +4,10 @@
         "Reclames Luminosos",
         "Letras Recortadas",
         "Stands & Eventos",
-        "Sinaléticas"
+        "Sinaléticas",
+        "Lonas & Impressão",
+        "Decoração de Viaturas",
+        "Decoração de Montras"
     ],
     "projects": [
         {
@@ -69,6 +72,204 @@
             "title": "Homy Casa",
             "description": "Sinalética exterior de armazém — Receção clientes",
             "date": "2025-07-01"
+        },
+        {
+            "id": 8,
+            "image": "img/portfolio/spmec-backdrop.webp",
+            "alt": "SPMEC — Medicina Estética — Backdrop fotográfico para o 8.º Congresso Nacional",
+            "category": "Stands & Eventos",
+            "title": "SPMEC — Medicina Estética",
+            "description": "Backdrop fotográfico para o 8.º Congresso Nacional de Medicina Estética",
+            "date": "2025-08-01"
+        },
+        {
+            "id": 9,
+            "image": "img/portfolio/spmec-bandeiras.webp",
+            "alt": "SPMEC — Bandeiras — Bandeiras fly banner para o Congresso de Medicina ",
+            "category": "Stands & Eventos",
+            "title": "SPMEC — Bandeiras",
+            "description": "Bandeiras fly banner para o Congresso de Medicina Estética",
+            "date": "2025-08-02"
+        },
+        {
+            "id": 10,
+            "image": "img/portfolio/spmec-lona-grande.webp",
+            "alt": "SPMEC — Lona Grande Formato — Lona de grande formato para o Congresso de Medicin",
+            "category": "Lonas & Impressão",
+            "title": "SPMEC — Lona Grande Formato",
+            "description": "Lona de grande formato para o Congresso de Medicina Estética",
+            "date": "2025-08-03"
+        },
+        {
+            "id": 11,
+            "image": "img/portfolio/spmec-photobooth.webp",
+            "alt": "SPMEC — Photobooth 10 Anos — Estrutura espelhada com esferas para photobooth — ",
+            "category": "Stands & Eventos",
+            "title": "SPMEC — Photobooth 10 Anos",
+            "description": "Estrutura espelhada com esferas para photobooth — 10 Anos SPMEC",
+            "date": "2025-08-04"
+        },
+        {
+            "id": 12,
+            "image": "img/portfolio/spmec-backdrop-azul.webp",
+            "alt": "SPMEC — Backdrop Azul — Backdrop press wall para o Congresso Nacional de M",
+            "category": "Stands & Eventos",
+            "title": "SPMEC — Backdrop Azul",
+            "description": "Backdrop press wall para o Congresso Nacional de Medicina Estética",
+            "date": "2025-08-05"
+        },
+        {
+            "id": 13,
+            "image": "img/portfolio/spmec-stand-institucional.webp",
+            "alt": "SPMEC — Stand Institucional — Stand com impressão em tecido para a Sociedade Por",
+            "category": "Stands & Eventos",
+            "title": "SPMEC — Stand Institucional",
+            "description": "Stand com impressão em tecido para a Sociedade Portuguesa de Medicina Estética",
+            "date": "2025-08-06"
+        },
+        {
+            "id": 14,
+            "image": "img/portfolio/renault-decoracao-viatura.webp",
+            "alt": "Renault — Decoração de viatura com vinil — Renault Elf racin",
+            "category": "Decoração de Viaturas",
+            "title": "Renault",
+            "description": "Decoração de viatura com vinil — Renault Elf racing",
+            "date": "2025-09-01"
+        },
+        {
+            "id": 15,
+            "image": "img/portfolio/homy-casa-reclame.webp",
+            "alt": "Homy Casa — Reclame — Reclame exterior com letras recortadas — Armazém H",
+            "category": "Reclames Luminosos",
+            "title": "Homy Casa — Reclame",
+            "description": "Reclame exterior com letras recortadas — Armazém Homy Casa",
+            "date": "2025-09-15"
+        },
+        {
+            "id": 16,
+            "image": "img/portfolio/lusiadas-braga-lona.webp",
+            "alt": "Lusíadas Hospital Braga — Lona de grande formato — Lusíadas Hospital Braga",
+            "category": "Lonas & Impressão",
+            "title": "Lusíadas Hospital Braga",
+            "description": "Lona de grande formato — Lusíadas Hospital Braga",
+            "date": "2025-10-01"
+        },
+        {
+            "id": 17,
+            "image": "img/portfolio/cs-pet-care-montra.webp",
+            "alt": "C's Pet Care — Decoração de montra e sinalética — C's Pet Care",
+            "category": "Decoração de Montras",
+            "title": "C's Pet Care",
+            "description": "Decoração de montra e sinalética — C's Pet Care",
+            "date": "2025-10-10"
+        },
+        {
+            "id": 18,
+            "image": "img/portfolio/weego-evento.webp",
+            "alt": "Weego — Bandeiras e sinalética para evento Weego — Feira d",
+            "category": "Stands & Eventos",
+            "title": "Weego",
+            "description": "Bandeiras e sinalética para evento Weego — Feira de animais",
+            "date": "2025-10-20"
+        },
+        {
+            "id": 19,
+            "image": "img/portfolio/lusiadas-porto-contentor.webp",
+            "alt": "Lusíadas Hospital Porto — Decoração de contentor — Serviço Médico Lusíadas H",
+            "category": "Lonas & Impressão",
+            "title": "Lusíadas Hospital Porto",
+            "description": "Decoração de contentor — Serviço Médico Lusíadas Hospital Porto",
+            "date": "2025-11-01"
+        },
+        {
+            "id": 20,
+            "image": "img/portfolio/spmec-balcao-recepcao.webp",
+            "alt": "SPMEC — Receção — Balcão de receção com impressão em vinil — Congres",
+            "category": "Stands & Eventos",
+            "title": "SPMEC — Receção",
+            "description": "Balcão de receção com impressão em vinil — Congresso de Medicina Estética",
+            "date": "2025-08-07"
+        },
+        {
+            "id": 21,
+            "image": "img/portfolio/spmec-press-wall.webp",
+            "alt": "SPMEC — Press Wall — Press wall iluminado com impressão em tecido — Con",
+            "category": "Stands & Eventos",
+            "title": "SPMEC — Press Wall",
+            "description": "Press wall iluminado com impressão em tecido — Congresso de Medicina Estética",
+            "date": "2025-08-08"
+        },
+        {
+            "id": 22,
+            "image": "img/portfolio/steve-madden-exposicao.webp",
+            "alt": "Steve Madden — Exposição — Exposição com sapatilha gigante e passadeira rosa ",
+            "category": "Stands & Eventos",
+            "title": "Steve Madden — Exposição",
+            "description": "Exposição com sapatilha gigante e passadeira rosa — Centro comercial",
+            "date": "2025-11-15"
+        },
+        {
+            "id": 23,
+            "image": "img/portfolio/liu-jo-evento.webp",
+            "alt": "Liu Jo — Evento — Backdrop floral e photobooth para evento Liu Jo St",
+            "category": "Stands & Eventos",
+            "title": "Liu Jo — Evento",
+            "description": "Backdrop floral e photobooth para evento Liu Jo Store",
+            "date": "2025-12-01"
+        },
+        {
+            "id": 24,
+            "image": "img/portfolio/liu-jo-stand-exterior.webp",
+            "alt": "Liu Jo — Stand Exterior — Stand promocional exterior para Liu Jo Milano — Po",
+            "category": "Stands & Eventos",
+            "title": "Liu Jo — Stand Exterior",
+            "description": "Stand promocional exterior para Liu Jo Milano — Porto",
+            "date": "2025-12-02"
+        },
+        {
+            "id": 25,
+            "image": "img/portfolio/liu-jo-stand-porto.webp",
+            "alt": "Liu Jo — Stand Porto — Stand promocional com vista para Torre dos Clérigo",
+            "category": "Stands & Eventos",
+            "title": "Liu Jo — Stand Porto",
+            "description": "Stand promocional com vista para Torre dos Clérigos — Liu Jo Porto",
+            "date": "2025-12-03"
+        },
+        {
+            "id": 26,
+            "image": "img/portfolio/lusiadas-letras-recortadas.webp",
+            "alt": "Lusíadas — Letras Recortadas — Letras recortadas 3D em PVC — Interior clínica Lus",
+            "category": "Letras Recortadas",
+            "title": "Lusíadas — Letras Recortadas",
+            "description": "Letras recortadas 3D em PVC — Interior clínica Lusíadas",
+            "date": "2025-12-10"
+        },
+        {
+            "id": 27,
+            "image": "img/portfolio/vogue-fashion-night-entrada.webp",
+            "alt": "Vogue — Fashion Night In — Pórtico iluminado com passadeira — Galleria Vogue ",
+            "category": "Stands & Eventos",
+            "title": "Vogue — Fashion Night In",
+            "description": "Pórtico iluminado com passadeira — Galleria Vogue Fashion Night In NorteShopping",
+            "date": "2026-01-10"
+        },
+        {
+            "id": 28,
+            "image": "img/portfolio/vogue-photobooth.webp",
+            "alt": "Vogue — Photobooth — Estrutura cúbica com impressão Vogue Portugal — No",
+            "category": "Stands & Eventos",
+            "title": "Vogue — Photobooth",
+            "description": "Estrutura cúbica com impressão Vogue Portugal — NorteShopping",
+            "date": "2026-01-11"
+        },
+        {
+            "id": 29,
+            "image": "img/portfolio/vogue-fashion-night-portico.webp",
+            "alt": "Vogue — Fashion Night — Pórtico iluminado Galleria Vogue — NorteShopping F",
+            "category": "Stands & Eventos",
+            "title": "Vogue — Fashion Night",
+            "description": "Pórtico iluminado Galleria Vogue — NorteShopping Fashion Night In",
+            "date": "2026-01-12"
         }
     ]
 }
