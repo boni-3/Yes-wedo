@@ -8,22 +8,33 @@
 
 ## 1. Visao Geral
 
-O website da Yes, We Do e uma pagina unica (chamada "landing page") profissional que apresenta a empresa, os seus servicos, o portfolio de trabalhos e as formas de contacto.
+O website da Yes, We Do e composto por duas paginas profissionais que apresentam a empresa, os seus servicos, o portfolio de trabalhos e as formas de contacto.
 
 **Endereco do site:** yes-wedo.pt
 
-### O que o site tem (seccoes de cima para baixo):
+### Paginas do site:
 
+**Pagina principal (yes-wedo.pt)**
 - **Inicio com video** — Uma entrada com impacto visual, com um video de fundo que mostra o espirito da empresa.
 - **Ticker de servicos** — Uma faixa animada que mostra os servicos de forma continua.
 - **12 Servicos** — Cada servico tem a sua descricao e icone proprio.
-- **Portfolio** — Galeria com exemplos de trabalhos realizados.
+- **Portfolio** — Galeria horizontal com exemplos de trabalhos realizados, com link para ver todos.
 - **Sobre Nos** — Informacao sobre a empresa, quem sao e o que fazem.
 - **Processo** — Explicacao de como funciona trabalhar com a Yes, We Do, passo a passo.
 - **Testemunhos** — Opinioes de clientes satisfeitos.
 - **Chamada a Acao** — Uma seccao que convida o visitante a entrar em contacto.
-- **Contacto** — Formulario e dados para o visitante falar convosco.
-- **Rodape** — Informacoes finais, links e redes sociais.
+- **Contacto** — Formulario funcional que envia mensagens diretamente para o email da empresa.
+- **Rodape** — Informacoes legais, links e redes sociais.
+
+**Pagina de portfolio (yes-wedo.pt/portfolio.html)**
+- Galeria completa de todos os trabalhos realizados.
+- Filtros por categoria (reclames luminosos, stands, sinaleticas, etc.).
+- Visualizador de imagens em ecra inteiro (lightbox) com navegacao por setas, teclado e toque.
+
+**Paginas legais:**
+- Politica de Privacidade (yes-wedo.pt/politica-privacidade.html)
+- Politica de Cookies (yes-wedo.pt/politica-cookies.html)
+- Termos e Condicoes (yes-wedo.pt/termos-condicoes.html)
 
 **O site funciona em todos os dispositivos:** computadores, tablets e telemoveis. Adapta-se automaticamente ao tamanho do ecra.
 
@@ -97,27 +108,53 @@ Quando alguem partilhar o link do site no **WhatsApp**, **Facebook**, **LinkedIn
 
 ---
 
-## 4. Informacoes de Contacto no Site
+## 4. Formulario de Contacto
+
+O formulario de contacto do site **esta totalmente funcional**. Quando um visitante preenche o formulario e carrega em "Enviar Mensagem":
+
+1. O botao muda para "A enviar..." enquanto a mensagem e processada.
+2. A mensagem e enviada automaticamente para o email da empresa.
+3. O visitante ve uma confirmacao de que a mensagem foi enviada com sucesso.
+4. Se houver algum erro (por exemplo, falha de internet), o visitante e informado e pode tentar novamente.
+
+As mensagens sao entregues atraves de um servico chamado **Formspree**, que reencaminha o conteudo do formulario diretamente para o email configurado.
+
+---
+
+## 5. Botao de WhatsApp
+
+O site tem um **botao flutuante de WhatsApp** no canto inferior direito de todas as paginas. Quando o visitante carrega nele, aparece uma janela com duas opcoes de contacto:
+
+- **Hugo** — +351 912 320 366
+- **Miguel** — +351 919 755 990
+
+Ao clicar num dos contactos, abre automaticamente o WhatsApp (no telemovel ou no computador) com uma mensagem pre-escrita: *"Ola, gostaria de saber mais sobre os vossos servicos."*
+
+Isto facilita o contacto rapido e direto com os socios da empresa.
+
+---
+
+## 6. Informacoes de Contacto no Site
 
 Estes sao os dados de contacto que estao visiveis no site:
 
 - **Morada:** Av. D. Joao I 81, 4435-208 Rio Tinto
 - **Email:** geral@yes-wedo.pt
-- **Telefone 1:** 912 320 366
-- **Telefone 2:** 919 755 990
-- **WhatsApp:** 919 755 990
+- **Telefone 1 (Hugo):** 912 320 366
+- **Telefone 2 (Miguel):** 919 755 990
+- **WhatsApp:** Ambos os numeros (botao flutuante no site)
 - **Instagram:** @wedo_yes e @y.wedo_
 
 Se algum destes dados mudar, basta informar o programador para atualizar.
 
 ---
 
-## 5. O Que Pode Pedir Para Alterar
+## 7. O Que Pode Pedir Para Alterar
 
 O site foi construido para poder ser atualizado. A qualquer momento, pode pedir ao programador para alterar:
 
 - **Textos e descricoes dos servicos** — Se quiser mudar a forma como um servico e descrito, ou adicionar informacao extra.
-- **Imagens do portfolio** — Quando tiver novos trabalhos realizados, pode adiciona-los a galeria do site.
+- **Imagens do portfolio** — Quando tiver novos trabalhos realizados, pode adiciona-los a galeria do site. Existe um sistema automatizado para isto.
 - **Testemunhos de clientes** — Se tiver novos clientes satisfeitos, pode adicionar as suas opinioes ao site.
 - **Informacoes de contacto** — Se mudar de morada, email ou numero de telefone.
 - **Precos ou promocoes** — Se quiser divulgar uma campanha ou promocao especial.
@@ -125,7 +162,7 @@ O site foi construido para poder ser atualizado. A qualquer momento, pode pedir 
 
 ---
 
-## 6. O Que Falta Para o Maximo Desempenho
+## 8. O Que Falta Para o Maximo Desempenho
 
 O site esta pronto e funcional. No entanto, ha algumas coisas adicionais que, quando forem feitas, vao ajudar ainda mais o negocio. Aqui ficam explicadas de forma simples:
 
@@ -147,40 +184,44 @@ O site esta pronto e funcional. No entanto, ha algumas coisas adicionais que, qu
 
 **O que e:** Uma ferramenta gratuita que mostra quantas pessoas visitam o site, de que pais ou cidade vem, quanto tempo ficam, quais as paginas mais vistas, e muito mais. E como ter um "contador de visitas" muito detalhado.
 
-**Quem faz:** O programador pode instalar e configurar.
+**Quem faz:** O cliente cria a conta em [analytics.google.com](https://analytics.google.com) e fornece o codigo de medicao (Measurement ID) ao programador, que o instala no site.
 
-### Formulario de contacto real
+### Meta Pixel (Facebook/Instagram)
 
-**O que e:** O formulario de contacto que esta no site neste momento e visual — ou seja, esta la para o visitante ver, mas ainda nao envia mensagens reais para o email da empresa. Para que as mensagens cheguem ao email geral@yes-wedo.pt, e preciso ligar o formulario a um servico de email.
+**O que e:** Uma ferramenta do Meta (Facebook/Instagram) que permite acompanhar quantas pessoas visitam o site a partir das redes sociais, e permite criar campanhas de publicidade direcionadas a essas pessoas.
 
-**Quem faz:** O programador trata disto. E um passo rapido.
-
-### Compressao no servidor (gzip)
-
-**O que e:** Quando o site for colocado online no servidor de alojamento, deve ser ativada uma funcionalidade chamada "compressao gzip". Isto faz com que os ficheiros do site sejam enviados de forma mais compacta para o visitante, tornando o carregamento ainda mais rapido.
-
-**Quem faz:** O programador ou a empresa de alojamento (hosting) trata disto quando o site for colocado online.
-
-### Certificado SSL (HTTPS)
-
-**O que e:** O certificado SSL e o que faz aparecer o **cadeado verde** na barra de endereco do navegador (browser). Isto garante que a ligacao entre o visitante e o site e segura. Sem isto, o browser pode mostrar um aviso de "site nao seguro", o que afasta visitantes.
-
-**Quem faz:** A maioria das empresas de alojamento (hosting) oferece o certificado SSL gratuitamente. O programador ativa isto quando o site for colocado no ar.
+**Quem faz:** O cliente cria o Pixel em [business.facebook.com](https://business.facebook.com) e fornece o Pixel ID ao programador, que o instala no site.
 
 ---
 
-## 7. Ficheiros Importantes
+## 9. Conformidade Legal
+
+O website esta em conformidade com a legislacao portuguesa e europeia. Foram criadas as seguintes paginas legais:
+
+- **Politica de Privacidade** — Conforme o RGPD (Regulamento Geral sobre a Protecao de Dados).
+- **Politica de Cookies** — Conforme a Lei n.o 41/2004 e Lei n.o 46/2012.
+- **Termos e Condicoes** — Conforme o Decreto-Lei n.o 7/2004 e Lei n.o 144/2015.
+
+O rodape do site inclui todas as informacoes legais obrigatorias: NIF, registo comercial, capital social, morada e contactos.
+
+Para mais detalhes, consulte o documento **compliance-report.md**.
+
+---
+
+## 10. Ficheiros Importantes
 
 Aqui ficam listados os ficheiros mais importantes do site, explicados de forma simples:
 
-- **`index.html`** — Este e o ficheiro principal. E a pagina do site em si, com todo o conteudo, textos e estrutura.
-- **`img/`** — Esta e a pasta que contem todas as imagens e o video do site. As fotografias do portfolio, os icones dos servicos e o video de fundo estao aqui.
-- **`og-image.jpg`** — Esta e a imagem que aparece automaticamente quando alguem partilha o link do site nas redes sociais (WhatsApp, Facebook, LinkedIn, Twitter).
-- **`llms.txt`** — Este e um ficheiro especial que ajuda as inteligencias artificiais (ChatGPT, Google AI, etc.) a entender o que a Yes, We Do faz. E invisivel para os visitantes, mas muito util para o negocio aparecer nas respostas das IAs.
+- **`index.html`** — A pagina principal do site, com todo o conteudo, textos e estrutura.
+- **`portfolio.html`** — A pagina de galeria com todos os trabalhos, filtros por categoria e visualizador de imagens.
+- **`img/`** — A pasta que contem todas as imagens e o video do site.
+- **`data/portfolio-data.json`** — Ficheiro com todos os projetos do portfolio (usado pela pagina de galeria).
+- **`og-image.jpg`** — A imagem que aparece quando alguem partilha o link do site nas redes sociais.
+- **`llms.txt`** — Ficheiro especial para inteligencias artificiais entenderem o negocio.
 
 ---
 
-## 8. Manutencao
+## 11. Manutencao
 
 Para manter o site atualizado e a funcionar bem, tenha em conta o seguinte:
 

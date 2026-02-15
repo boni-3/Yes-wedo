@@ -13,8 +13,11 @@ Language: **Portuguese (Portugal) (pt-PT)**.
 
 ```
 Yes-wedo/
-├── index.html                  # Single-page HTML (all sections)
-├── portfolio.html              # Portfolio gallery page (filterable grid + lightbox)
+├── index.html                  # Landing page (all sections)
+├── portfolio.html              # Portfolio gallery (filterable grid + lightbox)
+├── politica-privacidade.html   # Privacy policy (GDPR)
+├── politica-cookies.html       # Cookie policy
+├── termos-condicoes.html       # Terms and conditions
 ├── data/
 │   └── portfolio-data.json     # All portfolio projects (JSON, read by JS)
 ├── css/
@@ -45,12 +48,17 @@ Yes-wedo/
 │   └── FavIcon.png             # Original favicon source
 ├── add-portfolio.sh            # Automation: add new projects (WebP + JSON + minify + deploy)
 ├── robots.txt                  # Allows GPTBot, ClaudeBot, PerplexityBot, Google-Extended
-├── sitemap.xml
+├── sitemap.xml                 # Index + portfolio pages
 ├── site.webmanifest
 ├── llms.txt                    # AI-readable site summary
-├── CNAME                       # GitHub Pages custom domain
+├── CNAME                       # GitHub Pages custom domain (yes-wedo.pt)
 ├── favicon.ico
-└── CLAUDE.md                   # This file
+├── PRD.md                      # Product Requirements Document
+├── CLAUDE.md                   # This file
+└── docs/
+    ├── DEVELOPER.md            # Developer documentation
+    ├── DOCUMENTACAO-CLIENTE.md  # Client-facing documentation (Portuguese)
+    └── compliance-report.md    # Legal compliance report
 ```
 
 ---
@@ -228,11 +236,12 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 
 | File | Size |
 |---|---|
-| `index.html` | ~74KB |
-| `css/style.css` | ~37KB |
-| `css/style.min.css` | ~26KB |
-| `js/main.js` | ~18KB |
-| `js/main.min.js` | ~7KB |
+| `index.html` | ~77KB |
+| `portfolio.html` | ~17KB |
+| `css/style.css` | ~51KB |
+| `css/style.min.css` | ~36KB |
+| `js/main.js` | ~28KB |
+| `js/main.min.js` | ~12KB |
 | `js/vendor/gsap.min.js` | ~72KB |
 | `js/vendor/ScrollTrigger.min.js` | ~43KB |
 | `js/vendor/ScrollToPlugin.min.js` | ~4KB |
