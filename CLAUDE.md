@@ -38,7 +38,7 @@ Yes-wedo/
 │   │   └── new/                # Drop new images here for add-portfolio.sh
 │   ├── favicons/               # 5 sizes (16, 32, 180, 192, 512)
 │   ├── logo-horizontal-new.webp
-│   ├── Socios .webp            # NOTE: space before the dot in filename
+│   ├── socios.webp             # Team photo
 │   ├── hero-video-light.mp4    # 3.5MB hero background video
 │   ├── hero-poster.jpg         # Fallback poster for hero video
 │   ├── og-image.jpg            # 1200x630 Open Graph image
@@ -182,6 +182,7 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 | **Magnetic buttons** | Buttons subtly follow cursor on hover (desktop, `pointer: fine` only) |
 | **Text scramble** | Randomized character effect on nav link hover |
 | **Contact form** | Client-side validation + Formspree submission (`POST https://formspree.io/f/mzdaewqk`), success/error UI states |
+| **WhatsApp button** | Floating button (bottom-right) with popup showing two contact numbers. Click outside or `×` to close. Present on both `index.html` and `portfolio.html` |
 
 ---
 
@@ -213,7 +214,7 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 
 ## Gotchas and Known Issues
 
-1. **Filename with space**: `img/Socios .webp` and `img/Socios .png` have a space before the file extension. When referencing in HTML or CSS, the space must be preserved (or URL-encoded as `%20`).
+1. ~~**Filename with space**~~: Resolved. `Socios .webp` renamed to `socios.webp` (and `.png` variant).
 2. **No build pipeline**: There is no webpack, Vite, or any bundler. Minification is done manually via CLI commands (see Critical Workflow Rules above).
 3. **GSAP polling**: `main.js` uses `setInterval` to poll for `window.gsap` before initializing. If GSAP fails to load, the site will render but without scroll animations.
 4. **Portfolio PNGs still present**: The `img/portfolio/` directory contains both the original PNG/JPG files and the optimized WebP files. Only the WebP files are referenced in HTML. Do not delete the originals without checking if they are needed elsewhere.

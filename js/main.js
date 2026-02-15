@@ -714,9 +714,38 @@
         }
     }
 
+    // ===== WHATSAPP FLOATING BUTTON (outside GSAP init) =====
+    function initWhatsApp() {
+        var toggle = document.getElementById('whatsappToggle');
+        var popup = document.getElementById('whatsappPopup');
+        var close = document.getElementById('whatsappClose');
+        if (!toggle || !popup) return;
+
+        toggle.addEventListener('click', function () {
+            popup.classList.toggle('active');
+        });
+
+        if (close) {
+            close.addEventListener('click', function () {
+                popup.classList.remove('active');
+            });
+        }
+
+        document.addEventListener('click', function (e) {
+            var float = document.getElementById('whatsappFloat');
+            if (float && !float.contains(e.target)) {
+                popup.classList.remove('active');
+            }
+        });
+    }
+
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initCookieBanner);
+        document.addEventListener('DOMContentLoaded', function () {
+            initCookieBanner();
+            initWhatsApp();
+        });
     } else {
         initCookieBanner();
+        initWhatsApp();
     }
 })();

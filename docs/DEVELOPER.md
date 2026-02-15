@@ -44,7 +44,7 @@ Yes-wedo/
 │   ├── hero-video-light.mp4          # Hero background video (3.5MB, 720p)
 │   ├── hero-poster.jpg               # Video poster for instant LCP (122KB)
 │   ├── og-image.jpg                  # Open Graph image (1200x630)
-│   ├── Socios .webp                  # Team photo (note: space in filename)
+│   ├── socios.webp                   # Team photo
 │   └── logo-*.png / *.webp           # Various logo versions
 ├── robots.txt                        # Crawl rules (allows all major bots)
 ├── sitemap.xml                       # Sitemap for search engines
@@ -304,8 +304,8 @@ Add or modify service links in the `.footer-links` section inside `<footer>`.
 
 | Issue | Details |
 |---|---|
-| **"Socios .webp" filename** | Has a space before the dot (`Socios .webp`). This is a legacy filename. It works, but be careful with any tooling that might choke on spaces in filenames. |
-| **Contact form is simulated** | The form has no backend. It calls `preventDefault`, shows "A enviar..." for 1.5s, then "Mensagem enviada!", and resets. You need to integrate an actual backend (e.g., Formspree, Netlify Forms, or a custom endpoint) for production. |
+| **socios.webp filename** | Renamed from `Socios .webp` (which had a space). Now uses lowercase without spaces. |
+| **Contact form (Formspree)** | The form submits via `fetch` POST to Formspree (`https://formspree.io/f/mzdaewqk`). Shows "A enviar..." while processing, resets on success, displays error with auto-recovery on failure. |
 | **Portfolio section height** | On desktop, the portfolio section height is set dynamically by JS (`window.innerHeight + scrollDistance`). If you add/remove portfolio items, the height recalculates on next page load. |
 | **Testimonials height** | The slider container `minHeight` is measured dynamically by JS to prevent layout shift when switching between testimonials of different lengths. |
 | **Critical CSS sync** | The inline `<style>` block in `index.html` (line 47) is a manual copy of key styles from `style.css`. If you change nav, hero, cursor, or base reset styles, you must **manually update** the inline block to match. There is no automated sync. |
