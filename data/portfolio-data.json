@@ -270,6 +270,15 @@
             "title": "Vogue — Fashion Night",
             "description": "Pórtico iluminado Galleria Vogue — NorteShopping Fashion Night In",
             "date": "2026-01-12"
+        },
+        {
+            "id": 30,
+            "image": "img/portfolio/lusiadas-pacos-ferreira.webp",
+            "alt": "Lusíadas Paços Ferreira — Lona impressa de grande formato — Estádio futebol",
+            "category": "Lonas & Impressão",
+            "title": "Lusíadas Paços Ferreira",
+            "description": "Lona impressa de grande formato — Estádio futebol",
+            "date": "2026-02-16"
         }
     ]
 }
