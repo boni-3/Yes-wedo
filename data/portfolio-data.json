@@ -297,6 +297,15 @@
             "title": "Lusíadas — Sinalética Interior",
             "description": "Sinalética informativa para elevador.",
             "date": "2026-02-16"
+        },
+        {
+            "id": 33,
+            "image": "img/portfolio/ruiz-costa.webp",
+            "alt": "Ruiz Costa — Lona impressa de grande formato — Fachada",
+            "category": "Lonas & Impressão",
+            "title": "Ruiz Costa",
+            "description": "Lona impressa de grande formato — Fachada",
+            "date": "2026-02-16"
         }
     ]
 }
