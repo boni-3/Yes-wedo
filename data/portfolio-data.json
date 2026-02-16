@@ -342,6 +342,15 @@
             "title": "Lusíadas Hospital Braga",
             "description": "Sinalética interior informativa de piso e parque.",
             "date": "2026-02-16"
+        },
+        {
+            "id": 38,
+            "image": "img/portfolio/espinho-auto.webp",
+            "alt": "Espinho Auto — Reclame luminoso com letras LED — Fachada",
+            "category": "Reclames Luminosos",
+            "title": "Espinho Auto",
+            "description": "Reclame luminoso com letras LED — Fachada",
+            "date": "2026-02-16"
         }
     ]
 }
