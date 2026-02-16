@@ -288,6 +288,15 @@
             "title": "Lusíadas Hospital Maia",
             "description": "Reclame luminoso com letras e símbolo — Fachada",
             "date": "2026-02-16"
+        },
+        {
+            "id": 32,
+            "image": "img/portfolio/lusiadas-sinaletica-interior.webp",
+            "alt": "Lusíadas — Sinalética Interior — Sinalética informativa para elevador.",
+            "category": "Sinaléticas",
+            "title": "Lusíadas — Sinalética Interior",
+            "description": "Sinalética informativa para elevador.",
+            "date": "2026-02-16"
         }
     ]
 }
