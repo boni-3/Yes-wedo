@@ -696,6 +696,22 @@
             });
         });
 
+        // ===== HASH SCROLL ON PAGE LOAD =====
+        // When arriving from another page (e.g. /portfolio → /#contacto),
+        // scroll to the target after GSAP has initialized
+        if (window.location.hash) {
+            var hashTarget = document.querySelector(window.location.hash);
+            if (hashTarget) {
+                setTimeout(function () {
+                    gsap.to(window, {
+                        duration: 1,
+                        scrollTo: { y: hashTarget, offsetY: 80 },
+                        ease: 'power3.inOut'
+                    });
+                }, 600);
+            }
+        }
+
     }
 
     // Start when DOM is ready
