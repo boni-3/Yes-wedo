@@ -14,7 +14,9 @@ Language: **Portuguese (Portugal) (pt-PT)**.
 ```
 Yes-wedo/
 ├── index.html                  # Landing page (all sections)
-├── portfolio.html              # Portfolio gallery (filterable grid + lightbox)
+├── portfolio/
+│   └── index.html              # Portfolio gallery (filterable grid + lightbox) → /portfolio
+├── portfolio/index.html              # Redirect → /portfolio (SEO preservation)
 ├── politica-privacidade.html   # Privacy policy (GDPR)
 ├── politica-cookies.html       # Cookie policy
 ├── termos-condicoes.html       # Terms and conditions
@@ -46,6 +48,8 @@ Yes-wedo/
 │   ├── hero-poster.jpg         # Fallback poster for hero video
 │   ├── og-image.jpg            # 1200x630 Open Graph image
 │   └── FavIcon.png             # Original favicon source
+├── telegram-bot/
+│   └── bot.py                  # Telegram bot: auto-add portfolio via photo (AI-powered)
 ├── add-portfolio.sh            # Automation: add new projects (WebP + JSON + minify + deploy)
 ├── robots.txt                  # Allows GPTBot, ClaudeBot, PerplexityBot, Google-Extended
 ├── sitemap.xml                 # Index + portfolio pages
@@ -97,7 +101,7 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 1. **Hero** — fullscreen video background with logo, headline, tagline, CTA button, scroll indicator
 2. **Marquee** — infinite horizontal scrolling text strip
 3. **Services** — 12 service cards in a grid
-4. **Portfolio** — horizontal-scrolling project showcase (GSAP on desktop, native scroll-snap on mobile) + "Ver todos os trabalhos" link to portfolio.html
+4. **Portfolio** — horizontal-scrolling project showcase (GSAP on desktop, native scroll-snap on mobile) + "Ver todos os trabalhos" link to portfolio/index.html
 5. **About** — agency description with animated counters (stats section)
 6. **Process** — step-by-step workflow cards
 7. **Testimonials** — auto-rotating slider with dot navigation
@@ -105,7 +109,7 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 9. **Contact** — form with name, email, phone, message fields
 10. **Footer** — logo, navigation links, social links, legal text
 
-### portfolio.html — Dedicated gallery page
+### portfolio/index.html — Dedicated gallery page
 - **Compact hero** — title only, no video
 - **Sticky filter bar** — category pill buttons (rendered from JSON)
 - **Responsive grid** — 3 cols desktop, 2 cols tablet, 1 col mobile
@@ -190,7 +194,7 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 | **Magnetic buttons** | Buttons subtly follow cursor on hover (desktop, `pointer: fine` only) |
 | **Text scramble** | Randomized character effect on nav link hover |
 | **Contact form** | Client-side validation + Formspree submission (`POST https://formspree.io/f/mzdaewqk`), success/error UI states |
-| **WhatsApp button** | Floating button (bottom-right) with popup showing two contact numbers. Click outside or `×` to close. Present on both `index.html` and `portfolio.html` |
+| **WhatsApp button** | Floating button (bottom-right) with popup showing two contact numbers. Click outside or `×` to close. Present on both `index.html` and `portfolio/index.html` |
 
 ---
 
@@ -229,6 +233,9 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 5. **hero-video.mp4 (23MB)**: A large original hero video exists alongside the optimized `hero-video-light.mp4` (3.5MB). Only the light version is referenced in HTML.
 6. **Critical CSS duplication**: Some nav and hero styles appear both inline in `index.html` `<style>` and in `style.css`. Changes must be synchronized manually.
 7. **GitHub Pages hosting**: The `CNAME` file indicates deployment via GitHub Pages with the custom domain `yes-wedo.pt`.
+8. **Telegram bot runs locally**: The bot requires the Mac to be running (uses local GPU for Real-ESRGAN upscale). If the Mac sleeps or restarts, the bot stops — restart manually.
+9. **Gemini free tier limits**: Google Gemini free tier allows 15 requests/minute, 1500/day. More than enough for portfolio use. If rate-limited, send with manual caption as fallback.
+10. **Duplicate slugs**: The bot auto-appends a number suffix (`-2`, `-3`, etc.) if a project with the same slug already exists.
 
 ---
 
@@ -237,7 +244,7 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 | File | Size |
 |---|---|
 | `index.html` | ~77KB |
-| `portfolio.html` | ~17KB |
+| `portfolio/index.html` | ~17KB |
 | `css/style.css` | ~51KB |
 | `css/style.min.css` | ~36KB |
 | `js/main.js` | ~28KB |
@@ -250,6 +257,39 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 ---
 
 ## Adding New Portfolio Projects
+
+### Method 1: Telegram Bot (Recommended)
+
+Send a photo to **@Yeswedoworksbot** on Telegram — the AI handles everything automatically.
+
+The bot:
+1. Receives the photo (as image or file)
+2. Analyzes with **Gemini AI** to detect category, title, and description
+3. Enhances with **Real-ESRGAN** (upscayl-bin, local, free) — 4x upscale
+4. Resizes to 1536x1024 and converts to optimized **WebP** (~100-200KB)
+5. Updates `data/portfolio-data.json` with the new project entry
+6. Commits and pushes to GitHub Pages — live in ~35 seconds
+
+**Optional:** Add a caption in format `Categoria | Título | Descrição` to override AI detection.
+
+To start the bot:
+```bash
+cd telegram-bot
+TELEGRAM_BOT_TOKEN="<token>" GEMINI_API_KEY="<key>" python3 bot.py
+```
+
+Or run in background:
+```bash
+cd telegram-bot
+TELEGRAM_BOT_TOKEN="<token>" GEMINI_API_KEY="<key>" nohup python3 bot.py > /tmp/portfolio-bot.log 2>&1 &
+```
+
+Bot commands:
+- `/start` — Instructions and AI status
+- `/status` — Portfolio stats by category
+- `/id` — Show Telegram user ID
+
+### Method 2: Shell Script (Manual)
 
 Use the automation script to add new projects:
 
@@ -270,6 +310,105 @@ Requires: `brew install webp jq`
 
 ---
 
+## Telegram Portfolio Bot (`telegram-bot/bot.py`)
+
+### Overview
+
+A Telegram bot that automates the entire portfolio upload workflow. Send a photo from your phone — it appears on yes-wedo.pt in ~35 seconds. No typing required.
+
+### Architecture
+
+```
+📱 Telegram              🖥️ Mac (local)                    🌐 GitHub Pages
+    │                         │                                 │
+    │  Send photo             │                                 │
+    │ ────────────────►  1. Download image                      │
+    │                    2. Gemini AI → detect category/title   │
+    │                    3. Resize 1536x1024 (ImageMagick)      │
+    │                    4. Upscale 4x (Real-ESRGAN, local)     │
+    │                    5. Resize back to 1536x1024            │
+    │                    6. Convert to WebP (cwebp)             │
+    │                    7. Update portfolio-data.json           │
+    │                    8. git commit + push ──────────────►   │
+    │                         │                            Auto-deploy
+    │  ◄── "Added! ✅"       │                                 │
+```
+
+### Stack
+
+| Component | Tool | Cost |
+|---|---|---|
+| Bot framework | `python-telegram-bot` v22+ | Free |
+| Image analysis | Google Gemini 2.0 Flash API | Free (free tier) |
+| AI upscale | `upscayl-bin` (Real-ESRGAN, ultrasharp-4x) | Free (local) |
+| Image resize | ImageMagick (`magick`) | Free |
+| WebP conversion | `cwebp` | Free |
+| Hosting/deploy | GitHub Pages | Free |
+
+### Dependencies
+
+```bash
+# Python packages
+pip3 install python-telegram-bot google-genai
+
+# System tools (already installed via Homebrew)
+# brew install imagemagick webp
+# brew install --cask upscayl
+```
+
+### Environment Variables
+
+| Variable | Description |
+|---|---|
+| `TELEGRAM_BOT_TOKEN` | Bot token from @BotFather |
+| `GEMINI_API_KEY` | Google AI Studio API key (https://aistudio.google.com/apikey) |
+
+### Key Paths
+
+| Path | Description |
+|---|---|
+| `telegram-bot/bot.py` | Bot source code |
+| `img/portfolio/_processing/` | Temp directory during image processing (auto-cleaned) |
+| `data/portfolio-data.json` | Portfolio data (updated by bot) |
+| `img/portfolio/<slug>.webp` | Final output images |
+| `/tmp/portfolio-bot.log` | Bot logs when running in background |
+
+### Image Processing Pipeline
+
+1. **Download** — Telegram photo (compressed) or file (uncompressed)
+2. **AI Analysis** — Gemini 2.0 Flash analyzes the image and returns `Category | Title | Description` in Portuguese
+3. **Resize** — ImageMagick crop-to-fill to 1536x1024
+4. **AI Upscale** — Real-ESRGAN `ultrasharp-4x` model, 4x upscale via upscayl-bin (local GPU)
+5. **Resize Back** — ImageMagick resize from 6144x4096 back to 1536x1024 (sharper result)
+6. **WebP** — cwebp at quality 82 (~100-200KB output)
+7. **Cleanup** — Remove temp files from `_processing/`
+
+### Gemini AI Prompt
+
+The bot sends the image to Gemini with the full list of portfolio categories and 10 example projects for context. Gemini returns exactly one line: `CATEGORY | TITLE | DESCRIPTION`. The category is validated against `portfolio-data.json` categories.
+
+### Git Deploy
+
+The bot switches GitHub auth to `boni-3` for push, then restores to `ade-studio3` after.
+
+### Portfolio Categories (detected by AI)
+
+- Reclames Luminosos
+- Letras Recortadas
+- Stands & Eventos
+- Sinaléticas
+- Lonas & Impressão
+- Decoração de Viaturas
+- Decoração de Montras
+
+### Security Notes
+
+- `telegram-bot/.env` is in `.gitignore` — never commit API keys
+- `AUTHORIZED_USERS` list in bot.py can restrict access by Telegram user ID (empty = allow everyone)
+- Bot token and Gemini key are passed via environment variables only
+
+---
+
 ## Quick Commands
 
 ```bash
@@ -279,8 +418,17 @@ npx clean-css-cli css/style.css -o css/style.min.css
 # Minify JS after editing main.js
 npx terser js/main.js -c -m -o js/main.min.js
 
-# Add new portfolio projects
+# Add new portfolio projects (manual method)
 ./add-portfolio.sh
+
+# Start Telegram portfolio bot (recommended method)
+cd telegram-bot && TELEGRAM_BOT_TOKEN="<token>" GEMINI_API_KEY="<key>" python3 bot.py
+
+# Start bot in background
+cd telegram-bot && TELEGRAM_BOT_TOKEN="<token>" GEMINI_API_KEY="<key>" nohup python3 bot.py > /tmp/portfolio-bot.log 2>&1 &
+
+# Check bot logs
+tail -f /tmp/portfolio-bot.log
 
 # Local preview (any static server works)
 npx serve .

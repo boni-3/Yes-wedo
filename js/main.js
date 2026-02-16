@@ -495,7 +495,7 @@
             };
 
             // Fetch portfolio data
-            fetch('data/portfolio-data.json')
+            fetch('/data/portfolio-data.json')
                 .then(function (res) { return res.json(); })
                 .then(function (data) {
                     pgState.projects = data.projects;

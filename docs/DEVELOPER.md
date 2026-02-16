@@ -8,7 +8,7 @@ Landing page and portfolio gallery for **Yes, We Do**, a marketing and advertisi
 
 ## 1. Project Overview
 
-- Two-page static site: `index.html` (landing) + `portfolio.html` (filterable gallery)
+- Two-page static site: `index.html` (landing) + `portfolio/index.html` (filterable gallery)
 - Vanilla HTML, CSS, and JavaScript — no React, no Vue, no build step
 - GSAP 3.12.5 for scroll and entrance animations (self-hosted in `js/vendor/`)
 - Fonts: **Space Grotesk** (headings) + **Inter** (body), self-hosted woff2 files
@@ -24,7 +24,7 @@ Landing page and portfolio gallery for **Yes, We Do**, a marketing and advertisi
 ```
 Yes-wedo/
 ├── index.html                        # Landing page (all sections, ~1128 lines)
-├── portfolio.html                    # Portfolio gallery with filters + lightbox (~252 lines)
+├── portfolio/index.html                    # Portfolio gallery with filters + lightbox (~252 lines)
 ├── politica-privacidade.html         # Privacy policy (GDPR)
 ├── politica-cookies.html             # Cookie policy
 ├── termos-condicoes.html             # Terms and conditions
@@ -54,7 +54,7 @@ Yes-wedo/
 │   ├── socios.webp                   # Team photo
 │   └── logo-*.png / *.webp           # Various logo versions
 ├── data/
-│   └── portfolio-data.json           # Portfolio projects data (used by portfolio.html)
+│   └── portfolio-data.json           # Portfolio projects data (used by portfolio/index.html)
 ├── add-portfolio.sh                  # Automation: add new projects (WebP + JSON + minify + deploy)
 ├── robots.txt                        # Crawl rules (allows all major bots)
 ├── sitemap.xml                       # Sitemap (index + portfolio)
@@ -228,7 +228,7 @@ The entire JS is wrapped in an **IIFE** with `'use strict'`. It polls for GSAP a
 
 ---
 
-## 6. Portfolio Page (portfolio.html)
+## 6. Portfolio Page (portfolio/index.html)
 
 ### Architecture
 
@@ -300,7 +300,7 @@ Two schemas in `<head>` of `index.html`:
 
 - Open Graph: title, description, image (1200x630), locale (pt_PT)
 - Twitter Card: `summary_large_image`
-- Canonical URLs: `https://yes-wedo.pt` and `https://yes-wedo.pt/portfolio.html`
+- Canonical URLs: `https://yes-wedo.pt` and `https://yes-wedo.pt/portfolio/index.html`
 - `<meta name="robots" content="index, follow">`
 
 ### HTML Semantics
@@ -389,7 +389,7 @@ The marquee content is **duplicated** in HTML for the seamless loop. When adding
 | File | Size |
 |---|---|
 | `index.html` | ~77KB |
-| `portfolio.html` | ~17KB |
+| `portfolio/index.html` | ~17KB |
 | `css/style.css` | ~51KB |
 | `css/style.min.css` | ~36KB |
 | `js/main.js` | ~28KB |

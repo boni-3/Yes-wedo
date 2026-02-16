@@ -26,7 +26,7 @@ O website da Yes, We Do e composto por duas paginas profissionais que apresentam
 - **Contacto** — Formulario funcional que envia mensagens diretamente para o email da empresa.
 - **Rodape** — Informacoes legais, links e redes sociais.
 
-**Pagina de portfolio (yes-wedo.pt/portfolio.html)**
+**Pagina de portfolio (yes-wedo.pt/portfolio)**
 - Galeria completa de todos os trabalhos realizados.
 - Filtros por categoria (reclames luminosos, stands, sinaleticas, etc.).
 - Visualizador de imagens em ecra inteiro (lightbox) com navegacao por setas, teclado e toque.
@@ -213,7 +213,7 @@ Para mais detalhes, consulte o documento **compliance-report.md**.
 Aqui ficam listados os ficheiros mais importantes do site, explicados de forma simples:
 
 - **`index.html`** — A pagina principal do site, com todo o conteudo, textos e estrutura.
-- **`portfolio.html`** — A pagina de galeria com todos os trabalhos, filtros por categoria e visualizador de imagens.
+- **`portfolio/index.html`** — A pagina de galeria com todos os trabalhos, filtros por categoria e visualizador de imagens (URL: yes-wedo.pt/portfolio).
 - **`img/`** — A pasta que contem todas as imagens e o video do site.
 - **`data/portfolio-data.json`** — Ficheiro com todos os projetos do portfolio (usado pela pagina de galeria).
 - **`og-image.jpg`** — A imagem que aparece quando alguem partilha o link do site nas redes sociais.
