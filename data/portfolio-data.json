@@ -279,6 +279,15 @@
             "title": "Lusíadas Paços Ferreira",
             "description": "Lona impressa de grande formato — Estádio futebol",
             "date": "2026-02-16"
+        },
+        {
+            "id": 31,
+            "image": "img/portfolio/lusiadas-hospital-maia.webp",
+            "alt": "Lusíadas Hospital Maia — Reclame luminoso com letras e símbolo — Fachada",
+            "category": "Reclames Luminosos",
+            "title": "Lusíadas Hospital Maia",
+            "description": "Reclame luminoso com letras e símbolo — Fachada",
+            "date": "2026-02-16"
         }
     ]
 }
