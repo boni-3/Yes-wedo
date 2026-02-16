@@ -405,6 +405,15 @@
             "title": "Lusíadas Hospital Maia",
             "description": "Lona impressa de grande formato — Interior",
             "date": "2026-02-16"
+        },
+        {
+            "id": 45,
+            "image": "img/portfolio/lusiadas-hospital-porto.webp",
+            "alt": "Lusíadas Hospital Porto — Sinaléticas direcionais e informativas para o hospital.",
+            "category": "Sinaléticas",
+            "title": "Lusíadas Hospital Porto",
+            "description": "Sinaléticas direcionais e informativas para o hospital.",
+            "date": "2026-02-16"
         }
     ]
 }
