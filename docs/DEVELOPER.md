@@ -45,7 +45,7 @@ Yes-wedo/
 │   ├── space-grotesk-latin.woff2
 │   └── space-grotesk-latin-ext.woff2
 ├── img/
-│   ├── portfolio/                    # WebP images (1536x1024, ~100-200KB each)
+│   ├── portfolio/                    # WebP images (1536x1024, ~100-200KB each) + MP4 videos (~2-3MB each)
 │   │   └── new/                      # Drop new images here for add-portfolio.sh
 │   ├── favicons/                     # Multiple sizes (16, 32, 180, 192, 512)
 │   ├── hero-video-light.mp4          # Hero background video (3.5MB, 720p)
@@ -165,6 +165,8 @@ GSAP animates these to `opacity: 1; transform: none` when they enter the viewpor
 - **Portfolio (mobile, <= 768px):** Native `overflow-x: auto` with `scroll-snap-type: x mandatory`.
 - **Custom cursor:** Two fixed-position divs (`.cursor-dot` + `.cursor-outline`). Hidden on touch via `@media (pointer: coarse)`.
 - **Marquee:** Pure CSS `@keyframes` infinite scroll. Content is duplicated in HTML to create the seamless loop.
+- **Portfolio video overlay:** `.pg-card-play` — absolutely positioned SVG (circle + triangle) centered on `.pg-card-img`. Scales up on card hover.
+- **Lightbox video:** `.pg-lightbox-video` — same max-height constraints as `.pg-lightbox-img` (70vh desktop, 60vh mobile), rounded corners, black background.
 - **WhatsApp button:** Fixed position bottom-right with popup. Moves up when cookie banner is visible.
 
 ---
@@ -222,6 +224,8 @@ The entire JS is wrapped in an **IIFE** with `'use strict'`. It polls for GSAP a
 | **Testimonials** | Auto-rotates every 5s with `setInterval`. Dot buttons reset the timer. Dynamic `minHeight` measurement prevents layout shift. |
 | **Contact form** | Client-side validation + Formspree submission (`POST https://formspree.io/f/mzdaewqk`), success/error UI states |
 | **Portfolio scroll** | Waits for all portfolio images to load (with 3s fallback timeout). Desktop: calculates `scrollWidth - offsetWidth`, sets section height, creates GSAP scrub. Mobile: native scroll with progress bar via scroll listener. |
+| **Portfolio video cards** | If `project.type === 'video'`, grid card gets a play icon overlay (`.pg-card-play` SVG) on the thumbnail |
+| **Portfolio video lightbox** | Video projects show a `<video>` element (autoplay, muted, loop, controls, playsinline) instead of `<img>`. Video pauses on navigate or close. Non-video projects hide the `<video>` element and show `<img>` as before. |
 | **Text scramble** | On `.nav-link` hover, randomizes characters then resolves left-to-right at 30ms intervals |
 | **WhatsApp button** | Floating button (bottom-right) with popup showing two contact numbers (Hugo, Miguel). Click outside or × to close. Present on both pages. |
 | **Cookie banner** | Shows on first visit if no consent stored. Accept/reject saves to `localStorage`. |
@@ -235,22 +239,43 @@ The entire JS is wrapped in an **IIFE** with `'use strict'`. It polls for GSAP a
 - Loads project data from `data/portfolio-data.json` via `fetch`
 - Filter buttons generated dynamically from data categories
 - Responsive grid: 3 columns (desktop), 2 (tablet), 1 (mobile)
-- Lightbox with arrow/keyboard/swipe navigation
+- Video projects display a play icon overlay on the grid card thumbnail
+- Lightbox with arrow/keyboard/swipe navigation, supports both `<img>` and `<video>` elements
+- Video lightbox: autoplay, muted, loop, controls, playsinline; video pauses on navigate/close
 
 ### portfolio-data.json Format
 
+**Image project (default):**
 ```json
-[
-    {
-        "id": "project-slug",
-        "category": "Categoria",
-        "title": "Título do Projeto",
-        "description": "Descrição breve.",
-        "image": "img/portfolio/image-name.webp",
-        "date": "2026-01"
-    }
-]
+{
+    "id": 1,
+    "image": "img/portfolio/image-name.webp",
+    "alt": "Alt text",
+    "category": "Categoria",
+    "title": "Titulo do Projeto",
+    "description": "Descricao breve.",
+    "date": "2026-01-01"
+}
 ```
+
+**Video project:**
+```json
+{
+    "id": 47,
+    "type": "video",
+    "image": "img/portfolio/video-thumb.webp",
+    "video": "img/portfolio/video-name.mp4",
+    "alt": "Alt text",
+    "category": "Categoria",
+    "title": "Titulo do Projeto",
+    "description": "Descricao breve.",
+    "date": "2026-01-01"
+}
+```
+
+- `type` is optional. Absent = image project (backward compatible). Set to `"video"` for video projects.
+- `image` is always a WebP thumbnail (1536x1024). For videos, doubles as grid card image and `<video>` poster.
+- `video` is the MP4 path (only for video projects). H.264, ~1.5Mbps, no audio, faststart.
 
 ### Adding New Projects (Automated)
 
@@ -366,6 +391,27 @@ Two schemas in `<head>` of `index.html`:
 3. The JS reads `testimonialItems.length` dynamically — no array size to update
 4. Dynamic height measurement adjusts automatically
 
+### New Portfolio Video (Manual)
+
+1. **Optimize video** with ffmpeg (H.264, 1.5Mbps cap, no audio, faststart):
+   ```bash
+   ffmpeg -y -i input.mp4 \
+     -c:v libx264 -preset slow -b:v 1500k -maxrate 1500k -bufsize 3000k \
+     -an -movflags +faststart -pix_fmt yuv420p \
+     img/portfolio/slug-name.mp4
+   ```
+2. **Generate thumbnail** (extract frame, scale to 1536x1024, convert to WebP):
+   ```bash
+   ffmpeg -y -ss 5 -i input.mp4 -frames:v 1 \
+     -vf "scale=1536:1024:force_original_aspect_ratio=increase,crop=1536:1024" \
+     -q:v 2 /tmp/thumb.jpg
+   cwebp -q 82 /tmp/thumb.jpg -o img/portfolio/slug-name.webp
+   ```
+3. **Add JSON entry** to `data/portfolio-data.json` with `"type": "video"` and `"video"` path (see schema above)
+4. **Minify** CSS/JS and deploy
+
+Requires: `brew install ffmpeg webp`
+
 ### Update Marquee
 
 The marquee content is **duplicated** in HTML for the seamless loop. When adding or changing service names, update **both copies** of `.marquee-content`.
@@ -398,6 +444,7 @@ The marquee content is **duplicated** in HTML for the seamless loop. When adding
 | `js/vendor/ScrollTrigger.min.js` | ~43KB |
 | `js/vendor/ScrollToPlugin.min.js` | ~4KB |
 | `hero-video-light.mp4` | ~3.5MB |
+| Portfolio videos (MP4) | ~2-3MB each |
 
 ---
 

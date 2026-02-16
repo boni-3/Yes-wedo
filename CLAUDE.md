@@ -38,7 +38,7 @@ Yes-wedo/
 │   ├── space-grotesk-latin.woff2
 │   └── space-grotesk-latin-ext.woff2
 ├── img/
-│   ├── portfolio/              # WebP images (1536x1024, ~100-200KB each)
+│   ├── portfolio/              # WebP images (1536x1024, ~100-200KB each) + MP4 videos
 │   │   └── new/                # Drop new images here for add-portfolio.sh
 │   ├── favicons/               # 5 sizes (16, 32, 180, 192, 512)
 │   ├── logo-horizontal-new.webp
@@ -108,11 +108,11 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 9. **Contact** — form with name, email, phone, message fields
 10. **Footer** — logo, navigation links, social links, legal text
 
-### portfolio/index.html — Dedicated gallery page
+### portfolio.html — Dedicated gallery page
 - **Compact hero** — title only, no video
 - **Sticky filter bar** — category pill buttons (rendered from JSON)
-- **Responsive grid** — 3 cols desktop, 2 cols tablet, 1 col mobile
-- **Lightbox** — fullscreen viewer with arrow/keyboard/swipe navigation
+- **Responsive grid** — 3 cols desktop, 2 cols tablet, 1 col mobile. Video projects show a play icon overlay on the thumbnail.
+- **Lightbox** — fullscreen viewer with arrow/keyboard/swipe navigation. Supports both images (`<img>`) and videos (`<video>` with autoplay, muted, loop, controls, playsinline). Video pauses on navigate/close.
 - **CTA section** — "Gostou do que viu?" with link to contact
 - All project data loaded from `data/portfolio-data.json` via fetch
 
@@ -158,6 +158,8 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 ### Key CSS patterns
 - Custom cursor (circle that follows mouse) — hidden on touch via `@media (pointer: coarse)`
 - Portfolio section: GSAP horizontal scroll on desktop, `overflow-x: auto` with `scroll-snap-type` on mobile
+- Portfolio video cards: `.pg-card-play` overlay (centered SVG circle+triangle) on `.pg-card-img` for video projects
+- Portfolio lightbox video: `.pg-lightbox-video` styled same as image (`max-height: 70vh`, `60vh` on mobile, centered, rounded corners)
 - Testimonials: absolutely positioned items, `.active` class toggles `opacity` and `visibility`
 - `@supports (padding: env(safe-area-inset-bottom))` for safe area insets on notched devices
 - `@media (prefers-reduced-motion: reduce)` disables all transitions and animations
@@ -192,8 +194,10 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 | **Testimonials** | Auto-rotate every 5 seconds, dot navigation, dynamic height measurement |
 | **Magnetic buttons** | Buttons subtly follow cursor on hover (desktop, `pointer: fine` only) |
 | **Text scramble** | Randomized character effect on nav link hover |
+| **Portfolio gallery** | Fetches `portfolio-data.json`, renders filterable grid + lightbox with keyboard/swipe navigation. Supports image and video projects. |
+| **Portfolio video** | Video cards show play icon overlay (`.pg-card-play`). Lightbox shows `<video>` element (autoplay, muted, loop, controls, playsinline) for video projects. Video pauses on navigate away or close. |
 | **Contact form** | Client-side validation + Formspree submission (`POST https://formspree.io/f/mzdaewqk`), success/error UI states |
-| **WhatsApp button** | Floating button (bottom-right) with popup showing two contact numbers. Click outside or `×` to close. Present on both `index.html` and `portfolio/index.html` |
+| **WhatsApp button** | Floating button (bottom-right) with popup showing two contact numbers. Click outside or `×` to close. Present on both `index.html` and `portfolio.html` |
 
 ---
 
@@ -252,6 +256,43 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 | `js/vendor/ScrollTrigger.min.js` | ~43KB |
 | `js/vendor/ScrollToPlugin.min.js` | ~4KB |
 | `hero-video-light.mp4` | ~3.5MB |
+| Portfolio videos (MP4) | ~2-3MB each (H.264, 1.5Mbps cap, no audio) |
+
+---
+
+## Portfolio Data Schema
+
+### Image projects (default)
+```json
+{
+    "id": 1,
+    "image": "img/portfolio/example.webp",
+    "alt": "Alt text",
+    "category": "Category",
+    "title": "Title",
+    "description": "Description",
+    "date": "2026-01-01"
+}
+```
+
+### Video projects
+```json
+{
+    "id": 47,
+    "type": "video",
+    "image": "img/portfolio/example.webp",
+    "video": "img/portfolio/example.mp4",
+    "alt": "Alt text",
+    "category": "Category",
+    "title": "Title",
+    "description": "Description",
+    "date": "2026-01-01"
+}
+```
+
+- `type` field is optional. Absent or any value other than `"video"` = image project (backward compatible).
+- `image` is always the WebP thumbnail (1536x1024). For videos, it serves as the grid card image and the `<video>` poster.
+- `video` is the MP4 path (only present for video projects).
 
 ---
 
@@ -306,6 +347,53 @@ Use the automation script to add new projects:
 The script will: convert to WebP 1536x1024, update `portfolio-data.json`, minify CSS/JS, git commit & push.
 
 Requires: `brew install webp jq`
+
+### Method 3: Adding Videos (Manual)
+
+Videos are added manually (not supported by the Telegram bot or shell script):
+
+1. **Optimize the video** with ffmpeg:
+   ```bash
+   ffmpeg -y -i input.mp4 \
+     -c:v libx264 -preset slow -b:v 1500k -maxrate 1500k -bufsize 3000k \
+     -an -movflags +faststart -pix_fmt yuv420p \
+     img/portfolio/slug-name.mp4
+   ```
+   - H.264 codec, 1.5Mbps bitrate cap, no audio (`-an`), `faststart` for streaming
+   - Target file size: 2-3MB for 10-15s clips
+
+2. **Generate thumbnail** (WebP poster frame):
+   ```bash
+   ffmpeg -y -ss 5 -i input.mp4 -frames:v 1 \
+     -vf "scale=1536:1024:force_original_aspect_ratio=increase,crop=1536:1024" \
+     -q:v 2 /tmp/thumb.jpg
+   cwebp -q 82 /tmp/thumb.jpg -o img/portfolio/slug-name.webp
+   ```
+   - Choose `-ss` value for a visually representative frame
+
+3. **Add entry** to `data/portfolio-data.json`:
+   ```json
+   {
+       "id": <next_id>,
+       "type": "video",
+       "image": "img/portfolio/slug-name.webp",
+       "video": "img/portfolio/slug-name.mp4",
+       "alt": "Description",
+       "category": "Category",
+       "title": "Title",
+       "description": "Description",
+       "date": "YYYY-MM-DD"
+   }
+   ```
+
+4. **Minify and deploy**:
+   ```bash
+   npx clean-css-cli css/style.css -o css/style.min.css
+   npx terser js/main.js -c -m -o js/main.min.js
+   git add . && git commit -m "feat(portfolio): add video project" && git push
+   ```
+
+Requires: `brew install ffmpeg webp`
 
 ---
 
