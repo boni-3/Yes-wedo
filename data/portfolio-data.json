@@ -333,6 +333,15 @@
             "title": "Lusíadas Hospital Maia",
             "description": "Sinalética direcional vertical para interior.",
             "date": "2026-02-16"
+        },
+        {
+            "id": 37,
+            "image": "img/portfolio/lusiadas-hospital-braga.webp",
+            "alt": "Lusíadas Hospital Braga — Sinalética interior informativa de piso e parque.",
+            "category": "Sinaléticas",
+            "title": "Lusíadas Hospital Braga",
+            "description": "Sinalética interior informativa de piso e parque.",
+            "date": "2026-02-16"
         }
     ]
 }
