@@ -324,6 +324,15 @@
             "title": "Mira Maia Shopping",
             "description": "Letras 3D sem iluminação — Fachada",
             "date": "2026-02-16"
+        },
+        {
+            "id": 36,
+            "image": "img/portfolio/lusiadas-hospital-maia-2.webp",
+            "alt": "Lusíadas Hospital Maia — Sinalética direcional vertical para interior.",
+            "category": "Sinaléticas",
+            "title": "Lusíadas Hospital Maia",
+            "description": "Sinalética direcional vertical para interior.",
+            "date": "2026-02-16"
         }
     ]
 }
