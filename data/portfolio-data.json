@@ -315,6 +315,15 @@
             "title": "Lusíadas Maia Shopping",
             "description": "Lona de grande formato com publicidade — Lusíadas Maia",
             "date": "2026-02-16"
+        },
+        {
+            "id": 35,
+            "image": "img/portfolio/mira-maia-shopping.webp",
+            "alt": "Mira Maia Shopping — Letras 3D sem iluminação — Fachada",
+            "category": "Letras Recortadas",
+            "title": "Mira Maia Shopping",
+            "description": "Letras 3D sem iluminação — Fachada",
+            "date": "2026-02-16"
         }
     ]
 }
