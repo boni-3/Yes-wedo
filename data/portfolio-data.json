@@ -378,6 +378,15 @@
             "title": "Sinalética Interior Departamentos Hospital",
             "description": "Placa sinalética informativa com vários departamentos",
             "date": "2026-02-16"
+        },
+        {
+            "id": 42,
+            "image": "img/portfolio/lusiadas-hospital-maia-3.webp",
+            "alt": "Lusíadas Hospital Maia — Lona impressa de grande formato — Fachada exterior",
+            "category": "Lonas & Impressão",
+            "title": "Lusíadas Hospital Maia",
+            "description": "Lona impressa de grande formato — Fachada exterior",
+            "date": "2026-02-16"
         }
     ]
 }
