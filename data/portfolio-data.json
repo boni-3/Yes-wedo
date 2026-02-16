@@ -387,6 +387,15 @@
             "title": "Lusíadas Hospital Maia",
             "description": "Lona impressa de grande formato — Fachada exterior",
             "date": "2026-02-16"
+        },
+        {
+            "id": 43,
+            "image": "img/portfolio/medicina-aeronautica-rececao.webp",
+            "alt": "Medicina Aeronáutica Receção — Sinalética para balcão de receção — Sinalização interior",
+            "category": "Sinaléticas",
+            "title": "Medicina Aeronáutica Receção",
+            "description": "Sinalética para balcão de receção — Sinalização interior",
+            "date": "2026-02-16"
         }
     ]
 }
