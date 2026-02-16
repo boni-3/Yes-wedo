@@ -369,6 +369,15 @@
             "title": "Hospital Lapa",
             "description": "Roll-ups promocionais e informativos — Hospital",
             "date": "2026-02-16"
+        },
+        {
+            "id": 41,
+            "image": "img/portfolio/sinaletica-interior-departamentos-hospital.webp",
+            "alt": "Sinalética Interior Departamentos Hospital — Placa sinalética informativa com vários departamentos",
+            "category": "Sinaléticas",
+            "title": "Sinalética Interior Departamentos Hospital",
+            "description": "Placa sinalética informativa com vários departamentos",
+            "date": "2026-02-16"
         }
     ]
 }
