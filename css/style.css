@@ -2204,6 +2204,27 @@ body.cursor-hover .cursor-outline {
     transform: scale(1.05);
 }
 
+/* Video play icon overlay */
+.pg-card-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.9;
+    transition: opacity 0.3s, transform 0.3s var(--ease-out);
+}
+
+.pg-card:hover .pg-card-play {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.pg-card-img {
+    position: relative;
+}
+
 .pg-card-info {
     padding: 1.25rem 1.25rem 1.5rem;
 }
@@ -2278,6 +2299,13 @@ body.cursor-hover .cursor-outline {
     border-radius: 8px;
     user-select: none;
     -webkit-user-drag: none;
+}
+
+.pg-lightbox-video {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 8px;
+    background: #000;
 }
 
 .pg-lightbox-info {
@@ -2432,6 +2460,10 @@ body.cursor-hover .cursor-outline {
     }
 
     .pg-lightbox-img {
+        max-height: 60vh;
+    }
+
+    .pg-lightbox-video {
         max-height: 60vh;
     }
 

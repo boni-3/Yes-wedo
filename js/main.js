@@ -546,9 +546,11 @@
                     card.setAttribute('role', 'button');
                     card.setAttribute('tabindex', '0');
                     card.setAttribute('aria-label', 'Ver ' + project.title);
+                    var isVideo = project.type === 'video';
                     card.innerHTML =
                         '<div class="pg-card-img">' +
                             '<img src="' + project.image + '" alt="' + project.alt + '" loading="lazy" width="1536" height="1024">' +
+                            (isVideo ? '<div class="pg-card-play" aria-hidden="true"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.5)"/><polygon points="19,14 19,34 36,24" fill="#fff"/></svg></div>' : '') +
                         '</div>' +
                         '<div class="pg-card-info">' +
                             '<span class="pg-card-category">' + project.category + '</span>' +
@@ -583,6 +585,7 @@
             // Lightbox
             var lightbox = document.getElementById('pgLightbox');
             var lbImg = document.getElementById('pgLightboxImg');
+            var lbVideo = document.getElementById('pgLightboxVideo');
             var lbTitle = document.getElementById('pgLightboxTitle');
             var lbDesc = document.getElementById('pgLightboxDesc');
             var lbCounter = document.getElementById('pgLightboxCounter');
@@ -595,6 +598,7 @@
             }
 
             function closeLightbox() {
+                if (lbVideo) { lbVideo.pause(); lbVideo.removeAttribute('src'); lbVideo.load(); }
                 lightbox.classList.remove('active');
                 document.body.style.overflow = '';
                 pgState.lightboxIndex = -1;
@@ -603,8 +607,21 @@
             function updateLightbox() {
                 var p = pgState.filtered[pgState.lightboxIndex];
                 if (!p) return;
-                lbImg.src = p.image;
-                lbImg.alt = p.alt;
+                var isVideo = p.type === 'video';
+                if (lbVideo) { lbVideo.pause(); }
+                if (isVideo && lbVideo) {
+                    lbImg.style.display = 'none';
+                    lbVideo.style.display = 'block';
+                    lbVideo.src = p.video;
+                    lbVideo.poster = p.image;
+                    lbVideo.load();
+                    lbVideo.play();
+                } else {
+                    if (lbVideo) { lbVideo.style.display = 'none'; lbVideo.removeAttribute('src'); lbVideo.load(); }
+                    lbImg.style.display = '';
+                    lbImg.src = p.image;
+                    lbImg.alt = p.alt;
+                }
                 lbTitle.textContent = p.title;
                 lbDesc.textContent = p.description;
                 lbCounter.textContent = (pgState.lightboxIndex + 1) + ' / ' + pgState.filtered.length;

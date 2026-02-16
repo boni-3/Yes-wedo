@@ -423,6 +423,17 @@
             "title": "Lusíadas Hospital Maia",
             "description": "Reclame luminoso com imagem impressa — Entrada",
             "date": "2026-02-16"
+        },
+        {
+            "id": 47,
+            "type": "video",
+            "image": "img/portfolio/instalacao-lona-hospital.webp",
+            "video": "img/portfolio/instalacao-lona-hospital.mp4",
+            "alt": "Instalação de lona em hospital — Vídeo de instalação de lona de grande formato",
+            "category": "Lonas & Impressão",
+            "title": "Instalação de Lona — Hospital",
+            "description": "Vídeo de instalação de lona de grande formato em fachada de hospital",
+            "date": "2026-02-16"
         }
     ]
 }
