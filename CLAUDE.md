@@ -13,13 +13,12 @@ Language: **Portuguese (Portugal) (pt-PT)**.
 
 ```
 Yes-wedo/
-├── index.html                  # Landing page (all sections)
-├── portfolio/
-│   └── index.html              # Portfolio gallery (filterable grid + lightbox) → /portfolio
-├── portfolio/index.html              # Redirect → /portfolio (SEO preservation)
-├── politica-privacidade.html   # Privacy policy (GDPR)
-├── politica-cookies.html       # Cookie policy
-├── termos-condicoes.html       # Terms and conditions
+├── index.html                  # Landing page (all sections) → /
+├── portfolio.html              # Portfolio gallery (filterable grid + lightbox) → /portfolio
+├── politica-privacidade.html   # Privacy policy (GDPR) → /politica-privacidade
+├── politica-cookies.html       # Cookie policy → /politica-cookies
+├── termos-condicoes.html       # Terms and conditions → /termos-condicoes
+├── vercel.json                 # Vercel config: cleanUrls, no trailing slash
 ├── data/
 │   └── portfolio-data.json     # All portfolio projects (JSON, read by JS)
 ├── css/
@@ -232,7 +231,7 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 4. **Portfolio PNGs still present**: The `img/portfolio/` directory contains both the original PNG/JPG files and the optimized WebP files. Only the WebP files are referenced in HTML. Do not delete the originals without checking if they are needed elsewhere.
 5. **hero-video.mp4 (23MB)**: A large original hero video exists alongside the optimized `hero-video-light.mp4` (3.5MB). Only the light version is referenced in HTML.
 6. **Critical CSS duplication**: Some nav and hero styles appear both inline in `index.html` `<style>` and in `style.css`. Changes must be synchronized manually.
-7. **GitHub Pages hosting**: The `CNAME` file indicates deployment via GitHub Pages with the custom domain `yes-wedo.pt`.
+7. **Vercel hosting**: The site is deployed on **Vercel** (not GitHub Pages). `vercel.json` enables `cleanUrls` (all `.html` files served without extension). The `CNAME` file is a leftover from a previous GitHub Pages setup — Vercel handles the custom domain `yes-wedo.pt` via its dashboard.
 8. **Telegram bot runs locally**: The bot requires the Mac to be running (uses local GPU for Real-ESRGAN upscale). If the Mac sleeps or restarts, the bot stops — restart manually.
 9. **Gemini free tier limits**: Google Gemini free tier allows 15 requests/minute, 1500/day. More than enough for portfolio use. If rate-limited, send with manual caption as fallback.
 10. **Duplicate slugs**: The bot auto-appends a number suffix (`-2`, `-3`, etc.) if a project with the same slug already exists.
