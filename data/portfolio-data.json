@@ -306,6 +306,15 @@
             "title": "Ruiz Costa",
             "description": "Lona impressa de grande formato — Fachada",
             "date": "2026-02-16"
+        },
+        {
+            "id": 34,
+            "image": "img/portfolio/lusiadas-maia-shopping.webp",
+            "alt": "Lusíadas Maia Shopping — Lona de grande formato com publicidade — Lusíadas Maia",
+            "category": "Lonas & Impressão",
+            "title": "Lusíadas Maia Shopping",
+            "description": "Lona de grande formato com publicidade — Lusíadas Maia",
+            "date": "2026-02-16"
         }
     ]
 }
