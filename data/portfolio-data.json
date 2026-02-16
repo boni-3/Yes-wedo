@@ -360,6 +360,15 @@
             "title": "Lusíadas Maia",
             "description": "Lona impressa de grande formato — Interior",
             "date": "2026-02-16"
+        },
+        {
+            "id": 40,
+            "image": "img/portfolio/hospital-lapa.webp",
+            "alt": "Hospital Lapa — Roll-ups promocionais e informativos — Hospital",
+            "category": "Stands & Eventos",
+            "title": "Hospital Lapa",
+            "description": "Roll-ups promocionais e informativos — Hospital",
+            "date": "2026-02-16"
         }
     ]
 }
