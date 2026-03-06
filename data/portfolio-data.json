@@ -434,6 +434,15 @@
             "title": "Instalação de Lona — Hospital",
             "description": "Vídeo de instalação de lona de grande formato em fachada de hospital",
             "date": "2026-02-16"
+        },
+        {
+            "id": 48,
+            "image": "img/portfolio/decoracao-de-parede-geometrica.webp",
+            "alt": "Decoração de Parede Geométrica — Aplicação de letras recortadas em parede interior",
+            "category": "Letras Recortadas",
+            "title": "Decoração de Parede Geométrica",
+            "description": "Aplicação de letras recortadas em parede interior",
+            "date": "2026-03-06"
         }
     ]
 }
