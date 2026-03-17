@@ -461,6 +461,15 @@
             "title": "Abreu - Expo Prémio",
             "description": "Stand promocional com imagem turística.",
             "date": "2026-03-17"
+        },
+        {
+            "id": 51,
+            "image": "img/portfolio/sinaletica-outlet.webp",
+            "alt": "Sinalética \"Outlet\" — Letras recortadas e seta indicativa — Sinalética interior",
+            "category": "Letras Recortadas",
+            "title": "Sinalética \"Outlet\"",
+            "description": "Letras recortadas e seta indicativa — Sinalética interior",
+            "date": "2026-03-17"
         }
     ]
 }
