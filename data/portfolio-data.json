@@ -13,10 +13,10 @@
         {
             "id": 1,
             "image": "img/portfolio/reclame-lusiadas.webp",
-            "alt": "Lusíadas Hospital Paços de Ferreira",
+            "alt": "Lettering Monobloco c/ iluminação Led — Lusíadas Hospital Paços de Ferreira",
             "category": "Reclames Luminosos",
-            "title": "Lusíadas Hospital",
-            "description": "Letras recortadas iluminadas — Paços de Ferreira",
+            "title": "Lettering Monobloco c/ iluminação Led",
+            "description": "Lusíadas Hospital — Paços de Ferreira",
             "date": "2025-01-15"
         },
         {
@@ -67,10 +67,10 @@
         {
             "id": 7,
             "image": "img/portfolio/sinaletica-homycasa.webp",
-            "alt": "Homy Casa Armazém",
+            "alt": "HomyCasa junto - Estrutura Outdoor",
             "category": "Sinaléticas",
-            "title": "Homy Casa",
-            "description": "Sinalética exterior de armazém — Receção clientes",
+            "title": "HomyCasa junto - Estrutura Outdoor",
+            "description": "Estrutura outdoor — Armazém HomyCasa",
             "date": "2025-07-01"
         },
         {
@@ -139,10 +139,10 @@
         {
             "id": 15,
             "image": "img/portfolio/homy-casa-reclame.webp",
-            "alt": "Homy Casa — Reclame — Reclame exterior com letras recortadas — Armazém H",
+            "alt": "Reclamo Luminoso c/ base e letras monobloco iluminadas Led — HomyCasa",
             "category": "Reclames Luminosos",
-            "title": "Homy Casa — Reclame",
-            "description": "Reclame exterior com letras recortadas — Armazém Homy Casa",
+            "title": "Reclamo Luminoso c/ base e letras monobloco iluminadas Led",
+            "description": "HomyCasa — Armazém",
             "date": "2025-09-15"
         },
         {
@@ -202,9 +202,9 @@
         {
             "id": 22,
             "image": "img/portfolio/steve-madden-exposicao.webp",
-            "alt": "Steve Madden — Exposição — Exposição com sapatilha gigante e passadeira rosa ",
+            "alt": "Ativação de Marca - Steve Madden — Exposição com sapatilha gigante e passadeira rosa",
             "category": "Stands & Eventos",
-            "title": "Steve Madden — Exposição",
+            "title": "Ativação de Marca - Steve Madden",
             "description": "Exposição com sapatilha gigante e passadeira rosa — Centro comercial",
             "date": "2025-11-15"
         },
@@ -283,10 +283,10 @@
         {
             "id": 31,
             "image": "img/portfolio/lusiadas-hospital-maia.webp",
-            "alt": "Lusíadas Hospital Maia — Reclame luminoso com letras e símbolo — Fachada",
+            "alt": "Reclamo Luminoso de grande dimensão em Monobloco com iluminação Led — Lusíadas Hospital Maia",
             "category": "Reclames Luminosos",
-            "title": "Lusíadas Hospital Maia",
-            "description": "Reclame luminoso com letras e símbolo — Fachada",
+            "title": "Reclamo Luminoso de grande dimensão em Monobloco com iluminação Led",
+            "description": "Lusíadas Hospital Maia — Fachada",
             "date": "2026-02-16"
         },
         {
@@ -355,10 +355,10 @@
         {
             "id": 39,
             "image": "img/portfolio/lusiadas-maia.webp",
-            "alt": "Lusíadas Maia — Lona impressa de grande formato — Interior",
-            "category": "Lonas & Impressão",
-            "title": "Lusíadas Maia",
-            "description": "Lona impressa de grande formato — Interior",
+            "alt": "Decoração em vinil - Montras provisórias — Lusíadas Hospital Maia",
+            "category": "Decoração de Montras",
+            "title": "Decoração em vinil - Montras provisórias",
+            "description": "Lusíadas Hospital Maia",
             "date": "2026-02-16"
         },
         {
@@ -487,15 +487,6 @@
             "category": "Stands & Eventos",
             "title": "SPMEC - Backdrop Espelhado",
             "description": "Estrutura para evento com bolas espelhadas e reclame luminoso.",
-            "date": "2026-03-17"
-        },
-        {
-            "id": 54,
-            "image": "img/portfolio/homy-casa-jysk.webp",
-            "alt": "Homy Casa & Jysk — Lonas impressas para fachada comercial.",
-            "category": "Lonas & Impressão",
-            "title": "Homy Casa & Jysk",
-            "description": "Lonas impressas para fachada comercial.",
             "date": "2026-03-17"
         }
     ]
