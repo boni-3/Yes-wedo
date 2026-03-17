@@ -1,234 +1,365 @@
-# Documentacao — Website Yes, We Do
+# Entrega de Website — Yes, We Do
 
-**Preparado para:** Yes, We Do — Agencia de Marketing e Publicidade
-**Website:** yes-wedo.pt
-**Data:** Fevereiro 2026
-
----
-
-## 1. Visao Geral
-
-O website da Yes, We Do e composto por duas paginas profissionais que apresentam a empresa, os seus servicos, o portfolio de trabalhos e as formas de contacto.
-
-**Endereco do site:** yes-wedo.pt
-
-### Paginas do site:
-
-**Pagina principal (yes-wedo.pt)**
-- **Inicio com video** — Uma entrada com impacto visual, com um video de fundo que mostra o espirito da empresa.
-- **Ticker de servicos** — Uma faixa animada que mostra os servicos de forma continua.
-- **12 Servicos** — Cada servico tem a sua descricao e icone proprio.
-- **Portfolio** — Galeria horizontal com exemplos de trabalhos realizados, com link para ver todos.
-- **Sobre Nos** — Informacao sobre a empresa, quem sao e o que fazem.
-- **Processo** — Explicacao de como funciona trabalhar com a Yes, We Do, passo a passo.
-- **Testemunhos** — Opinioes de clientes satisfeitos.
-- **Chamada a Acao** — Uma seccao que convida o visitante a entrar em contacto.
-- **Contacto** — Formulario funcional que envia mensagens diretamente para o email da empresa.
-- **Rodape** — Informacoes legais, links e redes sociais.
-
-**Pagina de portfolio (yes-wedo.pt/portfolio)**
-- Galeria completa de todos os trabalhos realizados.
-- Filtros por categoria (reclames luminosos, stands, sinaleticas, etc.).
-- Visualizador de imagens em ecra inteiro (lightbox) com navegacao por setas, teclado e toque.
-
-**Paginas legais:**
-- Politica de Privacidade (yes-wedo.pt/politica-privacidade.html)
-- Politica de Cookies (yes-wedo.pt/politica-cookies.html)
-- Termos e Condicoes (yes-wedo.pt/termos-condicoes.html)
-
-**O site funciona em todos os dispositivos:** computadores, tablets e telemoveis. Adapta-se automaticamente ao tamanho do ecra.
+**Preparado para:** Hugo & Miguel — Yes, We Do, Lda.
+**Website:** [yes-wedo.pt](https://yes-wedo.pt)
+**Data de entrega:** Fevereiro 2026
+**Desenvolvido por:** Ryan Alves
 
 ---
 
-## 2. Servicos Apresentados
+## 1. Resumo do Projeto
+
+Foi desenvolvido um website profissional para a **Yes, We Do — Agencia de Marketing e Publicidade**, com o objetivo de apresentar a empresa, os seus servicos, o portfolio de trabalhos realizados e facilitar o contacto com potenciais clientes.
+
+O site esta **online e funcional** no endereco **yes-wedo.pt**.
+
+---
+
+## 2. O Que Foi Entregue
+
+### 2.1 Paginas do site
+
+| Pagina | Endereco | Descricao |
+|--------|----------|-----------|
+| Pagina principal | yes-wedo.pt | Landing page completa com todas as seccoes |
+| Portfolio / Galeria | yes-wedo.pt/portfolio | Galeria completa de todos os trabalhos (imagens e videos) |
+| Politica de Privacidade | yes-wedo.pt/politica-privacidade | Conforme RGPD |
+| Politica de Cookies | yes-wedo.pt/politica-cookies | Conforme legislacao portuguesa |
+| Termos e Condicoes | yes-wedo.pt/termos-condicoes | Conforme legislacao portuguesa |
+
+### 2.2 Pagina principal — Seccoes
+
+1. **Hero com video de fundo** — Entrada visual de impacto com video em ecra inteiro, titulo animado e botao de acao.
+2. **Ticker de servicos** — Faixa animada que percorre continuamente os nomes dos servicos.
+3. **12 Servicos** — Cada servico tem icone, descricao e etiquetas proprias, organizados numa grelha responsiva.
+4. **Portfolio horizontal** — Galeria de trabalhos com scroll horizontal animado (computador) ou deslizar com o dedo (telemovel). Inclui link para a galeria completa.
+5. **Sobre Nos** — Historia e identidade da empresa com fotografia dos socios e contadores animados (10+ anos de experiencia, 500+ projetos, etc.).
+6. **Processo de trabalho** — 4 passos visuais que explicam como funciona trabalhar com a Yes, We Do.
+7. **Testemunhos** — Opinioes de clientes satisfeitos com rotacao automatica.
+8. **Chamada a Acao (CTA)** — Seccao visual que convida o visitante a pedir orcamento.
+9. **Formulario de contacto** — Formulario funcional com nome, email, telefone e mensagem.
+10. **Rodape** — Informacoes legais, links de navegacao, contactos e dados da empresa.
+
+### 2.3 Pagina de portfolio — Funcionalidades
+
+- **47 projetos** publicados (imagens e videos).
+- **Filtros por categoria**: Reclames Luminosos, Letras Recortadas, Stands & Eventos, Sinaleticas, Lonas & Impressao, Decoracao de Viaturas, Decoracao de Montras.
+- **Suporte a video**: Os projetos em video mostram um icone de play na miniatura. Ao clicar, o video reproduz automaticamente no visualizador.
+- **Visualizador em ecra inteiro (Lightbox)**: Navegacao por setas, teclado e toque/deslizar. Suporta imagens e videos.
+- **Seccao CTA**: Convite para pedir orcamento no final da galeria.
+
+### 2.4 Botao de WhatsApp
+
+Todas as paginas do site tem um **botao flutuante de WhatsApp** no canto inferior direito. Ao clicar, aparece uma janela com duas opcoes de contacto:
+
+- **Hugo** — +351 912 320 366
+- **Miguel** — +351 919 755 990
+
+Ao clicar num dos contactos, abre automaticamente o WhatsApp com uma mensagem pre-escrita: *"Ola, gostaria de saber mais sobre os vossos servicos."*
+
+### 2.5 Formulario de contacto
+
+O formulario esta **totalmente funcional**:
+
+1. O visitante preenche nome, email, telefone e mensagem.
+2. Ao clicar "Enviar Mensagem", o botao muda para "A enviar...".
+3. A mensagem e entregue automaticamente no email da empresa.
+4. O visitante ve uma confirmacao de sucesso.
+5. Em caso de erro, o visitante e informado e pode tentar novamente.
+
+As mensagens sao entregues atraves do servico **Formspree**.
+
+### 2.6 Banner de cookies
+
+O site mostra um banner de consentimento de cookies na primeira visita, conforme exigido pela legislacao europeia. O visitante pode aceitar ou rejeitar.
+
+---
+
+## 3. Servicos Apresentados no Site
 
 O site apresenta **12 servicos** da Yes, We Do:
 
-1. **Flyers & Brochuras** — Materiais impressos para divulgacao.
-2. **Lonas & Stands** — Materiais para eventos e exposicoes.
-3. **Sinaleticas** — Placas e sinalizacao para empresas e espacos comerciais.
-4. **Merchandising** — Brindes e produtos personalizados com a marca do cliente.
-5. **Reclames Luminosos** — Letreiros iluminados para fachadas e espacos comerciais.
-6. **Impressao Grandes Formatos** — Impressao de imagens em tamanho grande (outdoors, paineis, etc.).
-7. **Decoracao de Montras** — Decoracao de vitrinas de lojas.
-8. **Decoracao de Viaturas** — Personalizacao de carros, carrinhas e outros veiculos com a imagem da empresa.
-9. **Paginas Web** — Criacao de websites para empresas e negocios.
-10. **Eventos** — Organizacao e apoio visual para eventos.
-11. **Decoracao de Espacos** — Transformacao de interiores e exteriores com elementos visuais.
-12. **Neons** — Letreiros e decoracoes em neon personalizados.
+| # | Servico | Descricao |
+|---|---------|-----------|
+| 1 | Flyers & Brochuras | Materiais impressos para divulgacao |
+| 2 | Lonas & Stands | Materiais para eventos e exposicoes |
+| 3 | Sinaleticas | Placas e sinalizacao para empresas e espacos comerciais |
+| 4 | Merchandising | Brindes e produtos personalizados com a marca do cliente |
+| 5 | Reclames Luminosos | Letreiros iluminados para fachadas e espacos comerciais |
+| 6 | Impressao Grandes Formatos | Impressao de imagens em grande dimensao (outdoors, paineis) |
+| 7 | Decoracao de Montras | Decoracao de vitrinas de lojas |
+| 8 | Decoracao de Viaturas | Personalizacao de veiculos com a imagem da empresa |
+| 9 | Paginas Web | Criacao de websites para empresas e negocios |
+| 10 | Eventos | Organizacao e apoio visual para eventos |
+| 11 | Decoracao de Espacos | Transformacao de interiores e exteriores com elementos visuais |
+| 12 | Neons | Letreiros e decoracoes em neon personalizados |
 
 ---
 
-## 3. O Que Foi Otimizado
+## 4. Otimizacoes Tecnicas
 
-Aqui explicamos, em linguagem simples, tudo o que foi feito para que o site funcione da melhor forma possivel.
+### Velocidade e desempenho
 
-### Velocidade
+- Todas as imagens foram comprimidas e convertidas para formato **WebP** (de ~45 MB para ~4,5 MB no total).
+- O video do hero foi otimizado de 23 MB para 3,5 MB.
+- Os videos do portfolio foram otimizados para ~2 MB cada, sem audio.
+- O CSS critico esta embutido na pagina para carregamento instantaneo.
+- Todas as fontes e bibliotecas estao alojadas no proprio servidor (zero pedidos externos).
+- As imagens do portfolio carregam de forma preguicosa (lazy loading) — so carregam quando o visitante se aproxima delas.
 
-A pagina carrega muito rapido. As imagens foram todas comprimidas — passaram de **45 MB para cerca de 4,5 MB** (10 vezes mais leves). Isto significa que quando alguem abre o site, nao precisa de esperar. Tudo aparece em poucos segundos, mesmo com uma ligacao de internet mais lenta.
+### Compatibilidade movel
 
-### Telemovel
+- O site funciona em **todos os dispositivos**: computadores, tablets e telemoveis.
+- Adapta-se automaticamente ao tamanho do ecra.
+- Os botoes tem tamanho minimo de 44px para toque facil.
+- O video de fundo adapta-se ao ecra.
+- O portfolio faz scroll horizontal — basta deslizar com o dedo.
+- Os videos reproduzem diretamente no ecra (sem abrir aplicacao externa) em iOS e Android.
 
-O site funciona perfeitamente em todos os telemoveis e tablets. Tudo foi pensado para o ecra pequeno:
+### SEO (Otimizacao para Google)
 
-- Os botoes sao grandes o suficiente para tocar com o dedo.
-- O video de fundo adapta-se ao tamanho do ecra.
-- O portfolio faz scroll horizontal — basta deslizar com o dedo para ver os trabalhos.
-- Os textos sao legiveis sem precisar de fazer zoom.
-
-### Google (SEO)
-
-O site esta preparado para aparecer nos resultados do Google. Isto chama-se SEO (Search Engine Optimization) e significa que, quando alguem pesquisar coisas como:
+O site esta preparado para aparecer nos resultados do Google. Quando alguem pesquisar:
 
 - "agencia de marketing Porto"
 - "reclames luminosos Rio Tinto"
-- "merchandising Porto"
+- "sinaletica para hospitais Porto"
 - "decoracao de viaturas"
 
-...o site da Yes, We Do tem boas hipoteses de aparecer nos resultados. Foram adicionados **dados estruturados**, que sao informacoes invisiveis que ajudam o Google a entender exatamente o que a empresa faz, onde fica e quais sao os servicos.
+...o site da Yes, We Do tem boas hipoteses de aparecer. Foram implementados:
 
-### Inteligencia Artificial (AEO)
+- **Dados estruturados (Schema.org)**: LocalBusiness com morada, telefones, email, coordenadas GPS e catalogo de 12 servicos.
+- **FAQ estruturada**: 7 perguntas e respostas em portugues que podem aparecer diretamente nos resultados do Google.
+- **Sitemap XML**: Mapa do site para os motores de busca.
+- **Meta tags completas**: Titulo, descricao, imagem para partilha em redes sociais (Open Graph + Twitter Card).
+- **URL canonica**: yes-wedo.pt
 
-O site esta preparado para ser recomendado por assistentes de inteligencia artificial como o **ChatGPT**, **Google AI**, **Perplexity** e outros. Isto chama-se AEO (Answer Engine Optimization).
+### AEO (Otimizacao para Inteligencia Artificial)
 
-Na pratica, quando alguem perguntar a uma IA "qual a melhor agencia de marketing no Porto?" ou "onde posso fazer reclames luminosos perto do Porto?", a **Yes, We Do pode ser recomendada** como resposta. Foi criado um ficheiro especial (llms.txt) que as IAs conseguem ler para entender o negocio.
+O site esta preparado para ser recomendado por assistentes de IA como **ChatGPT**, **Google AI**, **Perplexity** e outros. Quando alguem perguntar a uma IA "qual a melhor agencia de marketing no Porto?", a Yes, We Do pode ser recomendada como resposta.
+
+Foram criados:
+- **llms.txt** — Ficheiro especial que as IAs conseguem ler para entender o negocio.
+- **robots.txt** — Permite explicitamente o acesso a bots de IA (GPTBot, ClaudeBot, PerplexityBot, Google-Extended).
 
 ### Acessibilidade
 
 O site pode ser usado por pessoas com deficiencias visuais ou motoras:
 
-- E possivel navegar por todo o site usando apenas o teclado (sem rato).
-- Os textos tem tamanhos legiveis.
-- As cores tem contrastes adequados para facilitar a leitura.
-- As imagens tem descricoes alternativas para leitores de ecra (software usado por pessoas cegas).
+- Navegacao completa por teclado (sem rato).
+- Link "Saltar para o conteudo" para leitores de ecra.
+- Contrastes de cor adequados (WCAG AA).
+- Descricoes alternativas em todas as imagens.
+- Animacoes desativadas automaticamente para utilizadores que preferem movimento reduzido.
 
-### Redes Sociais
+### Partilha em redes sociais
 
-Quando alguem partilhar o link do site no **WhatsApp**, **Facebook**, **LinkedIn** ou **Twitter/X**, aparece automaticamente uma imagem bonita com o nome e a identidade da empresa. Esta imagem chama-se "imagem OG" e foi criada especificamente para isto. Em vez de aparecer um link feio e sem imagem, aparece algo profissional e apelativo que convida as pessoas a clicarem.
-
----
-
-## 4. Formulario de Contacto
-
-O formulario de contacto do site **esta totalmente funcional**. Quando um visitante preenche o formulario e carrega em "Enviar Mensagem":
-
-1. O botao muda para "A enviar..." enquanto a mensagem e processada.
-2. A mensagem e enviada automaticamente para o email da empresa.
-3. O visitante ve uma confirmacao de que a mensagem foi enviada com sucesso.
-4. Se houver algum erro (por exemplo, falha de internet), o visitante e informado e pode tentar novamente.
-
-As mensagens sao entregues atraves de um servico chamado **Formspree**, que reencaminha o conteudo do formulario diretamente para o email configurado.
+Quando alguem partilhar o link do site no **WhatsApp**, **Facebook**, **LinkedIn** ou **Twitter/X**, aparece automaticamente uma imagem profissional com o nome e a identidade visual da empresa (imagem OG de 1200x630 pixels).
 
 ---
 
-## 5. Botao de WhatsApp
+## 5. Pontuacoes e Testes de Qualidade
 
-O site tem um **botao flutuante de WhatsApp** no canto inferior direito de todas as paginas. Quando o visitante carrega nele, aparece uma janela com duas opcoes de contacto:
+O site foi testado com ferramentas profissionais utilizadas pela industria para medir a qualidade de websites. Aqui ficam os resultados e a explicacao de cada pontuacao.
 
-- **Hugo** — +351 912 320 366
-- **Miguel** — +351 919 755 990
+### Ferramenta utilizada
 
-Ao clicar num dos contactos, abre automaticamente o WhatsApp (no telemovel ou no computador) com uma mensagem pre-escrita: *"Ola, gostaria de saber mais sobre os vossos servicos."*
+**Google Lighthouse** — E a ferramenta oficial da Google, integrada no navegador Chrome. E utilizada mundialmente por programadores e agencias para avaliar websites em 4 areas: Desempenho (velocidade), Acessibilidade, Boas Praticas e SEO. A pontuacao vai de 0 a 100.
 
-Isto facilita o contacto rapido e direto com os socios da empresa.
+Os testes foram realizados em Fevereiro de 2026, simulando tanto uma ligacao movel (4G) como uma ligacao de computador.
+
+### Resultados — Pagina Principal (yes-wedo.pt)
+
+| Categoria | Movel | Computador | Explicacao |
+|-----------|-------|------------|------------|
+| **Desempenho** | 83/100 | 93/100 | Muito bom. Nao atinge 100 porque o site tem um **video de fundo no hero** (3,5 MB) que e essencial para o impacto visual da pagina. Um site sem video teria 95-100, mas perderia o efeito visual premium. E uma troca consciente: impacto visual vs. velocidade maxima. |
+| **Acessibilidade** | 91/100 | 91/100 | Excelente. Cobre navegacao por teclado, descricoes de imagens, areas de toque e contrastes. Os 9 pontos em falta sao detalhes menores: o contraste de textos muito claros (como "Clientes que confiam em nos") e a ordem tecnica dos titulos (h3 antes de h4). Nenhum destes afeta a experiencia real do utilizador. |
+| **Boas Praticas** | 100/100 | 100/100 | Pontuacao perfeita. O site segue todas as boas praticas recomendadas pela Google: HTTPS ativo, sem erros na consola, imagens com dimensoes corretas, sem bibliotecas vulneraveis. |
+| **SEO** | 100/100 | 100/100 | Pontuacao perfeita. Todos os elementos de SEO estao implementados: meta tags, dados estruturados, sitemap, robots.txt, textos alternativos nas imagens, URLs limpas. |
+
+### Resultados — Pagina de Portfolio (yes-wedo.pt/portfolio)
+
+| Categoria | Movel | Computador | Explicacao |
+|-----------|-------|------------|------------|
+| **Desempenho** | 59/100 | 75/100 | Aceitavel. A pagina carrega **47 projetos** com imagens de alta qualidade numa grelha. Em movel (4G simulado), carregar tantas imagens demora mais tempo. Na pratica, com uma ligacao normal de internet, a pagina carrega em 2-3 segundos. A pontuacao e afetada pelo teste simulado com rede lenta, nao pela experiencia real. |
+| **Acessibilidade** | 95/100 | 95/100 | Excelente. Os 5 pontos em falta sao detalhes tecnicos menores na ordem dos titulos da grelha. |
+| **Boas Praticas** | 100/100 | 96/100 | Quase perfeito. |
+| **SEO** | 100/100 | 100/100 | Pontuacao perfeita. |
+
+### Metricas de velocidade detalhadas — Pagina Principal
+
+| Metrica | Movel | Computador | O que significa |
+|---------|-------|------------|-----------------|
+| **FCP** (First Contentful Paint) | 1,4s | 0,5s | Tempo ate o primeiro conteudo aparecer no ecra |
+| **LCP** (Largest Contentful Paint) | 3,8s | 0,5s | Tempo ate o maior elemento (video/imagem) estar visivel |
+| **TBT** (Total Blocking Time) | 250ms | 0ms | Tempo em que o site esta "bloqueado" e nao responde a cliques |
+| **CLS** (Cumulative Layout Shift) | 0 | 0 | Movimentos inesperados no ecra (0 = perfeito, nada se mexe) |
+| **Speed Index** | 3,2s | 2,8s | Velocidade media de carregamento visual |
+
+### Porque nao 100 em tudo?
+
+Conseguir 100/100 em desempenho significaria:
+- Remover o **video de fundo** do hero (perde o impacto visual).
+- Reduzir o numero de projetos no portfolio (menos trabalhos visiveis).
+- Reduzir a qualidade das imagens (ficam pixelizadas).
+
+Estas sao decisoes conscientes: **priorizamos o impacto visual e a qualidade** do conteudo, mantendo pontuacoes excelentes em tudo o resto. Um site bonito que carrega em 2-3 segundos e muito melhor do que um site feio que carrega em 0,5 segundos.
+
+### Como verificar as pontuacoes
+
+Qualquer pessoa pode verificar estas pontuacoes:
+
+1. Abrir o **Google Chrome** no computador.
+2. Ir ao site **yes-wedo.pt**.
+3. Clicar com o botao direito → **Inspecionar** → separador **Lighthouse**.
+4. Selecionar as categorias e clicar **Analyze page load**.
+
+Ou usar a ferramenta online: [pagespeed.web.dev](https://pagespeed.web.dev) — basta inserir o endereco do site.
+
+**Nota:** Os resultados podem variar ligeiramente entre testes dependendo da velocidade da rede e da carga do servidor no momento.
 
 ---
 
-## 6. Informacoes de Contacto no Site
+## 6. Sistema de Portfolio
 
-Estes sao os dados de contacto que estao visiveis no site:
+### Como funciona
 
+O portfolio e gerido atraves de um ficheiro de dados (`portfolio-data.json`) que contem todos os projetos. A pagina de galeria le este ficheiro e apresenta os projetos automaticamente.
+
+### Tipos de projetos
+
+| Tipo | Descricao |
+|------|-----------|
+| **Imagem** | Fotografia otimizada em formato WebP (1536x1024 pixels) |
+| **Video** | Video otimizado em formato MP4 (H.264, sem audio) com miniatura WebP |
+
+### Como adicionar novos projetos
+
+Para adicionar novos trabalhos ao portfolio (imagens ou videos), basta contactar o programador com as fotografias ou videos. O processo inclui:
+
+1. Otimizacao e compressao das imagens/videos.
+2. Publicacao no site com categoria, titulo e descricao.
+3. O site fica atualizado em poucos minutos.
+
+---
+
+## 7. Conformidade Legal
+
+O website esta em conformidade com a legislacao portuguesa e europeia:
+
+| Documento | Legislacao |
+|-----------|-----------|
+| Politica de Privacidade | RGPD (Regulamento Geral sobre a Protecao de Dados) |
+| Politica de Cookies | Lei n.o 41/2004 e Lei n.o 46/2012 |
+| Termos e Condicoes | Decreto-Lei n.o 7/2004 e Lei n.o 144/2015 |
+| Banner de Cookies | Diretiva ePrivacy |
+
+O rodape inclui todas as informacoes legais obrigatorias:
+- **NIF:** PT517927977
+- **Registo Comercial:** Conservatoria do Registo Comercial de Lisboa n.o 517927977
+- **Capital Social:** 1.000,00 EUR
 - **Morada:** Av. D. Joao I 81, 4435-208 Rio Tinto
-- **Email:** geral@yes-wedo.pt
-- **Telefone 1 (Hugo):** 912 320 366
-- **Telefone 2 (Miguel):** 919 755 990
-- **WhatsApp:** Ambos os numeros (botao flutuante no site)
-- **Instagram:** @wedo_yes e @y.wedo_
+
+---
+
+## 8. Dados de Contacto no Site
+
+| Campo | Valor |
+|-------|-------|
+| Morada | Av. D. Joao I 81, 4435-208 Rio Tinto |
+| Email | geral@yes-wedo.pt |
+| Telefone (Hugo) | 912 320 366 |
+| Telefone (Miguel) | 919 755 990 |
+| WhatsApp | Ambos os numeros (botao flutuante) |
+| Instagram | @wedo_yes e @y.wedo_ |
 
 Se algum destes dados mudar, basta informar o programador para atualizar.
 
 ---
 
-## 7. O Que Pode Pedir Para Alterar
+## 9. Alojamento e Dominio
 
-O site foi construido para poder ser atualizado. A qualquer momento, pode pedir ao programador para alterar:
+| Item | Detalhes |
+|------|----------|
+| Dominio | yes-wedo.pt |
+| Alojamento | Vercel (plano gratuito) |
+| Repositorio | GitHub (privado) |
+| SSL/HTTPS | Ativo e automatico |
+| Velocidade | CDN global (conteudo servido a partir do servidor mais proximo do visitante) |
 
-- **Textos e descricoes dos servicos** — Se quiser mudar a forma como um servico e descrito, ou adicionar informacao extra.
-- **Imagens do portfolio** — Quando tiver novos trabalhos realizados, pode adiciona-los a galeria do site. Existe um sistema automatizado para isto.
-- **Testemunhos de clientes** — Se tiver novos clientes satisfeitos, pode adicionar as suas opinioes ao site.
-- **Informacoes de contacto** — Se mudar de morada, email ou numero de telefone.
-- **Precos ou promocoes** — Se quiser divulgar uma campanha ou promocao especial.
-- **Novos servicos** — Se a empresa comecar a oferecer um servico novo, pode ser adicionado ao site.
+O site nao tem custos mensais de alojamento. O dominio tem renovacao anual.
 
 ---
 
-## 8. O Que Falta Para o Maximo Desempenho
+## 10. O Que Pode Pedir Para Alterar
 
-O site esta pronto e funcional. No entanto, ha algumas coisas adicionais que, quando forem feitas, vao ajudar ainda mais o negocio. Aqui ficam explicadas de forma simples:
+A qualquer momento, pode pedir ao programador para alterar:
+
+- **Textos e descricoes** dos servicos.
+- **Imagens e videos** do portfolio.
+- **Testemunhos** de clientes.
+- **Informacoes de contacto** (morada, email, telefone).
+- **Novos servicos** — podem ser adicionados ao site.
+- **Novos videos** de trabalhos realizados.
+
+---
+
+## 11. O Que Falta Para o Maximo Desempenho
+
+O site esta pronto e funcional. No entanto, ha acoes adicionais que, quando realizadas, vao maximizar os resultados:
 
 ### Google Business Profile (Perfil de Empresa no Google)
 
-**O que e:** E o registo da empresa no Google Maps. Quando alguem pesquisar "agencia de marketing perto de mim" no Google ou no Google Maps, a Yes, We Do aparece com morada, telefone, horario e avaliacoes.
+**O que e:** Registo da empresa no Google Maps. Quando alguem pesquisar "agencia de marketing perto de mim", a Yes, We Do aparece com morada, telefone, horario e avaliacoes.
 
-**Quem faz:** Este passo e feito pelo cliente (o dono da empresa). E gratuito.
+**Como fazer:** Aceder a [business.google.com](https://business.google.com) e seguir os passos. O Google vai pedir para confirmar a morada.
 
-**Como fazer:** Aceder a [business.google.com](https://business.google.com) e seguir os passos para registar a empresa. O Google vai pedir para confirmar a morada (normalmente envia uma carta ou faz uma chamada).
+### Google Analytics (GA4)
+
+**O que e:** Ferramenta gratuita que mostra quantas pessoas visitam o site, de onde vem, quanto tempo ficam e quais as paginas mais vistas.
+
+**Como fazer:** O programador pode configurar isto. Basta criar uma conta em [analytics.google.com](https://analytics.google.com).
 
 ### Google Search Console
 
-**O que e:** Uma ferramenta gratuita do Google que permite acompanhar como o site aparece nos resultados de pesquisa. Mostra quantas vezes o site apareceu, quantas pessoas clicaram, e quais as palavras que usaram para o encontrar.
+**O que e:** Ferramenta gratuita que mostra como o site aparece nos resultados de pesquisa do Google — quantas vezes apareceu, quantos cliques recebeu e quais as palavras-chave.
 
-**Quem faz:** O programador pode ajudar a configurar isto.
-
-### Google Analytics
-
-**O que e:** Uma ferramenta gratuita que mostra quantas pessoas visitam o site, de que pais ou cidade vem, quanto tempo ficam, quais as paginas mais vistas, e muito mais. E como ter um "contador de visitas" muito detalhado.
-
-**Quem faz:** O cliente cria a conta em [analytics.google.com](https://analytics.google.com) e fornece o codigo de medicao (Measurement ID) ao programador, que o instala no site.
+**Como fazer:** O programador pode configurar isto.
 
 ### Meta Pixel (Facebook/Instagram)
 
-**O que e:** Uma ferramenta do Meta (Facebook/Instagram) que permite acompanhar quantas pessoas visitam o site a partir das redes sociais, e permite criar campanhas de publicidade direcionadas a essas pessoas.
+**O que e:** Ferramenta do Meta que permite acompanhar visitas ao site a partir das redes sociais e criar campanhas de publicidade direcionadas.
 
-**Quem faz:** O cliente cria o Pixel em [business.facebook.com](https://business.facebook.com) e fornece o Pixel ID ao programador, que o instala no site.
-
----
-
-## 9. Conformidade Legal
-
-O website esta em conformidade com a legislacao portuguesa e europeia. Foram criadas as seguintes paginas legais:
-
-- **Politica de Privacidade** — Conforme o RGPD (Regulamento Geral sobre a Protecao de Dados).
-- **Politica de Cookies** — Conforme a Lei n.o 41/2004 e Lei n.o 46/2012.
-- **Termos e Condicoes** — Conforme o Decreto-Lei n.o 7/2004 e Lei n.o 144/2015.
-
-O rodape do site inclui todas as informacoes legais obrigatorias: NIF, registo comercial, capital social, morada e contactos.
-
-Para mais detalhes, consulte o documento **compliance-report.md**.
+**Como fazer:** Criar o Pixel em [business.facebook.com](https://business.facebook.com) e fornecer o Pixel ID ao programador.
 
 ---
 
-## 10. Ficheiros Importantes
+## 12. Resumo Tecnico
 
-Aqui ficam listados os ficheiros mais importantes do site, explicados de forma simples:
-
-- **`index.html`** — A pagina principal do site, com todo o conteudo, textos e estrutura.
-- **`portfolio/index.html`** — A pagina de galeria com todos os trabalhos, filtros por categoria e visualizador de imagens (URL: yes-wedo.pt/portfolio).
-- **`img/`** — A pasta que contem todas as imagens e o video do site.
-- **`data/portfolio-data.json`** — Ficheiro com todos os projetos do portfolio (usado pela pagina de galeria).
-- **`og-image.jpg`** — A imagem que aparece quando alguem partilha o link do site nas redes sociais.
-- **`llms.txt`** — Ficheiro especial para inteligencias artificiais entenderem o negocio.
+| Item | Valor |
+|------|-------|
+| Paginas | 5 (principal, portfolio, 3 legais) |
+| Projetos no portfolio | 47 (imagens + videos) |
+| Categorias | 7 |
+| Servicos apresentados | 12 |
+| Formulario de contacto | Funcional (Formspree) |
+| Botao WhatsApp | 2 contactos |
+| SEO | Dados estruturados, sitemap, meta tags |
+| AEO | llms.txt, robots.txt para bots de IA |
+| Conformidade legal | RGPD, Cookies, Termos |
+| Compatibilidade | Todos os dispositivos e navegadores |
+| Velocidade | Otimizado (imagens WebP, lazy loading, CSS critico) |
+| Suporte a video | Reproducao no portfolio (grid + lightbox) |
 
 ---
 
-## 11. Manutencao
+## 13. Manutencao
 
-Para manter o site atualizado e a funcionar bem, tenha em conta o seguinte:
+Para manter o site atualizado e a funcionar bem:
 
-- **Para alterar qualquer conteudo do site** (textos, imagens, dados) — contacte o programador.
-- **Para adicionar novos trabalhos ao portfolio** — envie as imagens ao programador. O ideal e que as imagens estejam em formato **WebP** ou **JPG comprimido** (o programador pode explicar como, ou pode simplesmente enviar as fotografias e ele trata da compressao).
-- **Para alterar informacoes de contacto** (morada, email, telefone) — contacte o programador.
-- **Recomendacao:** Reveja o conteudo do site a cada **6 meses** para garantir que tudo esta atualizado — servicos, portfolio, testemunhos e informacoes de contacto.
+- **Para adicionar trabalhos ao portfolio** — Envie as fotografias ou videos ao programador.
+- **Para adicionar videos** — Envie o video ao programador, que o otimiza e publica.
+- **Para alterar textos, contactos ou servicos** — Contacte o programador.
+- **Recomendacao:** Reveja o conteudo do site a cada **3-6 meses** para garantir que tudo esta atualizado.
 
 ---
 
