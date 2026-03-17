@@ -470,6 +470,15 @@
             "title": "Sinalética \"Outlet\"",
             "description": "Letras recortadas e seta indicativa — Sinalética interior",
             "date": "2026-03-17"
+        },
+        {
+            "id": 52,
+            "image": "img/portfolio/abreu-madeira.webp",
+            "alt": "Abreu - Madeira — Stand promocional com imagem impressa.",
+            "category": "Stands & Eventos",
+            "title": "Abreu - Madeira",
+            "description": "Stand promocional com imagem impressa.",
+            "date": "2026-03-17"
         }
     ]
 }
