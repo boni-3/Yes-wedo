@@ -488,6 +488,15 @@
             "title": "SPMEC - Backdrop Espelhado",
             "description": "Estrutura para evento com bolas espelhadas e reclame luminoso.",
             "date": "2026-03-17"
+        },
+        {
+            "id": 54,
+            "image": "img/portfolio/homy-casa-jysk.webp",
+            "alt": "Homy Casa & Jysk — Lonas impressas para fachada comercial.",
+            "category": "Lonas & Impressão",
+            "title": "Homy Casa & Jysk",
+            "description": "Lonas impressas para fachada comercial.",
+            "date": "2026-03-17"
         }
     ]
 }
