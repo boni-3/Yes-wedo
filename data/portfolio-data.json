@@ -452,6 +452,15 @@
             "title": "Espinho Auto",
             "description": "Reclame luminoso exterior com néon — Automóveis",
             "date": "2026-03-17"
+        },
+        {
+            "id": 50,
+            "image": "img/portfolio/abreu-expo-premio.webp",
+            "alt": "Abreu - Expo Prémio — Stand promocional com imagem turística.",
+            "category": "Stands & Eventos",
+            "title": "Abreu - Expo Prémio",
+            "description": "Stand promocional com imagem turística.",
+            "date": "2026-03-17"
         }
     ]
 }
