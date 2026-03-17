@@ -497,6 +497,15 @@
             "title": "Lusíadas HeyDoc",
             "description": "Stand promocional desportivo",
             "date": "2026-03-17"
+        },
+        {
+            "id": 55,
+            "image": "img/portfolio/lusiadas-heydoc-lona.webp",
+            "alt": "Lusíadas HeyDoc - Lona — Lona impressa com design promocional.",
+            "category": "Lonas & Impressão",
+            "title": "Lusíadas HeyDoc - Lona",
+            "description": "Lona impressa com design promocional.",
+            "date": "2026-03-17"
         }
     ]
 }
