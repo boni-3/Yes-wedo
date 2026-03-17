@@ -479,6 +479,15 @@
             "title": "Abreu - Madeira",
             "description": "Stand promocional com imagem impressa.",
             "date": "2026-03-17"
+        },
+        {
+            "id": 53,
+            "image": "img/portfolio/spmec-backdrop-espelhado.webp",
+            "alt": "SPMEC - Backdrop Espelhado — Estrutura para evento com bolas espelhadas e reclame luminos",
+            "category": "Stands & Eventos",
+            "title": "SPMEC - Backdrop Espelhado",
+            "description": "Estrutura para evento com bolas espelhadas e reclame luminoso.",
+            "date": "2026-03-17"
         }
     ]
 }
