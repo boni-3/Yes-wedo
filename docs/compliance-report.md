@@ -63,7 +63,7 @@ Os dados do formulário são processados pela **Formspree, Inc.** (EUA), que atu
 A Política de Privacidade indica claramente o meio de contacto para exercício dos direitos dos titulares dos dados:
 
 - **Email:** geral@yes-wedo.pt
-- **Correio:** Yes Wedo, Lda., Rua dos Azevinhos, 123 Hab. 4.1, 4510-501 Fânzeres, Portugal
+- **Correio:** Yes Wedo, Lda., Av. D. João I 81, 4435-208 Rio Tinto, Portugal
 
 O prazo de resposta é de 30 dias, conforme o RGPD.
 
