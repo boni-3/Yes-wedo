@@ -488,6 +488,15 @@
             "title": "SPMEC - Backdrop Espelhado",
             "description": "Estrutura para evento com bolas espelhadas e reclame luminoso.",
             "date": "2026-03-17"
+        },
+        {
+            "id": 54,
+            "image": "img/portfolio/lusiadas-heydoc.webp",
+            "alt": "Lusíadas HeyDoc — Stand promocional desportivo",
+            "category": "Stands & Eventos",
+            "title": "Lusíadas HeyDoc",
+            "description": "Stand promocional desportivo",
+            "date": "2026-03-17"
         }
     ]
 }
