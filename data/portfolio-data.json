@@ -443,6 +443,15 @@
             "title": "Decoração de Parede Geométrica",
             "description": "Aplicação de letras recortadas em parede interior",
             "date": "2026-03-06"
+        },
+        {
+            "id": 49,
+            "image": "img/portfolio/espinho-auto-2.webp",
+            "alt": "Espinho Auto — Reclame luminoso exterior com néon — Automóveis",
+            "category": "Reclames Luminosos",
+            "title": "Espinho Auto",
+            "description": "Reclame luminoso exterior com néon — Automóveis",
+            "date": "2026-03-17"
         }
     ]
 }
