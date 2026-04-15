@@ -1,4 +1,15 @@
 {
     "cleanUrls": true,
-    "trailingSlash": false
+    "trailingSlash": false,
+    "headers": [
+        {
+            "source": "/simulador-copinow-pedro-a7k9x2/(.*)",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow, noarchive, nosnippet"
+                }
+            ]
+        }
+    ]
 }
