@@ -1,9 +1,21 @@
 {
     "cleanUrls": true,
     "trailingSlash": false,
-    "headers": [
+    "redirects": [
+        {
+            "source": "/simulador-copinow-pedro-a7k9x2",
+            "destination": "/copynow/",
+            "permanent": true
+        },
         {
             "source": "/simulador-copinow-pedro-a7k9x2/(.*)",
+            "destination": "/copynow/$1",
+            "permanent": true
+        }
+    ],
+    "headers": [
+        {
+            "source": "/copynow/(.*)",
             "headers": [
                 {
                     "key": "X-Robots-Tag",

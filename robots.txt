@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /js/
 Disallow: /css/
+Disallow: /copynow/
 Disallow: /simulador-copinow-pedro-a7k9x2/
 
 # AI Crawlers — explicitly allowed
