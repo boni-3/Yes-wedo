@@ -12,7 +12,7 @@
     "projects": [
         {
             "id": 1,
-            "image": "img/portfolio/reclame-lusiadas.webp",
+            "image": "/img/portfolio/reclame-lusiadas.webp",
             "alt": "Lettering Monobloco c/ iluminação Led — Lusíadas Hospital Paços de Ferreira",
             "category": "Reclames Luminosos",
             "title": "Lettering Monobloco c/ iluminação Led",
@@ -21,7 +21,7 @@
         },
         {
             "id": 2,
-            "image": "img/portfolio/amani-spa.webp",
+            "image": "/img/portfolio/amani-spa.webp",
             "alt": "Amani Spa Reclame Luminoso",
             "category": "Reclames Luminosos",
             "title": "Amani Spa",
@@ -30,7 +30,7 @@
         },
         {
             "id": 3,
-            "image": "img/portfolio/cleva.webp",
+            "image": "/img/portfolio/cleva.webp",
             "alt": "Cleva Letras 3D",
             "category": "Letras Recortadas",
             "title": "Cleva",
@@ -39,7 +39,7 @@
         },
         {
             "id": 4,
-            "image": "img/portfolio/vogue-stand.webp",
+            "image": "/img/portfolio/vogue-stand.webp",
             "alt": "Vogue Stand Evento",
             "category": "Stands & Eventos",
             "title": "Vogue",
@@ -48,7 +48,7 @@
         },
         {
             "id": 5,
-            "image": "img/portfolio/steve-madden.webp",
+            "image": "/img/portfolio/steve-madden.webp",
             "alt": "Steve Madden Exposição",
             "category": "Stands & Eventos",
             "title": "Steve Madden",
@@ -57,7 +57,7 @@
         },
         {
             "id": 6,
-            "image": "img/portfolio/norboxe-motor.webp",
+            "image": "/img/portfolio/norboxe-motor.webp",
             "alt": "Norboxe Stand Motos",
             "category": "Stands & Eventos",
             "title": "Norboxe",
@@ -66,7 +66,7 @@
         },
         {
             "id": 7,
-            "image": "img/portfolio/sinaletica-homycasa.webp",
+            "image": "/img/portfolio/sinaletica-homycasa.webp",
             "alt": "HomyCasa junto - Estrutura Outdoor",
             "category": "Sinaléticas",
             "title": "HomyCasa junto - Estrutura Outdoor",
@@ -75,7 +75,7 @@
         },
         {
             "id": 8,
-            "image": "img/portfolio/spmec-backdrop.webp",
+            "image": "/img/portfolio/spmec-backdrop.webp",
             "alt": "SPMEC — Medicina Estética — Backdrop fotográfico para o 8.º Congresso Nacional",
             "category": "Stands & Eventos",
             "title": "SPMEC — Medicina Estética",
@@ -84,7 +84,7 @@
         },
         {
             "id": 9,
-            "image": "img/portfolio/spmec-bandeiras.webp",
+            "image": "/img/portfolio/spmec-bandeiras.webp",
             "alt": "SPMEC — Bandeiras — Bandeiras fly banner para o Congresso de Medicina ",
             "category": "Stands & Eventos",
             "title": "SPMEC — Bandeiras",
@@ -93,7 +93,7 @@
         },
         {
             "id": 10,
-            "image": "img/portfolio/spmec-lona-grande.webp",
+            "image": "/img/portfolio/spmec-lona-grande.webp",
             "alt": "SPMEC — Lona Grande Formato — Lona de grande formato para o Congresso de Medicin",
             "category": "Lonas & Impressão",
             "title": "SPMEC — Lona Grande Formato",
@@ -102,7 +102,7 @@
         },
         {
             "id": 13,
-            "image": "img/portfolio/spmec-stand-institucional.webp",
+            "image": "/img/portfolio/spmec-stand-institucional.webp",
             "alt": "SPMEC — Stand Institucional — Stand com impressão em tecido para a Sociedade Por",
             "category": "Stands & Eventos",
             "title": "SPMEC — Stand Institucional",
@@ -111,7 +111,7 @@
         },
         {
             "id": 14,
-            "image": "img/portfolio/renault-decoracao-viatura.webp",
+            "image": "/img/portfolio/renault-decoracao-viatura.webp",
             "alt": "Renault — Decoração de viatura com vinil — Renault Elf racin",
             "category": "Decoração de Viaturas",
             "title": "Renault",
@@ -120,7 +120,7 @@
         },
         {
             "id": 15,
-            "image": "img/portfolio/homy-casa-reclame.webp",
+            "image": "/img/portfolio/homy-casa-reclame.webp",
             "alt": "Reclamo Luminoso c/ base e letras monobloco iluminadas Led — HomyCasa",
             "category": "Reclames Luminosos",
             "title": "Reclamo Luminoso c/ base e letras monobloco iluminadas Led",
@@ -129,7 +129,7 @@
         },
         {
             "id": 16,
-            "image": "img/portfolio/lusiadas-braga-lona.webp",
+            "image": "/img/portfolio/lusiadas-braga-lona.webp",
             "alt": "Lusíadas Hospital Braga — Lona de grande formato — Lusíadas Hospital Braga",
             "category": "Lonas & Impressão",
             "title": "Lusíadas Hospital Braga",
@@ -138,7 +138,7 @@
         },
         {
             "id": 17,
-            "image": "img/portfolio/cs-pet-care-montra.webp",
+            "image": "/img/portfolio/cs-pet-care-montra.webp",
             "alt": "C's Pet Care — Decoração de montra e sinalética — C's Pet Care",
             "category": "Decoração de Montras",
             "title": "C's Pet Care",
@@ -147,7 +147,7 @@
         },
         {
             "id": 18,
-            "image": "img/portfolio/weego-evento.webp",
+            "image": "/img/portfolio/weego-evento.webp",
             "alt": "Weego — Bandeiras e sinalética para evento Weego — Feira d",
             "category": "Stands & Eventos",
             "title": "Weego",
@@ -156,7 +156,7 @@
         },
         {
             "id": 19,
-            "image": "img/portfolio/lusiadas-porto-contentor.webp",
+            "image": "/img/portfolio/lusiadas-porto-contentor.webp",
             "alt": "Lusíadas Hospital Porto — Decoração de contentor — Serviço Médico Lusíadas H",
             "category": "Lonas & Impressão",
             "title": "Lusíadas Hospital Porto",
@@ -165,7 +165,7 @@
         },
         {
             "id": 20,
-            "image": "img/portfolio/spmec-balcao-recepcao.webp",
+            "image": "/img/portfolio/spmec-balcao-recepcao.webp",
             "alt": "SPMEC — Receção — Balcão de receção com impressão em vinil — Congres",
             "category": "Stands & Eventos",
             "title": "SPMEC — Receção",
@@ -174,7 +174,7 @@
         },
         {
             "id": 21,
-            "image": "img/portfolio/spmec-press-wall.webp",
+            "image": "/img/portfolio/spmec-press-wall.webp",
             "alt": "SPMEC — Press Wall — Press wall iluminado com impressão em tecido — Con",
             "category": "Stands & Eventos",
             "title": "SPMEC — Press Wall",
@@ -183,7 +183,7 @@
         },
         {
             "id": 22,
-            "image": "img/portfolio/steve-madden-exposicao.webp",
+            "image": "/img/portfolio/steve-madden-exposicao.webp",
             "alt": "Ativação de Marca - Steve Madden — Exposição com sapatilha gigante e passadeira rosa",
             "category": "Stands & Eventos",
             "title": "Ativação de Marca - Steve Madden",
@@ -192,7 +192,7 @@
         },
         {
             "id": 23,
-            "image": "img/portfolio/liu-jo-evento.webp",
+            "image": "/img/portfolio/liu-jo-evento.webp",
             "alt": "Liu Jo — Evento — Backdrop floral e photobooth para evento Liu Jo St",
             "category": "Stands & Eventos",
             "title": "Liu Jo — Evento",
@@ -201,7 +201,7 @@
         },
         {
             "id": 24,
-            "image": "img/portfolio/liu-jo-stand-exterior.webp",
+            "image": "/img/portfolio/liu-jo-stand-exterior.webp",
             "alt": "Liu Jo — Stand Exterior — Stand promocional exterior para Liu Jo Milano — Po",
             "category": "Stands & Eventos",
             "title": "Liu Jo — Stand Exterior",
@@ -210,7 +210,7 @@
         },
         {
             "id": 25,
-            "image": "img/portfolio/liu-jo-stand-porto.webp",
+            "image": "/img/portfolio/liu-jo-stand-porto.webp",
             "alt": "Liu Jo — Stand Porto — Stand promocional com vista para Torre dos Clérigo",
             "category": "Stands & Eventos",
             "title": "Liu Jo — Stand Porto",
@@ -219,7 +219,7 @@
         },
         {
             "id": 26,
-            "image": "img/portfolio/lusiadas-letras-recortadas.webp",
+            "image": "/img/portfolio/lusiadas-letras-recortadas.webp",
             "alt": "Lusíadas — Letras Recortadas — Letras recortadas 3D em PVC — Interior clínica Lus",
             "category": "Letras Recortadas",
             "title": "Lusíadas — Letras Recortadas",
@@ -228,7 +228,7 @@
         },
         {
             "id": 27,
-            "image": "img/portfolio/vogue-fashion-night-entrada.webp",
+            "image": "/img/portfolio/vogue-fashion-night-entrada.webp",
             "alt": "Vogue — Fashion Night In — Pórtico iluminado com passadeira — Galleria Vogue ",
             "category": "Stands & Eventos",
             "title": "Vogue — Fashion Night In",
@@ -237,7 +237,7 @@
         },
         {
             "id": 28,
-            "image": "img/portfolio/vogue-photobooth.webp",
+            "image": "/img/portfolio/vogue-photobooth.webp",
             "alt": "Vogue — Photobooth — Estrutura cúbica com impressão Vogue Portugal — No",
             "category": "Stands & Eventos",
             "title": "Vogue — Photobooth",
@@ -246,7 +246,7 @@
         },
         {
             "id": 29,
-            "image": "img/portfolio/vogue-fashion-night-portico.webp",
+            "image": "/img/portfolio/vogue-fashion-night-portico.webp",
             "alt": "Vogue — Fashion Night — Pórtico iluminado Galleria Vogue — NorteShopping F",
             "category": "Stands & Eventos",
             "title": "Vogue — Fashion Night",
@@ -255,7 +255,7 @@
         },
         {
             "id": 30,
-            "image": "img/portfolio/lusiadas-pacos-ferreira.webp",
+            "image": "/img/portfolio/lusiadas-pacos-ferreira.webp",
             "alt": "Lusíadas Paços Ferreira — Lona impressa de grande formato — Estádio futebol",
             "category": "Lonas & Impressão",
             "title": "Lusíadas Paços Ferreira",
@@ -264,7 +264,7 @@
         },
         {
             "id": 31,
-            "image": "img/portfolio/lusiadas-hospital-maia.webp",
+            "image": "/img/portfolio/lusiadas-hospital-maia.webp",
             "alt": "Reclamo Luminoso de grande dimensão em Monobloco com iluminação Led — Lusíadas Hospital Maia",
             "category": "Reclames Luminosos",
             "title": "Reclamo Luminoso de grande dimensão em Monobloco com iluminação Led",
@@ -273,7 +273,7 @@
         },
         {
             "id": 32,
-            "image": "img/portfolio/lusiadas-sinaletica-interior.webp",
+            "image": "/img/portfolio/lusiadas-sinaletica-interior.webp",
             "alt": "Lusíadas — Sinalética Interior — Sinalética informativa para elevador.",
             "category": "Sinaléticas",
             "title": "Lusíadas — Sinalética Interior",
@@ -282,7 +282,7 @@
         },
         {
             "id": 33,
-            "image": "img/portfolio/ruiz-costa.webp",
+            "image": "/img/portfolio/ruiz-costa.webp",
             "alt": "Ruiz Costa — Lona impressa de grande formato — Fachada",
             "category": "Lonas & Impressão",
             "title": "Ruiz Costa",
@@ -291,7 +291,7 @@
         },
         {
             "id": 34,
-            "image": "img/portfolio/lusiadas-maia-shopping.webp",
+            "image": "/img/portfolio/lusiadas-maia-shopping.webp",
             "alt": "Lusíadas Maia Shopping — Lona de grande formato com publicidade — Lusíadas Maia",
             "category": "Lonas & Impressão",
             "title": "Lusíadas Maia Shopping",
@@ -300,7 +300,7 @@
         },
         {
             "id": 35,
-            "image": "img/portfolio/mira-maia-shopping.webp",
+            "image": "/img/portfolio/mira-maia-shopping.webp",
             "alt": "Mira Maia Shopping — Letras 3D sem iluminação — Fachada",
             "category": "Letras Recortadas",
             "title": "Mira Maia Shopping",
@@ -309,7 +309,7 @@
         },
         {
             "id": 36,
-            "image": "img/portfolio/lusiadas-hospital-maia-2.webp",
+            "image": "/img/portfolio/lusiadas-hospital-maia-2.webp",
             "alt": "Lusíadas Hospital Maia — Sinalética direcional vertical para interior.",
             "category": "Sinaléticas",
             "title": "Lusíadas Hospital Maia",
@@ -318,7 +318,7 @@
         },
         {
             "id": 37,
-            "image": "img/portfolio/lusiadas-hospital-braga.webp",
+            "image": "/img/portfolio/lusiadas-hospital-braga.webp",
             "alt": "Lusíadas Hospital Braga — Sinalética interior informativa de piso e parque.",
             "category": "Sinaléticas",
             "title": "Lusíadas Hospital Braga",
@@ -327,7 +327,7 @@
         },
         {
             "id": 38,
-            "image": "img/portfolio/espinho-auto.webp",
+            "image": "/img/portfolio/espinho-auto.webp",
             "alt": "Espinho Auto — Reclame luminoso com letras LED — Fachada",
             "category": "Reclames Luminosos",
             "title": "Espinho Auto",
@@ -336,7 +336,7 @@
         },
         {
             "id": 39,
-            "image": "img/portfolio/lusiadas-maia.webp",
+            "image": "/img/portfolio/lusiadas-maia.webp",
             "alt": "Decoração em vinil - Montras provisórias — Lusíadas Hospital Maia",
             "category": "Decoração de Montras",
             "title": "Decoração em vinil - Montras provisórias",
@@ -345,7 +345,7 @@
         },
         {
             "id": 40,
-            "image": "img/portfolio/hospital-lapa.webp",
+            "image": "/img/portfolio/hospital-lapa.webp",
             "alt": "Hospital Lapa — Roll-ups promocionais e informativos — Hospital",
             "category": "Stands & Eventos",
             "title": "Hospital Lapa",
@@ -354,7 +354,7 @@
         },
         {
             "id": 41,
-            "image": "img/portfolio/sinaletica-interior-departamentos-hospital.webp",
+            "image": "/img/portfolio/sinaletica-interior-departamentos-hospital.webp",
             "alt": "Sinalética Interior Departamentos Hospital — Placa sinalética informativa com vários departamentos",
             "category": "Sinaléticas",
             "title": "Sinalética Interior Departamentos Hospital",
@@ -363,7 +363,7 @@
         },
         {
             "id": 42,
-            "image": "img/portfolio/lusiadas-hospital-maia-3.webp",
+            "image": "/img/portfolio/lusiadas-hospital-maia-3.webp",
             "alt": "Lusíadas Hospital Maia — Lona impressa de grande formato — Fachada exterior",
             "category": "Lonas & Impressão",
             "title": "Lusíadas Hospital Maia",
@@ -372,7 +372,7 @@
         },
         {
             "id": 43,
-            "image": "img/portfolio/medicina-aeronautica-rececao.webp",
+            "image": "/img/portfolio/medicina-aeronautica-rececao.webp",
             "alt": "Medicina Aeronáutica Receção — Sinalética para balcão de receção — Sinalização interior",
             "category": "Sinaléticas",
             "title": "Medicina Aeronáutica Receção",
@@ -381,7 +381,7 @@
         },
         {
             "id": 44,
-            "image": "img/portfolio/lusiadas-hospital-maia-4.webp",
+            "image": "/img/portfolio/lusiadas-hospital-maia-4.webp",
             "alt": "Lusíadas Hospital Maia — Lona impressa de grande formato — Interior",
             "category": "Lonas & Impressão",
             "title": "Lusíadas Hospital Maia",
@@ -390,7 +390,7 @@
         },
         {
             "id": 45,
-            "image": "img/portfolio/lusiadas-hospital-porto.webp",
+            "image": "/img/portfolio/lusiadas-hospital-porto.webp",
             "alt": "Lusíadas Hospital Porto — Sinaléticas direcionais e informativas para o hospital.",
             "category": "Sinaléticas",
             "title": "Lusíadas Hospital Porto",
@@ -399,7 +399,7 @@
         },
         {
             "id": 46,
-            "image": "img/portfolio/lusiadas-hospital-maia-5.webp",
+            "image": "/img/portfolio/lusiadas-hospital-maia-5.webp",
             "alt": "Lusíadas Hospital Maia — Reclame luminoso com imagem impressa — Entrada",
             "category": "Reclames Luminosos",
             "title": "Lusíadas Hospital Maia",
@@ -409,8 +409,8 @@
         {
             "id": 47,
             "type": "video",
-            "image": "img/portfolio/instalacao-lona-hospital.webp",
-            "video": "img/portfolio/instalacao-lona-hospital.mp4",
+            "image": "/img/portfolio/instalacao-lona-hospital.webp",
+            "video": "/img/portfolio/instalacao-lona-hospital.mp4",
             "alt": "Instalação de lona em hospital — Vídeo de instalação de lona de grande formato",
             "category": "Lonas & Impressão",
             "title": "Instalação de Lona — Hospital",
@@ -419,7 +419,7 @@
         },
         {
             "id": 48,
-            "image": "img/portfolio/decoracao-de-parede-geometrica.webp",
+            "image": "/img/portfolio/decoracao-de-parede-geometrica.webp",
             "alt": "Decoração de Parede Geométrica — Aplicação de letras recortadas em parede interior",
             "category": "Letras Recortadas",
             "title": "Decoração de Parede Geométrica",
@@ -428,7 +428,7 @@
         },
         {
             "id": 49,
-            "image": "img/portfolio/espinho-auto-2.webp",
+            "image": "/img/portfolio/espinho-auto-2.webp",
             "alt": "Espinho Auto — Reclame luminoso exterior com néon — Automóveis",
             "category": "Reclames Luminosos",
             "title": "Espinho Auto",
@@ -437,7 +437,7 @@
         },
         {
             "id": 50,
-            "image": "img/portfolio/abreu-expo-premio.webp",
+            "image": "/img/portfolio/abreu-expo-premio.webp",
             "alt": "Abreu - Expo Prémio — Stand promocional com imagem turística.",
             "category": "Stands & Eventos",
             "title": "Abreu - Expo Prémio",
@@ -446,7 +446,7 @@
         },
         {
             "id": 51,
-            "image": "img/portfolio/sinaletica-outlet.webp",
+            "image": "/img/portfolio/sinaletica-outlet.webp",
             "alt": "Sinalética \"Outlet\" — Letras recortadas e seta indicativa — Sinalética interior",
             "category": "Letras Recortadas",
             "title": "Sinalética \"Outlet\"",
@@ -455,7 +455,7 @@
         },
         {
             "id": 52,
-            "image": "img/portfolio/abreu-madeira.webp",
+            "image": "/img/portfolio/abreu-madeira.webp",
             "alt": "Abreu - Madeira — Stand promocional com imagem impressa.",
             "category": "Stands & Eventos",
             "title": "Abreu - Madeira",
@@ -464,7 +464,7 @@
         },
         {
             "id": 53,
-            "image": "img/portfolio/spmec-backdrop-espelhado.webp",
+            "image": "/img/portfolio/spmec-backdrop-espelhado.webp",
             "alt": "SPMEC - Backdrop Espelhado — Estrutura para evento com bolas espelhadas e reclame luminos",
             "category": "Stands & Eventos",
             "title": "SPMEC - Backdrop Espelhado",
@@ -473,7 +473,7 @@
         },
         {
             "id": 54,
-            "image": "img/portfolio/lusiadas-heydoc.webp",
+            "image": "/img/portfolio/lusiadas-heydoc.webp",
             "alt": "Lusíadas HeyDoc — Stand promocional desportivo",
             "category": "Stands & Eventos",
             "title": "Lusíadas HeyDoc",
@@ -482,7 +482,7 @@
         },
         {
             "id": 55,
-            "image": "img/portfolio/lusiadas-heydoc-lona.webp",
+            "image": "/img/portfolio/lusiadas-heydoc-lona.webp",
             "alt": "Lusíadas HeyDoc - Lona — Lona impressa com design promocional.",
             "category": "Lonas & Impressão",
             "title": "Lusíadas HeyDoc - Lona",
