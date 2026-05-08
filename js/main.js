@@ -619,7 +619,7 @@
                 } else {
                     if (lbVideo) { lbVideo.style.display = 'none'; lbVideo.removeAttribute('src'); lbVideo.load(); }
                     lbImg.style.display = '';
-                    lbImg.src = p.image;
+                    lbImg.src = p.imageFull || p.image;
                     lbImg.alt = p.alt;
                 }
                 lbTitle.textContent = p.title;

@@ -64,24 +64,30 @@ while IFS='|' read -r filename category title description; do
     SLUG="${filename%.*}"
     SLUG=$(echo "$SLUG" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
     WEBP_NAME="${SLUG}.webp"
+    FULL_NAME="${SLUG}-full.webp"
     DEST="$PORTFOLIO_DIR/$WEBP_NAME"
+    FULL_DEST="$PORTFOLIO_DIR/$FULL_NAME"
 
-    # Convert to WebP 1536x1024
+    # Convert to WebP 1536x1024 (cropped thumbnail for grid)
     echo "  Converting: $filename -> $WEBP_NAME"
     cwebp -resize 1536 1024 -q 80 "$SRC" -o "$DEST" 2>/dev/null
+
+    # Generate uncropped full version for lightbox (max 1920px on longest side)
+    magick "$SRC" -resize "1920x1920>" -quality 85 "$FULL_DEST" 2>/dev/null
 
     # Generate alt text from title and category
     ALT="$title $category"
 
-    # Add entry to JSON
-    jq --arg img "img/portfolio/$WEBP_NAME" \
+    # Add entry to JSON (image = thumb, imageFull = uncropped)
+    jq --arg img "/img/portfolio/$WEBP_NAME" \
+       --arg full "/img/portfolio/$FULL_NAME" \
        --arg alt "$ALT" \
        --arg cat "$category" \
        --arg ttl "$title" \
        --arg desc "$description" \
        --arg date "$TODAY" \
        --argjson id "$NEXT_ID" \
-       '.projects += [{id: $id, image: $img, alt: $alt, category: $cat, title: $ttl, description: $desc, date: $date}]' \
+       '.projects += [{id: $id, image: $img, imageFull: $full, alt: $alt, category: $cat, title: $ttl, description: $desc, date: $date}]' \
        "$DATA_FILE" > "${DATA_FILE}.tmp" && mv "${DATA_FILE}.tmp" "$DATA_FILE"
 
     # Add category if new

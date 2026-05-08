@@ -2,15 +2,16 @@
 """
 Yes, We Do — Portfolio Telegram Bot
 
-Receives photos via Telegram and automatically:
+Receives photos and videos via Telegram and automatically:
   1. Analyzes with Gemini AI (free) to detect category/title/description
-  2. Enhances with Real-ESRGAN via upscayl-bin (free, local)
-  3. Converts to optimized WebP
-  4. Updates portfolio-data.json
-  5. Commits & pushes to GitHub Pages
+  2. Enhances images with Real-ESRGAN via upscayl-bin (free, local)
+  3. Optimizes videos with ffmpeg (H.264, 1.5Mbps, no audio)
+  4. Converts thumbnails to optimized WebP
+  5. Updates portfolio-data.json
+  6. Commits & pushes to GitHub Pages
 
 Usage:
-  Just send a photo — AI does the rest!
+  Just send a photo or video — AI does the rest!
   Optional: add a caption to override AI detection:
     Categoria | Título | Descrição
 
@@ -48,6 +49,10 @@ PROJECT_DIR = Path("/Users/ryanalves/Yes-wedo")
 PORTFOLIO_JSON = PROJECT_DIR / "data" / "portfolio-data.json"
 PORTFOLIO_IMG_DIR = PROJECT_DIR / "img" / "portfolio"
 PROCESSING_DIR = PROJECT_DIR / "img" / "portfolio" / "_processing"
+
+# Video settings
+VIDEO_BITRATE = "1500k"
+VIDEO_MAX_SIZE_MB = 20  # Telegram bot API limit for downloading files
 
 UPSCAYL_BIN = "/Applications/Upscayl.app/Contents/Resources/bin/upscayl-bin"
 UPSCAYL_MODELS = "/Applications/Upscayl.app/Contents/Resources/models"
@@ -209,14 +214,89 @@ def run(cmd, desc):
     return result
 
 
+def extract_thumbnail(video_path, output_path):
+    """Extract a representative frame from video and convert to WebP thumbnail."""
+    # Get video duration to pick a frame at ~30%
+    probe = subprocess.run(
+        ["ffprobe", "-v", "quiet", "-show_entries", "format=duration",
+         "-of", "default=noprint_wrappers=1:nokey=1", str(video_path)],
+        capture_output=True, text=True, timeout=30,
+    )
+    duration = float(probe.stdout.strip()) if probe.stdout.strip() else 5.0
+    seek_time = min(duration * 0.3, duration - 0.5)
+
+    tmp_jpg = output_path.parent / f"{output_path.stem}_thumb.jpg"
+
+    # Extract frame
+    run(
+        ["ffmpeg", "-y", "-ss", str(seek_time), "-i", str(video_path),
+         "-frames:v", "1",
+         "-vf", f"scale={TARGET_WIDTH}:{TARGET_HEIGHT}:force_original_aspect_ratio=increase,crop={TARGET_WIDTH}:{TARGET_HEIGHT}",
+         "-q:v", "2", str(tmp_jpg)],
+        "Extract thumbnail frame",
+    )
+
+    # Convert to WebP
+    run(
+        ["cwebp", "-q", str(WEBP_QUALITY), str(tmp_jpg), "-o", str(output_path)],
+        "Thumbnail to WebP",
+    )
+
+    tmp_jpg.unlink(missing_ok=True)
+    return output_path
+
+
+def process_video(input_path, slug):
+    """Optimize video with ffmpeg and generate WebP thumbnail."""
+    PROCESSING_DIR.mkdir(parents=True, exist_ok=True)
+
+    output_mp4 = PORTFOLIO_IMG_DIR / f"{slug}.mp4"
+    output_webp = PORTFOLIO_IMG_DIR / f"{slug}.webp"
+
+    # 1 — Optimize video (H.264, capped bitrate, no audio, faststart)
+    run(
+        ["ffmpeg", "-y", "-i", str(input_path),
+         "-c:v", "libx264", "-preset", "slow",
+         "-b:v", VIDEO_BITRATE, "-maxrate", VIDEO_BITRATE, "-bufsize", "3000k",
+         "-an", "-movflags", "+faststart", "-pix_fmt", "yuv420p",
+         str(output_mp4)],
+        "Optimize video (H.264)",
+    )
+
+    # 2 — Extract thumbnail and convert to WebP
+    extract_thumbnail(output_mp4, output_webp)
+
+    # 3 — Cleanup
+    input_path.unlink(missing_ok=True)
+
+    return output_mp4, output_webp
+
+
 def process_image(input_path, slug):
-    """Resize → AI upscale → resize back → WebP."""
+    """Resize → AI upscale → resize back → WebP. Also produces -full.webp uncropped (for lightbox)."""
     PROCESSING_DIR.mkdir(parents=True, exist_ok=True)
 
     resized = PROCESSING_DIR / f"{slug}_1_resized.png"
     upscaled = PROCESSING_DIR / f"{slug}_2_upscaled.png"
     final = PROCESSING_DIR / f"{slug}_3_final.png"
     output = PORTFOLIO_IMG_DIR / f"{slug}.webp"
+    output_full = PORTFOLIO_IMG_DIR / f"{slug}-full.webp"
+
+    # 0 — Generate uncropped "full" version for lightbox (max 1920px on longest side)
+    full_tmp = PROCESSING_DIR / f"{slug}_0_full.png"
+    run(
+        [
+            "magick", str(input_path),
+            "-resize", "1920x1920>",
+            "-quality", "95",
+            str(full_tmp),
+        ],
+        "Generate uncropped full version",
+    )
+    run(
+        ["cwebp", "-q", "85", str(full_tmp), "-o", str(output_full)],
+        "Convert full to WebP",
+    )
 
     # 1 — Resize to target dimensions (crop-to-fill)
     run(
@@ -278,16 +358,23 @@ def process_image(input_path, slug):
     return output
 
 
-def git_deploy(slug, title):
+def git_deploy(slug, title, is_video=False):
     """Stage, commit, push to GitHub Pages."""
     os.chdir(PROJECT_DIR)
 
+    files_to_add = ["data/portfolio-data.json", f"img/portfolio/{slug}.webp"]
+    if is_video:
+        files_to_add.append(f"img/portfolio/{slug}.mp4")
+    else:
+        files_to_add.append(f"img/portfolio/{slug}-full.webp")
+
     run(
-        ["git", "add", f"img/portfolio/{slug}.webp", "data/portfolio-data.json"],
+        ["git", "add"] + files_to_add,
         "Git add",
     )
+    commit_type = "video" if is_video else "image"
     run(
-        ["git", "commit", "-m", f"feat(portfolio): add {title}"],
+        ["git", "commit", "-m", f"feat(portfolio): add {commit_type} {title}"],
         "Git commit",
     )
 
@@ -324,8 +411,8 @@ async def cmd_start(update, context):
 
     await update.message.reply_text(
         "*Yes, We Do — Portfolio Bot*\n\n"
-        "Envia uma foto e a IA faz tudo automaticamente!\n\n"
-        "A IA analisa a imagem e detecta:\n"
+        "Envia uma foto ou video e a IA faz tudo automaticamente!\n\n"
+        "A IA analisa e detecta:\n"
         "  - Categoria\n"
         "  - Titulo\n"
         "  - Descricao\n\n"
@@ -355,8 +442,8 @@ async def cmd_id(update, context):
     await update.message.reply_text(f"`{update.effective_user.id}`", parse_mode="Markdown")
 
 
-async def process_and_deploy(update, context, input_path, category, title, description):
-    """Shared processing pipeline for photos and documents."""
+async def process_and_deploy(update, context, input_path, category, title, description, is_video=False):
+    """Shared processing pipeline for photos, documents, and videos."""
     slug = slugify(title)
 
     # Check duplicate slug — append number if needed
@@ -366,22 +453,33 @@ async def process_and_deploy(update, context, input_path, category, title, descr
         slug = f"{original_slug}-{counter}"
         counter += 1
 
+    media_type = "Video" if is_video else "Foto"
     status_msg = await update.message.reply_text(
-        f"1/5 — Foto recebida: *{title}*\n"
+        f"1/5 — {media_type} recebido: *{title}*\n"
         f"Categoria: {category}\n"
         f"{description}",
         parse_mode="Markdown",
     )
 
     try:
-        # Step 2: Process image
-        await status_msg.edit_text(
-            f"2/5 — A melhorar com IA *{title}*...\n(pode demorar ~30s)",
-            parse_mode="Markdown",
-        )
-
         loop = asyncio.get_event_loop()
-        output = await loop.run_in_executor(None, process_image, input_path, slug)
+
+        if is_video:
+            # Step 2: Process video
+            await status_msg.edit_text(
+                f"2/5 — A otimizar video *{title}*...\n(pode demorar ~60s)",
+                parse_mode="Markdown",
+            )
+            output_mp4, output_webp = await loop.run_in_executor(
+                None, process_video, input_path, slug
+            )
+        else:
+            # Step 2: Process image
+            await status_msg.edit_text(
+                f"2/5 — A melhorar com IA *{title}*...\n(pode demorar ~30s)",
+                parse_mode="Markdown",
+            )
+            output_webp = await loop.run_in_executor(None, process_image, input_path, slug)
 
         # Step 3: Update JSON
         await status_msg.edit_text(
@@ -390,17 +488,21 @@ async def process_and_deploy(update, context, input_path, category, title, descr
         )
 
         data = load_portfolio()
-        data["projects"].append(
-            {
-                "id": next_id(data),
-                "image": f"img/portfolio/{slug}.webp",
-                "alt": f"{title} — {description[:60]}",
-                "category": category,
-                "title": title,
-                "description": description,
-                "date": date.today().isoformat(),
-            }
-        )
+        project_entry = {
+            "id": next_id(data),
+            "image": f"/img/portfolio/{slug}.webp",
+            "alt": f"{title} — {description[:60]}",
+            "category": category,
+            "title": title,
+            "description": description,
+            "date": date.today().isoformat(),
+        }
+        if is_video:
+            project_entry["type"] = "video"
+            project_entry["video"] = f"/img/portfolio/{slug}.mp4"
+        else:
+            project_entry["imageFull"] = f"/img/portfolio/{slug}-full.webp"
+        data["projects"].append(project_entry)
         save_portfolio(data)
 
         # Step 4: Git deploy
@@ -409,21 +511,33 @@ async def process_and_deploy(update, context, input_path, category, title, descr
             parse_mode="Markdown",
         )
 
-        await loop.run_in_executor(None, git_deploy, slug, title)
+        await loop.run_in_executor(None, git_deploy, slug, title, is_video)
 
         # Done
-        size_kb = output.stat().st_size // 1024
+        size_kb = output_webp.stat().st_size // 1024
         input_path.unlink(missing_ok=True)
 
-        await status_msg.edit_text(
-            f"*{title}* adicionado!\n\n"
-            f"`{slug}.webp` ({size_kb}KB)\n"
-            f"*Categoria:* {category}\n"
-            f"*Descricao:* {description}\n\n"
-            f"https://yes-wedo.pt/portfolio",
-            parse_mode="Markdown",
-        )
-        log.info(f"SUCCESS: {slug}.webp ({size_kb}KB) deployed")
+        if is_video:
+            mp4_size_kb = output_mp4.stat().st_size // 1024
+            await status_msg.edit_text(
+                f"*{title}* adicionado!\n\n"
+                f"`{slug}.mp4` ({mp4_size_kb}KB) + `{slug}.webp` ({size_kb}KB)\n"
+                f"*Categoria:* {category}\n"
+                f"*Descricao:* {description}\n\n"
+                f"https://yes-wedo.pt/portfolio",
+                parse_mode="Markdown",
+            )
+            log.info(f"SUCCESS: {slug}.mp4 ({mp4_size_kb}KB) + {slug}.webp ({size_kb}KB) deployed")
+        else:
+            await status_msg.edit_text(
+                f"*{title}* adicionado!\n\n"
+                f"`{slug}.webp` ({size_kb}KB)\n"
+                f"*Categoria:* {category}\n"
+                f"*Descricao:* {description}\n\n"
+                f"https://yes-wedo.pt/portfolio",
+                parse_mode="Markdown",
+            )
+            log.info(f"SUCCESS: {slug}.webp ({size_kb}KB) deployed")
 
     except Exception as e:
         log.exception(f"Error processing {title}")
@@ -436,10 +550,13 @@ async def process_and_deploy(update, context, input_path, category, title, descr
             f.unlink(missing_ok=True)
         webp = PORTFOLIO_IMG_DIR / f"{slug}.webp"
         webp.unlink(missing_ok=True)
+        if is_video:
+            mp4 = PORTFOLIO_IMG_DIR / f"{slug}.mp4"
+            mp4.unlink(missing_ok=True)
 
 
-async def download_and_process(update, context, input_path):
-    """Download image, analyze with AI if no caption, then process."""
+async def download_and_process(update, context, input_path, is_video=False):
+    """Download media, analyze with AI if no caption, then process."""
     user = update.effective_user
     if not is_authorized(user.id):
         await update.message.reply_text("Nao autorizado.")
@@ -471,15 +588,35 @@ async def download_and_process(update, context, input_path):
             return
 
         analyzing_msg = await update.message.reply_text(
-            "A analisar a imagem com IA...",
+            "A analisar com IA...",
         )
 
         loop = asyncio.get_event_loop()
-        result = await loop.run_in_executor(None, analyze_image, input_path)
+
+        if is_video:
+            # Extract a thumbnail frame for AI analysis
+            thumb_path = PROCESSING_DIR / f"thumb_{input_path.stem}.jpg"
+            PROCESSING_DIR.mkdir(parents=True, exist_ok=True)
+            try:
+                await loop.run_in_executor(
+                    None,
+                    lambda: run(
+                        ["ffmpeg", "-y", "-ss", "3", "-i", str(input_path),
+                         "-frames:v", "1", "-q:v", "2", str(thumb_path)],
+                        "Extract frame for AI",
+                    ),
+                )
+                result = await loop.run_in_executor(None, analyze_image, thumb_path)
+                thumb_path.unlink(missing_ok=True)
+            except Exception:
+                thumb_path.unlink(missing_ok=True)
+                result = None
+        else:
+            result = await loop.run_in_executor(None, analyze_image, input_path)
 
         if not result:
             await analyzing_msg.edit_text(
-                "A IA nao conseguiu analisar a imagem.\n"
+                "A IA nao conseguiu analisar.\n"
                 "Envia com legenda:\n`Categoria | Titulo | Descricao`",
                 parse_mode="Markdown",
             )
@@ -489,7 +626,7 @@ async def download_and_process(update, context, input_path):
         await analyzing_msg.delete()
         log.info(f"AI detected: {category} | {title} | {description}")
 
-    await process_and_deploy(update, context, input_path, category, title, description)
+    await process_and_deploy(update, context, input_path, category, title, description, is_video=is_video)
 
 
 async def handle_photo(update, context):
@@ -504,20 +641,51 @@ async def handle_photo(update, context):
     await download_and_process(update, context, input_path)
 
 
-async def handle_document(update, context):
-    """Handle uncompressed images sent as files."""
-    doc = update.message.document
-    if not doc or not doc.mime_type or not doc.mime_type.startswith("image/"):
+async def handle_video(update, context):
+    """Handle compressed videos sent via Telegram."""
+    video = update.message.video
+    if not video:
+        return
+
+    # Check file size (Telegram Bot API can download up to 20MB)
+    if video.file_size and video.file_size > VIDEO_MAX_SIZE_MB * 1024 * 1024:
+        await update.message.reply_text(
+            f"Video demasiado grande ({video.file_size // (1024*1024)}MB).\n"
+            f"Maximo: {VIDEO_MAX_SIZE_MB}MB.\n"
+            "Envia como ficheiro ou comprime primeiro.",
+            parse_mode="Markdown",
+        )
         return
 
     PROCESSING_DIR.mkdir(parents=True, exist_ok=True)
-    ext = doc.file_name.rsplit(".", 1)[-1] if doc.file_name else "jpg"
+    input_path = PROCESSING_DIR / f"temp_{update.message.message_id}.mp4"
+
+    file = await context.bot.get_file(video.file_id)
+    await file.download_to_drive(str(input_path))
+
+    await download_and_process(update, context, input_path, is_video=True)
+
+
+async def handle_document(update, context):
+    """Handle uncompressed images or videos sent as files."""
+    doc = update.message.document
+    if not doc or not doc.mime_type:
+        return
+
+    is_video = doc.mime_type.startswith("video/")
+    is_image = doc.mime_type.startswith("image/")
+
+    if not is_video and not is_image:
+        return
+
+    PROCESSING_DIR.mkdir(parents=True, exist_ok=True)
+    ext = doc.file_name.rsplit(".", 1)[-1] if doc.file_name else ("mp4" if is_video else "jpg")
     input_path = PROCESSING_DIR / f"temp_{update.message.message_id}.{ext}"
 
     file = await context.bot.get_file(doc.file_id)
     await file.download_to_drive(str(input_path))
 
-    await download_and_process(update, context, input_path)
+    await download_and_process(update, context, input_path, is_video=is_video)
 
 
 # ── Main ───────────────────────────────────────────────────────────
@@ -542,6 +710,7 @@ def main():
     app.add_handler(CommandHandler("status", cmd_status))
     app.add_handler(CommandHandler("id", cmd_id))
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
+    app.add_handler(MessageHandler(filters.VIDEO, handle_video))
     app.add_handler(MessageHandler(filters.Document.ALL, handle_document))
 
     log.info("Bot running — send /start in Telegram")

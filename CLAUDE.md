@@ -92,6 +92,18 @@ npx terser js/main.js -c -m -o js/main.min.js
 
 The contact form submits via `fetch` POST to **Formspree** (`https://formspree.io/f/mzdaewqk`). It sends `FormData` with JSON accept header, shows "A enviar..." while processing, resets on success, and displays an error message with auto-recovery on failure. Emails are delivered to the agency inbox.
 
+### Asset paths must be ABSOLUTE (start with `/`)
+
+`vercel.json` has `trailingSlash: true`, so `/portfolio` is served as `/portfolio/`. Any **relative** path used inside that page (e.g. `img/portfolio/foo.webp`) is resolved against `/portfolio/`, becoming `/portfolio/img/portfolio/foo.webp` → **404**.
+
+**Rule:** every asset path that ends up in an `<img src>`, `<video src>`, `<source src>`, or any `fetch()` URL — whether written by hand, by `add-portfolio.sh`, or by the Telegram bot — **MUST start with `/`**. This applies especially to:
+- `data/portfolio-data.json` → `image`, `video` fields
+- Any new automation that writes paths into JSON or HTML
+
+When in doubt, prefix with `/`. Never use `img/...`, always `/img/...`. Same for `data/`, `css/`, `js/`, `fonts/`.
+
+**Why this rule exists:** on 2026-04-15, `vercel.json` switched to `trailingSlash: true` to support `/copynow/`. Three weeks later the portfolio page broke (only alt text visible) because the JSON paths were relative. Fix: commit `60e3921` made all 54 paths absolute.
+
 ---
 
 ## HTML (index.html)
@@ -239,6 +251,8 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 8. **Telegram bot runs locally**: The bot requires the Mac to be running (uses local GPU for Real-ESRGAN upscale). If the Mac sleeps or restarts, the bot stops — restart manually.
 9. **Gemini free tier limits**: Google Gemini free tier allows 15 requests/minute, 1500/day. More than enough for portfolio use. If rate-limited, send with manual caption as fallback.
 10. **Duplicate slugs**: The bot auto-appends a number suffix (`-2`, `-3`, etc.) if a project with the same slug already exists.
+11. **Telegram video size limit**: Telegram Bot API can download files up to 20MB. For larger videos, compress first or send as a file. The bot validates file size before downloading.
+12. **Video AI analysis**: For videos, the bot extracts a frame at ~30% of duration for Gemini analysis. If the frame is not representative, use a manual caption instead.
 
 ---
 
@@ -266,7 +280,8 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 ```json
 {
     "id": 1,
-    "image": "img/portfolio/example.webp",
+    "image": "/img/portfolio/example.webp",
+    "imageFull": "/img/portfolio/example-full.webp",
     "alt": "Alt text",
     "category": "Category",
     "title": "Title",
@@ -275,13 +290,16 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 }
 ```
 
+- `image` → cropped 3:2 thumbnail used in the grid card.
+- `imageFull` → **uncropped** version (max 1920px on longest side, native aspect) used in the lightbox. Optional — JS falls back to `image` if missing (legacy projects).
+
 ### Video projects
 ```json
 {
     "id": 47,
     "type": "video",
-    "image": "img/portfolio/example.webp",
-    "video": "img/portfolio/example.mp4",
+    "image": "/img/portfolio/example.webp",
+    "video": "/img/portfolio/example.mp4",
     "alt": "Alt text",
     "category": "Category",
     "title": "Title",
@@ -293,6 +311,7 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 - `type` field is optional. Absent or any value other than `"video"` = image project (backward compatible).
 - `image` is always the WebP thumbnail (1536x1024). For videos, it serves as the grid card image and the `<video>` poster.
 - `video` is the MP4 path (only present for video projects).
+- **Paths MUST be absolute** (start with `/`). See "Asset paths must be ABSOLUTE" rule above.
 
 ---
 
@@ -300,15 +319,23 @@ The contact form submits via `fetch` POST to **Formspree** (`https://formspree.i
 
 ### Method 1: Telegram Bot (Recommended)
 
-Send a photo to **@Yeswedoworksbot** on Telegram — the AI handles everything automatically.
+Send a photo or video to **@Yeswedoworksbot** on Telegram — the AI handles everything automatically.
 
-The bot:
+**Photos:**
 1. Receives the photo (as image or file)
 2. Analyzes with **Gemini AI** to detect category, title, and description
 3. Enhances with **Real-ESRGAN** (upscayl-bin, local, free) — 4x upscale
 4. Resizes to 1536x1024 and converts to optimized **WebP** (~100-200KB)
 5. Updates `data/portfolio-data.json` with the new project entry
 6. Commits and pushes to GitHub Pages — live in ~35 seconds
+
+**Videos** (up to 20MB):
+1. Receives the video (as video or file)
+2. Extracts a frame and analyzes with **Gemini AI** to detect category, title, and description
+3. Optimizes with **ffmpeg** (H.264, 1.5Mbps cap, no audio, faststart)
+4. Generates a **WebP thumbnail** (1536x1024) from a representative frame
+5. Updates `data/portfolio-data.json` with `"type": "video"` entry
+6. Commits MP4 + WebP + JSON and pushes — live in ~35 seconds
 
 **Optional:** Add a caption in format `Categoria | Título | Descrição` to override AI detection.
 
@@ -350,7 +377,7 @@ Requires: `brew install webp jq`
 
 ### Method 3: Adding Videos (Manual)
 
-Videos are added manually (not supported by the Telegram bot or shell script):
+Videos can also be added manually (in addition to the Telegram bot):
 
 1. **Optimize the video** with ffmpeg:
    ```bash
@@ -401,22 +428,20 @@ Requires: `brew install ffmpeg webp`
 
 ### Overview
 
-A Telegram bot that automates the entire portfolio upload workflow. Send a photo from your phone — it appears on yes-wedo.pt in ~35 seconds. No typing required.
+A Telegram bot that automates the entire portfolio upload workflow. Send a photo or video from your phone — it appears on yes-wedo.pt in ~35 seconds. No typing required.
 
 ### Architecture
 
 ```
 📱 Telegram              🖥️ Mac (local)                    🌐 GitHub Pages
     │                         │                                 │
-    │  Send photo             │                                 │
-    │ ────────────────►  1. Download image                      │
+    │  Send photo/video       │                                 │
+    │ ────────────────►  1. Download media                      │
     │                    2. Gemini AI → detect category/title   │
-    │                    3. Resize 1536x1024 (ImageMagick)      │
-    │                    4. Upscale 4x (Real-ESRGAN, local)     │
-    │                    5. Resize back to 1536x1024            │
-    │                    6. Convert to WebP (cwebp)             │
-    │                    7. Update portfolio-data.json           │
-    │                    8. git commit + push ──────────────►   │
+    │                    3a. Images: Resize → AI Upscale → WebP │
+    │                    3b. Videos: ffmpeg optimize → thumbnail │
+    │                    4. Update portfolio-data.json           │
+    │                    5. git commit + push ──────────────►   │
     │                         │                            Auto-deploy
     │  ◄── "Added! ✅"       │                                 │
 ```
@@ -429,6 +454,7 @@ A Telegram bot that automates the entire portfolio upload workflow. Send a photo
 | Image analysis | Google Gemini 2.0 Flash API | Free (free tier) |
 | AI upscale | `upscayl-bin` (Real-ESRGAN, ultrasharp-4x) | Free (local) |
 | Image resize | ImageMagick (`magick`) | Free |
+| Video optimization | `ffmpeg` (H.264, 1.5Mbps, no audio) | Free |
 | WebP conversion | `cwebp` | Free |
 | Hosting/deploy | GitHub Pages | Free |
 
@@ -439,7 +465,7 @@ A Telegram bot that automates the entire portfolio upload workflow. Send a photo
 pip3 install python-telegram-bot google-genai
 
 # System tools (already installed via Homebrew)
-# brew install imagemagick webp
+# brew install imagemagick webp ffmpeg
 # brew install --cask upscayl
 ```
 
@@ -457,7 +483,8 @@ pip3 install python-telegram-bot google-genai
 | `telegram-bot/bot.py` | Bot source code |
 | `img/portfolio/_processing/` | Temp directory during image processing (auto-cleaned) |
 | `data/portfolio-data.json` | Portfolio data (updated by bot) |
-| `img/portfolio/<slug>.webp` | Final output images |
+| `img/portfolio/<slug>.webp` | Final output images/thumbnails |
+| `img/portfolio/<slug>.mp4` | Final output videos |
 | `/tmp/portfolio-bot.log` | Bot logs when running in background |
 
 ### Image Processing Pipeline
@@ -469,6 +496,15 @@ pip3 install python-telegram-bot google-genai
 5. **Resize Back** — ImageMagick resize from 6144x4096 back to 1536x1024 (sharper result)
 6. **WebP** — cwebp at quality 82 (~100-200KB output)
 7. **Cleanup** — Remove temp files from `_processing/`
+
+### Video Processing Pipeline
+
+1. **Download** — Telegram video (compressed) or video file (uncompressed, up to 20MB)
+2. **AI Analysis** — Extracts a frame at ~30% of duration, sends to Gemini for `Category | Title | Description`
+3. **Optimize** — ffmpeg H.264, `slow` preset, 1.5Mbps bitrate cap, no audio, `faststart` for streaming
+4. **Thumbnail** — Extracts frame at ~30% duration, scales to 1536x1024, converts to WebP (quality 82)
+5. **JSON** — Adds entry with `"type": "video"`, `"video"` (MP4 path) and `"image"` (WebP thumbnail)
+6. **Deploy** — Commits both MP4 + WebP + JSON, pushes to GitHub
 
 ### Gemini AI Prompt
 
