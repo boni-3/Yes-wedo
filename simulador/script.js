@@ -699,7 +699,7 @@ function getBlendFactorForText(font, text) {
  * PREÇO
  ********************************/
 const priceConfig = {
-  markup: 1.20 * 1.23,  // margem 20% + IVA 23% incluído
+  markup: 1.9853,  // alinhado com Gráfica Minuto e Copinow — PVP com IVA incluído
   minChars: 3,
   multiplierTwoLines: 1.43,
   tables: {
@@ -984,6 +984,7 @@ function buildOrderSummary() {
 
     shape:   lang.shapeMap[shapeVal]   || shapeVal,
     install: lang.installMap[installVal] || installVal,
+    power:   'Transformador / Fonte de alimentação incluído ✓',
     priceText,
     labels
   };
@@ -1002,6 +1003,7 @@ function buildWhatsAppMessage(s) {
 
     `• ${s.labels.shape}: ${s.shape}`,
     `• ${s.labels.install}: ${s.install}`,
+    `• Transformador: ${s.power}`,
     `• ${s.labels.price}: ${s.priceText}`
   ];
   return encodeURIComponent(lines.join('\n'));
@@ -1020,6 +1022,7 @@ function buildEmailBody(s) {
 
     `${s.labels.shape}: ${s.shape}`,
     `${s.labels.install}: ${s.install}`,
+    `Transformador: ${s.power}`,
     `${s.labels.price}: ${s.priceText}`
   ].join('%0A');
   return body;
@@ -1098,6 +1101,7 @@ function openCheckoutModal() {
 
       { label:labels.shape,   value:summary.shape,     cls:'' },
       { label:labels.install, value:summary.install,   cls:'' },
+      { label:'Transformador', value:summary.power,    cls:'' },
       { label:labels.price,   value:summary.priceText, cls:'price-row' }
     ];
     summaryEl.innerHTML = rows

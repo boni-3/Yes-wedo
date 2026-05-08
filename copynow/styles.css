@@ -165,7 +165,7 @@ main { display:flex; min-height:100vh; }
   padding:6px 4px 12px; margin-bottom:8px;
   border-bottom:1px solid rgba(255,255,255,.08);
 }
-.brand-logo { height:44px; width:auto; object-fit:contain; }
+.brand-logo { height:44px; width:auto; object-fit:contain; border-radius:6px; }
 .lang-select {
   background:#2b2c2f; color:#fff;
   border:1px solid #3a3a3a; border-radius:10px; padding:6px 10px;
@@ -359,7 +359,7 @@ textarea:focus { border-color:var(--brand-primary); outline:none; }
     height:calc(52px + env(safe-area-inset-top, 0px));
     box-sizing:border-box;
   }
-  #mobile-header .brand-logo          { height:28px; flex-shrink:0; }
+  #mobile-header .brand-logo          { height:28px; flex-shrink:0; border-radius:5px; }
   #mobile-header .lang-wrap           { flex-shrink:0; }
   #mobile-header .lang-select         { font-size:.76rem; padding:4px 6px; background:#2b2c2f; color:#fff; border:1px solid #3a3a3a; border-radius:10px; }
   #mobile-header .back-btn-mob {
