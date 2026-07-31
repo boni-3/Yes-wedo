@@ -314,17 +314,26 @@
      MODOS
      ========================================================================== */
 
-  function montaFlip() {
+  function montaFlip(retrato) {
     var el = document.getElementById('folheto');
     el.innerHTML = D.pages.map(function (p) { return render(p, D); }).join('');
     document.body.classList.add('modo-flip');
+    document.body.classList.toggle('modo-retrato', !!retrato);
     document.body.classList.remove('modo-scroll');
 
-    var disp = Math.min(window.innerWidth - 60, 1500);
-    var larg = Math.min(PW, Math.floor(disp / 2));
-    var alt = Math.round(larg * PH / PW);
-    var altMax = window.innerHeight - 170;
-    if (alt > altMax) { alt = altMax; larg = Math.round(alt * PW / PH); }
+    var larg, alt, altMax;
+    if (retrato) {
+      /* uma página só: aproveita o ecrã todo menos o espaço dos controlos */
+      altMax = window.innerHeight - 108;
+      larg = Math.min(window.innerWidth - 24, Math.round(altMax * PW / PH));
+      alt = Math.round(larg * PH / PW);
+    } else {
+      var disp = Math.min(window.innerWidth - 60, 1500);
+      larg = Math.min(PW, Math.floor(disp / 2));
+      alt = Math.round(larg * PH / PW);
+      altMax = window.innerHeight - 170;
+      if (alt > altMax) { alt = altMax; larg = Math.round(alt * PW / PH); }
+    }
 
     el.style.setProperty('--esc', (larg / PW).toFixed(4));
 
@@ -333,9 +342,10 @@
       size: 'fixed',
       showCover: true,
       maxShadowOpacity: 0.4,
-      mobileScrollSupport: false,
-      flippingTime: 750,
-      usePortrait: false
+      mobileScrollSupport: false,   // o arrasto vira a página, não faz scroll
+      flippingTime: retrato ? 600 : 750,
+      usePortrait: !!retrato,
+      swipeDistance: 20
     });
     flip.loadFromHTML(document.querySelectorAll('#folheto .pg'));
 
@@ -356,7 +366,7 @@
         marcaIndice(pg.id);
       }
       /* anima o spread visível — a página da esquerda e a da direita */
-      [i, i + 1].forEach(function (n) {
+      (modo === 'retrato' ? [i] : [i, i + 1]).forEach(function (n) {
         var p = D.pages[n];
         if (p) animaPagina(document.getElementById('p-' + p.id));
       });
@@ -374,7 +384,6 @@
     bs.setAttribute('aria-label', comSom ? 'Desligar som' : 'Ligar som ao virar a página');
     bs.setAttribute('aria-pressed', comSom ? 'true' : 'false');
     bs.onclick = alternaSom;
-    /* no desktop não havia forma de saltar para uma secção sem saber o hash */
     montaIndice();
     document.getElementById('ind').onclick = function () {
       document.getElementById('indice').classList.add('aberto');
@@ -506,17 +515,13 @@
       toast('Secção não encontrada — abrimos no início');
       return;
     }
-    if (modo === 'flip' && flip) { flip.flip(i); }
-    else {
-      var el = document.getElementById('p-' + id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (flip) flip.flip(i);
   }
 
   function paraVideos() {
     document.querySelectorAll('#folheto video').forEach(function (v) { v.pause(); });
     var i = flip ? flip.getCurrentPageIndex() : -1;
-    [i, i + 1].forEach(function (n) {
+    (modo === 'retrato' ? [i] : [i, i + 1]).forEach(function (n) {
       var pg = D.pages[n];
       if (!pg) return;
       var v = document.querySelector('#p-' + pg.id + ' video');
@@ -641,7 +646,7 @@
   });
 
   function tocaFolha() {
-    if (!comSom || modo !== 'flip') return;
+    if (!comSom) return;
     try {
       if (!audio) { audio = new Audio('/brochura/audio/folha.mp3'); audio.volume = .5; }
       audio.currentTime = 0;
@@ -729,9 +734,11 @@
 
   /* ---------- arranque ---------- */
 
+  /* O folheto é agora universal. No telemóvel mostra UMA página de cada vez
+     (retrato); no desktop mostra o spread de duas. O scroll vertical deixou
+     de ser usado — a metáfora do folheto vale nos dois. */
   function escolheModo() {
-    return (window.innerWidth >= LIMITE_FLIP &&
-            window.matchMedia('(pointer:fine)').matches) ? 'flip' : 'scroll';
+    return window.innerWidth >= LIMITE_FLIP ? 'flip' : 'retrato';
   }
 
   function arranca() {
@@ -742,7 +749,7 @@
     if (flip) { try { flip.destroy(); } catch (e) {} flip = null; }
     document.getElementById('folheto').innerHTML = '';
     document.getElementById('rolo').innerHTML = '';
-    if (modo === 'flip') montaFlip(); else montaScroll();
+    montaFlip(modo === 'retrato');
   }
 
   document.getElementById('ant').innerHTML = ICO.ant;
