@@ -19,8 +19,15 @@ Yes-wedo/
 ├── politica-cookies.html       # Cookie policy → /politica-cookies
 ├── termos-condicoes.html       # Terms and conditions → /termos-condicoes
 ├── vercel.json                 # Vercel config: cleanUrls, no trailing slash
+├── brochura/                   # Brochura institucional → /brochura (noindex)
+│   ├── index.html              # Versão digital: folheto com virar de página
+│   ├── brochura.css/.js        # + .min. (é o que o HTML carrega)
+│   ├── print.html/.css/.js     # Versão A4 para gráfica (Paged.js)
+│   ├── audio/folha.mp3         # Som de virar página (CC0)
+│   └── vendor/                 # StPageFlip + Paged.js, self-hosted
 ├── data/
-│   └── portfolio-data.json     # All portfolio projects (JSON, read by JS)
+│   ├── portfolio-data.json     # All portfolio projects (JSON, read by JS)
+│   └── brochura-content.json   # FONTE ÚNICA da brochura (print + digital)
 ├── css/
 │   ├── style.css               # Source CSS (includes pg-* gallery classes)
 │   ├── style.min.css           # Minified CSS — referenced by HTML
@@ -252,7 +259,15 @@ When in doubt, prefix with `/`. Never use `img/...`, always `/img/...`. Same for
 9. **Gemini free tier limits**: Google Gemini free tier allows 15 requests/minute, 1500/day. More than enough for portfolio use. If rate-limited, send with manual caption as fallback.
 10. **Duplicate slugs**: The bot auto-appends a number suffix (`-2`, `-3`, etc.) if a project with the same slug already exists.
 11. **Telegram video size limit**: Telegram Bot API can download files up to 20MB. For larger videos, compress first or send as a file. The bot validates file size before downloading.
-12. **Video AI analysis**: For videos, the bot extracts a frame at ~30% of duration for Gemini analysis. If the frame is not representative, use a manual caption instead.
+12. **Brochura — imagens em falta falham em silêncio**: os scripts de imagens leem o
+    `brochura-content.json`. Mudar uma imagem lá sem os correr outra vez produz uma
+    página vazia sem qualquer erro.
+13. **Chrome headless**: não sai depois do `--print-to-pdf` (o `build-brochura-pdf.sh`
+    já contorna); tem largura mínima de janela de 500px (`--window-size=430` é
+    ignorado e dá falsos overflows); e congela o relógio do GSAP, por isso as capturas
+    apanham sempre as animações a meio — usar `--force-prefers-reduced-motion` para
+    ver o estado final.
+14. **Video AI analysis**: For videos, the bot extracts a frame at ~30% of duration for Gemini analysis. If the frame is not representative, use a manual caption instead.
 
 ---
 
@@ -529,6 +544,47 @@ The bot switches GitHub auth to `boni-3` for push, then restores to `ade-studio3
 - `telegram-bot/.env` is in `.gitignore` — never commit API keys
 - `AUTHORIZED_USERS` list in bot.py can restrict access by Telegram user ID (empty = allow everyone)
 - Bot token and Gemini key are passed via environment variables only
+
+---
+
+## Brochura (`/brochura`)
+
+Brochura institucional de 16 páginas vendida ao cliente por 400 €. **Uma fonte de
+conteúdo, dois destinos**: `data/brochura-content.json` alimenta a versão A4 para
+gráfica e a versão digital interativa. Editar o copy só nesse JSON.
+
+**Estado e retoma: `docs/BROCHURA-ESTADO.md`** — começar sempre por aí.
+
+### Regras críticas
+
+- **`./build-brochura-estatico.py` antes de CADA deploy.** Gera o bloco `<noscript>`
+  com as 16 secções em HTML real (SEO + acessibilidade) a partir do JSON.
+- **Trocar uma imagem no JSON obriga a correr `./prep-print-images.sh` (para o PDF)
+  e `./prep-web-images.sh` (para o digital)** antes de gerar seja o que for.
+  Se não, a página sai **vazia, sem erro nenhum**. Já aconteceu duas vezes.
+- **Minificar CSS/JS da brochura** como no resto do site — o HTML só carrega `.min.`.
+- **Não fazer polling a yes-wedo.pt** para verificar deploys: ativa o *Security
+  Checkpoint* da Vercel e devolve 403 no site inteiro.
+- `img/brochura/print/`, `raw/` e `capas/*.png` estão no `.gitignore` (~400 MB
+  regeneráveis). **`img/brochura/web/` NÃO — é precisa em produção.**
+
+### Fluxo de deploy
+
+```bash
+./prep-web-images.sh          # se mudaram imagens
+./build-brochura-estatico.py  # sempre
+npx clean-css-cli brochura/brochura.css -o brochura/brochura.min.css
+npx terser brochura/brochura.js -c -m -o brochura/brochura.min.js
+```
+
+### Gerar o PDF de impressão
+
+```bash
+./build-brochura-pdf.sh          # RGB + CMYK com texto em curvas
+./build-brochura-pdf.sh --rgb    # só RGB, rápido, para iterar no design
+```
+
+Saídas em `docs/entrega/` (gitignored). 16 páginas A4, 3 mm bleed, marcas de corte.
 
 ---
 
