@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<title>Brochura — opções de capa claras</title>
+<link rel="stylesheet" href="/css/fonts.css">
+<style>
+  :root{ --orange:#F04320; --blue:#529BCA; --magenta:#BA046A; --dark-blue:#0F1B2D;
+         --paper:#F5F2EC; --fh:'Space Grotesk',sans-serif; --fb:'Inter',sans-serif; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#1a2434;color:#fff;font-family:var(--fb);padding:28px}
+  h1{font-family:var(--fh);font-size:19px;margin-bottom:4px}
+  .sub{color:#9fb0c4;font-size:13px;margin-bottom:22px}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .item .tag{font-family:var(--fh);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+             color:var(--orange);margin-bottom:5px}
+  .item .desc{color:#9fb0c4;font-size:11px;line-height:1.45;margin-top:7px;min-height:44px}
+
+  /* ---- capa A4 ---- */
+  .capa{position:relative;width:100%;aspect-ratio:210/297;overflow:hidden;
+        background:var(--paper);display:flex;flex-direction:column;
+        justify-content:flex-end;padding:8% 7.6% 6.7%;
+        box-shadow:0 10px 26px rgba(0,0,0,.5);color:var(--dark-blue)}
+  .capa .bg{position:absolute;inset:0;z-index:0}
+  .capa .bg img{width:100%;height:100%;object-fit:cover;display:block}
+  /* véu claro em baixo para o texto escuro se ler sempre sobre a fotografia */
+  .capa--foto .bg::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(255,255,255,0) 46%,rgba(248,246,242,.92) 100%)}
+  .capa > *{position:relative;z-index:1}
+  .kick{font-family:var(--fh);font-size:.52vw;letter-spacing:.26em;text-transform:uppercase;
+        opacity:.7;margin-bottom:4%}
+  .rule{width:22%;height:.28vw;background:var(--orange);margin:0 0 4.5%}
+  .tag2{font-family:var(--fh);font-size:.95vw;font-weight:500;letter-spacing:-.01em}
+  .foot{font-family:var(--fh);font-size:.5vw;letter-spacing:.18em;text-transform:uppercase;
+        opacity:.55;margin-top:3.5%}
+
+  /* ---- capas construídas em CSS (logótipo real, exato) ---- */
+  .logo-css{width:48%;height:auto;position:absolute;left:7.6%;top:12%;z-index:1}
+  .cs-branco{background:#fff}
+  .cs-bloco .faixa{position:absolute;inset:0 0 auto 0;height:47%;background:var(--orange);z-index:0}
+  .cs-bloco .faixa2{position:absolute;top:47%;left:0;right:0;height:7%;background:var(--blue);z-index:0}
+  .cs-bloco .logo-css{top:auto;bottom:33%;filter:brightness(0) invert(1)}
+  .cs-grelha .mosaico{position:absolute;inset:0 0 36% 0;display:grid;
+     grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:2px;z-index:0}
+  .cs-grelha .mosaico img{width:100%;height:100%;object-fit:cover;display:block}
+  .cs-grelha .logo-css{top:auto;bottom:26%;width:38%;filter:
+      drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff)
+      drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff)
+      drop-shadow(1.5px 1.5px 0 #fff) drop-shadow(-1.5px 1.5px 0 #fff)
+      drop-shadow(1.5px -1.5px 0 #fff) drop-shadow(-1.5px -1.5px 0 #fff)}
+</style>
+</head>
+<body>
+<h1>Opções de capa CLARAS — Brochura Yes, We Do</h1>
+<p class="sub">Sem néon e sem fundo escuro. Letras recortadas em PVC, luz natural, muito espaço branco.
+   1–6: geradas com o logótipo real como referência. 7–10: construídas em código, com o logótipo real — exatas a 100%.</p>
+<div class="grid" id="g"></div>
+
+<script>
+const LOGO = '/img/brochura/ref/logo-yeswedo-alpha.png';
+const FOTOS = ['reclame-lusiadas','liu-jo-stand-porto','spmec-photobooth','steve-madden',
+               'lusiadas-letras-recortadas','abreu-expo-premio','homy-casa-jysk',
+               'vogue-photobooth','medicina-aeronautica-rececao'];
+
+const opcoes = [
+  { tag:'1 · Pedra clara ⭐', img:'capa-clara-pedra',
+    desc:'Letras PVC em parede de pedra clara, sol rasante e sombras longas. A mais arquitetónica — e a que melhor mostra letras recortadas.' },
+  { tag:'2 · Estúdio', img:'capa-clara-estudio',
+    desc:'Letras sobre fundo branco puro, estilo catálogo de design. A mais limpa e a de maior impacto por contraste de cor.' },
+  { tag:'3 · Fachada clara', img:'capa-clara-fachada',
+    desc:'Parede branca de edifício contra céu azul. Corporativa e luminosa.' },
+  { tag:'4 · Instalação', img:'capa-clara-instalacao',
+    desc:'Escada encostada, acabado de instalar. A única que conta que a instalação é deles.' },
+  { tag:'5 · Vidro', img:'capa-clara-vidro',
+    desc:'Vinil recortado em fachada de vidro com reflexo do céu. Moderna, mas o logo compete com o reflexo.' },
+  { tag:'6 · Receção', img:'capa-clara-rececao',
+    desc:'Interior branco com luz natural de janela. Sóbria e elegante.' },
+
+  { tag:'7 · Bloco de cor', css:'cs-bloco',
+    desc:'Faixa laranja e azul da marca, logótipo a branco. Gráfica e muito "agência". Logótipo REAL, sem IA.' },
+  { tag:'8 · Papel + logo', css:'cs-papel',
+    desc:'Off-white, logótipo real grande. Calma e confiante. Logótipo REAL, sem IA.' },
+  { tag:'9 · Branco total', css:'cs-branco',
+    desc:'Branco puro, máximo espaço negativo. A mais minimalista. Logótipo REAL, sem IA.' },
+  { tag:'10 · Mosaico de trabalhos', css:'cs-grelha',
+    desc:'Nove trabalhos reais em grelha. Mostra volume de portfólio — mas os logótipos dos clientes voltam a competir.' },
+];
+
+document.getElementById('g').innerHTML = opcoes.map(o => `
+  <div class="item">
+    <div class="tag">${o.tag}</div>
+    <div class="capa ${o.img ? 'capa--foto' : o.css}">
+      ${o.img ? `<div class="bg"><img src="/img/brochura/${o.img}.webp" alt=""></div>` : ''}
+      ${o.css === 'cs-bloco' ? '<div class="faixa"></div><div class="faixa2"></div>' : ''}
+      ${o.css === 'cs-grelha' ? `<div class="mosaico">${FOTOS.map(f=>`<img src="/img/portfolio/${f}.webp" alt="">`).join('')}</div>` : ''}
+      ${o.css ? `<img class="logo-css" src="${LOGO}" alt="Yes, We Do">` : ''}
+      <div>
+        <div class="kick">Rio Tinto · Porto · Portugal</div>
+        <div class="rule"></div>
+        <div class="tag2">Dizemos sim aos desafios.</div>
+        <div class="foot">Marketing &amp; Publicidade</div>
+      </div>
+    </div>
+    <div class="desc">${o.desc}</div>
+  </div>`).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<title>Brochura — opções de capa</title>
+<link rel="stylesheet" href="/css/fonts.css">
+<style>
+  :root{ --orange:#F04320; --blue:#529BCA; --magenta:#BA046A; --dark-blue:#0F1B2D;
+         --paper:#F5F2EC; --fh:'Space Grotesk',sans-serif; --fb:'Inter',sans-serif; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#1a2434;color:#fff;font-family:var(--fb);padding:28px}
+  h1{font-family:var(--fh);font-size:19px;margin-bottom:4px}
+  .sub{color:#9fb0c4;font-size:13px;margin-bottom:22px}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .item .tag{font-family:var(--fh);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+             color:var(--orange);margin-bottom:5px}
+  .item .desc{color:#9fb0c4;font-size:11px;line-height:1.45;margin-top:7px;min-height:44px}
+
+  /* ---- capa A4 ---- */
+  .capa{position:relative;width:100%;aspect-ratio:210/297;overflow:hidden;
+        background:var(--dark-blue);display:flex;flex-direction:column;
+        justify-content:space-between;padding:8% 7.6% 6.7%;
+        box-shadow:0 10px 26px rgba(0,0,0,.5)}
+  .capa .bg{position:absolute;inset:0;z-index:0}
+  .capa .bg img{width:100%;height:100%;object-fit:cover;display:block}
+  .capa .bg::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(15,27,45,.12) 0%,rgba(15,27,45,0) 34%,
+                                     rgba(15,27,45,.40) 58%,rgba(15,27,45,.86) 100%)}
+  .capa > *{position:relative;z-index:1}
+  .logo{width:44%;height:auto}
+  .kick{font-family:var(--fh);font-size:.52vw;letter-spacing:.26em;text-transform:uppercase;
+        opacity:.75;margin-bottom:5%}
+  .tit{font-family:var(--fh);font-size:3.1vw;font-weight:700;line-height:.95;letter-spacing:-.03em}
+  .rule{width:22%;height:.28vw;background:var(--orange);margin:6% 0 4.5%}
+  .tag2{font-family:var(--fh);font-size:.95vw;font-weight:500;color:#fff;letter-spacing:-.01em}
+  .foot{font-family:var(--fh);font-size:.5vw;letter-spacing:.18em;text-transform:uppercase;opacity:.6}
+
+  /* variante tipográfica */
+  .capa--comlogo{justify-content:flex-end}
+  .capa--comlogo .kick{margin-bottom:3%}
+  .capa--tipo{background:var(--dark-blue)}
+  .capa--tipo .bg{opacity:.30}
+  .capa--tipo .tit{font-size:3.6vw}
+  .capa--paper{background:var(--paper);color:var(--dark-blue)}
+  .capa--paper .tag2{color:var(--dark-blue)}
+  .capa--paper .foot,.capa--paper .kick{opacity:.6}
+</style>
+</head>
+<body>
+<h1>Opções de capa — Brochura Yes, We Do</h1>
+<p class="sub">Capas construídas a partir do logótipo Yes, We Do e da linguagem do vídeo do site. 1–3: logo gerado por IA com o ficheiro real como referência. 4–6: fundo gerado + logótipo REAL sobreposto. 7–8: abstratas.</p>
+<div class="grid" id="g"></div>
+
+<script>
+const LOGO = '/img/logo-stacked-tagline.png';
+const opcoes = [
+  { tag:'1 · Fachada · logo IA', img:'/img/brochura/capa-logo-fachada.webp', semLogo:true,
+    desc:'Logo fabricado como reclame luminoso 3D em fachada, ao anoitecer. Retroiluminacao laranja e azul. Letras ~95% fieis.' },
+  { tag:'2 · Betao · logo IA', img:'/img/brochura/capa-logo-betao.webp', semLogo:true,
+    desc:'Letras 3D com volume e sombra em parede de betao, reflexo no chao. A mais fiel ao logotipo original. ⭐' },
+  { tag:'3 · Neon · logo IA', img:'/img/brochura/capa-logo-neon.webp', semLogo:true,
+    desc:'Logo em tubo de neon aceso sobre tijolo escuro. Neons sao um dos produtos deles.' },
+  { tag:'4 · Fachada · logo real', img:'/img/brochura/capa-comp-fachada.webp', semLogo:true,
+    desc:'Fundo gerado + logotipo REAL sobreposto com halo. Letras 100% exatas, mas mais plano.' },
+  { tag:'5 · Betao · logo real', img:'/img/brochura/capa-comp-betao.webp', semLogo:true,
+    desc:'Fundo gerado + logotipo REAL. Exato, limpo, muito espaco negativo.' },
+  { tag:'6 · Oficina · logo real', img:'/img/brochura/capa-comp-oficina.webp', semLogo:true,
+    desc:'Oficina com plotter e rolos de vinil + logotipo REAL. Mostra o fabrico.' },
+  { tag:'7 · Neon bokeh', img:'/img/brochura/capa-arte-v1.webp',
+    desc:'Sem logo no fundo. Abstrata, atmosferica.' },
+  { tag:'8 · Rastos de luz', img:'/img/brochura/capa-arte-v3.webp',
+    desc:'Sem logo no fundo. Grafica, as 3 cores da marca.' },
+];
+
+document.getElementById('g').innerHTML = opcoes.map(o => `
+  <div class="item">
+    <div class="tag">${o.tag}</div>
+    <div class="capa ${o.cls||''} ${o.semLogo?'capa--comlogo':''}">
+      <div class="bg"><img src="${o.img}" alt=""></div>
+      ${o.semLogo ? '<div></div>' : `<img class="logo" src="${LOGO}" alt="Yes, We Do">`}
+      <div>
+        <div class="kick">Rio Tinto · Porto · Portugal</div>
+        ${o.semLogo ? '' : '<div class="tit">Yes,<br>We Do</div>'}
+        <div class="rule"></div>
+        <div class="tag2">Dizemos sim aos desafios.</div>
+      </div>
+      <div class="foot">Marketing &amp; Publicidade</div>
+    </div>
+    <div class="desc">${o.desc}</div>
+  </div>`).join('');
+</script>
+</body>
+</html>

@@ -3,3 +3,14 @@ node_modules/
 .vercel
 telegram-bot/.env
 img/portfolio/_processing/
+
+# Artefactos de build da brochura — regeneráveis com os scripts do repo.
+# São ~400 MB; os scripts que os produzem ficam versionados, os ficheiros não.
+#   ./prep-print-images.sh   → img/brochura/print/
+#   ./prep-web-images.sh     → img/brochura/web/     (ESTE é preciso em produção)
+#   ./gen-brochura-img.sh    → img/brochura/raw/
+#   ./build-brochura-pdf.sh  → docs/entrega/*.pdf
+img/brochura/raw/
+img/brochura/print/
+img/brochura/capas/*.png
+docs/entrega/*.pdf

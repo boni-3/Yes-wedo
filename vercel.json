@@ -40,6 +40,33 @@
                     "value": "noindex, nofollow, noarchive, nosnippet"
                 }
             ]
+        },
+        {
+            "source": "/brochura",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow, noarchive, nosnippet"
+                }
+            ]
+        },
+        {
+            "source": "/brochura/",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow, noarchive, nosnippet"
+                }
+            ]
+        },
+        {
+            "source": "/brochura/(.*)",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex, nofollow, noarchive, nosnippet"
+                }
+            ]
         }
     ]
 }

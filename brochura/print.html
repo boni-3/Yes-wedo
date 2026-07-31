@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<title>Brochura Yes, We Do — versão de impressão</title>
+
+<!-- Fontes self-hosted (mesma regra do resto do site: zero CDN) -->
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/brochura/print.css">
+
+<!--
+  Paged.js em modo manual: só paginamos DEPOIS de o conteúdo estar
+  construído a partir do JSON. Com `auto: true` correria cedo demais
+  e paginaria uma página vazia.
+-->
+<script>window.PagedConfig = { auto: false };</script>
+<script src="/brochura/vendor/paged.polyfill.js"></script>
+</head>
+<body>
+
+<div id="content"></div>
+
+<script src="/brochura/print.js"></script>
+</body>
+</html>

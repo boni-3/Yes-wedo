@@ -1,0 +1,501 @@
+{
+  "meta": {
+    "version": "1.0",
+    "updated": "2026-07-30",
+    "titulo": "Yes, We Do — Brochura Institucional",
+    "paginas": 16,
+    "idioma": "pt-PT",
+    "conceito": "Linha clara — letras recortadas, luz natural, muito espaço branco. Todas as 16 páginas em papel off-white; o ritmo faz-se com fotografia full-bleed e com o laranja da marca, não com alternância de fundos.",
+    "nota": "Fonte única de conteúdo. Alimenta /brochura/index.html (digital) e /brochura/print.html (A4). Editar aqui atualiza os dois.",
+    "linha": "clara"
+  },
+  "empresa": {
+    "nome": "Yes, We Do",
+    "razaoSocial": "Yes Wedo, Lda.",
+    "morada": "Av. D. João I 81, 4435-208 Rio Tinto, Portugal",
+    "telefones": [
+      "+351 912 320 366",
+      "+351 919 755 990"
+    ],
+    "whatsapp": "351912320366",
+    "email": "geral@yes-wedo.pt",
+    "site": "yes-wedo.pt",
+    "brochuraUrl": "https://yes-wedo.pt/brochura",
+    "numeros": [
+      {
+        "valor": "10+",
+        "label": "Anos de experiência"
+      },
+      {
+        "valor": "105+",
+        "label": "Clientes"
+      },
+      {
+        "valor": "150+",
+        "label": "Projetos realizados",
+        "_confirmar": "Se os clientes subiram de 80 para 105, este número também deve ter subido. Confirmar com o Miguel."
+      },
+      {
+        "valor": "100%",
+        "label": "Dedicação"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "n": 1,
+      "id": "capa",
+      "template": "capa",
+      "kicker": "Rio Tinto · Porto · Portugal",
+      "titulo": "Yes, We Do",
+      "tagline": "Dizemos sim aos desafios.",
+      "rodape": "Marketing & Publicidade · Desde 2015",
+      "arte": "/img/brochura/capa-clara-pedra.webp",
+      "logo": "/img/logo-stacked-tagline.png",
+      "_nota": "LINHA CLARA aprovada pelo Hugo (2026-07-30). Arte atual: capa-clara-pedra. Trocar de capa = mudar só este caminho. Alternativas em img/brochura/capas/: capa-clara-estudio, capa-clara-fachada, capa-clara-instalacao, capa-clara-vidro, capa-clara-rececao."
+    },
+    {
+      "n": 2,
+      "id": "manifesto",
+      "template": "manifesto",
+      "fundo": null,
+      "corpo": [
+        "Há marcas que passam despercebidas.",
+        "E há marcas que se veem do outro lado da rua.",
+        "A diferença raramente é o orçamento. É saber o que fazer com ele."
+      ],
+      "assinatura": "Há mais de dez anos que damos forma, cor e luz a marcas do Grande Porto e de todo o país. Não desenhamos e entregamos: projetamos, fabricamos e instalamos. Do primeiro esboço ao parafuso final."
+    },
+    {
+      "n": 3,
+      "id": "quem-somos",
+      "template": "quem-somos",
+      "kicker": "Quem somos",
+      "titulo": "Somos a Yes, We Do.",
+      "corpo": [
+        "A Yes Wedo, Lda. nasceu das mãos de dois sócios com mais de dez anos de experiência no setor. Juntaram o que sabiam — produção, montagem, design — e abriram portas em Rio Tinto com uma ideia simples: fazer tudo em casa, do princípio ao fim.",
+        "É isso que nos distingue. Não subcontratamos o essencial. O projeto é nosso, o fabrico é nosso, a instalação é nossa. Quando algo corre mal, não há a quem apontar o dedo — resolvemos.",
+        "De Rio Tinto para todo o país, dizemos sim aos desafios. Acreditamos que cada marca tem uma história única para contar, e sabemos como a materializar da forma mais impactante."
+      ],
+      "imagem": "/img/socios.webp",
+      "imagemAlt": "Os sócios da Yes, We Do"
+    },
+    {
+      "n": 4,
+      "id": "numeros",
+      "template": "numeros",
+      "kicker": "Em números",
+      "titulo": "Dez anos a pôr marcas de pé.",
+      "usaNumerosDaEmpresa": true,
+      "corpo": [
+        "Trabalhamos para hospitais, marcas internacionais de moda, concessionários, centros comerciais, clínicas e restaurantes. Projetos de uma placa e projetos de um hospital inteiro.",
+        "A escala muda. O cuidado não."
+      ],
+      "destaque": "Cobrimos o Grande Porto, Matosinhos, Maia, Gondomar, Valongo e todo o norte de Portugal. Para projetos maiores, deslocamo-nos a qualquer ponto do país."
+    },
+    {
+      "n": 5,
+      "id": "mapa-servicos",
+      "template": "mapa-servicos",
+      "kicker": "O que fazemos",
+      "titulo": "Doze formas de dar a ver a sua marca.",
+      "intro": "Da placa de porta ao reclame de fachada. Do vinil de uma montra ao stand de uma feira internacional.",
+      "servicos": [
+        {
+          "nome": "Reclames Luminosos",
+          "desc": "Letreiros com iluminação LED para máxima visibilidade, dia e noite."
+        },
+        {
+          "nome": "Sinaléticas",
+          "desc": "Sinalética interior e exterior, lettering e placas de identificação."
+        },
+        {
+          "nome": "Impressão Grandes Formatos",
+          "desc": "Impressão digital para vitrinas, fachadas, veículos e qualquer superfície."
+        },
+        {
+          "nome": "Decoração de Espaços",
+          "desc": "Ambientação de espaços comerciais, escritórios e pontos de venda."
+        },
+        {
+          "nome": "Néons",
+          "desc": "Letreiros e decorações em néon LED personalizados."
+        },
+        {
+          "nome": "Eventos",
+          "desc": "Produção de materiais para feiras, exposições e lançamentos de marca."
+        },
+        {
+          "nome": "Decoração de Montras",
+          "desc": "Montras que atraem clientes e comunicam promoções com eficácia."
+        },
+        {
+          "nome": "Lonas & Stands",
+          "desc": "Lonas publicitárias e stands para eventos, feiras e pontos de venda."
+        },
+        {
+          "nome": "Flyers & Brochuras",
+          "desc": "Design e impressão de flyers, brochuras e catálogos."
+        },
+        {
+          "nome": "Merchandising",
+          "desc": "Artigos promocionais personalizados e merchandising corporativo."
+        },
+        {
+          "nome": "Páginas Web",
+          "desc": "Websites modernos e responsivos que elevam a presença digital."
+        },
+        {
+          "nome": "Decoração de Viaturas",
+          "desc": "Vinil que transforma cada veículo numa ferramenta de marketing."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "id": "reclames",
+      "template": "servico",
+      "kicker": "01 · Serviços",
+      "titulo": "Reclames Luminosos",
+      "tagline": "A sua marca vista de longe, dia e noite.",
+      "corpo": [
+        "Um reclame luminoso é o primeiro funcionário da sua empresa: trabalha 24 horas por dia, todos os dias, e nunca falta. Fabricamos letras monobloco em alumínio com iluminação LED, retroiluminadas ou frontais, dimensionadas para a distância a que vão ser lidas.",
+        "Tratamos do projeto, do fabrico e da instalação — incluindo o trabalho em altura com plataforma quando é preciso. Entregamos o reclame aceso e a funcionar, não uma caixa por montar."
+      ],
+      "specs": [
+        "Letras monobloco em alumínio",
+        "Iluminação LED de baixo consumo",
+        "Retroiluminado ou frontal",
+        "Instalação em altura incluída"
+      ],
+      "hero": "/img/portfolio/reclame-lusiadas.webp",
+      "apoio": [
+        "/img/portfolio/homy-casa-reclame.webp",
+        "/img/portfolio/amani-spa.webp",
+        "/img/portfolio/espinho-auto.webp"
+      ],
+      "cta": "Reclames luminosos? Yes, we do.",
+      "_confirmar": "Confirmar com o Miguel: fazem o licenciamento camarário? Se sim, é um argumento de venda forte e deve entrar nos specs."
+    },
+    {
+      "n": 7,
+      "id": "letras-recortadas",
+      "template": "servico",
+      "kicker": "02 · Serviços",
+      "titulo": "Letras Recortadas",
+      "tagline": "Volume, sombra e presença. Sem eletricidade.",
+      "corpo": [
+        "Nem tudo precisa de luz para se impor. Letras recortadas em relevo dão profundidade a uma receção, a uma fachada ou a uma parede de escritório — e a sombra que projetam faz metade do trabalho.",
+        "Cortamos em acrílico, PVC, alumínio composto ou inox escovado, com o acabamento à medida do espaço. Aplicação com espaçadores ou colagem direta, sempre alinhada a laser."
+      ],
+      "specs": [
+        "Acrílico, PVC, alumínio ou inox",
+        "Espessuras de 3 a 30 mm",
+        "Aplicação com espaçadores ou direta",
+        "Alinhamento a laser na instalação"
+      ],
+      "hero": "/img/portfolio/lusiadas-letras-recortadas.webp",
+      "apoio": [
+        "/img/portfolio/cleva.webp",
+        "/img/portfolio/mira-maia-shopping.webp",
+        "/img/portfolio/decoracao-de-parede-geometrica.webp"
+      ],
+      "cta": "Letras recortadas? Yes, we do.",
+      "_confirmar": "Materiais e espessuras foram inferidos do que é prática comum no setor. Validar a lista com o Miguel antes de imprimir."
+    },
+    {
+      "n": 8,
+      "id": "sinaleticas",
+      "template": "servico",
+      "kicker": "03 · Serviços",
+      "titulo": "Sinaléticas",
+      "tagline": "Quem entra tem de saber para onde ir.",
+      "corpo": [
+        "Sinalética é o serviço mais invisível que fazemos — e nota-se logo quando falta. Num hospital, num centro comercial ou num edifício de escritórios, um sistema de sinalética bem pensado é a diferença entre um visitante orientado e um visitante perdido.",
+        "Desenhamos o sistema completo: direcional, identificativa, de segurança e de porta. Numeração coerente, tipografia legível à distância certa, materiais que aguentam anos de utilização intensa."
+      ],
+      "specs": [
+        "Sistemas completos, não peças soltas",
+        "Direcional, identificativa e de segurança",
+        "Materiais para uso intensivo",
+        "Ampliável à medida que o espaço cresce"
+      ],
+      "hero": "/img/portfolio/lusiadas-sinaletica-interior.webp",
+      "apoio": [
+        "/img/portfolio/medicina-aeronautica-rececao.webp",
+        "/img/portfolio/sinaletica-homycasa.webp",
+        "/img/portfolio/lusiadas-hospital-braga.webp"
+      ],
+      "cta": "Sinalética? Yes, we do."
+    },
+    {
+      "n": 9,
+      "id": "lonas",
+      "template": "servico",
+      "tipoDestaque": "video",
+      "kicker": "04 · Serviços",
+      "titulo": "Lonas & Impressão em Grandes Formatos",
+      "tagline": "Quando é preciso ocupar uma fachada inteira.",
+      "corpo": [
+        "Uma obra em curso, um hospital em expansão, uma campanha que precisa de ser vista do outro lado da avenida. A impressão em grande formato resolve em dias o que uma estrutura permanente demoraria meses.",
+        "Imprimimos em lona, vinil, rede microperfurada e telas de fachada, com tintas resistentes a UV. E instalamos — incluindo os trabalhos em altura que a maioria das gráficas não faz."
+      ],
+      "specs": [
+        "Lona, vinil, rede microperfurada e tela",
+        "Tintas resistentes a UV e intempérie",
+        "Sem limite prático de dimensão",
+        "Instalação em altura incluída"
+      ],
+      "hero": "/img/portfolio/spmec-lona-grande.webp",
+      "apoio": [
+        "/img/portfolio/lusiadas-porto-contentor.webp",
+        "/img/portfolio/lusiadas-braga-lona.webp",
+        "/img/portfolio/ruiz-costa.webp"
+      ],
+      "video": "/img/portfolio/instalacao-lona-hospital.mp4",
+      "videoPoster": "/img/portfolio/instalacao-lona-hospital.webp",
+      "videoLegenda": "Instalação de lona de fachada — Hospital Lusíadas",
+      "cta": "Grandes formatos? Yes, we do."
+    },
+    {
+      "n": 10,
+      "id": "stands",
+      "template": "servico-duplo",
+      "kicker": "05 · Serviços",
+      "titulo": "Stands & Eventos",
+      "tagline": "Três dias para causar impressão. Sem segunda hipótese.",
+      "corpo": [
+        "Numa feira, o seu stand compete com dezenas de outros pelo olhar de quem passa. Produzimos stands, backdrops, press walls, photobooths, balcões e bandeiras — e montamos tudo no local, a horas, com a marca alinhada ao milímetro.",
+        "É a área onde temos mais quilómetros: Vogue Fashion Night, Liu Jo, Steve Madden, SPMEC, Abreu. Eventos de moda, congressos médicos e ativações de marca em que o prazo não se negoceia."
+      ],
+      "specs": [
+        "Stands, backdrops e press walls",
+        "Photobooths e balcões de receção",
+        "Montagem e desmontagem no local",
+        "Cumprimento de prazos de feira"
+      ],
+      "hero": "/img/portfolio/liu-jo-stand-porto.webp",
+      "apoio": [
+        "/img/portfolio/vogue-photobooth.webp",
+        "/img/portfolio/steve-madden.webp",
+        "/img/portfolio/spmec-press-wall.webp",
+        "/img/portfolio/abreu-expo-premio.webp",
+        "/img/portfolio/vogue-fashion-night-portico.webp"
+      ],
+      "cta": "Stands e eventos? Yes, we do.",
+      "_nota": "Categoria com mais material (21 projetos). Merece spread duplo — é a página que melhor demonstra capacidade."
+    },
+    {
+      "n": 11,
+      "id": "viaturas",
+      "template": "servico",
+      "kicker": "06 · Serviços",
+      "titulo": "Decoração de Viaturas",
+      "tagline": "Publicidade que anda sozinha pela cidade.",
+      "corpo": [
+        "Uma carrinha decorada passa por milhares de pessoas por dia e não custa nada a mais depois de aplicada. É o meio publicitário com melhor retorno por euro investido — e o único que trabalha enquanto a equipa vai para o cliente.",
+        "Aplicamos vinil de fundição em decoração total ou parcial, com desenho adaptado à forma do veículo. Vinil de qualidade automóvel, removível sem danificar a pintura."
+      ],
+      "specs": [
+        "Decoração total ou parcial",
+        "Vinil de fundição, qualidade automóvel",
+        "Removível sem danificar a pintura",
+        "Frotas com aplicação uniforme"
+      ],
+      "hero": "/img/portfolio/renault-decoracao-viatura.webp",
+      "apoio": [
+        "/img/brochura/viatura-frota-comercial.webp",
+        "/img/brochura/viatura-frota-multipla.webp",
+        "/img/brochura/viatura-citadino-lateral.webp"
+      ],
+      "cta": "Decoração de viaturas? Yes, we do.",
+      "_atencao": "As 3 imagens de apoio são geradas por IA (marcas fictícias FLORA/NOVA/ELVA). Só o hero (Renault) é trabalho real. Ver img/brochura/ASSETS.md — decidir com o Miguel: substituir por fotos reais, ou rotular como 'Simulação'."
+    },
+    {
+      "n": 12,
+      "id": "montras",
+      "template": "servico",
+      "kicker": "07 · Serviços",
+      "titulo": "Decoração de Montras",
+      "tagline": "O vidro é o cartaz mais barato que tem.",
+      "corpo": [
+        "A montra é o único espaço publicitário que já pagou: está pago na renda. Vinil recortado, impresso ou jateado transforma um vidro comum na primeira frase que o cliente lê sobre o seu negócio.",
+        "Fazemos desde a campanha sazonal que se troca em duas horas até à identidade permanente da loja. E o vinil jateado resolve, de caminho, o problema da privacidade em clínicas e escritórios."
+      ],
+      "specs": [
+        "Vinil recortado, impresso ou jateado",
+        "Campanhas sazonais ou permanentes",
+        "Efeito jateado para privacidade",
+        "Aplicação sem bolhas, garantida"
+      ],
+      "hero": "/img/portfolio/cs-pet-care-montra.webp",
+      "apoio": [
+        "/img/brochura/montra-loja-moda.webp",
+        "/img/brochura/montra-restaurante.webp",
+        "/img/brochura/montra-clinica.webp"
+      ],
+      "cta": "Decoração de montras? Yes, we do.",
+      "_atencao": "As 3 imagens de apoio são geradas por IA (ATRIO/MESA/CLINICA VIVA). Só o hero (C's Pet Care) é trabalho real. Mesma decisão que a página 11."
+    },
+    {
+      "n": 13,
+      "id": "clientes",
+      "template": "clientes-hibrido",
+      "kicker": "Clientes",
+      "titulo": "Confiam em nós.",
+      "intro": "Mais de 105 empresas — de hospitais a marcas internacionais de moda.",
+      "usaNumerosDaEmpresa": true,
+      "logos": [
+        {
+          "nome": "Lusíadas Saúde",
+          "ficheiro": "/img/brochura/logos/lusiadas-dark.svg"
+        },
+        {
+          "nome": "Renault",
+          "ficheiro": "/img/brochura/logos/renault-texto.svg",
+          "_nota": "losango sozinho desaparecia ao tamanho da grelha; esta versão tem wordmark"
+        },
+        {
+          "nome": "JYSK",
+          "ficheiro": "/img/brochura/logos/jysk.svg"
+        },
+        {
+          "nome": "Liu Jo",
+          "ficheiro": "/img/brochura/logos/liu-jo.svg"
+        },
+        {
+          "nome": "Steve Madden",
+          "ficheiro": "/img/brochura/logos/steve-madden.svg"
+        },
+        {
+          "nome": "Vogue",
+          "ficheiro": "/img/brochura/logos/vogue.svg"
+        },
+        {
+          "nome": "Abreu",
+          "ficheiro": "/img/brochura/logos/abreu.png"
+        },
+        {
+          "nome": "SPMEC",
+          "ficheiro": "/img/brochura/logos/spmec-dark.svg"
+        },
+        {
+          "nome": "Lusíadas HeyDoc",
+          "ficheiro": "/img/brochura/logos/lusiadas-heydoc-dark.svg"
+        }
+      ],
+      "nomes": [
+        "HomyCasa",
+        "Mira Maia Shopping",
+        "Cleva",
+        "Weego",
+        "Amani Spa",
+        "Norboxe",
+        "Espinho Auto",
+        "Ruiz Costa",
+        "C's Pet Care",
+        "Hospital da Lapa",
+        "Medicina Aeronáutica"
+      ],
+      "remate": "e mais de 85 outras",
+      "_nota": "Página em papel claro (ritmo visual + resolve os logótipos com fundo próprio como JYSK e Abreu, que ficariam mal a branco monocromático). Os logótipos da Lusíadas, HeyDoc e SPMEC vinham em versão branca — foram criadas variantes '-dark' com o azul da marca. Quando chegarem mais logótipos, mover o nome de 'nomes' para 'logos'."
+    },
+    {
+      "n": 14,
+      "id": "processo",
+      "template": "processo",
+      "kicker": "Como trabalhamos",
+      "titulo": "Do briefing ao parafuso final.",
+      "intro": "Cinco passos. Sem intermediários, sem subcontratos no que interessa.",
+      "passos": [
+        {
+          "n": "01",
+          "nome": "Conversa",
+          "desc": "Vamos ao local, medimos e percebemos o que precisa. Sem custo e sem compromisso."
+        },
+        {
+          "n": "02",
+          "nome": "Projeto",
+          "desc": "Recebe a simulação do trabalho aplicado ao seu espaço, com orçamento fechado. Sem surpresas no fim."
+        },
+        {
+          "n": "03",
+          "nome": "Produção",
+          "desc": "Fabricamos nas nossas instalações em Rio Tinto. Controlamos o prazo porque a oficina é nossa."
+        },
+        {
+          "n": "04",
+          "nome": "Instalação",
+          "desc": "Montamos no local, incluindo trabalhos em altura. Deixamos a funcionar e o espaço limpo."
+        },
+        {
+          "n": "05",
+          "nome": "Acompanhamento",
+          "desc": "Continuamos disponíveis. Uma lâmpada, um vinil descolado, uma ampliação — atende sempre a mesma pessoa."
+        }
+      ]
+    },
+    {
+      "n": 15,
+      "id": "porque-nos",
+      "template": "porque-nos",
+      "kicker": "Porquê a Yes, We Do",
+      "titulo": "Cinco razões, sem rodeios.",
+      "razoes": [
+        {
+          "titulo": "Fazemos tudo em casa",
+          "desc": "Projeto, fabrico e instalação são nossos. Um interlocutor do princípio ao fim — e ninguém a quem apontar o dedo quando algo falha."
+        },
+        {
+          "titulo": "Instalamos, não só entregamos",
+          "desc": "Incluindo trabalhos em altura. Recebe o trabalho montado e a funcionar, não uma caixa e um manual."
+        },
+        {
+          "titulo": "Orçamento fechado",
+          "desc": "O valor que aprova é o valor que paga. Sem extras a meio da obra."
+        },
+        {
+          "titulo": "Dez anos e mais de 105 clientes",
+          "desc": "Hospitais, marcas internacionais, concessionários e lojas de bairro. Já vimos o problema que tem."
+        },
+        {
+          "titulo": "Estamos aqui ao lado",
+          "desc": "Rio Tinto, a dez minutos do Porto. Quando precisa de alguém no local, aparecemos no próprio dia."
+        }
+      ],
+      "remate": "E se for um desafio que nunca fizemos? Dizemos sim na mesma. É o nome da casa."
+    },
+    {
+      "n": 16,
+      "id": "contactos",
+      "template": "contra-capa",
+      "kicker": "Falamos?",
+      "titulo": "Diga-nos o que precisa.",
+      "intro": "Vamos ao local, medimos e apresentamos proposta. Sem custo e sem compromisso.",
+      "ctas": [
+        {
+          "tipo": "whatsapp",
+          "label": "WhatsApp",
+          "valor": "+351 912 320 366"
+        },
+        {
+          "tipo": "tel",
+          "label": "Telefone",
+          "valor": "+351 919 755 990"
+        },
+        {
+          "tipo": "email",
+          "label": "Email",
+          "valor": "geral@yes-wedo.pt"
+        }
+      ],
+      "qr": {
+        "destino": "https://yes-wedo.pt/brochura?ref=qr",
+        "legenda": "Aponte a câmara para ver esta brochura no telemóvel — com os vídeos dos trabalhos."
+      },
+      "rodape": "Yes Wedo, Lda. · Av. D. João I 81, 4435-208 Rio Tinto · yes-wedo.pt",
+      "remate": "Yes, we do.",
+      "_nota": "O remate fecha a brochura com o device que aparece no fim de cada página de serviço."
+    }
+  ]
+}

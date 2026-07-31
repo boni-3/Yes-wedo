@@ -1,0 +1,422 @@
+/* ==========================================================================
+   Brochura Yes, We Do — folha de estilo de IMPRESSÃO
+   A4 · 16 páginas · 3 mm bleed · marcas de corte · 300 dpi
+   Conceito "Luz Própria": fundo escuro, a luz revela o conteúdo.
+
+   Abordagem: cada página é uma caixa de dimensão fixa (não há texto a fluir).
+   É uma brochura desenhada, não um livro — controlo total de cada página.
+   ========================================================================== */
+
+/* ---------- Página ---------- */
+@page {
+  size: 210mm 297mm;
+  margin: 0;
+  bleed: 3mm;
+  marks: crop cross;
+}
+
+:root {
+  --orange:      #F04320;
+  --blue:        #529BCA;
+  --magenta:     #BA046A;
+  --dark-blue:   #0F1B2D;
+  --dark-blue-2: #16243A;
+  --paper:       #F5F2EC;
+  --ink:         #0F1B2D;
+
+  --font-h: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --font-b: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+
+  /* margens tipográficas da mancha */
+  --m-top:    18mm;
+  --m-side:   16mm;
+  --m-bottom: 14mm;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 10pt; }
+
+body {
+  font-family: var(--font-b);
+  color: var(--ink);
+  background: #555;               /* só visível na pré-visualização em ecrã */
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ==========================================================================
+   ESTRUTURA DE PÁGINA
+   .sheet        → caixa A4 exata
+   .sheet__bleed → estende-se 3 mm para fora em todos os lados (zona de corte)
+   .sheet__in    → mancha de texto, dentro das margens
+   ========================================================================== */
+
+.sheet {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  break-after: page;
+  page-break-after: always;
+  background: var(--paper);          /* LINHA CLARA: o claro é o padrão */
+}
+.sheet:last-child { break-after: auto; page-break-after: auto; }
+
+/* ==========================================================================
+   PÁGINAS ESCURAS DE ACENTO
+   A brochura é clara. Três páginas ficam escuras para dar ritmo e evitar que
+   16 páginas claras seguidas se tornem monótonas: manifesto (2), processo (14)
+   e contra-capa (16). Tudo o que precisa de inverter está reunido aqui.
+   ========================================================================== */
+.sheet--dark { background: var(--dark-blue); color: #fff; }
+.sheet--dark .body p       { color: rgba(255,255,255,.88); }
+.sheet--dark .folio        { border-top-color: rgba(255,255,255,.22); }
+.sheet--dark .specs li     { color: rgba(255,255,255,.86); }
+.sheet--dark .passo        { border-top-color: rgba(255,255,255,.2); }
+.sheet--dark .passo:last-child { border-bottom-color: rgba(255,255,255,.2); }
+.sheet--dark .destaque     { color: rgba(255,255,255,.85); }
+.sheet--dark .razao__d,
+.sheet--dark .passo__d     { color: rgba(255,255,255,.84); }
+.sheet--dark .num__l,
+.sheet--dark .kicker,
+.sheet--dark .legenda      { color: rgba(255,255,255,.65); }
+
+.sheet__bleed {
+  position: absolute;
+  inset: -3mm;                    /* transborda para a zona de sangria */
+  z-index: 0;
+  overflow: hidden;
+}
+.sheet__bleed img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Véu para garantir contraste do texto sobre fotografia.
+   Claro por omissão (texto escuro); escuro nas páginas de acento. */
+.sheet__bleed::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+      rgba(245,242,236,0) 44%, rgba(245,242,236,.72) 72%, rgba(245,242,236,.95) 100%);
+}
+.sheet--dark .sheet__bleed::after {
+  background: linear-gradient(180deg,
+      rgba(15,27,45,.30) 0%, rgba(15,27,45,.62) 55%, rgba(15,27,45,.92) 100%);
+}
+.sheet__bleed--plain::after { display: none; }
+
+.sheet__in {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: var(--m-top) var(--m-side) var(--m-bottom);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Rodapé / fólio ---------- */
+.folio {
+  margin-top: auto;
+  padding-top: 5mm;
+  border-top: .3pt solid rgba(15,27,45,.22);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-h);
+  font-size: 7.5pt;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .5;
+}
+
+.folio__n { color: var(--orange); opacity: 1; font-weight: 700; letter-spacing: 0; }
+
+/* ==========================================================================
+   TIPOGRAFIA
+   ========================================================================== */
+.kicker {
+  font-family: var(--font-h);
+  font-size: 8pt;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  opacity: .6;
+  margin-bottom: 5mm;
+}
+.kicker--orange { color: var(--orange); opacity: 1; }
+
+.h1 {
+  font-family: var(--font-h);
+  font-size: 30pt;
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -.02em;
+  margin-bottom: 4mm;
+}
+.h1 em { font-style: normal; color: var(--orange); }
+
+.h2 {
+  font-family: var(--font-h);
+  font-size: 20pt;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.015em;
+}
+
+.tagline {
+  font-family: var(--font-h);
+  font-size: 13pt;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--orange);
+  margin-bottom: 6mm;
+}
+
+.body p {
+  font-size: 10.5pt;
+  line-height: 1.62;
+  margin-bottom: 3.5mm;
+  max-width: 62ch;
+  color: #33414F;
+}
+.body p:last-child { margin-bottom: 0; }
+
+
+.legenda {
+  font-size: 7.5pt;
+  line-height: 1.4;
+  letter-spacing: .02em;
+  opacity: .55;
+  margin-top: 1.5mm;
+}
+
+/* ==========================================================================
+   P.1 — CAPA
+   ========================================================================== */
+.capa .sheet__in { justify-content: flex-end; padding: 24mm var(--m-side) 18mm; }
+.capa__bloco { margin-top: auto; }
+/* Degradé para branco na base da capa.
+   Continua a ser um degradé e não uma barra — a fotografia dissolve-se em vez
+   de ser cortada — mas fecha em branco puro por baixo do texto, para o bloco
+   inferior se ler sem esforço. */
+.capa .sheet__bleed::after {
+  content: ''; display: block; position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+      rgba(255,255,255,0) 38%,
+      rgba(255,255,255,.45) 58%,
+      rgba(255,255,255,.82) 72%,
+      rgba(255,255,255,.96) 85%,
+      rgba(255,255,255,1) 100%);
+}
+.capa__logo { width: 62mm; height: auto; }
+.capa__kicker {
+  font-family: var(--font-h);
+  font-size: 10pt; letter-spacing: .26em; text-transform: uppercase;
+  color: #5B6B7D; margin-bottom: 5mm;      /* cor sólida, sem opacidade */
+}
+.capa__titulo {
+  font-family: var(--font-h);
+  font-size: 54pt; font-weight: 700; line-height: .95; letter-spacing: -.03em;
+}
+.capa__tagline {
+  font-family: var(--font-h);
+  font-size: 25pt; font-weight: 700; color: var(--ink);
+  margin-top: 0; letter-spacing: -.02em; line-height: 1.15;
+}
+.capa__rule { width: 38mm; height: 1.8mm; background: var(--orange); margin: 0 0 6mm; }
+.capa__rodape {
+  font-family: var(--font-h);
+  font-size: 9.5pt; letter-spacing: .18em; text-transform: uppercase; color: #5B6B7D;
+  margin-top: 5mm;
+}
+
+/* ==========================================================================
+   P.2 — MANIFESTO
+   ========================================================================== */
+.manifesto .sheet__in { justify-content: center; padding: 0 24mm; }
+.manifesto__linha {
+  font-family: var(--font-h);
+  font-size: 24pt; font-weight: 500; line-height: 1.32;
+  letter-spacing: -.02em; margin-bottom: 3mm;
+}
+.manifesto__linha--fim { color: var(--orange); font-weight: 700; }
+.manifesto__ass {
+  font-size: 11pt; line-height: 1.7; opacity: .9;
+  margin-top: 16mm; padding-top: 8mm; max-width: 58ch;
+  border-top: .3pt solid rgba(255,255,255,.3);
+}
+
+/* ==========================================================================
+   P.3 — QUEM SOMOS
+   ========================================================================== */
+/* A foto dos sócios é QUADRADA (2048×2048). Numa caixa de 178×72mm só sobrava
+   a faixa central e cortava as cabeças. A 112mm a janela visível vai dos ~13%
+   aos ~76% da imagem: apanha as cabeças inteiras e as mãos na mesa. */
+.quem__img {
+  width: 100%; height: 112mm;
+  object-fit: cover; object-position: center 34%;
+  margin-bottom: 8mm;
+}
+
+/* ==========================================================================
+   P.4 — NÚMEROS
+   ========================================================================== */
+.nums { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16mm 6mm; margin: 14mm 0 16mm; }
+.num__v {
+  font-family: var(--font-h);
+  font-size: 54pt; font-weight: 700; line-height: .9;
+  color: var(--orange); letter-spacing: -.03em;
+}
+.num__l {
+  font-family: var(--font-h);
+  font-size: 8pt; letter-spacing: .16em; text-transform: uppercase;
+  opacity: .6; margin-top: 2.5mm;
+}
+.destaque {
+  font-size: 9.5pt; line-height: 1.6; color: #33414F;
+  border-left: 1mm solid var(--orange); padding-left: 5mm; margin-top: auto;
+}
+
+/* ==========================================================================
+   P.5 — MAPA DE SERVIÇOS
+   ========================================================================== */
+.grid-serv { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm 5mm; margin-top: 8mm; }
+.serv-card { border-top: .5pt solid rgba(15,27,45,.28); padding-top: 3mm; }
+.serv-card__n {
+  font-family: var(--font-h);
+  font-size: 7pt; color: var(--orange); font-weight: 700; letter-spacing: .1em;
+}
+.serv-card__t {
+  font-family: var(--font-h);
+  font-size: 10pt; font-weight: 700; line-height: 1.2; margin: 1.5mm 0;
+}
+.serv-card__d { font-size: 7.8pt; line-height: 1.45; opacity: .72; }
+
+/* ==========================================================================
+   P.6–12 — PÁGINAS DE SERVIÇO
+   ========================================================================== */
+.servico__hero { width: 100%; height: 97mm; object-fit: cover; margin-bottom: 7mm; }
+.servico--wide .servico__hero { height: 112mm; }
+
+.servico__grid { display: grid; grid-template-columns: 1fr 52mm; gap: 8mm; align-items: start; }
+
+.specs { list-style: none; margin-top: 5mm; }
+.specs li {
+  font-size: 8.6pt; line-height: 1.45; padding-left: 5mm; margin-bottom: 2.6mm;
+  position: relative; color: #33414F;
+}
+.specs li::before {
+  content: ''; position: absolute; left: 0; top: 1.5mm;
+  width: 2.4mm; height: 2.4mm; background: var(--orange);
+}
+
+.apoio { display: grid; gap: 3mm; margin-top: 6mm; }
+.apoio--3 { grid-template-columns: repeat(3, 1fr); }
+.apoio--5 { grid-template-columns: repeat(5, 1fr); }
+.apoio img { width: 100%; height: 36mm; object-fit: cover; display: block; }
+.apoio--5 img { height: 30mm; }
+
+.cta-linha {
+  font-family: var(--font-h);
+  font-size: 16pt; font-weight: 700; letter-spacing: -.015em;
+  color: var(--orange); margin-top: 6mm;
+}
+
+/* selo discreto para imagens que não são trabalho executado */
+.simulacao {
+  position: absolute; right: 1.5mm; bottom: 1.5mm;
+  font-family: var(--font-h); font-size: 5.5pt; letter-spacing: .12em;
+  text-transform: uppercase; color: #fff; opacity: .75;
+  background: rgba(15,27,45,.6); padding: .6mm 1.6mm;
+}
+.apoio__wrap { position: relative; }
+
+/* ==========================================================================
+   P.13 — CLIENTES (híbrido)
+   ========================================================================== */
+/* Página clara → logótipos na cor original, sem filtros CSS.
+   Os filtros seriam rasterizados pelo Chrome e sairiam desfocados no PDF. */
+.logos-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 9mm 8mm; align-items: center;
+  padding-bottom: 8mm; border-bottom: .3pt solid rgba(15,27,45,.2);
+}
+.logos-grid img {
+  width: 100%; height: 13mm; object-fit: contain; object-position: center;
+}
+
+.nomes {
+  display: flex; flex-wrap: wrap; gap: 2mm 5mm; padding-top: 7mm;
+  font-family: var(--font-h); font-size: 9pt; font-weight: 500;
+  color: #33414F;
+}
+.nomes .mais { opacity: .55; font-style: italic; }
+
+.nums--linha { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; margin-bottom: 9mm; }
+.nums--linha .num__v { font-size: 26pt; }
+.nums--linha .num__l { font-size: 6.8pt; }
+
+/* ==========================================================================
+   P.14 — PROCESSO
+   ========================================================================== */
+.passos { margin-top: 8mm; }
+.passo {
+  display: grid; grid-template-columns: 16mm 1fr; gap: 5mm;
+  padding: 5mm 0; border-top: .3pt solid rgba(15,27,45,.2);
+}
+.passo:last-child { border-bottom: .3pt solid rgba(15,27,45,.2); }
+.passo__n {
+  font-family: var(--font-h);
+  font-size: 20pt; font-weight: 700; color: var(--orange);
+  line-height: 1; letter-spacing: -.03em;
+}
+.passo__t { font-family: var(--font-h); font-size: 12pt; font-weight: 700; margin-bottom: 1.5mm; }
+.passo__d { font-size: 9.2pt; line-height: 1.5; color: #33414F; }
+
+/* ==========================================================================
+   P.15 — PORQUÊ NÓS
+   ========================================================================== */
+.razoes { margin-top: 7mm; display: grid; gap: 6mm; }
+.razao { display: grid; grid-template-columns: 6mm 1fr; gap: 4mm; align-items: start; }
+.razao__bullet { width: 3.5mm; height: 3.5mm; background: var(--orange); margin-top: 1.8mm; }
+.razao__t { font-family: var(--font-h); font-size: 11.5pt; font-weight: 700; margin-bottom: 1.5mm; }
+.razao__d { font-size: 9.2pt; line-height: 1.55; color: #33414F; }
+.remate {
+  font-family: var(--font-h);
+  font-size: 13pt; font-weight: 500; line-height: 1.35; color: var(--orange);
+  margin-top: auto; padding-top: 8mm;
+}
+
+/* ==========================================================================
+   P.16 — CONTRA-CAPA
+   ========================================================================== */
+.contactos { margin: 14mm 0 0; display: grid; gap: 9mm; }
+.contacto__l {
+  font-family: var(--font-h);
+  font-size: 7.5pt; letter-spacing: .18em; text-transform: uppercase;
+  opacity: .55; margin-bottom: 1mm;
+}
+.contacto__v { font-family: var(--font-h); font-size: 19pt; font-weight: 700; letter-spacing: -.01em; }
+
+.qr-bloco { display: grid; grid-template-columns: 36mm 1fr; gap: 7mm; align-items: center; margin-top: auto; }
+.qr-bloco img { width: 36mm; height: 36mm; background: #fff; padding: 2mm; }
+.qr-bloco p { font-size: 10pt; line-height: 1.5; opacity: .82; }
+.remate-fim {
+  font-family: var(--font-h);
+  font-size: 26pt; font-weight: 700; letter-spacing: -.025em;
+  color: var(--orange); margin-top: auto; padding-top: 12mm; line-height: 1;
+}
+.contra__rodape {
+  font-size: 7.5pt; letter-spacing: .06em; color: #5B6B7D;
+  margin-top: 7mm; padding-top: 5mm; border-top: .3pt solid rgba(15,27,45,.22);
+}
+
+/* ==========================================================================
+   Pré-visualização em ecrã (não afeta o PDF)
+   ========================================================================== */
+@media screen {
+  .pagedjs_pages { display: flex; flex-direction: column; align-items: center; gap: 10mm; padding: 10mm 0; }
+  .pagedjs_page { box-shadow: 0 4mm 12mm rgba(0,0,0,.45); }
+}

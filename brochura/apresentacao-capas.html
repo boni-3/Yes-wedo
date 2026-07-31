@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<title>Yes, We Do — Opções de Capa da Brochura</title>
+<link rel="stylesheet" href="/css/fonts.css">
+<style>
+  @page { size: 210mm 297mm; margin: 0; }
+
+  :root{ --orange:#F04320; --blue:#529BCA; --dark-blue:#0F1B2D; --paper:#F5F2EC;
+         --fh:'Space Grotesk',sans-serif; --fb:'Inter',sans-serif; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--fb);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+  .pg{width:210mm;height:297mm;background:var(--dark-blue);color:#fff;
+      padding:11mm 10mm 10mm;display:flex;flex-direction:column;
+      break-after:page;page-break-after:always;position:relative;overflow:hidden}
+  .pg:last-child{break-after:auto;page-break-after:auto}
+
+  .hd{display:flex;justify-content:space-between;align-items:baseline;
+      padding-bottom:3mm;margin-bottom:6mm;border-bottom:.3pt solid rgba(255,255,255,.22)}
+  .hd h2{font-family:var(--fh);font-size:14pt;font-weight:700;letter-spacing:-.01em}
+  .hd h2 em{font-style:normal;color:var(--orange)}
+  .hd .pgn{font-family:var(--fh);font-size:8pt;letter-spacing:.14em;text-transform:uppercase;opacity:.5}
+
+  /* ---------- grelha de capas ---------- */
+  .row{display:grid;grid-template-columns:repeat(2,1fr);gap:8mm;flex:1;align-content:center}
+    .cel .num{font-family:var(--fh);font-size:13pt;font-weight:700;color:var(--orange);
+            letter-spacing:.04em;margin-bottom:3mm}
+  .cel .cap{color:#9fb0c4;font-size:9pt;line-height:1.45;margin-top:4mm}
+
+  .capa{position:relative;width:100%;height:auto;aspect-ratio:210/297;margin:0 auto;
+        overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;
+        padding:8% 7.6% 6.7%;background:var(--dark-blue)}
+  .capa img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .capa .veu{position:absolute;inset:0;z-index:0}
+  .capa--esc .veu{background:linear-gradient(180deg,rgba(15,27,45,0) 45%,rgba(15,27,45,.86) 100%)}
+  .capa--cla{background:var(--paper);color:var(--dark-blue)}
+  .capa--cla .veu{background:linear-gradient(180deg,rgba(255,255,255,0) 46%,rgba(248,246,242,.92) 100%)}
+  .capa > .txt{position:relative;z-index:1}
+  .kick{font-family:var(--fh);font-size:6pt;letter-spacing:.24em;text-transform:uppercase;
+        opacity:.72;margin-bottom:2.5mm}
+  .rule{width:22%;height:.7mm;background:var(--orange);margin-bottom:2.5mm}
+  .tg{font-family:var(--fh);font-size:11pt;font-weight:500;letter-spacing:-.01em}
+  .ft{font-family:var(--fh);font-size:5.6pt;letter-spacing:.16em;text-transform:uppercase;
+      opacity:.55;margin-top:1.5mm}
+
+  /* capas construídas em código */
+  .logoc{position:absolute;left:7.6%;top:12%;width:48%;z-index:1}
+  .cs-bloco .f1{position:absolute;inset:0 0 auto 0;height:47%;background:var(--orange);z-index:0}
+  .cs-bloco .f2{position:absolute;top:47%;left:0;right:0;height:7%;background:var(--blue);z-index:0}
+  .cs-bloco .logoc{top:auto;bottom:33%;filter:brightness(0) invert(1)}
+  .cs-branco{background:#fff}
+  .cs-grelha .mos{position:absolute;inset:0 0 36% 0;display:grid;grid-template-columns:repeat(3,1fr);
+                  grid-template-rows:repeat(3,1fr);gap:.4mm;z-index:0}
+  .cs-grelha .mos img{width:100%;height:100%;object-fit:cover}
+  .cs-grelha .logoc{top:auto;bottom:26%;width:38%}
+  /* contorno branco: destaca o logótipo por cima do mosaico de fotografias */
+  .cs-grelha .logoc{filter:
+      drop-shadow( .55mm 0 0 #fff) drop-shadow(-.55mm 0 0 #fff)
+      drop-shadow(0  .55mm 0 #fff) drop-shadow(0 -.55mm 0 #fff)
+      drop-shadow( .4mm  .4mm 0 #fff) drop-shadow(-.4mm  .4mm 0 #fff)
+      drop-shadow( .4mm -.4mm 0 #fff) drop-shadow(-.4mm -.4mm 0 #fff)}
+
+
+  /* ---------- página de abertura ---------- */
+  .cover{justify-content:center}
+  .cover .logo{width:52mm;margin-bottom:10mm}
+  .cover h1{font-family:var(--fh);font-size:27pt;font-weight:700;line-height:1.05;
+            letter-spacing:-.025em;margin-bottom:5mm}
+  .cover h1 em{font-style:normal;color:var(--orange)}
+  .cover .lead{font-size:10.5pt;line-height:1.6;max-width:150mm;opacity:.88;margin-bottom:9mm}
+  .duas{display:grid;grid-template-columns:1fr;gap:6mm;max-width:170mm}
+  .via{border-left:1mm solid var(--orange);padding-left:6mm}
+  .via.b{border-left-color:var(--blue)}
+  .via h3{font-family:var(--fh);font-size:12pt;font-weight:700;margin-bottom:2.5mm}
+  .via p{font-size:9pt;line-height:1.55;opacity:.82}
+  .cover .pede{margin-top:auto;padding-top:7mm;border-top:.3pt solid rgba(255,255,255,.22);
+               font-family:var(--fh);font-size:10pt;color:var(--orange);font-weight:500}
+
+  /* ---------- página final ---------- */
+  .fim{justify-content:center;text-align:left}
+  .fim h1{font-family:var(--fh);font-size:24pt;font-weight:700;margin-bottom:6mm;letter-spacing:-.02em}
+  .fim ol{margin:0 0 8mm 5mm;font-size:10pt;line-height:1.9}
+  .fim ol b{color:var(--orange)}
+  .fim .cont{font-family:var(--fh);font-size:9pt;opacity:.6;margin-top:auto;
+             padding-top:6mm;border-top:.3pt solid rgba(255,255,255,.22)}
+</style>
+</head>
+<body>
+<div id="doc"></div>
+
+<script>
+const LOGO_A = '/img/brochura/ref/logo-yeswedo-alpha.png';
+const LOGO_M = '/img/logo-stacked-tagline.png';
+const FOTOS = ['reclame-lusiadas','liu-jo-stand-porto','spmec-photobooth','steve-madden',
+               'lusiadas-letras-recortadas','abreu-expo-premio','homy-casa-jysk',
+               'vogue-photobooth','medicina-aeronautica-rececao'];
+
+const ESCURAS = [
+  ['1','capa-logo-fachada','Reclame luminoso 3D em fachada, ao anoitecer. Retroiluminação laranja e azul.'],
+  ['2','capa-logo-betao','Letras 3D com volume e sombra em parede de betão, com reflexo no chão.'],
+  ['3','capa-logo-neon','Logótipo em tubo de néon aceso sobre tijolo escuro.'],
+  ['4','capa-comp-fachada','Fachada ao anoitecer com o logótipo aplicado e halo de luz.'],
+  ['5','capa-comp-betao','Parede de betão com foco de luz. Calma e com muito espaço.'],
+  ['6','capa-comp-oficina','Oficina com plotter e rolos de vinil. Mostra o fabrico.'],
+  ['7','capa-arte-v1','Tubos de néon desfocados. Atmosférica, sem ser literal.'],
+  ['8','capa-arte-v3','Rastos de luz nas três cores da marca. Gráfica e limpa.'],
+];
+
+const CLARAS = [
+  ['1','capa-clara-pedra','Letras em parede de pedra clara, sol rasante e sombras longas. A mais arquitetónica.'],
+  ['2','capa-clara-estudio','Letras sobre fundo branco puro, estilo catálogo de design. A mais limpa.'],
+  ['3','capa-clara-fachada','Parede branca de edifício contra céu azul. Corporativa e luminosa.'],
+  ['4','capa-clara-instalacao','Escada encostada, acabado de instalar. Conta que a instalação é vossa.'],
+  ['5','capa-clara-vidro','Vinil recortado em fachada de vidro com reflexo do céu.'],
+  ['6','capa-clara-rececao','Interior branco com luz natural de janela. Sóbria e elegante.'],
+  ['7',{css:'cs-bloco'},'Faixa laranja e azul da marca, logótipo a branco. Gráfica e muito "agência".'],
+  ['8',{css:'cs-papel'},'Off-white com o logótipo grande. Calma e confiante.'],
+  ['9',{css:'cs-branco'},'Branco puro, máximo espaço negativo. A mais minimalista.'],
+  ['10',{css:'cs-grelha'},'Nove trabalhos reais em grelha. Mostra o volume de portfólio.'],
+];
+
+function capa(item, escura){
+  const [n, src, desc] = item;
+  const cls = escura ? 'capa--esc' : 'capa--cla';
+  let inner;
+  if (typeof src === 'string') {
+    inner = `<img class="bg" src="/img/brochura/${src}.webp" alt=""><div class="veu"></div>`;
+  } else {
+    inner = (src.css==='cs-bloco' ? '<div class="f1"></div><div class="f2"></div>' : '')
+          + (src.css==='cs-grelha' ? `<div class="mos">${FOTOS.map(f=>`<img src="/img/portfolio/${f}.webp">`).join('')}</div>` : '')
+          + `<img class="logoc" src="${LOGO_A}" alt="">`;
+  }
+  const extra = typeof src === 'string' ? '' : ' ' + src.css;
+  return `<div class="cel">
+      <div class="num">${n}</div>
+      <div class="capa ${cls}${extra}">${inner}
+        <div class="txt">
+          <div class="kick">Rio Tinto · Porto · Portugal</div>
+          <div class="rule"></div>
+          <div class="tg">Dizemos sim aos desafios.</div>
+          <div class="ft">Marketing &amp; Publicidade</div>
+        </div>
+      </div>
+      <div class="cap">${desc}</div>
+    </div>`;
+}
+
+function pagina(titulo, itens, escura, pgn){
+  return `<div class="pg">
+    <div class="hd"><h2>${titulo}</h2><div class="pgn">${pgn}</div></div>
+    <div class="row">${itens.map(i=>capa(i,escura)).join('')}</div>
+  </div>`;
+}
+
+let html = '';
+
+// ---- abertura ----
+html += `<div class="pg cover">
+  <img class="logo" src="${LOGO_M}" alt="Yes, We Do">
+  <h1>Linha clara.<br><em>Falta escolher a capa.</em></h1>
+  <p class="lead">A linha gráfica já está decidida: <b>clara</b> — letras recortadas em PVC,
+     luz natural e muito espaço branco. Toda a brochura, nas 16 páginas, segue esta linha.</p>
+  <div class="duas">
+    <div class="via b">
+      <h3>Faltam só as capas</h3>
+      <p>Aqui estão as 10 propostas, duas por página para se verem bem no telemóvel.
+         Em todas o logótipo aparece fabricado como produto — tal como no vídeo do vosso site.</p>
+    </div>
+  </div>
+  <p class="pede">Basta dizerem-me o número da capa que preferem.</p>
+</div>`;
+
+// ---- linha clara, 2 por página para se ler bem no telemóvel ----
+for (let i = 0; i < 8; i += 2) {
+  html += pagina(`Capa <em>${CLARAS[i][0]}</em> e <em>${CLARAS[i+1][0]}</em>`,
+                 CLARAS.slice(i, i+2), false, `Página ${2 + i/2} de 6`);
+}
+
+// ---- última: 9 e 10 + próximos passos ----
+html += `<div class="pg">
+  <div class="hd"><h2>Capa <em>9</em> e <em>10</em> · e a seguir</h2><div class="pgn">Página 6 de 6</div></div>
+  <div class="row">
+    ${capa(CLARAS[8], false)}
+    ${capa(CLARAS[9], false)}
+    <div class="cel" style="grid-column:span 2;margin-top:4mm">
+      <div class="num">A SEGUIR</div>
+      <div style="font-size:10pt;line-height:1.75;opacity:.88">
+        <p style="margin-bottom:4mm">Assim que escolherem a capa, sigo com as <b style="color:#F04320">16 páginas completas</b>
+        nessa linha — versão para gráfica e versão digital interativa.</p>
+        <p style="margin-bottom:4mm">Ainda preciso de duas coisas vossas:</p>
+        <p style="margin-bottom:2mm">1 · Confirmar os números: fiquei com <b style="color:#F04320">+105 clientes</b>
+        e <b style="color:#F04320">+150 projetos</b>. O segundo continua certo?</p>
+        <p>2 · Se tiverem <b style="color:#F04320">vídeos de instalação</b> no telemóvel, mandem 2 ou 3 —
+        na versão digital são o que mais impressiona.</p>
+      </div>
+    </div>
+  </div>
+</div>`;
+
+document.getElementById('doc').innerHTML = html;
+document.body.setAttribute('data-pronto','sim');
+</script>
+</body>
+</html>

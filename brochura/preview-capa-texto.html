@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<title>Capa 1 — tratamento do texto</title>
+<link rel="stylesheet" href="/css/fonts.css">
+<style>
+  :root{ --orange:#F04320; --blue:#529BCA; --dark-blue:#0F1B2D; --ink:#0F1B2D;
+         --paper:#F5F2EC; --fh:'Space Grotesk',sans-serif; --fb:'Inter',sans-serif; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#1a2434;color:#fff;font-family:var(--fb);padding:26px}
+  h1{font-family:var(--fh);font-size:18px;margin-bottom:3px}
+  .sub{color:#9fb0c4;font-size:12.5px;margin-bottom:20px}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:start}
+  .tag{font-family:var(--fh);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+       color:var(--orange);margin-bottom:5px}
+  .desc{color:#9fb0c4;font-size:11px;line-height:1.45;margin-top:7px}
+
+  .capa{position:relative;width:100%;aspect-ratio:210/297;overflow:hidden;
+        background:var(--paper);box-shadow:0 8px 22px rgba(0,0,0,.5)}
+  .capa img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .txt{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:7.6% 7.6% 6.7%}
+  .kick{font-family:var(--fh);font-size:.55vw;letter-spacing:.26em;text-transform:uppercase;
+        margin-bottom:3.5%}
+  .rule{width:24%;height:.32vw;background:var(--orange);margin-bottom:3.5%}
+  .tg{font-family:var(--fh);font-size:1.05vw;font-weight:700;letter-spacing:-.015em;
+      margin-bottom:2.5%}
+  .ft{font-family:var(--fh);font-size:.5vw;letter-spacing:.18em;text-transform:uppercase}
+
+  /* ---------- 0 · atual ---------- */
+  .v0 .scrim{position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg,rgba(245,242,236,0) 46%,rgba(245,242,236,.72) 72%,rgba(245,242,236,.95) 100%)}
+  .v0 .kick,.v0 .ft{color:#5b6b7d}
+  .v0 .tg{color:var(--ink)}
+
+  /* ---------- A · banda sólida ---------- */
+  .vA .banda{position:absolute;left:0;right:0;bottom:0;height:26%;background:var(--paper);z-index:1}
+  .vA .kick{color:#6b7889}
+  .vA .tg{color:var(--ink)}
+  .vA .ft{color:#8a94a1}
+
+  /* ---------- B · véu forte + texto a cheio ---------- */
+  .vB .scrim{position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg,rgba(245,242,236,0) 40%,rgba(245,242,236,.94) 62%,rgba(245,242,236,1) 78%)}
+  .vB .kick{color:var(--ink);font-weight:700;opacity:.75}
+  .vB .tg{color:var(--ink)}
+  .vB .ft{color:var(--ink);font-weight:500;opacity:.6}
+
+  /* ---------- C · bloco escuro ---------- */
+  .vC .bloco{position:absolute;left:0;right:0;bottom:0;height:27%;background:var(--dark-blue);z-index:1}
+  .vC .kick{color:rgba(255,255,255,.72)}
+  .vC .tg{color:#fff}
+  .vC .ft{color:rgba(255,255,255,.55)}
+  .vC .rule{background:var(--orange)}
+</style>
+</head>
+<body>
+<h1>Capa 1 · Pedra clara — tratamento do bloco de texto</h1>
+<p class="sub">O problema: sobre travertino texturado, o cinzento de “RIO TINTO” e “MARKETING &amp; PUBLICIDADE” desaparece.</p>
+
+<div class="grid" id="g"></div>
+
+<script>
+const IMG = '/img/brochura/capa-clara-pedra.webp';
+const OPS = [
+  ['0 · Atual', 'v0', '<div class="scrim"></div>', 'Véu suave. É o que está — o texto pequeno perde-se na textura.'],
+  ['A · Banda sólida', 'vA', '<div class="banda"></div>', 'Faixa off-white opaca no rodapé. Contraste garantido e liga com o papel das páginas interiores.'],
+  ['B · Véu forte', 'vB', '<div class="scrim"></div>', 'Degradê muito mais opaco e texto a cheio, sem transparências. Mantém a fotografia a respirar.'],
+  ['C · Bloco escuro', 'vC', '<div class="bloco"></div>', 'Faixa azul-escura da marca. Máximo contraste e muito impacto — mas quebra a linha clara.'],
+];
+
+document.getElementById('g').innerHTML = OPS.map(([t,c,layer,d]) => `
+  <div>
+    <div class="tag">${t}</div>
+    <div class="capa ${c}">
+      <img class="bg" src="${IMG}" alt="">
+      ${layer}
+      <div class="txt">
+        <div class="kick">Rio Tinto · Porto · Portugal</div>
+        <div class="rule"></div>
+        <div class="tg">Dizemos sim aos desafios.</div>
+        <div class="ft">Marketing &amp; Publicidade</div>
+      </div>
+    </div>
+    <div class="desc">${d}</div>
+  </div>`).join('');
+</script>
+</body>
+</html>

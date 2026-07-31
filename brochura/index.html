@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brochura — Yes, We Do | Marketing &amp; Publicidade em Rio Tinto, Porto</title>
+<meta name="description" content="Brochura da Yes, We Do: reclames luminosos, letras recortadas, sinalética, lonas, stands, decoração de viaturas e montras. Projeto, fabrico e instalação em Rio Tinto, Porto.">
+<link rel="canonical" href="https://yes-wedo.pt/brochura">
+
+<!-- Partilha por WhatsApp e redes -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_PT">
+<meta property="og:url" content="https://yes-wedo.pt/brochura">
+<meta property="og:title" content="Brochura Yes, We Do — Publicidade que se vê">
+<meta property="og:description" content="Reclames luminosos, letras recortadas, sinalética, stands e decoração de viaturas. Projetamos, fabricamos e instalamos.">
+<meta property="og:image" content="https://yes-wedo.pt/img/brochura/og-brochura.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta name="theme-color" content="#F5F2EC">
+
+<link rel="preload" as="image" href="/img/brochura/web/capa-clara-pedra.webp" fetchpriority="high">
+
+<!--
+  GA4 — as "estatísticas de visualizações" prometidas na proposta.
+  O brochura.js já dispara os eventos (brochura_open, page_view_brochura,
+  cta_whatsapp, video_play, share_section, presentation_mode) e não rebenta
+  sem gtag. Falta SÓ o ID da propriedade.
+
+  PARA ATIVAR: criar propriedade em analytics.google.com, copiar o G-XXXXXXXXXX
+  e descomentar as 6 linhas abaixo, substituindo o ID nos dois sítios.
+-->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/brochura/brochura.min.css">
+<style>
+  /* Fallback sem JS: independente do resto, para funcionar mesmo que algo falhe */
+  .sem-js{max-width:44rem;margin:0 auto;padding:3rem 1.5rem;
+          font:16px/1.65 'Inter',system-ui,sans-serif;color:#33414F;background:#F5F2EC}
+  .sem-js h2{font-family:'Space Grotesk',sans-serif;font-size:1.7rem;color:#0F1B2D;
+             margin:2.6rem 0 .6rem;letter-spacing:-.02em}
+  .sem-js__kicker{font-family:'Space Grotesk',sans-serif;font-size:.72rem;letter-spacing:.18em;
+                  text-transform:uppercase;color:#F04320;margin-top:2.4rem}
+  .sem-js p{margin:.7rem 0}
+  .sem-js ul,.sem-js ol{margin:.7rem 0 .7rem 1.2rem}
+  .sem-js li{margin:.3rem 0}
+  .sem-js a{color:#F04320}
+  .sem-js__topo{border-bottom:1px solid rgba(15,27,45,.15);padding-bottom:1.6rem}
+  .sem-js__acoes a{font-weight:600}
+  .sem-js footer{margin-top:3rem;padding-top:1.2rem;font-size:.8rem;color:#5B6B7D;
+                 border-top:1px solid rgba(15,27,45,.15)}
+  /* o splash não pode tapar o fallback */
+  html.sem-js-ativo #splash{display:none}
+</style>
+<noscript><style>#splash,#barra,#controlos,#indice-btn{display:none!important}
+  body{background:#F5F2EC}</style></noscript>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Brochura Yes, We Do",
+  "about": "Marketing e publicidade: reclames luminosos, sinalética, letras recortadas, lonas, stands, decoração de viaturas e montras",
+  "inLanguage": "pt-PT",
+  "url": "https://yes-wedo.pt/brochura",
+  "publisher": {
+    "@type": "LocalBusiness",
+    "name": "Yes, We Do",
+    "telephone": "+351912320366",
+    "email": "geral@yes-wedo.pt",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. D. João I 81",
+      "postalCode": "4435-208",
+      "addressLocality": "Rio Tinto",
+      "addressCountry": "PT"
+    }
+  }
+}
+</script>
+</head>
+<body>
+
+<div id="splash"><img src="/img/logo-stacked-tagline.png" alt="Yes, We Do"></div>
+
+<div id="progresso"></div>
+
+<button id="indice-btn" aria-label="Abrir índice"></button>
+<nav id="indice" aria-label="Índice da brochura"></nav>
+
+<!-- modo folheto (desktop) -->
+<main id="folheto" aria-label="Brochura Yes, We Do"></main>
+
+<!-- modo scroll (telemóvel) -->
+<main id="rolo" aria-label="Brochura Yes, We Do"></main>
+
+<div id="controlos">
+  <button id="ant" aria-label="Página anterior"></button>
+  <span id="conta" aria-live="polite">1 / 16</span>
+  <button id="seg" aria-label="Página seguinte"></button>
+  <button id="ind" aria-label="Abrir índice"></button>
+  <button id="som" aria-label="Ligar som ao virar a página" aria-pressed="false"></button>
+  <button id="full" aria-label="Modo apresentação"></button>
+</div>
+
+<div id="barra"></div>
+
+<script src="/js/vendor/gsap.min.js"></script>
+<script src="/brochura/vendor/page-flip.browser.js"></script>
+<script src="/brochura/brochura.min.js"></script>
+<!-- ESTATICO:INICIO -->
+<noscript>
+<div class="sem-js">
+<header class="sem-js__topo">
+<img src="/img/logo-stacked-tagline.png" alt="Yes, We Do" width="160">
+<p>Esta brochura é interativa e precisa de JavaScript. Em baixo fica o conteúdo completo em texto — e o PDF para descarregar.</p>
+<p class="sem-js__acoes"><a href="/brochura/Brochura-Yes-We-Do.pdf" download>Descarregar a brochura em PDF</a> &middot; <a href="https://wa.me/351912320366">WhatsApp</a> &middot; <a href="tel:+351912320366">+351 912 320 366</a> &middot; <a href="mailto:geral@yes-wedo.pt">geral@yes-wedo.pt</a></p>
+</header>
+<section id="sem-js-capa">
+<p class="sem-js__kicker">Rio Tinto · Porto · Portugal</p>
+<h2>Yes, We Do</h2>
+<p><strong>Dizemos sim aos desafios.</strong></p>
+</section>
+<section id="sem-js-manifesto">
+<p>Há marcas que passam despercebidas.</p>
+<p>E há marcas que se veem do outro lado da rua.</p>
+<p>A diferença raramente é o orçamento. É saber o que fazer com ele.</p>
+<p>Há mais de dez anos que damos forma, cor e luz a marcas do Grande Porto e de todo o país. Não desenhamos e entregamos: projetamos, fabricamos e instalamos. Do primeiro esboço ao parafuso final.</p>
+</section>
+<section id="sem-js-quem-somos">
+<p class="sem-js__kicker">Quem somos</p>
+<h2>Somos a Yes, We Do.</h2>
+<p>A Yes Wedo, Lda. nasceu das mãos de dois sócios com mais de dez anos de experiência no setor. Juntaram o que sabiam — produção, montagem, design — e abriram portas em Rio Tinto com uma ideia simples: fazer tudo em casa, do princípio ao fim.</p>
+<p>É isso que nos distingue. Não subcontratamos o essencial. O projeto é nosso, o fabrico é nosso, a instalação é nossa. Quando algo corre mal, não há a quem apontar o dedo — resolvemos.</p>
+<p>De Rio Tinto para todo o país, dizemos sim aos desafios. Acreditamos que cada marca tem uma história única para contar, e sabemos como a materializar da forma mais impactante.</p>
+</section>
+<section id="sem-js-numeros">
+<p class="sem-js__kicker">Em números</p>
+<h2>Dez anos a pôr marcas de pé.</h2>
+<p>Trabalhamos para hospitais, marcas internacionais de moda, concessionários, centros comerciais, clínicas e restaurantes. Projetos de uma placa e projetos de um hospital inteiro.</p>
+<p>A escala muda. O cuidado não.</p>
+<p>Cobrimos o Grande Porto, Matosinhos, Maia, Gondomar, Valongo e todo o norte de Portugal. Para projetos maiores, deslocamo-nos a qualquer ponto do país.</p>
+</section>
+<section id="sem-js-mapa-servicos">
+<p class="sem-js__kicker">O que fazemos</p>
+<h2>Doze formas de dar a ver a sua marca.</h2>
+<p>Da placa de porta ao reclame de fachada. Do vinil de uma montra ao stand de uma feira internacional.</p>
+<ul><li><strong>Reclames Luminosos</strong> — Letreiros com iluminação LED para máxima visibilidade, dia e noite.</li><li><strong>Sinaléticas</strong> — Sinalética interior e exterior, lettering e placas de identificação.</li><li><strong>Impressão Grandes Formatos</strong> — Impressão digital para vitrinas, fachadas, veículos e qualquer superfície.</li><li><strong>Decoração de Espaços</strong> — Ambientação de espaços comerciais, escritórios e pontos de venda.</li><li><strong>Néons</strong> — Letreiros e decorações em néon LED personalizados.</li><li><strong>Eventos</strong> — Produção de materiais para feiras, exposições e lançamentos de marca.</li><li><strong>Decoração de Montras</strong> — Montras que atraem clientes e comunicam promoções com eficácia.</li><li><strong>Lonas &amp; Stands</strong> — Lonas publicitárias e stands para eventos, feiras e pontos de venda.</li><li><strong>Flyers &amp; Brochuras</strong> — Design e impressão de flyers, brochuras e catálogos.</li><li><strong>Merchandising</strong> — Artigos promocionais personalizados e merchandising corporativo.</li><li><strong>Páginas Web</strong> — Websites modernos e responsivos que elevam a presença digital.</li><li><strong>Decoração de Viaturas</strong> — Vinil que transforma cada veículo numa ferramenta de marketing.</li></ul>
+</section>
+<section id="sem-js-reclames">
+<p class="sem-js__kicker">01 · Serviços</p>
+<h2>Reclames Luminosos</h2>
+<p><strong>A sua marca vista de longe, dia e noite.</strong></p>
+<p>Um reclame luminoso é o primeiro funcionário da sua empresa: trabalha 24 horas por dia, todos os dias, e nunca falta. Fabricamos letras monobloco em alumínio com iluminação LED, retroiluminadas ou frontais, dimensionadas para a distância a que vão ser lidas.</p>
+<p>Tratamos do projeto, do fabrico e da instalação — incluindo o trabalho em altura com plataforma quando é preciso. Entregamos o reclame aceso e a funcionar, não uma caixa por montar.</p>
+<ul><li>Letras monobloco em alumínio</li><li>Iluminação LED de baixo consumo</li><li>Retroiluminado ou frontal</li><li>Instalação em altura incluída</li></ul>
+<p><strong>Reclames luminosos? Yes, we do.</strong></p>
+</section>
+<section id="sem-js-letras-recortadas">
+<p class="sem-js__kicker">02 · Serviços</p>
+<h2>Letras Recortadas</h2>
+<p><strong>Volume, sombra e presença. Sem eletricidade.</strong></p>
+<p>Nem tudo precisa de luz para se impor. Letras recortadas em relevo dão profundidade a uma receção, a uma fachada ou a uma parede de escritório — e a sombra que projetam faz metade do trabalho.</p>
+<p>Cortamos em acrílico, PVC, alumínio composto ou inox escovado, com o acabamento à medida do espaço. Aplicação com espaçadores ou colagem direta, sempre alinhada a laser.</p>
+<ul><li>Acrílico, PVC, alumínio ou inox</li><li>Espessuras de 3 a 30 mm</li><li>Aplicação com espaçadores ou direta</li><li>Alinhamento a laser na instalação</li></ul>
+<p><strong>Letras recortadas? Yes, we do.</strong></p>
+</section>
+<section id="sem-js-sinaleticas">
+<p class="sem-js__kicker">03 · Serviços</p>
+<h2>Sinaléticas</h2>
+<p><strong>Quem entra tem de saber para onde ir.</strong></p>
+<p>Sinalética é o serviço mais invisível que fazemos — e nota-se logo quando falta. Num hospital, num centro comercial ou num edifício de escritórios, um sistema de sinalética bem pensado é a diferença entre um visitante orientado e um visitante perdido.</p>
+<p>Desenhamos o sistema completo: direcional, identificativa, de segurança e de porta. Numeração coerente, tipografia legível à distância certa, materiais que aguentam anos de utilização intensa.</p>
+<ul><li>Sistemas completos, não peças soltas</li><li>Direcional, identificativa e de segurança</li><li>Materiais para uso intensivo</li><li>Ampliável à medida que o espaço cresce</li></ul>
+<p><strong>Sinalética? Yes, we do.</strong></p>
+</section>
+<section id="sem-js-lonas">
+<p class="sem-js__kicker">04 · Serviços</p>
+<h2>Lonas &amp; Impressão em Grandes Formatos</h2>
+<p><strong>Quando é preciso ocupar uma fachada inteira.</strong></p>
+<p>Uma obra em curso, um hospital em expansão, uma campanha que precisa de ser vista do outro lado da avenida. A impressão em grande formato resolve em dias o que uma estrutura permanente demoraria meses.</p>
+<p>Imprimimos em lona, vinil, rede microperfurada e telas de fachada, com tintas resistentes a UV. E instalamos — incluindo os trabalhos em altura que a maioria das gráficas não faz.</p>
+<ul><li>Lona, vinil, rede microperfurada e tela</li><li>Tintas resistentes a UV e intempérie</li><li>Sem limite prático de dimensão</li><li>Instalação em altura incluída</li></ul>
+<p><strong>Grandes formatos? Yes, we do.</strong></p>
+</section>
+<section id="sem-js-stands">
+<p class="sem-js__kicker">05 · Serviços</p>
+<h2>Stands &amp; Eventos</h2>
+<p><strong>Três dias para causar impressão. Sem segunda hipótese.</strong></p>
+<p>Numa feira, o seu stand compete com dezenas de outros pelo olhar de quem passa. Produzimos stands, backdrops, press walls, photobooths, balcões e bandeiras — e montamos tudo no local, a horas, com a marca alinhada ao milímetro.</p>
+<p>É a área onde temos mais quilómetros: Vogue Fashion Night, Liu Jo, Steve Madden, SPMEC, Abreu. Eventos de moda, congressos médicos e ativações de marca em que o prazo não se negoceia.</p>
+<ul><li>Stands, backdrops e press walls</li><li>Photobooths e balcões de receção</li><li>Montagem e desmontagem no local</li><li>Cumprimento de prazos de feira</li></ul>
+<p><strong>Stands e eventos? Yes, we do.</strong></p>
+</section>
+<section id="sem-js-viaturas">
+<p class="sem-js__kicker">06 · Serviços</p>
+<h2>Decoração de Viaturas</h2>
+<p><strong>Publicidade que anda sozinha pela cidade.</strong></p>
+<p>Uma carrinha decorada passa por milhares de pessoas por dia e não custa nada a mais depois de aplicada. É o meio publicitário com melhor retorno por euro investido — e o único que trabalha enquanto a equipa vai para o cliente.</p>
+<p>Aplicamos vinil de fundição em decoração total ou parcial, com desenho adaptado à forma do veículo. Vinil de qualidade automóvel, removível sem danificar a pintura.</p>
+<ul><li>Decoração total ou parcial</li><li>Vinil de fundição, qualidade automóvel</li><li>Removível sem danificar a pintura</li><li>Frotas com aplicação uniforme</li></ul>
+<p><strong>Decoração de viaturas? Yes, we do.</strong></p>
+</section>
+<section id="sem-js-montras">
+<p class="sem-js__kicker">07 · Serviços</p>
+<h2>Decoração de Montras</h2>
+<p><strong>O vidro é o cartaz mais barato que tem.</strong></p>
+<p>A montra é o único espaço publicitário que já pagou: está pago na renda. Vinil recortado, impresso ou jateado transforma um vidro comum na primeira frase que o cliente lê sobre o seu negócio.</p>
+<p>Fazemos desde a campanha sazonal que se troca em duas horas até à identidade permanente da loja. E o vinil jateado resolve, de caminho, o problema da privacidade em clínicas e escritórios.</p>
+<ul><li>Vinil recortado, impresso ou jateado</li><li>Campanhas sazonais ou permanentes</li><li>Efeito jateado para privacidade</li><li>Aplicação sem bolhas, garantida</li></ul>
+<p><strong>Decoração de montras? Yes, we do.</strong></p>
+</section>
+<section id="sem-js-clientes">
+<p class="sem-js__kicker">Clientes</p>
+<h2>Confiam em nós.</h2>
+<p>Mais de 105 empresas — de hospitais a marcas internacionais de moda.</p>
+<p>Lusíadas Saúde &middot; Renault &middot; JYSK &middot; Liu Jo &middot; Steve Madden &middot; Vogue &middot; Abreu &middot; SPMEC &middot; Lusíadas HeyDoc &middot; HomyCasa &middot; Mira Maia Shopping &middot; Cleva &middot; Weego &middot; Amani Spa &middot; Norboxe &middot; Espinho Auto &middot; Ruiz Costa &middot; C&#x27;s Pet Care &middot; Hospital da Lapa &middot; Medicina Aeronáutica &middot; e mais de 85 outras</p>
+</section>
+<section id="sem-js-processo">
+<p class="sem-js__kicker">Como trabalhamos</p>
+<h2>Do briefing ao parafuso final.</h2>
+<p>Cinco passos. Sem intermediários, sem subcontratos no que interessa.</p>
+<ol><li><strong>Conversa</strong> — Vamos ao local, medimos e percebemos o que precisa. Sem custo e sem compromisso.</li><li><strong>Projeto</strong> — Recebe a simulação do trabalho aplicado ao seu espaço, com orçamento fechado. Sem surpresas no fim.</li><li><strong>Produção</strong> — Fabricamos nas nossas instalações em Rio Tinto. Controlamos o prazo porque a oficina é nossa.</li><li><strong>Instalação</strong> — Montamos no local, incluindo trabalhos em altura. Deixamos a funcionar e o espaço limpo.</li><li><strong>Acompanhamento</strong> — Continuamos disponíveis. Uma lâmpada, um vinil descolado, uma ampliação — atende sempre a mesma pessoa.</li></ol>
+</section>
+<section id="sem-js-porque-nos">
+<p class="sem-js__kicker">Porquê a Yes, We Do</p>
+<h2>Cinco razões, sem rodeios.</h2>
+<ul><li><strong>Fazemos tudo em casa</strong> — Projeto, fabrico e instalação são nossos. Um interlocutor do princípio ao fim — e ninguém a quem apontar o dedo quando algo falha.</li><li><strong>Instalamos, não só entregamos</strong> — Incluindo trabalhos em altura. Recebe o trabalho montado e a funcionar, não uma caixa e um manual.</li><li><strong>Orçamento fechado</strong> — O valor que aprova é o valor que paga. Sem extras a meio da obra.</li><li><strong>Dez anos e mais de 105 clientes</strong> — Hospitais, marcas internacionais, concessionários e lojas de bairro. Já vimos o problema que tem.</li><li><strong>Estamos aqui ao lado</strong> — Rio Tinto, a dez minutos do Porto. Quando precisa de alguém no local, aparecemos no próprio dia.</li></ul>
+<p><strong>E se for um desafio que nunca fizemos? Dizemos sim na mesma. É o nome da casa.</strong></p>
+</section>
+<section id="sem-js-contactos">
+<p class="sem-js__kicker">Falamos?</p>
+<h2>Diga-nos o que precisa.</h2>
+<p>Vamos ao local, medimos e apresentamos proposta. Sem custo e sem compromisso.</p>
+<p><strong>Yes, we do.</strong></p>
+<ul><li>WhatsApp: +351 912 320 366</li><li>Telefone: +351 919 755 990</li><li>Email: geral@yes-wedo.pt</li></ul>
+</section>
+<footer><p>Yes Wedo, Lda. &middot; Av. D. João I 81, 4435-208 Rio Tinto, Portugal &middot; yes-wedo.pt</p></footer>
+</div>
+</noscript>
+<!-- ESTATICO:FIM -->
+</body>
+</html>
