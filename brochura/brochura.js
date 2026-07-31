@@ -609,8 +609,36 @@
   /* Som de folha a virar. DESLIGADO por omissão — ninguém gosta de abrir um
      link e ouvir barulho. Fica um botão nos controlos e a escolha guarda-se.
      Nunca no telemóvel: aí não há virar de página. */
-  var audio = null, comSom = false;
-  try { comSom = localStorage.getItem('brochura-som') === '1'; } catch (e) {}
+  /* Ligado por omissão. Só suna no modo folheto (no telemóvel nunca) e só
+     quando alguém vira uma página — ou seja, já está a interagir. Se o
+     utilizador o desligar, a escolha dele manda nas visitas seguintes. */
+  var audio = null, comSom = true;
+  try {
+    var guardado = localStorage.getItem('brochura-som');
+    if (guardado !== null) comSom = guardado === '1';
+  } catch (e) {}
+
+  /* Os navegadores bloqueiam áudio até haver um gesto do utilizador. Sem isto,
+     o primeiro virar de página falhava em silêncio. Aqui "aquecemos" o áudio no
+     primeiro toque/clique: toca em mudo e pausa logo, o que basta para libertar
+     as reproduções seguintes. */
+  var aquecido = false;
+  function aquece() {
+    if (aquecido) return;
+    aquecido = true;
+    try {
+      audio = new Audio('/brochura/audio/folha.mp3');
+      audio.volume = 0;
+      audio.play().then(function () {
+        audio.pause();
+        audio.currentTime = 0;
+        audio.volume = .5;
+      }).catch(function () { audio.volume = .5; });
+    } catch (e) {}
+  }
+  ['pointerdown', 'keydown'].forEach(function (t) {
+    document.addEventListener(t, aquece, { once: true, capture: true });
+  });
 
   function tocaFolha() {
     if (!comSom || modo !== 'flip') return;
