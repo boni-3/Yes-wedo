@@ -281,8 +281,85 @@ body.apresentar.ocioso #controlos{opacity:0;pointer-events:none}
 
 /* ==========================================================================
    MODO RETRATO (telemóvel) — folheto de uma página só
+
+   A página base é 480×679 em vez de 700×990. Com um ecrã de 430px o fator
+   de escala sobe de 0,58 para ~0,86, e é isso que faz o texto passar de
+   ilegível a confortável. Em troca, o layout tem de se reorganizar: coluna
+   única, imagens mais baixas, espaçamentos mais apertados.
    ========================================================================== */
-.modo-retrato.modo-flip{padding:14px 12px 78px;place-items:center}
+.modo-retrato .pg__in{padding:30px 28px 22px}
+
+/* tipografia: sobe em termos relativos, porque a página é mais pequena */
+.modo-retrato .h1{font-size:27px;margin-bottom:9px}
+.modo-retrato .kicker{font-size:9.5px;margin-bottom:10px}
+.modo-retrato .tagline{font-size:13.5px;margin-bottom:12px}
+.modo-retrato .corpo p{font-size:12px;line-height:1.52;margin-bottom:8px}
+.modo-retrato .folio{font-size:8px;padding-top:12px}
+.modo-retrato .folio b{font-size:10px}
+
+/* as duas colunas do serviço passam a uma só */
+.modo-retrato .serv__grid{grid-template-columns:1fr;gap:12px}
+.modo-retrato .specs{margin-top:0;display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.modo-retrato .specs li{font-size:10.5px;padding-left:13px;margin-bottom:6px}
+.modo-retrato .specs li::before{width:6px;height:6px;top:5px}
+
+/* média mais baixa para sobrar espaço ao texto */
+.modo-retrato .serv__hero,
+.modo-retrato .serv__video video{height:148px;margin-bottom:12px}
+.modo-retrato .apoio img{height:58px}
+.modo-retrato .apoio--5 img{height:48px}
+.modo-retrato .apoio{gap:6px;margin-top:12px}
+.modo-retrato .cta-linha{font-size:14px;margin-top:10px}
+.modo-retrato .cta-servico{font-size:11px;padding:8px 14px;margin-top:8px}
+.modo-retrato .simulacao{font-size:6.5px;padding:1px 4px}
+
+/* páginas específicas */
+.modo-retrato .quem__img{height:210px;margin-bottom:16px}
+.modo-retrato .nums{gap:26px 14px;margin:24px 0 26px}
+.modo-retrato .num__v{font-size:42px}
+.modo-retrato .num__l{font-size:8.5px;margin-top:5px}
+.modo-retrato .destaque{font-size:11px;padding-left:12px;border-left-width:2px}
+.modo-retrato .grid-serv{grid-template-columns:1fr 1fr;gap:9px 12px;margin-top:12px}
+.modo-retrato .sc__t{font-size:11.5px}
+.modo-retrato .sc__d{font-size:8.5px;line-height:1.35}
+.modo-retrato .sc__n{font-size:8px}
+.modo-retrato .manif{font-size:24px;margin-bottom:9px}
+.modo-retrato .manif__ass{font-size:12px;margin-top:30px;padding-top:18px}
+.modo-retrato .pg--manifesto .pg__in{padding:34px 34px}
+.modo-retrato .logos{grid-template-columns:repeat(3,1fr);gap:22px 16px;padding-bottom:20px}
+.modo-retrato .logos img{height:34px}
+.modo-retrato .nomes{font-size:10px;gap:5px 11px;padding-top:16px}
+.modo-retrato .nums--linha{gap:8px;margin:16px 0 18px}
+.modo-retrato .nums--linha .num__v{font-size:21px}
+.modo-retrato .nums--linha .num__l{font-size:6.5px}
+.modo-retrato .passo{grid-template-columns:34px 1fr;gap:11px;padding:11px 0}
+.modo-retrato .passo__n{font-size:18px}
+.modo-retrato .passo__t{font-size:12.5px;margin-bottom:3px}
+.modo-retrato .passo__d{font-size:10.5px;line-height:1.45}
+.modo-retrato .razoes{gap:13px;margin-top:16px}
+.modo-retrato .razao{grid-template-columns:14px 1fr;gap:9px}
+.modo-retrato .razao__b{width:9px;height:9px;margin-top:4px}
+.modo-retrato .razao__t{font-size:12.5px;margin-bottom:3px}
+.modo-retrato .razao__d{font-size:10.5px;line-height:1.45}
+.modo-retrato .remate{font-size:14px;padding-top:18px}
+.modo-retrato .capa__kicker{font-size:10px;margin-bottom:12px}
+.modo-retrato .capa__rule{width:86px;height:4px;margin-bottom:14px}
+.modo-retrato .capa__tag{font-size:24px}
+.modo-retrato .capa__rod{font-size:9.5px;margin-top:12px}
+.modo-retrato .pg--capa .pg__in{padding:50px 30px 40px}
+.modo-retrato .contactos{margin:30px 0 0;gap:22px}
+.modo-retrato .ct__l{font-size:8px}
+.modo-retrato .ct__v{font-size:21px}
+.modo-retrato .qr{grid-template-columns:88px 1fr;gap:16px;margin-top:32px}
+.modo-retrato .qr img{width:88px;height:88px;padding:5px}
+.modo-retrato .qr p{font-size:10.5px}
+.modo-retrato .remate-fim{font-size:29px;padding-top:24px}
+.modo-retrato .contra__rod{font-size:8.5px;margin-top:18px;padding-top:12px}
+
+/* ==========================================================================
+   Controlos e ações no retrato
+   ========================================================================== */
+.modo-retrato.modo-flip{padding:10px 8px 74px;place-items:center}
 .modo-retrato #controlos{bottom:14px;padding:5px 7px}
 .modo-retrato #controlos button{width:42px;height:42px}   /* alvo de toque ≥44px */
 .modo-retrato #controlos svg{width:19px;height:19px}

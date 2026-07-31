@@ -7,7 +7,12 @@
 (function () {
   'use strict';
 
-  var PW = 700, PH = 990;            // dimensão base da página (rácio A4)
+  /* Dimensão base da página. No telemóvel usamos uma base MAIS ESTREITA:
+     escalar a página de 700px para um ecrã de 430 dava fator 0,58 e o texto
+     de 14,5px aparecia a 8,4px. Com base 480 o fator sobe para ~0,85 e o
+     texto lê-se. O conteúdo é o mesmo, o layout é que se reorganiza. */
+  var PW = 700, PH = 990;
+  var PW_RETRATO = 480, PH_RETRATO = 679;   // mesmo rácio A4
   var LIMITE_FLIP = 1024;            // abaixo disto, scroll
   var D = null, flip = null, modo = null;
   var hashInicial = location.hash.slice(1);   // lido ANTES de qualquer replaceState
@@ -321,12 +326,17 @@
     document.body.classList.toggle('modo-retrato', !!retrato);
     document.body.classList.remove('modo-scroll');
 
+    var bw = retrato ? PW_RETRATO : PW;
+    var bh = retrato ? PH_RETRATO : PH;
+    el.style.setProperty('--pw', bw + 'px');
+    el.style.setProperty('--ph', bh + 'px');
+
     var larg, alt, altMax;
     if (retrato) {
       /* uma página só: aproveita o ecrã todo menos o espaço dos controlos */
-      altMax = window.innerHeight - 108;
-      larg = Math.min(window.innerWidth - 24, Math.round(altMax * PW / PH));
-      alt = Math.round(larg * PH / PW);
+      altMax = window.innerHeight - 104;
+      larg = Math.min(window.innerWidth - 16, Math.round(altMax * bw / bh));
+      alt = Math.round(larg * bh / bw);
     } else {
       var disp = Math.min(window.innerWidth - 60, 1500);
       larg = Math.min(PW, Math.floor(disp / 2));
@@ -335,7 +345,7 @@
       if (alt > altMax) { alt = altMax; larg = Math.round(alt * PW / PH); }
     }
 
-    el.style.setProperty('--esc', (larg / PW).toFixed(4));
+    el.style.setProperty('--esc', (larg / bw).toFixed(4));
 
     flip = new St.PageFlip(el, {
       width: larg, height: alt,
@@ -405,21 +415,36 @@
   /* Na primeira visita nada indica que as páginas viram — parecia um PDF.
      Uma dica discreta no canto, uma única vez por dispositivo. */
   function dica() {
-    try { if (localStorage.getItem('brochura-dica')) return; } catch (e) { return; }
-    if (SEM_MOVIMENTO) return;
+    /* chave v2: quem já tinha dispensado a versão antiga volta a ver esta,
+       porque o texto e o gesto mudaram com o folheto no telemóvel */
+    try { if (localStorage.getItem('brochura-dica-v2')) return; } catch (e) {}
     var d = document.createElement('div');
     d.id = 'dica';
-    d.innerHTML = '<span>Arraste o canto para virar a página</span>';
+    d.innerHTML = '<span>' + (modo === 'retrato'
+      ? 'Deslize para virar a página'
+      : 'Arraste o canto para virar a página') + '</span>';
     document.body.appendChild(d);
-    setTimeout(function () { d.classList.add('vis'); }, 900);
-    var fecha = function () {
+    setTimeout(function () { d.classList.add('vis'); }, 700);
+
+    var fechado = false;
+    function fecha() {
+      if (fechado) return;
+      fechado = true;
       d.classList.remove('vis');
-      setTimeout(function () { d.remove(); }, 500);
-      try { localStorage.setItem('brochura-dica', '1'); } catch (e) {}
-      document.removeEventListener('mousedown', fecha);
-    };
-    setTimeout(fecha, 6500);
-    document.addEventListener('mousedown', fecha);
+      setTimeout(function () { if (d.parentNode) d.remove(); }, 500);
+      try { localStorage.setItem('brochura-dica-v2', '1'); } catch (e) {}
+      ['pointerdown', 'keydown'].forEach(function (t) {
+        document.removeEventListener(t, fecha);
+      });
+    }
+    /* fecha ao primeiro gesto, mas só passados 1,2s — senão o toque que
+       dispensa o splash fechava-a antes de se ver */
+    setTimeout(function () {
+      ['pointerdown', 'keydown'].forEach(function (t) {
+        document.addEventListener(t, fecha);
+      });
+    }, 1200);
+    setTimeout(fecha, 8000);
   }
 
   var jaSaltou = false;
