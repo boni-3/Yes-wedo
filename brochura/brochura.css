@@ -748,7 +748,7 @@ body.apresentar.ocioso #controlos{opacity:0;pointer-events:none}
 .pg__in.noite .destaque{color:rgba(245,242,236,.84)}
 .pg__in.noite .folio{color:rgba(245,242,236,.62);border-top-color:rgba(245,242,236,.24)}
 .pg:has(.pg__in.noite) .partilhar{background:rgba(245,242,236,.16);color:#F5F2EC}
-.pg:has(.pg__in.noite) 
+
 /* A fotografia de noite é uma imagem à parte, sobreposta e revelada por
    cross-fade. A primeira tentativa pintava luz por cima da foto de dia com
    gradientes e mix-blend-mode: dava um nevoeiro esbranquiçado, não um
