@@ -175,7 +175,57 @@
         "/img/portfolio/espinho-auto.webp"
       ],
       "cta": "Reclames luminosos? Yes, we do.",
-      "_confirmar": "Confirmar com o Miguel: fazem o licenciamento camarário? Se sim, é um argumento de venda forte e deve entrar nos specs."
+      "fichas": {
+        "/img/portfolio/reclame-lusiadas.webp": {
+          "cliente": "Lusíadas Saúde",
+          "local": "Hospital Paços de Ferreira",
+          "servicos": [
+            "Letras monobloco em alumínio",
+            "Iluminação LED integrada",
+            "Instalação em altura com plataforma"
+          ],
+          "descricao": "Reclame de fachada dimensionado para ser lido à distância, dia e noite. Projeto, fabrico e instalação pela Yes, We Do.",
+          "tags": ["Reclames Luminosos", "Saúde"]
+        },
+        "/img/portfolio/homy-casa-reclame.webp": {
+          "cliente": "HomyCasa",
+          "servicos": [
+            "Letras monobloco iluminadas",
+            "Iluminação LED frontal",
+            "Instalação em fachada"
+          ],
+          "descricao": "Reclame de fachada em loja de mobiliário e decoração, com letras dimensionadas para leitura a partir da via.",
+          "tags": ["Reclames Luminosos", "Retalho"]
+        },
+        "/img/portfolio/amani-spa.webp": {
+          "cliente": "Amani Spa",
+          "servicos": [
+            "Néon LED personalizado",
+            "Aplicação em interior",
+            "Luz quente regulável"
+          ],
+          "descricao": "Letreiro em néon LED para ambiente de spa — luz suave, contínua e de baixo consumo.",
+          "tags": ["Néons", "Bem-estar"]
+        },
+        "/img/portfolio/espinho-auto.webp": {
+          "cliente": "Espinho Auto",
+          "servicos": [
+            "Caixa luminosa personalizada",
+            "Contorno em néon LED",
+            "Fabrico à medida"
+          ],
+          "descricao": "Identificação luminosa para stand automóvel, desenhada à volta da forma do logótipo do cliente.",
+          "tags": ["Reclames Luminosos", "Automóvel"]
+        }
+      },
+      "noite": {
+        "/img/portfolio/reclame-lusiadas.webp": "/img/brochura/web/reclame-lusiadas-noite.webp",
+        "/img/portfolio/homy-casa-reclame.webp": "/img/brochura/web/homy-casa-reclame-noite.webp",
+        "/img/portfolio/amani-spa.webp": "/img/brochura/web/amani-spa-noite.webp",
+        "/img/portfolio/espinho-auto.webp": "/img/brochura/web/espinho-auto-noite.webp"
+      },
+      "_confirmar": "Confirmar com o Miguel: fazem o licenciamento camarário? Se sim, é um argumento de venda forte e deve entrar nos specs. Confirmar também as fichas de projeto (cliente/serviços) — o detalhe técnico foi inferido do copy da página.",
+      "_nota": "'noite' mapeia cada fotografia de dia na sua versão noturna, mostrada quando se carrega em 'Ver de noite'. Só usado no digital; o print ignora. ⚠️ As 4 versões noturnas são GERADAS POR IA a partir das fotografias reais (image-to-image) — o reclame e o edifício são reais e acendem mesmo, mas a fotografia de noite nunca foi tirada. Por isso levam selo de simulação. Ver img/brochura/ASSETS.md."
     },
     {
       "n": 7,
@@ -201,7 +251,47 @@
         "/img/portfolio/decoracao-de-parede-geometrica.webp"
       ],
       "cta": "Letras recortadas? Yes, we do.",
-      "_confirmar": "Materiais e espessuras foram inferidos do que é prática comum no setor. Validar a lista com o Miguel antes de imprimir."
+      "peca3d": {
+        "tipo": "letras",
+        "kicker": "Amostra em volume",
+        "titulo": "Veja a espessura, não só a frente.",
+        "intro": "Numa fotografia todas as letras parecem iguais. Rode a peça e compare as espessuras — é a aresta e o afastamento da parede que mudam tudo.",
+        "nota": "Peça de amostra da Yes, We Do. Não é um trabalho de cliente.",
+        "cta": "Quero letras assim"
+      },
+      "fichas": {
+        "/img/portfolio/lusiadas-letras-recortadas.webp": {
+          "cliente": "Lusíadas Saúde",
+          "servicos": [
+            "Letras recortadas em relevo",
+            "Aplicação com espaçadores",
+            "Alinhamento a laser na instalação"
+          ],
+          "descricao": "Identificação em relevo numa parede de receção. A sombra projetada faz metade do trabalho — sem uma única ligação elétrica.",
+          "tags": ["Letras Recortadas", "Saúde"]
+        },
+        "/img/portfolio/cleva.webp": {
+          "cliente": "Cleva",
+          "servicos": [
+            "Letras recortadas à medida",
+            "Acabamento à cor da marca",
+            "Colagem direta"
+          ],
+          "descricao": "Lettering aplicado em parede interior, cortado a partir dos ficheiros da identidade da marca.",
+          "tags": ["Letras Recortadas"]
+        },
+        "/img/portfolio/mira-maia-shopping.webp": {
+          "cliente": "Mira Maia Shopping",
+          "servicos": [
+            "Letras recortadas de grande dimensão",
+            "Aplicação em espaço comercial",
+            "Alinhamento a laser"
+          ],
+          "descricao": "Identificação em centro comercial, dimensionada para a distância de leitura do espaço.",
+          "tags": ["Letras Recortadas", "Retalho"]
+        }
+      },
+      "_confirmar": "Materiais e espessuras foram inferidos do que é prática comum no setor. Validar a lista com o Miguel antes de imprimir. Validar também as fichas de projeto."
     },
     {
       "n": 8,
@@ -226,7 +316,51 @@
         "/img/portfolio/sinaletica-homycasa.webp",
         "/img/portfolio/lusiadas-hospital-braga.webp"
       ],
-      "cta": "Sinalética? Yes, we do."
+      "cta": "Sinalética? Yes, we do.",
+      "fichas": {
+        "/img/portfolio/lusiadas-sinaletica-interior.webp": {
+          "cliente": "Lusíadas Saúde",
+          "servicos": [
+            "Sistema completo de sinalética interior",
+            "Direcional e identificativa",
+            "Materiais para uso intensivo"
+          ],
+          "descricao": "Sistema de orientação para ambiente hospitalar: numeração coerente, tipografia legível à distância certa e materiais que aguentam anos de utilização.",
+          "tags": ["Sinaléticas", "Saúde"]
+        },
+        "/img/portfolio/medicina-aeronautica-rececao.webp": {
+          "cliente": "Medicina Aeronáutica",
+          "servicos": [
+            "Identificação de receção",
+            "Sinalética de porta",
+            "Aplicação em interior"
+          ],
+          "descricao": "Identificação de receção e sinalética de portas numa clínica — o primeiro sinal de que se chegou ao sítio certo.",
+          "tags": ["Sinaléticas", "Saúde"]
+        },
+        "/img/portfolio/sinaletica-homycasa.webp": {
+          "cliente": "HomyCasa",
+          "servicos": [
+            "Sinalética de espaço comercial",
+            "Direcional e informativa",
+            "Sistema ampliável"
+          ],
+          "descricao": "Sinalética de loja pensada para orientar quem circula por um espaço grande, com secções que mudam ao longo do ano.",
+          "tags": ["Sinaléticas", "Retalho"]
+        },
+        "/img/portfolio/lusiadas-hospital-braga.webp": {
+          "cliente": "Lusíadas Saúde",
+          "local": "Braga",
+          "servicos": [
+            "Sinalética exterior",
+            "Identificação de edifício",
+            "Instalação no local"
+          ],
+          "descricao": "Identificação exterior de unidade hospitalar, visível de longe e a qualquer hora.",
+          "tags": ["Sinaléticas", "Saúde"]
+        }
+      },
+      "_confirmar": "Fichas de projeto — validar cliente e serviços com o Miguel."
     },
     {
       "n": 9,
@@ -255,7 +389,42 @@
       "video": "/img/portfolio/instalacao-lona-hospital.mp4",
       "videoPoster": "/img/portfolio/instalacao-lona-hospital.webp",
       "videoLegenda": "Instalação de lona de fachada — Hospital Lusíadas",
-      "cta": "Grandes formatos? Yes, we do."
+      "cta": "Grandes formatos? Yes, we do.",
+      "fichas": {
+        "/img/portfolio/lusiadas-porto-contentor.webp": {
+          "cliente": "Lusíadas Saúde",
+          "local": "Porto",
+          "servicos": [
+            "Impressão em lona de grande formato",
+            "Aplicação sobre estrutura de obra",
+            "Tintas resistentes a UV"
+          ],
+          "descricao": "Uma obra em curso transformada em suporte de comunicação. Resolve em dias o que uma estrutura permanente demoraria meses.",
+          "tags": ["Lonas & Impressão", "Saúde"]
+        },
+        "/img/portfolio/lusiadas-braga-lona.webp": {
+          "cliente": "Lusíadas Saúde",
+          "local": "Braga",
+          "servicos": [
+            "Lona de fachada",
+            "Instalação em altura",
+            "Impressão resistente a intempérie"
+          ],
+          "descricao": "Lona de fachada em unidade hospitalar, instalada em altura pela nossa equipa — incluindo os trabalhos que a maioria das gráficas não faz.",
+          "tags": ["Lonas & Impressão", "Saúde"]
+        },
+        "/img/portfolio/ruiz-costa.webp": {
+          "cliente": "Ruiz Costa",
+          "servicos": [
+            "Impressão em grande formato",
+            "Aplicação em fachada",
+            "Produção e instalação"
+          ],
+          "descricao": "Comunicação de fachada em grande formato, do ficheiro à aplicação no local.",
+          "tags": ["Lonas & Impressão"]
+        }
+      },
+      "_confirmar": "Fichas de projeto — validar cliente e serviços com o Miguel. Nota: nesta página o destaque é o vídeo, por isso o 'hero' não é mostrado no digital e não leva ficha."
     },
     {
       "n": 10,
@@ -283,6 +452,59 @@
         "/img/portfolio/vogue-fashion-night-portico.webp"
       ],
       "cta": "Stands e eventos? Yes, we do.",
+      "peca3d": {
+        "tipo": "stand",
+        "kicker": "Amostra em volume",
+        "titulo": "Dê a volta ao stand antes de o encomendar.",
+        "intro": "Um stand vê-se de todos os lados — e é por isso que a marca tem de funcionar em todos. Rode a peça e escolha o esquema de cor.",
+        "nota": "Peça de amostra da Yes, We Do. Não é um trabalho de cliente.",
+        "cta": "Quero um stand assim"
+      },
+      "fichas": {
+        "/img/portfolio/liu-jo-stand-porto.webp": {
+          "cliente": "Liu Jo",
+          "local": "Porto",
+          "servicos": [
+            "Produção de stand completo",
+            "Montagem e desmontagem no local",
+            "Marca alinhada ao milímetro"
+          ],
+          "descricao": "Stand para marca internacional de moda. Três dias para causar impressão, sem segunda hipótese — e um prazo de feira que não se negoceia.",
+          "tags": ["Stands & Eventos", "Moda"]
+        },
+        "/img/portfolio/vogue-photobooth.webp": {
+          "cliente": "Vogue",
+          "local": "Vogue Fashion Night",
+          "servicos": [
+            "Photobooth de marca",
+            "Produção e montagem no local",
+            "Acabamento para fotografia"
+          ],
+          "descricao": "Photobooth para a Vogue Fashion Night — desenhado para aparecer bem em fotografia, que é onde o evento continua a viver.",
+          "tags": ["Stands & Eventos", "Moda"]
+        },
+        "/img/portfolio/steve-madden.webp": {
+          "cliente": "Steve Madden",
+          "servicos": [
+            "Produção de materiais de evento",
+            "Aplicação de marca",
+            "Montagem no local"
+          ],
+          "descricao": "Ativação de marca internacional de calçado, produzida e montada pela nossa equipa.",
+          "tags": ["Stands & Eventos", "Moda"]
+        },
+        "/img/portfolio/spmec-press-wall.webp": {
+          "cliente": "SPMEC",
+          "servicos": [
+            "Press wall de congresso",
+            "Impressão de grande formato",
+            "Montagem no local"
+          ],
+          "descricao": "Press wall para congresso médico. O fundo de todas as fotografias oficiais do evento — não pode ter uma ruga.",
+          "tags": ["Stands & Eventos", "Congressos"]
+        }
+      },
+      "_confirmar": "Fichas de projeto — validar cliente e serviços com o Miguel.",
       "_nota": "Categoria com mais material (21 projetos). Merece spread duplo — é a página que melhor demonstra capacidade."
     },
     {
@@ -309,6 +531,19 @@
         "/img/brochura/viatura-citadino-lateral.webp"
       ],
       "cta": "Decoração de viaturas? Yes, we do.",
+      "fichas": {
+        "/img/portfolio/renault-decoracao-viatura.webp": {
+          "cliente": "Renault",
+          "servicos": [
+            "Decoração em vinil de fundição",
+            "Desenho adaptado à forma do veículo",
+            "Removível sem danificar a pintura"
+          ],
+          "descricao": "Publicidade que anda sozinha pela cidade — o meio com melhor retorno por euro investido, porque depois de aplicado não custa mais nada.",
+          "tags": ["Decoração de Viaturas", "Automóvel"]
+        }
+      },
+      "_notaFichas": "SÓ o hero tem ficha. As 3 imagens de apoio são geradas por IA (marcas fictícias) — uma ficha de projeto sobre trabalho que não existe seria enganar o leitor.",
       "_atencao": "As 3 imagens de apoio são geradas por IA (marcas fictícias FLORA/NOVA/ELVA). Só o hero (Renault) é trabalho real. Ver img/brochura/ASSETS.md — decidir com o Miguel: substituir por fotos reais, ou rotular como 'Simulação'."
     },
     {
@@ -335,6 +570,19 @@
         "/img/brochura/montra-clinica.webp"
       ],
       "cta": "Decoração de montras? Yes, we do.",
+      "fichas": {
+        "/img/portfolio/cs-pet-care-montra.webp": {
+          "cliente": "C's Pet Care",
+          "servicos": [
+            "Vinil recortado e impresso",
+            "Identidade permanente de montra",
+            "Aplicação sem bolhas"
+          ],
+          "descricao": "A montra é o único espaço publicitário que já está pago — está na renda. Aqui transformou-se na primeira frase que o cliente lê sobre o negócio.",
+          "tags": ["Decoração de Montras", "Retalho"]
+        }
+      },
+      "_notaFichas": "SÓ o hero tem ficha. As 3 imagens de apoio são geradas por IA — ver nota da página 11.",
       "_atencao": "As 3 imagens de apoio são geradas por IA (ATRIO/MESA/CLINICA VIVA). Só o hero (C's Pet Care) é trabalho real. Mesma decisão que a página 11."
     },
     {

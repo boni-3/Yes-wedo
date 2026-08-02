@@ -44,16 +44,21 @@
     som: '<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>',
     mudo: '<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm18.5-1.1-1.4-1.4L17 9.6 13.9 6.5l-1.4 1.4 3.1 3.1-3.1 3.1 1.4 1.4 3.1-3.1 3.1 3.1 1.4-1.4-3.1-3.1 3.1-3.1z"/></svg>',
     full: '<svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>',
-    menu: '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>'
+    menu: '<svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>',
+    mais: '<svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2z"/><path d="M5 11h14v2H5z"/></svg>',
+    lamp: '<svg viewBox="0 0 24 24"><path d="M9 21h6v-1H9v1zm3-19A7 7 0 0 0 8 15c.7.8 1.2 1.5 1.4 2.5h5.2c.2-1 .7-1.7 1.4-2.5A7 7 0 0 0 12 2zm0 2a5 5 0 0 1 3 9c-.5.6-.9 1.2-1.2 1.9h-3.6c-.3-.7-.7-1.3-1.2-1.9A5 5 0 0 1 12 4z"/></svg>',
+    cubo: '<svg viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5zm0 2.3 6.5 3.6L12 11.5 5.5 7.9 12 4.3zM5 9.6l6 3.3v6.9l-6-3.3V9.6zm8 10.2v-6.9l6-3.3v6.9l-6 3.3z"/></svg>'
   };
 
   /* Link de WhatsApp com a mensagem já escrita — o contacto chega
-     identificado com o serviço que interessou. */
+     identificado com o serviço (ou o projeto) que interessou. */
+  function waMsg(texto) {
+    return 'https://wa.me/' + D.empresa.whatsapp + '?text=' + encodeURIComponent(texto);
+  }
   function waLink(servico) {
-    var t = servico
+    return waMsg(servico
       ? 'Olá! Vi a vossa brochura e tenho interesse em ' + servico + '.'
-      : 'Olá! Vi a vossa brochura e queria pedir um orçamento.';
-    return 'https://wa.me/' + D.empresa.whatsapp + '?text=' + encodeURIComponent(t);
+      : 'Olá! Vi a vossa brochura e queria pedir um orçamento.');
   }
 
   /* ==========================================================================
@@ -87,7 +92,8 @@
     var alvos = pg.querySelectorAll(
       '.kicker, .h1, .tagline, .corpo p, .serv__hero, .serv__video, .quem__img,' +
       '.grid-serv .sc, .passo, .razao, .logos img, .apoio__w, .cta-linha,' +
-      '.cta-servico, .manif, .manif__ass, .destaque, .contactos > div, .qr'
+      '.cta-servico, .manif, .manif__ass, .destaque, .contactos > div, .qr,' +
+      '.hotspot, .luz-btn'
     );
     if (alvos.length) {
       tl.fromTo(alvos,
@@ -107,6 +113,189 @@
     });
 
     pg.classList.add('vista');
+  }
+
+  /* ==========================================================================
+     INCLINAÇÃO 3D
+     Partilhada pelo lightbox e pelas fichas de projeto. É o que dá a sensação
+     de a fotografia ter descolado da folha: ela responde ao rato (desktop) ou
+     ao inclinar do telemóvel (giroscópio).
+     `baseY` é a inclinação de repouso — a ficha fica ligeiramente virada, o
+     lightbox fica a direito, e o tilt oscila à volta desse valor.
+     Devolve uma função para desligar (obrigatório chamar ao fechar).
+     ========================================================================== */
+
+  /* O giroscópio no iOS 13+ exige autorização explícita e SÓ pode ser pedida
+     de dentro de um gesto do utilizador. Pedimos uma vez por sessão, no toque
+     que abre a fotografia. Se for recusada, segue sem tilt e em silêncio —
+     nunca é um erro visível. */
+  var giroEstado = 0;   // 0 = por pedir, 1 = concedido, -1 = recusado/indisponível
+  function pedeGiro() {
+    if (giroEstado !== 0) return;
+    var DOE = window.DeviceOrientationEvent;
+    if (!DOE) { giroEstado = -1; return; }
+    if (typeof DOE.requestPermission !== 'function') { giroEstado = 1; return; }
+    giroEstado = -1;   // pessimista até haver resposta
+    try {
+      DOE.requestPermission().then(function (r) {
+        giroEstado = (r === 'granted') ? 1 : -1;
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
+  function liga3d(el, zona, opts) {
+    opts = opts || {};
+    var max = opts.max || 6, baseY = opts.baseY || 0;
+    if (SEM_MOVIMENTO || !temGsap() || !el || !zona) return function () {};
+
+    var qx = window.gsap.quickTo(el, 'rotationX', { duration: .5, ease: 'power2.out' });
+    var qy = window.gsap.quickTo(el, 'rotationY', { duration: .5, ease: 'power2.out' });
+
+    function mover(e) {
+      var r = zona.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      var dx = (e.clientX - r.left) / r.width - .5;    // -0.5 … 0.5
+      var dy = (e.clientY - r.top) / r.height - .5;
+      qy(baseY + dx * max * 2);
+      qx(-dy * max * 2);
+    }
+    function repousa() { qy(baseY); qx(0); }
+
+    /* beta = inclinação frente/trás, gamma = esquerda/direita. Tomamos 45°
+       como posição neutra de quem segura o telemóvel a ler. */
+    function orienta(e) {
+      if (e.gamma == null) return;
+      var gx = Math.max(-1, Math.min(1, e.gamma / 30));
+      var gy = Math.max(-1, Math.min(1, ((e.beta == null ? 45 : e.beta) - 45) / 30));
+      qy(baseY + gx * max);
+      qx(-gy * max);
+    }
+
+    zona.addEventListener('pointermove', mover);
+    zona.addEventListener('pointerleave', repousa);
+    if (giroEstado === 1) window.addEventListener('deviceorientation', orienta);
+
+    return function () {
+      zona.removeEventListener('pointermove', mover);
+      zona.removeEventListener('pointerleave', repousa);
+      window.removeEventListener('deviceorientation', orienta);
+    };
+  }
+
+  /* ==========================================================================
+     MOTOR 3D
+     Geometria a sério, não fotografias: cada caixa são 6 faces posicionadas
+     no espaço com preserve-3d. Zero bibliotecas.
+     Ensaiou-se antes o caminho das imagens (8 vistas geradas por IA, a fazer
+     de turntable) e não serve: mantém o estilo mas não a geometria — as
+     peças deformavam-se entre fotogramas. Ver docs/PLANO-BROCHURA-3D.md.
+
+     ⚠️ Isto vive SEMPRE no overlay, nunca dentro de uma .pg: a StPageFlip já
+     aplica os seus próprios transforms e os dois contextos 3D brigam.
+     ========================================================================== */
+
+  /* Brilho fixo por orientação da face. É uma simplificação da luz, mas com
+     a peça a rodar lê-se como volume — que é o que interessa. */
+  var BR3 = { frente: 1, tras: .68, esq: .84, dir: .90, topo: 1.18, base: .45 };
+
+  /* Uma face roda PRIMEIRO e só depois é empurrada ao longo do seu próprio
+     eixo Z. Trocar a ordem faz as caixas não fecharem. */
+  function face3(w, h, tr, cor, br) {
+    var d = document.createElement('div');
+    d.className = 'f3';
+    d.style.cssText = 'left:' + (-w / 2) + 'px;top:' + (-h / 2) + 'px;width:' + w +
+      'px;height:' + h + 'px;transform:' + tr + ';background:' + cor +
+      ';filter:brightness(' + br + ')';
+    return d;
+  }
+
+  function caixa3(o) {
+    var l = o.l, a = o.a, p = o.p, cor = o.cor;
+    var c = document.createElement('div');
+    c.className = 'cx3';
+    c.style.cssText = 'transform:translate3d(' + (o.x || 0) + 'px,' + (o.y || 0) +
+      'px,' + (o.z || 0) + 'px)';
+    [ face3(l, a, 'translateZ(' + (p / 2) + 'px)', cor, BR3.frente),
+      face3(l, a, 'rotateY(180deg) translateZ(' + (p / 2) + 'px)', cor, BR3.tras),
+      face3(p, a, 'rotateY(90deg) translateZ(' + (l / 2) + 'px)', cor, BR3.dir),
+      face3(p, a, 'rotateY(-90deg) translateZ(' + (l / 2) + 'px)', cor, BR3.esq),
+      face3(l, p, 'rotateX(90deg) translateZ(' + (a / 2) + 'px)', o.corTopo || cor, BR3.topo),
+      face3(l, p, 'rotateX(-90deg) translateZ(' + (a / 2) + 'px)', cor, BR3.base)
+    ].forEach(function (f) { c.appendChild(f); });
+    return c;
+  }
+
+  /* Marca aplicada a uma face. Fica 2,5px à frente: a 0,6px o navegador não
+     decidia de forma fiável o que vinha primeiro e o decalque desaparecia
+     atrás da face nuns sítios e não noutros. Coplanares não são de fiar. */
+  function decalque3(o) {
+    var d = document.createElement('div');
+    d.className = 'dec3';
+    d.style.cssText = 'left:' + (-o.l / 2) + 'px;top:' + (-o.a / 2) + 'px;width:' + o.l +
+      'px;height:' + o.a + 'px;transform:translate3d(' + (o.x || 0) + 'px,' +
+      (o.y || 0) + 'px,' + (o.z || 0) + 'px)' + (o.rot || '') + ' translateZ(2.5px);' +
+      'background-image:url(' + o.src + ');filter:brightness(' + (o.br || 1) + ')';
+    return d;
+  }
+
+  /* Extrusão de uma silhueta PNG: N cópias empilhadas, as de trás
+     escurecidas — é a aresta de acrílico cortado. O logótipo é ilustrado à
+     mão e não existe em SVG, por isso esta é a única via fiel à forma. */
+  function extrusao3(o) {
+    var n = o.camadas || 30, passo = o.prof / n;
+    var c = document.createElement('div');
+    c.className = 'cx3';
+    for (var i = n; i >= 0; i--) {
+      var im = document.createElement('img');
+      im.src = o.src; im.alt = ''; im.draggable = false;
+      var frente = (i === n);
+      im.style.cssText = 'position:absolute;left:' + (-o.l / 2) + 'px;top:' + (-o.a / 2) +
+        'px;width:' + o.l + 'px;height:auto;transform:translateZ(' +
+        (-o.prof / 2 + i * passo) + 'px);filter:brightness(' +
+        (frente ? 1 : (.34 + .22 * (i / n))) + ')' + (frente ? '' : ' saturate(.9)');
+      c.appendChild(im);
+    }
+    return c;
+  }
+
+  /* Órbita nos dois eixos. O horizontal roda livremente; o vertical é
+     LIMITADO — sem limite a peça capota e perde-se a noção de chão.
+     Devolve uma função para desligar (o intervalo tem de morrer ao fechar). */
+  function orbita3(palco, obj, op) {
+    op = op || {};
+    var ry = op.ry === undefined ? 26 : op.ry, rx = op.rx === undefined ? -14 : op.rx;
+    var arr = false, x0 = 0, y0 = 0, ry0 = 0, rx0 = 0, auto = null;
+
+    function poe(nry, nrx) {
+      ry = nry; rx = Math.max(-62, Math.min(30, nrx));
+      obj.style.transform = 'translate(-50%,-50%) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg)';
+    }
+    poe(ry, rx);
+    function para() { if (auto) { clearInterval(auto); auto = null; } }
+
+    function baixo(e) {
+      arr = true; x0 = e.clientX; y0 = e.clientY; ry0 = ry; rx0 = rx;
+      try { palco.setPointerCapture(e.pointerId); } catch (err) {}
+      palco.classList.add('a-rodar'); para();
+    }
+    function move(e) { if (arr) poe(ry0 + (e.clientX - x0) * .55, rx0 - (e.clientY - y0) * .45); }
+    function cima() { arr = false; palco.classList.remove('a-rodar'); }
+    /* a peça é conteúdo: tem de ser explorável sem rato */
+    function tecla(e) {
+      var k = { ArrowLeft: [-6, 0], ArrowRight: [6, 0], ArrowUp: [0, 6], ArrowDown: [0, -6] }[e.key];
+      if (!k) return;
+      e.preventDefault(); e.stopPropagation(); para(); poe(ry + k[0], rx + k[1]);
+    }
+    palco.addEventListener('pointerdown', baixo);
+    palco.addEventListener('pointermove', move);
+    palco.addEventListener('pointerup', cima);
+    palco.addEventListener('pointercancel', cima);
+    palco.addEventListener('keydown', tecla);
+    if (!SEM_MOVIMENTO) {
+      auto = setInterval(function () { if (!arr) poe(ry + .32, rx); }, 32);
+      palco.addEventListener('pointerenter', para);
+    }
+    return function () { para(); };
   }
 
   /* Aponta para a versão leve em img/brochura/web/ (1200px, ~47% menor).
@@ -155,12 +344,67 @@
              '<div class="num__l">' + esc(n.label) + '</div></div>';
     }).join('') + '</div>';
   }
-  function apoio(l, marcar) {
+  /* ---------- fichas de projeto e luz ---------- */
+
+  function fichaDe(p, src) { return (p.fichas && p.fichas[src]) || null; }
+  function noiteDe(p, src) { return (p.noite && p.noite[src]) || null; }
+
+  /* O convite. Um ponto pulsante no canto da fotografia, só onde há mesmo
+     ficha para mostrar — se aparecesse em todas deixava de querer dizer nada. */
+  function hotspot(pid, src) {
+    /* sem `title`: no telemóvel o balão fica preso no canto do ecrã e o
+       aria-label já diz o mesmo a quem precisa */
+    return '<button class="hotspot" data-pg="' + esc(pid) + '" data-src="' + esc(src) + '"' +
+           ' aria-label="Ver detalhes deste projeto">' +
+           '<span class="hotspot__anel"></span>' + ICO.mais + '</button>';
+  }
+
+  /* Modo noite: em vez de pintar luz por cima da foto de dia — que dava um
+     nevoeiro esbranquiçado, não um reclame aceso — trocamos mesmo a
+     fotografia pela versão noturna. O `data-src` só vira `src` no primeiro
+     toque no interruptor: quem nunca acender a luz não descarrega nada.
+     As versões noturnas são geradas por IA e levam selo de simulação. */
+  function camadaNoite(src) {
+    if (!src) return '';
+    return '<img class="img-noite" data-src="' + src + '" alt="" aria-hidden="true">' +
+           '<span class="selo-noite">Simulação noturna</span>';
+  }
+
+  /* Envolve uma imagem no que ela precisar. Se não precisar de nada devolve-a
+     tal como estava: as páginas sem fichas nem luzes ficam com o DOM
+     exatamente igual ao que já estava publicado. */
+  function figura(p, src, htmlImg) {
+    var f = fichaDe(p, src), noite = noiteDe(p, src);
+    if (!f && !noite) return htmlImg;
+    return '<div class="fig">' + htmlImg + camadaNoite(noite) +
+           (f ? hotspot(p.id, src) : '') + '</div>';
+  }
+
+  /* Convite para a peça de amostra. Fica junto ao CTA de orçamento, porque é
+     do mesmo lado da conversa: "veja o que está a comprar" → "peça-o". */
+  function botao3d(p) {
+    if (!p.peca3d) return '';
+    return '<button class="btn3d" data-pg="' + esc(p.id) + '">' + ICO.cubo +
+           '<span>Ver a peça em 3D</span></button>';
+  }
+
+  function botaoLuz(p) {
+    if (!p.noite) return '';
+    return '<button class="luz-btn" data-pg="' + esc(p.id) + '" aria-pressed="false"' +
+           ' aria-label="Ver esta página de noite, com os reclames acesos">' +
+           ICO.lamp + '<span class="luz-btn__t">Ver de noite</span></button>';
+  }
+
+  function apoio(p, marcar) {
+    var l = p.apoio;
     if (!l || !l.length) return '';
     var n = l.length >= 5 ? 5 : 3;
     return '<div class="apoio apoio--' + n + '">' + l.map(function (s) {
-      return '<div class="apoio__w">' + img(s) +
-             (marcar ? '<span class="simulacao">Simulação</span>' : '') + '</div>';
+      var f = fichaDe(p, s);
+      /* .apoio__w já é position:relative — não é preciso outro invólucro */
+      return '<div class="apoio__w">' + img(s) + camadaNoite(noiteDe(p, s)) +
+             (marcar ? '<span class="simulacao">Simulação</span>' : '') +
+             (f ? hotspot(p.id, s) : '') + '</div>';
     }).join('') + '</div>';
   }
 
@@ -225,10 +469,11 @@
             web(p.videoPoster) + '" muted loop playsinline preload="none"></video>' +
             (p.videoLegenda ? '<figcaption>' + esc(p.videoLegenda) + '</figcaption>' : '') +
           '</figure>'
-        : img(p.hero, 'serv__hero', p.titulo);
+        : figura(p, p.hero, img(p.hero, 'serv__hero', p.titulo));
 
       return '<button class="partilhar" data-id="' + p.id + '" ' +
                'aria-label="Partilhar esta secção">' + ICO.part + '</button>' +
+        botaoLuz(p) +
         '<div class="pg__in">' + media +
           '<div class="kicker kicker--o">' + esc(p.kicker) + '</div>' +
           '<h2 class="h1">' + esc(p.titulo) + '</h2>' +
@@ -237,11 +482,13 @@
             '<ul class="specs">' + (p.specs || []).map(function (s) {
               return '<li>' + esc(s) + '</li>';
             }).join('') + '</ul></div>' +
-          apoio(p.apoio, simular) +
+          apoio(p, simular) +
           '<p class="cta-linha">' + esc(p.cta) + '</p>' +
-          '<a class="cta-servico" href="' + waLink(p.titulo) + '" target="_blank" ' +
-             'rel="noopener" data-servico="' + esc(p.titulo) + '">' +
-             ICO.wa + 'Pedir orçamento</a>' +
+          '<div class="acoes-serv">' +
+            '<a class="cta-servico" href="' + waLink(p.titulo) + '" target="_blank" ' +
+               'rel="noopener" data-servico="' + esc(p.titulo) + '">' +
+               ICO.wa + 'Pedir orçamento</a>' + botao3d(p) +
+          '</div>' +
           folio(p, p.titulo) + '</div>';
     },
 
@@ -319,9 +566,47 @@
      MODOS
      ========================================================================== */
 
-  function montaFlip(retrato) {
+  /* A StPageFlip.destroy() faz `block.remove()` — leva o #folheto com ela.
+     Sem isto, atravessar os 1024px a redimensionar (ou rodar um tablet, que
+     passa de ~820 para ~1180) deixava a brochura em branco para sempre:
+     o arranca() seguinte fazia getElementById('folheto').innerHTML num null.
+     Aqui recriamo-lo no mesmo sítio quando faltar. */
+  function garanteFolheto() {
     var el = document.getElementById('folheto');
+    if (el) return el;
+    el = document.createElement('main');
+    el.id = 'folheto';
+    el.setAttribute('aria-label', 'Brochura Yes, We Do');
+    var rolo = document.getElementById('rolo');
+    rolo.parentNode.insertBefore(el, rolo);
+    return el;
+  }
+
+  /* Impede que tocar num controlo comece a virar a página.
+     A StPageFlip escuta `mousedown` e `touchstart` no contentor dela (e
+     mousemove/up e touchmove/end na window) — NÃO usa pointer events.
+     Travamos no PRÓPRIO elemento, não no document em captura: em captura o
+     evento morria antes de chegar ao botão e, no toque, o navegador deixava
+     de sintetizar o clique — os hotspots não abriam nada no telemóvel. Aqui
+     o botão recebe o evento primeiro e só depois a propagação pára. */
+  /* Só as IMAGENS. Os botões e links já são respeitados pela própria
+     StPageFlip (checkTarget ignora <a> e <button>), desde que o alvo seja
+     mesmo o botão — o que o `pointer-events:none` nos filhos garante.
+     As imagens não são nem uma coisa nem outra, e sem isto tocar numa
+     fotografia para a ampliar virava a página. */
+  var INTERATIVOS = '.apoio__w img, .serv__hero, .quem__img';
+  function protegeInterativos(raiz) {
+    raiz.querySelectorAll(INTERATIVOS).forEach(function (el) {
+      ['mousedown', 'touchstart'].forEach(function (t) {
+        el.addEventListener(t, function (e) { e.stopPropagation(); });
+      });
+    });
+  }
+
+  function montaFlip(retrato) {
+    var el = garanteFolheto();
     el.innerHTML = D.pages.map(function (p) { return render(p, D); }).join('');
+    protegeInterativos(el);
     document.body.classList.add('modo-flip');
     document.body.classList.toggle('modo-retrato', !!retrato);
     document.body.classList.remove('modo-scroll');
@@ -346,6 +631,7 @@
     }
 
     el.style.setProperty('--esc', (larg / bw).toFixed(4));
+    el.style.setProperty('--pgw', larg + 'px');   // largura de UMA página, para centrar a capa
 
     flip = new St.PageFlip(el, {
       width: larg, height: alt,
@@ -364,6 +650,20 @@
     function atualiza() {
       var i = flip.getCurrentPageIndex(), t = flip.getPageCount();
       conta.textContent = (i + 1) + ' / ' + t;
+      /* Espessura das pilhas de folhas nas laterais: a da esquerda engorda à
+         medida que se avança, a da direita emagrece. É o que dá corpo de
+         objeto ao folheto em vez de duas folhas soltas. */
+      var fr = t > 1 ? i / (t - 1) : 0;
+      el.style.setProperty('--folhas-esq', fr.toFixed(3));
+      el.style.setProperty('--folhas-dir', (1 - fr).toFixed(3));
+      /* A capa e a contracapa aparecem sozinhas num contentor de duas páginas:
+         ficavam encostadas a um dos lados, com meia folha de vazio ao lado e a
+         pilha de folhas desse lado a flutuar no ar. Aqui centramos a folha
+         solitária e escondemos a pilha do lado que não tem página. */
+      if (!retrato) {
+        el.classList.toggle('folheto--capa', i === 0);
+        el.classList.toggle('folheto--fim', i === t - 1);
+      }
       var atual = D.pages[i];
       conta.setAttribute('aria-label',
         'Página ' + (i + 1) + ' de ' + t + (atual ? ' — ' + (atual.titulo || atual.id) : ''));
@@ -409,7 +709,26 @@
        da lib), tenta na mesma no frame seguinte */
     requestAnimationFrame(function () { setTimeout(saltaInicial, 60); });
 
+    entrada(el);
     dica();
+  }
+
+  /* O folheto assenta na página em vez de aparecer de repente. Uma vez por
+     sessão: no resize o folheto é remontado e repetir isto seria ruído.
+     Bloqueamos o rato durante a animação — a StPageFlip lê a posição do
+     contentor para saber onde começa o arrasto, e a meio de um transform
+     essa leitura estaria errada. */
+  var entradaFeita = false;
+  function entrada(el) {
+    if (entradaFeita) return;
+    entradaFeita = true;
+    if (SEM_MOVIMENTO || !temGsap()) return;
+    el.style.pointerEvents = 'none';
+    window.gsap.fromTo(el,
+      { opacity: 0, scale: .93, y: 26 },
+      { opacity: 1, scale: 1, y: 0, duration: .9, ease: 'power3.out', delay: .1,
+        clearProps: 'transform,opacity',
+        onComplete: function () { el.style.pointerEvents = ''; } });
   }
 
   /* Na primeira visita nada indica que as páginas viram — parecia um PDF.
@@ -611,9 +930,10 @@
     lb.setAttribute('role', 'dialog');
     lb.setAttribute('aria-modal', 'true');
     lb.setAttribute('aria-label', legenda || 'Fotografia ampliada');
+    /* o palco tem a perspetiva; a imagem é que inclina */
     lb.innerHTML =
       '<button class="lb__x" aria-label="Fechar">&times;</button>' +
-      '<img src="' + src + '" alt="' + esc(legenda || '') + '">' +
+      '<div class="lb__pal"><img src="' + src + '" alt="' + esc(legenda || '') + '"></div>' +
       (legenda ? '<p class="lb__c">' + esc(legenda) + '</p>' : '');
     document.body.appendChild(lb);
     requestAnimationFrame(function () { lb.classList.add('vis'); });
@@ -621,7 +941,21 @@
     var antes = document.activeElement;
     lb.querySelector('.lb__x').focus();
 
+    /* Com GSAP a entrada é 3D e o tilt segue o rato/giroscópio. A classe
+       lb--3d desliga a transição CSS da imagem — senão as duas suavizações
+       sobrepunham-se e o movimento saía pastoso. */
+    var desliga3d = function () {};
+    var im = lb.querySelector('img');
+    if (temGsap() && !SEM_MOVIMENTO) {
+      lb.classList.add('lb--3d');
+      window.gsap.fromTo(im,
+        { scale: .9, rotationY: -10, opacity: 0 },
+        { scale: 1, rotationY: 0, opacity: 1, duration: .5, ease: 'power3.out' });
+      desliga3d = liga3d(im, lb, { max: 5 });
+    }
+
     function fecha() {
+      desliga3d();
       lb.classList.remove('vis');
       setTimeout(function () { lb.remove(); }, 260);
       document.removeEventListener('keydown', tecla);
@@ -634,6 +968,306 @@
     lb.addEventListener('click', fecha);
     document.addEventListener('keydown', tecla);
     ev('foto_zoom', { src: src.split('/').pop() });
+  }
+
+  /* ==========================================================================
+     FICHA DE PROJETO
+     O passo a seguir ao lightbox: a fotografia descola da folha em 3D e ao
+     lado abre a ficha do trabalho — quem é o cliente e o que a Yes, We Do
+     fez ali. É o que transforma "uma foto bonita" em prova de capacidade.
+     ========================================================================== */
+  function fichaModal(src, f, pageId) {
+    var fc = document.createElement('div');
+    fc.className = 'fc';
+    fc.setAttribute('role', 'dialog');
+    fc.setAttribute('aria-modal', 'true');
+    fc.setAttribute('aria-label', 'Projeto — ' + (f.cliente || ''));
+
+    var msg = 'Olá! Vi o projeto "' + (f.cliente || '') +
+              '" na vossa brochura e queria algo assim.';
+
+    fc.innerHTML =
+      '<button class="fc__x" aria-label="Fechar">&times;</button>' +
+      '<div class="fc__in">' +
+        '<div class="fc__pal">' +
+          '<img class="fc__img" src="' + web(src) + '" alt="' + esc(f.cliente || '') + '"' +
+            ' onerror="this.onerror=null;this.src=\'' + src + '\'">' +
+        '</div>' +
+        '<div class="fc__card">' +
+          '<div class="fc__kicker">Projeto</div>' +
+          '<h3 class="fc__cli">' + esc(f.cliente || '') + '</h3>' +
+          (f.local ? '<div class="fc__loc">' + esc(f.local) + '</div>' : '') +
+          '<ul class="fc__serv">' + (f.servicos || []).map(function (s) {
+            return '<li>' + esc(s) + '</li>';
+          }).join('') + '</ul>' +
+          (f.descricao ? '<p class="fc__desc">' + esc(f.descricao) + '</p>' : '') +
+          ((f.tags || []).length
+            ? '<div class="fc__tags">' + f.tags.map(function (t) {
+                return '<span>' + esc(t) + '</span>';
+              }).join('') + '</div>'
+            : '') +
+          '<a class="fc__cta" href="' + waMsg(msg) + '" target="_blank" rel="noopener"' +
+            ' data-cliente="' + esc(f.cliente || '') + '">' + ICO.wa + 'Quero algo assim</a>' +
+        '</div>' +
+      '</div>';
+
+    document.body.appendChild(fc);
+    requestAnimationFrame(function () { fc.classList.add('vis'); });
+
+    var antes = document.activeElement;
+    fc.querySelector('.fc__x').focus();
+
+    var im = fc.querySelector('.fc__img');
+    var desliga3d = function () {};
+    /* Repouso ligeiramente virado: é essa inclinação parada que faz a
+       fotografia parecer levantada da página, mesmo sem ninguém mexer.
+       Em ecrã estreito fica a direito — a -6° encostava aos cantos, porque
+       aí a fotografia ocupa a largura toda. */
+    var baseY = window.innerWidth < 900 ? 0 : -6;
+    if (temGsap() && !SEM_MOVIMENTO) {
+      fc.classList.add('fc--3d');
+      var tl = window.gsap.timeline();
+      tl.fromTo(im,
+        { scale: .62, rotationY: baseY - 14, y: 18, opacity: 0 },
+        { scale: 1, rotationY: baseY, y: 0, opacity: 1, duration: .75, ease: 'power3.out' }, 0);
+      tl.fromTo(fc.querySelector('.fc__card'),
+        { x: 34, opacity: 0 }, { x: 0, opacity: 1, duration: .5, ease: 'power2.out' }, .15);
+      tl.fromTo(fc.querySelectorAll('.fc__card > *'),
+        { y: 12, opacity: 0 },
+        { y: 0, opacity: 1, duration: .4, ease: 'power2.out', stagger: .05 }, .22);
+      desliga3d = liga3d(im, fc, { max: 7, baseY: baseY });
+    }
+
+    function fecha() {
+      desliga3d();
+      fc.classList.remove('vis');
+      setTimeout(function () { fc.remove(); }, 300);
+      document.removeEventListener('keydown', tecla);
+      if (antes && antes.focus) antes.focus();
+    }
+    /* Fecha no fundo e no X. Dentro da ficha não fecha: há texto para ler e
+       um link para carregar. */
+    fc.addEventListener('click', function (e) {
+      if (e.target.closest('.fc__card')) return;
+      if (e.target.closest('.fc__x') || !e.target.closest('.fc__in')) fecha();
+    });
+    /* Foco preso, mas a circular: o CTA tem de ser alcançável por teclado. */
+    function tecla(e) {
+      if (e.key === 'Escape') { e.stopPropagation(); fecha(); return; }
+      if (e.key !== 'Tab') return;
+      var alvos = fc.querySelectorAll('button, a[href]');
+      if (!alvos.length) { e.preventDefault(); return; }
+      var pri = alvos[0], ult = alvos[alvos.length - 1];
+      if (e.shiftKey && document.activeElement === pri) { e.preventDefault(); ult.focus(); }
+      else if (!e.shiftKey && document.activeElement === ult) { e.preventDefault(); pri.focus(); }
+    }
+    document.addEventListener('keydown', tecla);
+
+    ev('ficha_open', { page_id: pageId, cliente: f.cliente || '' });
+  }
+
+  /* ==========================================================================
+     PEÇAS DE AMOSTRA EM 3D
+     Geometria é código, não conteúdo — o JSON traz só o copy. São peças da
+     Yes, We Do, NÃO trabalhos de clientes: modelar a letra de um cliente
+     seria reproduzir a marca registada dele.
+     ========================================================================== */
+  var B3 = '/img/brochura/3d/';
+
+  var PECAS = {
+    letras: {
+      rotulo: 'Espessura do acrílico',
+      /* as espessuras que a própria página anuncia: 3 a 30 mm */
+      opcoes: [
+        { nome: '3 mm',  prof: 10, camadas: 16 },
+        { nome: '10 mm', prof: 30, camadas: 30 },
+        { nome: '20 mm', prof: 56, camadas: 44 },
+        { nome: '30 mm', prof: 82, camadas: 58 }
+      ],
+      inicial: 1,
+      spec: function (o) { return 'letras recortadas em acrílico de ' + o.nome; },
+      constroi: function (alvo, o) {
+        /* a parede fica atrás, afastada pelos espaçadores — é isso que
+           distingue esta aplicação e o que a fotografia nunca mostra */
+        alvo.appendChild(caixa3({ l: 470, a: 400, p: 12, y: 0, z: -(o.prof / 2) - 46,
+                                  cor: '#E7E2D9' }));
+        [[-150, -128], [150, -128], [-150, 128], [150, 128]].forEach(function (pt) {
+          alvo.appendChild(caixa3({ l: 9, a: 9, p: 40, x: pt[0], y: pt[1],
+                                    z: -(o.prof / 2) - 20, cor: '#8E959C' }));
+        });
+        alvo.appendChild(extrusao3({ src: B3 + 'logo-3d.png', l: 355, a: 378,
+                                     prof: o.prof, camadas: o.camadas }));
+      }
+    },
+    stand: {
+      rotulo: 'Esquema de cor',
+      opcoes: [
+        { nome: 'Laranja', corpo: '#F04320', cob: '#F04320', friso: '#529BCA' },
+        { nome: 'Azul',    corpo: '#529BCA', cob: '#F04320', friso: '#F04320' },
+        { nome: 'Escuro',  corpo: '#22303F', cob: '#F04320', friso: '#529BCA' },
+        { nome: 'Neutro',  corpo: '#E7E2D9', cob: '#F04320', friso: '#529BCA' }
+      ],
+      inicial: 0,
+      spec: function (o) { return 'um stand no esquema ' + o.nome.toLowerCase(); },
+      constroi: function (alvo, C) {
+        var branco = B3 + 'logo-h-branco.png';
+        alvo.appendChild(caixa3({ l: 210, a: 110, p: 150, y: 95,   cor: C.corpo }));
+        alvo.appendChild(caixa3({ l: 232, a: 10,  p: 168, y: 35,   cor: '#C8A87A' }));
+        [[-100, -70], [100, -70], [-100, 70], [100, 70]].forEach(function (pt) {
+          alvo.appendChild(caixa3({ l: 10, a: 150, p: 10, x: pt[0], y: -45, z: pt[1],
+                                    cor: '#3A4048' }));
+        });
+        alvo.appendChild(caixa3({ l: 240, a: 46,  p: 180, y: -143, cor: C.cob }));
+        alvo.appendChild(caixa3({ l: 240, a: 6,   p: 180, y: -117, cor: C.friso }));
+        alvo.appendChild(caixa3({ l: 190, a: 120, p: 6,   y: -55, z: -72, cor: '#F5F2EC' }));
+        /* vinil branco: o logótipo a cores desaparecia sobre o painel laranja,
+           porque o "we" também é laranja. É o que se faz na realidade. */
+        alvo.appendChild(decalque3({ src: branco, l: 150, a: 53, y: -143, z: 90 }));
+        alvo.appendChild(decalque3({ src: branco, l: 150, a: 53, y: -143, z: -90,
+                                     rot: ' rotateY(180deg)', br: .7 }));
+        alvo.appendChild(decalque3({ src: branco, l: 155, a: 58, y: 95, z: 75 }));
+        alvo.appendChild(decalque3({ src: B3 + 'logo-3d.png', l: 86, a: 92, y: -55,
+                                     z: -68.6, rot: ' rotateY(180deg)', br: .95 }));
+        alvo.appendChild(decalque3({ src: branco, l: 118, a: 42, x: 120, y: -143,
+                                     rot: ' rotateY(90deg)', br: .9 }));
+        alvo.appendChild(decalque3({ src: branco, l: 118, a: 42, x: -120, y: -143,
+                                     rot: ' rotateY(-90deg)', br: .85 }));
+      }
+    }
+  };
+
+  function peca3dModal(p) {
+    var cfg = p.peca3d, def = PECAS[cfg.tipo];
+    if (!def) return;
+    var i = def.inicial;
+
+    var m = document.createElement('div');
+    m.className = 'p3';
+    m.setAttribute('role', 'dialog');
+    m.setAttribute('aria-modal', 'true');
+    m.setAttribute('aria-label', cfg.titulo || 'Peça em três dimensões');
+    m.innerHTML =
+      '<button class="p3__x" aria-label="Fechar">&times;</button>' +
+      '<div class="p3__in">' +
+        '<div class="p3__palco" tabindex="0" role="img" aria-label="' +
+          esc(cfg.titulo || '') + '. Use as setas do teclado para rodar.">' +
+          '<div class="p3__chao"></div>' +
+          '<div class="p3__zoom"><div class="p3__obj"></div></div>' +
+        '</div>' +
+        '<div class="p3__card">' +
+          '<div class="fc__kicker">' + esc(cfg.kicker || 'Amostra') + '</div>' +
+          '<h3 class="fc__cli">' + esc(cfg.titulo || '') + '</h3>' +
+          (cfg.intro ? '<p class="fc__desc">' + esc(cfg.intro) + '</p>' : '') +
+          '<div class="p3__rot">' + esc(def.rotulo) + '</div>' +
+          '<div class="p3__ops"></div>' +
+          '<a class="fc__cta" target="_blank" rel="noopener">' + ICO.wa +
+            esc(cfg.cta || 'Pedir orçamento') + '</a>' +
+          (cfg.nota ? '<p class="p3__nota">' + esc(cfg.nota) + '</p>' : '') +
+          '<p class="p3__dica">Arraste para rodar e inclinar · ou use as setas</p>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(m);
+    requestAnimationFrame(function () { m.classList.add('vis'); });
+
+    var palco = m.querySelector('.p3__palco');
+    var zoom = m.querySelector('.p3__zoom');
+    var obj = m.querySelector('.p3__obj');
+    var cta = m.querySelector('.fc__cta');
+    var ops = m.querySelector('.p3__ops');
+
+    /* a geometria está em px fixos; encolhe-se para caber no palco */
+    function ajusta() {
+      var r = palco.getBoundingClientRect();
+      var e = Math.min(1, Math.min(r.width / 560, r.height / 500));
+      zoom.style.setProperty('--e3', e.toFixed(3));
+    }
+
+    function desenha() {
+      obj.innerHTML = '';
+      def.constroi(obj, def.opcoes[i]);
+      cta.href = waMsg('Olá! Vi a amostra em 3D na vossa brochura e queria ' +
+                       def.spec(def.opcoes[i]) + '.');
+      [].forEach.call(ops.children, function (b, n) {
+        b.classList.toggle('on', n === i);
+        b.setAttribute('aria-pressed', n === i ? 'true' : 'false');
+      });
+      ajusta();
+    }
+
+    def.opcoes.forEach(function (o, n) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = o.nome;
+      b.onclick = function () {
+        i = n; desenha();
+        ev('peca3d_opcao', { tipo: cfg.tipo, opcao: o.nome });
+      };
+      ops.appendChild(b);
+    });
+    desenha();
+
+    var paraOrbita = orbita3(palco, obj, { ry: 26, rx: -14 });
+    window.addEventListener('resize', ajusta);
+
+    var antes = document.activeElement;
+    m.querySelector('.p3__x').focus();
+
+    function fecha() {
+      paraOrbita();                       // sem isto o intervalo ficava vivo
+      window.removeEventListener('resize', ajusta);
+      m.classList.remove('vis');
+      setTimeout(function () { m.remove(); }, 300);
+      document.removeEventListener('keydown', tecla);
+      if (antes && antes.focus) antes.focus();
+    }
+    m.addEventListener('click', function (e) {
+      if (e.target.closest('.p3__card') || e.target.closest('.p3__palco')) {
+        if (e.target.closest('.p3__x')) fecha();
+        return;
+      }
+      fecha();
+    });
+    function tecla(e) {
+      if (e.key === 'Escape') { e.stopPropagation(); fecha(); return; }
+      if (e.key !== 'Tab') return;
+      var alvos = m.querySelectorAll('button, a[href], .p3__palco');
+      if (!alvos.length) return;
+      var pri = alvos[0], ult = alvos[alvos.length - 1];
+      if (e.shiftKey && document.activeElement === pri) { e.preventDefault(); ult.focus(); }
+      else if (!e.shiftKey && document.activeElement === ult) { e.preventDefault(); pri.focus(); }
+    }
+    document.addEventListener('keydown', tecla);
+    ev('peca3d_open', { page_id: p.id, tipo: cfg.tipo });
+  }
+
+  /* Acende/apaga a página. O véu escuro e o brilho estão no CSS; aqui só
+     alternamos a classe e damos ao acender o tremeluzir de um LED a arrancar. */
+  function alternaLuz(btn) {
+    var pg = btn.closest('.pg');
+    /* O estado vive no .pg__in, não no .pg. A StPageFlip reescreve o atributo
+       `class` do item dela na primeira interação e levava o `pg--noite` à
+       frente: a luz acendia e apagava-se sozinha ao fim de um instante.
+       O .pg__in é markup nosso e a biblioteca não lhe toca. */
+    var alvo = pg && pg.querySelector('.pg__in');
+    if (!alvo) return;
+    var noite = !alvo.classList.contains('noite');
+    alvo.classList.toggle('noite', noite);
+    btn.setAttribute('aria-pressed', noite ? 'true' : 'false');
+    var t = btn.querySelector('.luz-btn__t');
+    if (t) t.textContent = noite ? 'Ver de dia' : 'Ver de noite';
+    btn.setAttribute('aria-label', noite
+      ? 'Voltar a ver esta página de dia'
+      : 'Ver esta página de noite, com os reclames acesos');
+
+    /* Primeira vez que se acende: só agora é que as fotografias noturnas
+       são pedidas ao servidor. Quem nunca carregar no interruptor não paga
+       o download. */
+    if (noite) {
+      pg.querySelectorAll('.img-noite[data-src]').forEach(function (im) {
+        im.src = im.dataset.src;
+        im.removeAttribute('data-src');
+      });
+    }
+    ev('luz_toggle', { ligado: noite, page_id: pg.dataset.id });
   }
 
   /* Som de folha a virar. DESLIGADO por omissão — ninguém gosta de abrir um
@@ -658,12 +1292,17 @@
     aquecido = true;
     try {
       audio = new Audio('/brochura/audio/folha.mp3');
-      audio.volume = 0;
+      /* `muted`, não `volume`: no iOS o volume de um elemento de áudio é só
+         de leitura e pôr `volume = 0` não faz absolutamente nada — o
+         aquecimento tocava a folha em alto e bom som no primeiro toque do
+         utilizador, que soava a página virada sem nada ter virado. */
+      audio.muted = true;
       audio.play().then(function () {
         audio.pause();
         audio.currentTime = 0;
-        audio.volume = .5;
-      }).catch(function () { audio.volume = .5; });
+        audio.muted = false;
+        audio.volume = .5;          // respeitado fora do iOS; lá é ignorado
+      }).catch(function () { audio.muted = false; audio.volume = .5; });
     } catch (e) {}
   }
   ['pointerdown', 'keydown'].forEach(function (t) {
@@ -711,13 +1350,42 @@
         }
         return;
       }
+      /* Tem de vir ANTES da foto: o hotspot está por cima da imagem e é ele
+         que abre a ficha; o clique na foto continua a abrir só o lightbox. */
+      var hs = e.target.closest('.hotspot');
+      if (hs) {
+        e.preventDefault(); e.stopPropagation();
+        var pag = D.pages.find(function (x) { return x.id === hs.dataset.pg; });
+        var fi = pag && fichaDe(pag, hs.dataset.src);
+        if (fi) {
+          pedeGiro();                 // dentro do gesto — exigência do iOS
+          fichaModal(hs.dataset.src, fi, hs.dataset.pg);
+        }
+        return;
+      }
+      var luzb = e.target.closest('.luz-btn');
+      if (luzb) { e.preventDefault(); e.stopPropagation(); alternaLuz(luzb); return; }
+
+      var b3 = e.target.closest('.btn3d');
+      if (b3) {
+        e.preventDefault(); e.stopPropagation();
+        var pg3 = D.pages.find(function (x) { return x.id === b3.dataset.pg; });
+        if (pg3 && pg3.peca3d) peca3dModal(pg3);
+        return;
+      }
+      var c3 = e.target.closest('.p3 .fc__cta');
+      if (c3) ev('peca3d_cta', {});
+
       var foto = e.target.closest('.apoio__w img, .serv__hero, .quem__img');
       if (foto) {
         e.preventDefault(); e.stopPropagation();
+        pedeGiro();
         /* a versão web é 1200px — chega e sobra para ver em ecrã */
         lightbox(foto.currentSrc || foto.src, foto.alt);
         return;
       }
+      var fcta = e.target.closest('.fc__cta');
+      if (fcta) ev('ficha_cta', { cliente: fcta.dataset.cliente });
       var cta = e.target.closest('.cta-servico');
       if (cta) ev('cta_whatsapp', { servico: cta.dataset.servico });
       var ct = e.target.closest('[data-cta]');
@@ -726,14 +1394,6 @@
       if (bar) ev('cta_' + bar.dataset.ev, {});
     });
 
-    /* o StPageFlip reage a mousedown/touchstart: travar aí, senão o clique
-       no botão de partilha começa a virar a página */
-    ['mousedown', 'touchstart', 'pointerdown'].forEach(function (t) {
-      document.addEventListener(t, function (e) {
-        if (e.target.closest('.partilhar, .cta-servico, .ct__v,' +
-            ' .apoio__w img, .serv__hero, .quem__img, .lb')) e.stopPropagation();
-      }, true);
-    });
 
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'Enter' && e.key !== ' ') return;
@@ -772,7 +1432,7 @@
     modo = novo;
     jaSaltou = false;
     if (flip) { try { flip.destroy(); } catch (e) {} flip = null; }
-    document.getElementById('folheto').innerHTML = '';
+    garanteFolheto().innerHTML = '';
     document.getElementById('rolo').innerHTML = '';
     montaFlip(modo === 'retrato');
   }

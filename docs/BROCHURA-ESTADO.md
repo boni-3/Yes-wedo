@@ -1,7 +1,55 @@
 # Brochura Yes, We Do — Estado e Retoma
 
-> **Última atualização: 2026-07-31.** Trabalho em pausa à espera de feedback do cliente.
+> **Última atualização: 2026-08-02.** V2 premium implementada, por publicar.
 > Este é o documento por onde começar. Os outros ficheiros entram no detalhe.
+
+---
+
+## V2 Premium — implementada a 2026-08-02, **ainda não publicada**
+
+Plano: `docs/PLANO-BROCHURA-V2-PREMIUM.md`. Tudo testado localmente, nada em produção.
+
+| O quê | Onde |
+|---|---|
+| **Fichas de projeto 3D** — 20 fotografias ganham um ponto laranja pulsante; abre a foto inclinada em 3D com cliente, o que a Yes, We Do fez ali, tags e CTA de WhatsApp com o nome do projeto | `fichas` no JSON, `fichaModal()` |
+| **"Ver de noite"** na página dos reclames — a página escurece e as 4 fotografias são **trocadas por versões noturnas** com os reclames acesos | `noite` no JSON, `alternaLuz()` |
+| **Inclinação 3D** no lightbox e nas fichas, com rato ou giroscópio | `liga3d()` |
+| **Corpo de objeto** — lombada com folhas empilhadas que cresce ao avançar, grão de papel, entrada do folheto | `--folhas-esq/dir`, `entrada()` |
+| **Peças de amostra em 3D** — botão "Ver a peça em 3D" nas Letras Recortadas e nos Stands. Geometria real em CSS (zero bibliotecas), órbita nos dois eixos, e o material/cor escolhido vai no WhatsApp | `peca3d` no JSON, `peca3dModal()` |
+
+**As fichas estão por validar com o Miguel** — o detalhe técnico (materiais,
+serviços por projeto) foi inferido do copy das páginas. Estão marcadas com
+`_confirmar` no JSON. Viaturas e Montras só têm ficha no *hero*: as imagens de
+apoio são geradas por IA e uma ficha sobre trabalho que não existe seria mentir.
+
+**⚠️ As 4 imagens noturnas são geradas por IA** a partir das fotografias reais.
+O reclame existe e acende mesmo — a IA só simula a hora do dia — mas a
+fotografia nunca foi tirada, por isso levam selo `Simulação noturna`.
+**Decisão pendente do Miguel**, detalhe em `img/brochura/ASSETS.md`. O ideal
+é fotografar os reclames ao fim do dia e dispensar a IA.
+
+**Dois bugs pré-existentes corrigidos de caminho:**
+1. `StPageFlip.destroy()` faz `block.remove()` e levava o `#folheto` com ela.
+   Atravessar os 1024px a redimensionar — ou **rodar um iPad** (≈820 → ≈1180) —
+   deixava a brochura em branco para sempre. Resolvido com `garanteFolheto()`.
+2. Capa e contracapa apareciam encostadas a um lado do folheto de duas
+   páginas, com meia folha de vazio. Agora ficam centradas.
+
+**Duas armadilhas para quem mexer nisto:**
+
+1. A StPageFlip **reescreve o atributo `class` do `.pg`** e apaga classes
+   postas em tempo de execução. Estado nunca pode viver no `.pg` — o modo
+   noite vive no `.pg__in`, que é markup nosso.
+2. **Nunca travar eventos no `document` em fase de captura.** A StPageFlip só
+   escuta `mousedown` e `touchstart` (no contentor dela) e
+   `mousemove/up`/`touchmove/end` (na window) — **não usa pointer events**.
+   Travar em captura no document matava o evento antes de chegar ao botão e,
+   no toque, o navegador deixava de sintetizar o clique: os hotspots não
+   abriam nada no telemóvel e o palco 3D não rodava. A forma correta é
+   `stopPropagation` **no próprio elemento** (`protegeInterativos()`), que
+   deixa o botão receber o evento e só depois corta a subida.
+
+Novos eventos GA4: `ficha_open`, `ficha_cta`, `luz_toggle`.
 
 ---
 
@@ -161,6 +209,7 @@ O custo de impressão é do cliente, não está nos 400 €.
 
 | Ficheiro | Conteúdo |
 |---|---|
+| `docs/PLANO-BROCHURA-V2-PREMIUM.md` | **V2 premium aprovada (2026-08-02), pronta a implementar** — fichas 3D, luz, tilt, polish |
 | `docs/ORCAMENTO-BROCHURA.md` | orçamento original e mensagem de WhatsApp |
 | `docs/PLANO-BROCHURA-PREMIUM.md` | plano de negócio, cronograma, upsells |
 | `docs/BROCHURA-SPEC-EXECUCAO.md` | conceito, design system, specs técnicas |

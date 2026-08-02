@@ -13,4 +13,11 @@ img/portfolio/_processing/
 img/brochura/raw/
 img/brochura/print/
 img/brochura/capas/*.png
+# originais das versões noturnas (PNG 1536×1024, ~8 MB). As .webp derivadas
+# vivem em img/brochura/web/ e ESSAS são precisas em produção.
+img/brochura/noite-raw/
 docs/entrega/*.pdf
+
+# material de teste 3D (protótipos e folhas de turntable)
+_proto3d/
+img/brochura/3d-raw/

@@ -45,8 +45,17 @@ body{
    ========================================================================== */
 .pg{
   width:var(--pw);height:var(--ph);
-  background:var(--paper);color:var(--ink);
+  /* Grão de papel. Vai na própria página, por baixo do conteúdo, e não numa
+     camada com mix-blend-mode por cima de tudo: assim as fotografias ficam
+     limpas (o grão é do papel, não da foto) e não há um elemento blendado a
+     ser recomposto a cada virar de página — que custava caro nos telemóveis
+     mais fracos. */
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E"),
+    var(--paper);
+  color:var(--ink);
   position:relative;overflow:hidden;
+  transition:background-color .8s var(--ease),color .8s var(--ease);
 }
 .pg__bg{position:absolute;inset:0;z-index:0}
 .pg__bg img{width:100%;height:100%;object-fit:cover;display:block}
@@ -59,6 +68,9 @@ body{
 .pg__in{
   position:relative;z-index:1;height:100%;
   padding:60px 53px 47px;display:flex;flex-direction:column;
+  /* o modo noite pinta-se aqui (ver .pg__in.noite) — não no .pg, que é o
+     elemento que a StPageFlip gere e cujas classes reescreve */
+  transition:background-color .8s var(--ease),color .8s var(--ease);
 }
 
 .folio{
@@ -136,7 +148,7 @@ body{
 .apoio img{width:100%;height:104px;object-fit:cover;display:block}
 .apoio--5 img{height:88px}
 .apoio__w{position:relative}
-.simulacao{position:absolute;right:5px;bottom:5px;font-family:var(--fh);font-size:8px;
+.simulacao{position:absolute;right:5px;bottom:5px;z-index:3;font-family:var(--fh);font-size:8px;
            letter-spacing:.12em;text-transform:uppercase;color:#fff;
            background:rgba(15,27,45,.6);padding:2px 5px}
 .cta-linha{font-family:var(--fh);font-size:19px;font-weight:700;letter-spacing:-.015em;
@@ -180,7 +192,6 @@ body{
        text-transform:uppercase;color:var(--suave);margin-bottom:4px}
 .ct__v{font-family:var(--fh);font-size:31px;font-weight:700;letter-spacing:-.015em;
        color:var(--ink);text-decoration:none;display:inline-block}
-.ct__v:hover{color:var(--orange)}
 .qr{display:grid;grid-template-columns:132px 1fr;gap:26px;align-items:center;margin-top:56px}
 .qr img{width:132px;height:132px;background:#fff;padding:8px}
 .qr p{font-size:13px;line-height:1.5;color:var(--texto)}
@@ -199,7 +210,6 @@ body{
   padding:11px 18px;border-radius:100px;
   transition:transform .25s var(--ease),box-shadow .25s var(--ease)
 }
-.cta-servico:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(240,67,32,.35)}
 .cta-servico svg{width:16px;height:16px;fill:currentColor}
 
 .partilhar{
@@ -208,7 +218,6 @@ body{
   background:rgba(15,27,45,.08);color:var(--ink);
   display:grid;place-items:center;transition:.2s
 }
-.partilhar:hover{background:var(--orange);color:#fff}
 .partilhar svg{width:16px;height:16px;fill:currentColor}
 
 /* barra fixa de contacto */
@@ -222,7 +231,6 @@ body{
   box-shadow:0 6px 20px rgba(15,27,45,.28);
   transition:transform .25s var(--ease),background .25s
 }
-#barra a:hover{transform:translateY(-3px)}
 #barra a.wa{background:#25D366}
 #barra a.orc{background:var(--orange)}
 #barra svg{width:23px;height:23px;fill:currentColor}
@@ -259,7 +267,6 @@ body{
   width:38px;height:38px;border:none;border-radius:50%;cursor:pointer;
   background:transparent;color:var(--ink);display:grid;place-items:center;transition:.2s
 }
-#controlos button:hover:not(:disabled){background:var(--orange);color:#fff}
 #controlos button:disabled{opacity:.28;cursor:default}
 #controlos svg{width:17px;height:17px;fill:currentColor}
 /* visualmente escondido, continua disponível para leitores de ecrã */
@@ -312,6 +319,13 @@ body.apresentar.ocioso #controlos{opacity:0;pointer-events:none}
 .modo-retrato .cta-linha{font-size:14px;margin-top:10px}
 .modo-retrato .cta-servico{font-size:11px;padding:8px 14px;margin-top:8px}
 .modo-retrato .simulacao{font-size:6.5px;padding:1px 4px}
+.modo-retrato .fig{margin-bottom:12px}
+.modo-retrato .hotspot{width:26px;height:26px;right:8px;bottom:8px}
+.modo-retrato .hotspot::after{inset:-12px}   /* toque confortável depois da escala */
+.modo-retrato .apoio__w .hotspot{width:20px;height:20px;right:4px;bottom:4px}
+.modo-retrato .apoio__w .hotspot svg{width:10px;height:10px}
+.modo-retrato .luz-btn{top:12px;left:12px;padding:5px 10px 5px 8px;font-size:8.5px;gap:4px}
+.modo-retrato .luz-btn svg{width:13px;height:13px}
 
 /* páginas específicas */
 .modo-retrato .quem__img{height:210px;margin-bottom:16px}
@@ -473,6 +487,19 @@ body.apresentar.ocioso #controlos{opacity:0;pointer-events:none}
   35%{transform:perspective(60px) rotateY(-62deg);opacity:.45}
 }
 
+/* Toque imediato nos controlos: sem isto o navegador espera para ver se o
+   dedo vai arrastar, e o toque parece que não pegou. */
+.partilhar,.cta-servico,.hotspot,.luz-btn,.btn3d,
+.apoio__w img,.serv__hero,.quem__img{touch-action:manipulation}
+
+/* O QUE ESTÁ DENTRO DE UM BOTÃO NÃO PODE SER ALVO DO TOQUE.
+   A StPageFlip só ignora um toque se o alvo for literalmente <a> ou <button>
+   (checkTarget). Tocando no `+`, o alvo era o <svg> do ícone — a biblioteca
+   não reconhecia o botão e virava a página. No rato o clique passava à
+   mesma; no iPhone o primeiro toque era engolido pelo folheto e só o
+   segundo abria a ficha. Assim o alvo é sempre o próprio botão. */
+.hotspot *,.luz-btn *,.btn3d *,.partilhar *,.cta-servico *{pointer-events:none}
+
 /* o cursor diz que se pode agarrar */
 .modo-flip .stf__item,.modo-flip #folheto{cursor:grab}
 .modo-flip #folheto:active{cursor:grabbing}
@@ -504,10 +531,308 @@ body.apresentar.ocioso #controlos{opacity:0;pointer-events:none}
   background:rgba(255,255,255,.12);color:#fff;font-size:26px;line-height:1;
   display:grid;place-items:center;transition:background .2s
 }
-.lb__x:hover{background:var(--orange)}
 
 /* dá a entender que a foto amplia */
 .apoio__w img,.serv__hero,.quem__img{cursor:zoom-in}
+
+/* o palco tem a perspetiva, a imagem é que inclina */
+.lb__pal{perspective:1200px;display:grid;place-items:center;max-width:100%}
+/* com o GSAP a conduzir, a transição CSS só atrapalhava: duas suavizações
+   sobrepostas davam um movimento pastoso */
+.lb--3d img{transition:none}
+
+/* ==========================================================================
+   FICHA DE PROJETO — hotspots e painel 3D
+
+   O passo a seguir ao lightbox. Um ponto pulsante convida, e a fotografia
+   descola da folha com a ficha do trabalho ao lado. É o que transforma
+   "uma foto bonita" em prova de que a Yes, We Do fez mesmo aquilo.
+   ========================================================================== */
+
+/* invólucro só criado quando a imagem precisa de hotspot ou de luz */
+.fig{position:relative;margin-bottom:20px}
+.fig .serv__hero{margin-bottom:0}
+
+.hotspot{
+  position:absolute;right:10px;bottom:10px;z-index:4;
+  width:30px;height:30px;padding:0;border:none;border-radius:50%;cursor:pointer;
+  background:var(--orange);color:#fff;display:grid;place-items:center;
+  box-shadow:0 3px 12px rgba(15,27,45,.38);
+  transition:transform .22s var(--ease)
+}
+/* alvo de toque confortável sem engordar o círculo visível */
+.hotspot::after{content:'';position:absolute;inset:-9px;border-radius:50%}
+.hotspot svg{width:15px;height:15px;fill:currentColor;position:relative;z-index:1}
+.hotspot__anel{
+  position:absolute;inset:0;border-radius:50%;border:2px solid var(--orange);
+  animation:radar 2.2s var(--ease) infinite;pointer-events:none
+}
+@keyframes radar{
+  0%{transform:scale(1);opacity:.7}
+  70%,100%{transform:scale(2.2);opacity:0}
+}
+/* nas miniaturas de apoio o ponto tem de ser mais discreto */
+.apoio__w .hotspot{width:24px;height:24px;right:6px;bottom:6px}
+.apoio__w .hotspot svg{width:12px;height:12px}
+
+.fc{
+  position:fixed;inset:0;z-index:210;display:grid;place-items:center;
+  padding:4vh 4vw;background:rgba(15,27,45,.95);
+  opacity:0;transition:opacity .3s var(--ease)
+}
+.fc.vis{opacity:1}
+.fc__in{
+  display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,.95fr);
+  gap:38px;align-items:center;width:100%;max-width:1180px
+}
+.fc__pal{perspective:1300px;min-width:0}
+.fc__img{
+  width:100%;max-height:74vh;object-fit:contain;display:block;border-radius:4px;
+  box-shadow:0 40px 90px rgba(0,0,0,.6),0 8px 26px rgba(0,0,0,.42)
+}
+.fc--3d .fc__img{transition:none}
+.fc__card{
+  background:var(--paper);color:var(--ink);
+  padding:34px 32px;border-radius:4px;max-height:82vh;overflow-y:auto
+}
+.fc__kicker{font-family:var(--fh);font-size:10px;font-weight:700;letter-spacing:.2em;
+            text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+.fc__cli{font-family:var(--fh);font-size:30px;font-weight:700;line-height:1.05;
+         letter-spacing:-.02em;margin-bottom:4px}
+.fc__loc{font-size:13px;color:var(--suave)}
+.fc__serv{list-style:none;margin:20px 0 0;padding:0}
+.fc__serv li{font-size:13px;line-height:1.45;padding-left:18px;margin-bottom:9px;
+             position:relative;color:var(--texto)}
+.fc__serv li::before{content:'';position:absolute;left:0;top:6px;
+                     width:8px;height:8px;background:var(--orange)}
+.fc__desc{font-size:13.5px;line-height:1.6;color:var(--texto);margin-top:16px}
+.fc__tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.fc__tags span{font-family:var(--fh);font-size:10px;font-weight:600;letter-spacing:.08em;
+               text-transform:uppercase;color:var(--suave);
+               border:1px solid rgba(15,27,45,.2);border-radius:100px;padding:5px 11px}
+.fc__cta{
+  display:inline-flex;align-items:center;gap:9px;margin-top:24px;
+  font-family:var(--fh);font-size:13px;font-weight:700;
+  background:var(--orange);color:#fff;text-decoration:none;
+  padding:12px 20px;border-radius:100px;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease)
+}
+.fc__cta svg{width:16px;height:16px;fill:currentColor}
+.fc__x{
+  position:absolute;top:20px;right:24px;z-index:2;
+  width:44px;height:44px;border:none;border-radius:50%;cursor:pointer;
+  background:rgba(255,255,255,.12);color:#fff;font-size:26px;line-height:1;
+  display:grid;place-items:center;transition:background .2s
+}
+
+/* Ecrã estreito: a ficha passa para baixo da fotografia e o conjunto rola.
+   O JS também põe a inclinação de repouso a 0 nesta largura — a -6° a
+   fotografia encostava aos cantos. */
+@media (max-width:900px){
+  .fc{padding:0;place-items:stretch}
+  /* o papel continua até ao fim: sem isto sobrava uma faixa escura por baixo
+     do cartão e a ficha deixava de ler-se como uma folha inteira */
+  .fc__in{grid-template-columns:1fr;gap:0;align-content:start;
+          height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;
+          background:var(--paper)}
+  .fc__pal{perspective:900px}
+  .fc__img{max-height:44vh;border-radius:0}
+  .fc__card{padding:24px 22px 40px;border-radius:0;max-height:none;overflow:visible}
+  .fc__cli{font-size:24px}
+  .fc__x{top:12px;right:12px;width:40px;height:40px;background:rgba(15,27,45,.55)}
+}
+
+/* ==========================================================================
+   PEÇA DE AMOSTRA EM 3D
+
+   Geometria real em CSS, sem bibliotecas. O contexto 3D vive SÓ neste
+   overlay: dentro de uma .pg entraria em conflito com os transforms da
+   StPageFlip. Ver docs/PLANO-BROCHURA-3D.md.
+   ========================================================================== */
+.acoes-serv{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.btn3d{
+  display:inline-flex;align-items:center;gap:8px;margin-top:13px;
+  border:1px solid rgba(15,27,45,.28);background:none;color:var(--ink);
+  font-family:var(--fh);font-size:12px;font-weight:700;
+  padding:10px 16px;border-radius:100px;cursor:pointer;
+  transition:border-color .25s,background .25s,color .25s
+}
+.btn3d svg{width:15px;height:15px;fill:currentColor}
+.modo-retrato .btn3d{font-size:10px;padding:7px 12px;margin-top:8px;gap:6px}
+.modo-retrato .btn3d svg{width:13px;height:13px}
+
+.p3{
+  position:fixed;inset:0;z-index:215;display:grid;place-items:center;
+  padding:4vh 4vw;background:rgba(15,27,45,.96);
+  opacity:0;transition:opacity .3s var(--ease)
+}
+.p3.vis{opacity:1}
+.p3__in{
+  display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.95fr);
+  gap:34px;align-items:center;width:100%;max-width:1140px
+}
+.p3__palco{
+  position:relative;height:min(64vh,540px);
+  perspective:1500px;perspective-origin:50% 44%;
+  cursor:grab;touch-action:none;outline:none;border-radius:6px
+}
+.p3__palco.a-rodar{cursor:grabbing}
+.p3__palco:focus-visible{outline:3px solid var(--orange);outline-offset:6px}
+.p3__zoom{position:absolute;inset:0;transform-style:preserve-3d;transform:scale(var(--e3,1))}
+.p3__obj{position:absolute;left:50%;top:50%;transform-style:preserve-3d}
+.cx3{position:absolute;transform-style:preserve-3d}
+.f3{position:absolute;backface-visibility:visible;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.12)}
+.dec3{position:absolute;background-repeat:no-repeat;background-position:center;
+      background-size:contain;pointer-events:none}
+.cx3 img{pointer-events:none;user-select:none}
+/* a sombra é o que assenta a peça no espaço em vez de a deixar a flutuar */
+.p3__chao{
+  position:absolute;left:50%;top:84%;width:340px;height:76px;
+  transform:translate(-50%,-50%) rotateX(78deg);
+  background:radial-gradient(ellipse at center,rgba(0,0,0,.6),transparent 68%);
+  filter:blur(14px);pointer-events:none
+}
+.p3__card{background:var(--paper);color:var(--ink);padding:32px 30px;border-radius:4px;
+          max-height:82vh;overflow-y:auto}
+.p3__rot{font-family:var(--fh);font-size:10px;font-weight:700;letter-spacing:.16em;
+         text-transform:uppercase;color:var(--suave);margin:22px 0 9px}
+.p3__ops{display:flex;flex-wrap:wrap;gap:7px}
+.p3__ops button{
+  border:1px solid rgba(15,27,45,.24);background:none;color:var(--ink);
+  font-family:var(--fh);font-size:11px;font-weight:700;letter-spacing:.06em;
+  padding:8px 14px;border-radius:99px;cursor:pointer;transition:.2s
+}
+.p3__ops button.on{background:var(--orange);border-color:var(--orange);color:#fff}
+.p3__nota{font-size:11px;line-height:1.45;color:var(--suave);margin-top:14px;
+          padding-top:12px;border-top:1px solid rgba(15,27,45,.14)}
+.p3__dica{font-family:var(--fh);font-size:9.5px;letter-spacing:.14em;
+          text-transform:uppercase;color:var(--suave);margin-top:10px}
+.p3__x{
+  position:absolute;top:20px;right:24px;z-index:2;
+  width:44px;height:44px;border:none;border-radius:50%;cursor:pointer;
+  background:rgba(255,255,255,.12);color:#fff;font-size:26px;line-height:1;
+  display:grid;place-items:center;transition:background .2s
+}
+
+@media (max-width:900px){
+  .p3{padding:0;place-items:stretch}
+  .p3__in{grid-template-columns:1fr;gap:0;align-content:start;height:100%;
+          overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--paper)}
+  .p3__palco{height:46vh;background:#e8e4dc;border-radius:0}
+  .p3__card{padding:22px 20px 40px;border-radius:0;max-height:none;overflow:visible}
+  .p3__x{top:12px;right:12px;width:40px;height:40px;background:rgba(15,27,45,.55)}
+}
+
+/* ==========================================================================
+   MODO NOITE — "apagar a luz" na página dos reclames
+
+   Uma empresa que vende luz devia poder mostrar a diferença. É o espelho
+   digital do verniz UV localizado proposto para a versão impressa.
+   ========================================================================== */
+.luz-btn{
+  position:absolute;top:20px;left:20px;z-index:3;
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 13px 7px 10px;border:none;border-radius:100px;cursor:pointer;
+  background:rgba(15,27,45,.08);color:var(--ink);
+  font-family:var(--fh);font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  transition:background .25s,color .25s
+}
+.luz-btn svg{width:15px;height:15px;fill:currentColor}
+.luz-btn[aria-pressed="true"]{background:rgba(245,242,236,.16);color:#F5F2EC}
+
+.pg__in.noite{background-color:var(--dark-blue);color:#F5F2EC}
+.pg__in.noite .h1{color:#F5F2EC}
+.pg__in.noite .corpo p,
+.pg__in.noite .specs li,
+.pg__in.noite .destaque{color:rgba(245,242,236,.84)}
+.pg__in.noite .folio{color:rgba(245,242,236,.62);border-top-color:rgba(245,242,236,.24)}
+.pg:has(.pg__in.noite) .partilhar{background:rgba(245,242,236,.16);color:#F5F2EC}
+.pg:has(.pg__in.noite) 
+/* A fotografia de noite é uma imagem à parte, sobreposta e revelada por
+   cross-fade. A primeira tentativa pintava luz por cima da foto de dia com
+   gradientes e mix-blend-mode: dava um nevoeiro esbranquiçado, não um
+   reclame aceso. Trocar a fotografia resolve o que filtro nenhum resolvia. */
+.img-noite{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+  opacity:0;transition:opacity .9s var(--ease);pointer-events:none;z-index:1
+}
+.pg__in.noite .img-noite{opacity:1}
+
+/* Estas versões noturnas são geradas por IA a partir das fotografias reais.
+   O reclame e o edifício existem e acendem mesmo, mas a fotografia de noite
+   nunca foi tirada — por isso é dito a quem vê. */
+/* À esquerda: o ponto da ficha ocupa sempre o canto inferior direito. */
+.selo-noite{
+  position:absolute;left:6px;bottom:6px;z-index:3;
+  font-family:var(--fh);font-size:8px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);background:rgba(15,27,45,.62);padding:2px 6px;
+  opacity:0;transition:opacity .5s var(--ease);pointer-events:none
+}
+.pg__in.noite .selo-noite{opacity:1}
+.apoio__w .selo-noite{left:4px;bottom:4px;font-size:6px;padding:1px 4px;letter-spacing:.08em}
+.modo-retrato .selo-noite{font-size:7px}
+.modo-retrato .apoio__w .selo-noite{font-size:5.5px}
+
+/* ==========================================================================
+   LOMBADA — a espessura do objeto
+
+   Duas folhas soltas no ar não são uma brochura. As pilhas laterais crescem
+   e encolhem conforme se avança (--folhas-esq / --folhas-dir, postas pelo JS).
+   ========================================================================== */
+#folheto{position:relative}
+.modo-flip #folheto::before,
+.modo-flip #folheto::after{
+  content:'';position:absolute;top:9px;bottom:9px;pointer-events:none;
+  background:repeating-linear-gradient(90deg,
+    rgba(255,255,255,.92) 0 1px,rgba(15,27,45,.15) 1px 2px);
+  box-shadow:0 2px 10px rgba(15,27,45,.2);
+  transition:width .5s var(--ease)
+}
+.modo-flip #folheto::before{
+  right:100%;width:calc(1px + var(--folhas-esq,0) * 9px);border-radius:2px 0 0 2px
+}
+.modo-flip #folheto::after{
+  left:100%;width:calc(1px + var(--folhas-dir,1) * 9px);border-radius:0 2px 2px 0
+}
+/* em retrato só há pilha do lado por virar */
+.modo-retrato #folheto::before{display:none}
+.modo-retrato #folheto::after{width:calc(1px + var(--folhas-dir,1) * 5px)}
+
+/* Capa e contracapa aparecem sozinhas num contentor de duas páginas. Sem isto
+   ficavam encostadas a um lado, com meia folha de vazio ao lado — e a pilha
+   desse lado suspensa no ar, longe do papel. A margem centra a folha (num
+   item centrado, margem de X desloca o conteúdo X/2 para o lado oposto). */
+body.modo-flip:not(.modo-retrato) #folheto{transition:margin .45s var(--ease)}
+body.modo-flip:not(.modo-retrato) #folheto.folheto--capa{margin-right:var(--pgw,0px)}
+body.modo-flip:not(.modo-retrato) #folheto.folheto--fim{margin-left:var(--pgw,0px)}
+body.modo-flip:not(.modo-retrato) #folheto.folheto--capa::before,
+body.modo-flip:not(.modo-retrato) #folheto.folheto--fim::after{display:none}
+
+/* ==========================================================================
+   ESTADOS DE RATO
+
+   Só onde há mesmo um ponteiro que paira. Num ecrã tátil o :hover obriga a
+   DOIS toques — o primeiro revela o estado, o segundo é que carrega. Foi o
+   que aconteceu com o ponto laranja das fichas: no telemóvel só abria à
+   segunda. Tudo o que se toca tem de ter o hover atrás desta condição.
+   ========================================================================== */
+@media (hover:hover) and (pointer:fine){
+  .ct__v:hover{color:var(--orange)}
+  .cta-servico:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(240,67,32,.35)}
+  .partilhar:hover{background:var(--orange);color:#fff}
+  #barra a:hover{transform:translateY(-3px)}
+  #controlos button:hover:not(:disabled){background:var(--orange);color:#fff}
+  .lb__x:hover{background:var(--orange)}
+  .hotspot:hover{transform:scale(1.14)}
+  .fc__cta:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(240,67,32,.4)}
+  .fc__x:hover{background:var(--orange)}
+  .btn3d:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+  .p3__ops button:hover{border-color:var(--orange)}
+  .p3__x:hover{background:var(--orange)}
+  .luz-btn:hover,.luz-btn[aria-pressed="true"]:hover{background:var(--orange);color:#fff}
+  .pg:has(.pg__in.noite) .partilhar:hover{background:var(--orange);color:#fff}
+}
 
 /* ==========================================================================
    Acessibilidade e preferências
@@ -535,6 +860,8 @@ body.apresentar.ocioso #controlos{opacity:0;pointer-events:none}
 .anima .pg:not(.vista) .manif__ass,
 .anima .pg:not(.vista) .destaque,
 .anima .pg:not(.vista) .contactos > div,
+.anima .pg:not(.vista) .hotspot,
+.anima .pg:not(.vista) .luz-btn,
 .anima .pg:not(.vista) .qr{opacity:0}
 
 @media (prefers-reduced-motion:reduce){
@@ -543,6 +870,8 @@ body.apresentar.ocioso #controlos{opacity:0;pointer-events:none}
     transition-duration:.15ms!important;scroll-behavior:auto!important
   }
   html{scroll-behavior:auto}
+  /* o anel deixa de pulsar mas o convite continua a ler-se */
+  .hotspot__anel{transform:scale(1.4);opacity:.4}
 }
 
 @media print{

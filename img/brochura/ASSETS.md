@@ -36,6 +36,49 @@ Estas páginas mostram trabalhos que a Yes We Do **sabe fazer** mas de que não 
 
 ---
 
+## 🌙 Gerado por IA — versões noturnas de trabalhos REAIS
+
+> Categoria diferente das de cima, e mais delicada: aqui **o trabalho existe**.
+> O que não existe é a fotografia.
+
+Criadas a 2026-08-02 para o botão **"Ver de noite"** da página 6 (Reclames
+Luminosos) da brochura digital. Geradas com Codex CLI (`image_gen`
+image-to-image), usando a fotografia real como referência.
+
+| Ficheiro (`img/brochura/web/`) | Origem real | O que muda |
+|---|---|---|
+| `reclame-lusiadas-noite.webp` | `reclame-lusiadas.webp` | Céu noturno, letras acesas, projetores ligados, átrio com luz quente |
+| `homy-casa-reclame-noite.webp` | `homy-casa-reclame.webp` | Céu noturno, letras retroiluminadas sobre o painel vermelho |
+| `amani-spa-noite.webp` | `amani-spa.webp` | Luz ambiente apagada, néon a iluminar a parede |
+| `espinho-auto-noite.webp` | `espinho-auto.webp` | Sala às escuras, contorno e letras a brilhar |
+
+**Porque é diferente das 6 de cima:** estas não inventam trabalho nenhum. O
+reclame do Hospital Lusíadas de Paços de Ferreira existe, é da Yes, We Do, e
+acende mesmo à noite — é literalmente o produto. A IA só simula a hora do dia.
+
+**Porque continua a precisar de rótulo:** são fotografias de edifícios de
+clientes reais e identificáveis que **nunca foram tiradas**. Quem vê pode
+julgar que é o registo da instalação de noite. Se a IA errar a temperatura da
+luz ou quais as letras que acendem, a brochura passa a mostrar o trabalho
+entregue de forma inexata.
+
+**Estado atual: rotuladas.** Aparece um selo `Simulação noturna` no canto
+inferior esquerdo de cada imagem, visível só com a luz apagada. Implementado
+em `.selo-noite` (`brochura.css`) e em `camadaNoite()` (`brochura.js`).
+
+### ⚠️ Decidir com o Miguel
+
+1. **⭐ Melhor de todas — fotografar os reclames de noite.** Uma ida a Paços de
+   Ferreira ao fim do dia resolve o hero, que é a imagem mais importante. As
+   imagens de IA saem e o selo desaparece.
+2. **Manter rotuladas.** É o estado atual. Honesto, e o efeito não perde nada.
+3. **Manter sem rótulo.** ❌ Não recomendo, pelas razões acima. Tirar o selo é
+   uma linha de CSS — mas é uma decisão do cliente, não nossa.
+
+Os originais em alta ficam em `img/brochura/noite-raw/` (PNG 1536×1024).
+
+---
+
 ## 🎨 Gerado por IA — elementos gráficos de marca
 
 Sem qualquer problema de proveniência: são arte abstrata, não representam trabalhos.
